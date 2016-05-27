@@ -1,0 +1,52 @@
+body {
+  background-color: #820701;
+}
+
+#wrapper {
+  margin: 0 auto;
+  width: 982px;
+}
+
+.vspace {
+  height: 2em;
+}
+
+/* Top Main Menu */
+.main-menu { display:table; float:right; margin: 1em 0 0.5em 0; font-size: 14px; font-weight: bold; }
+.main-menu ul li { display: inline; }
+.main-menu ul li a {
+	display: inline-block; padding: 0.4em 1.5em; text-decoration: none;
+	-moz-border-radius: 0.5em; -webkit-border-radius: 0.5em; border-radius: 0.5em;
+}
+.main-menu ul li a, .main-menu ul li a:visited { color: white; }
+.main-menu ul li a.active, .main-menu ul li a:hover { background-color: rgb(81, 29, 0); }
+
+ul, ol, dir, menu {
+  list-style: none;
+}
+
+/* Blocks of information */
+.sticker {
+	background-color: white; padding: 1.25em 1.45em 1.25em 1.55em; margin: 0.5em 0 3em 0; -moz-border-radius: 1em; -webkit-border-radius: 1em; border-radius: 1em;
+	opacity:0.9; -moz-box-shadow: 0 0 1.1em #666; -webkit-box-shadow: 0 0 1.1em #666; box-shadow: 0 0 1.1em #666;
+}
+
+.sticker .heading, .sticker h1 { color: #A71500; margin: 0.25em 0 0.25em 0; font-weight: bold; font-size: 1.2em; }
+.stickerHeading {
+	background-color: rgb(229, 218, 214); height: 1.3em; margin: -2em -1.45em 1.25em -1.55em; padding: 0.4em 1em 1.1em 1.75em;
+	-moz-border-radius-topright: 1em; -moz-border-radius-topleft: 1em;
+	-webkit-border-top-right-radius: 1em; -webkit-border-top-left-radius: 1em;
+	border-top-right-radius: 1em; border-top-left-radius: 1em;
+}
+
+/* Left-Right columns */
+.floatLeft {
+  float: left !important;
+}
+.floatRight {
+  float: right !important;
+}
+
+.clear {
+  clear: both;
+}
