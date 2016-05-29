@@ -24,6 +24,21 @@ function editableFieldVM(jsonField) {
     }
   }
 
+  // Optional - Field of type Image
+  if ((jsonField.type != undefined) && (jsonField.type == 'image')) {
+
+    self.type = 'image';
+    self.dataUrl = ko.observable('');
+    self.uploadImage = function(file) {
+      var reader  = new FileReader();
+      reader.addEventListener("load", function () {
+        self.dataUrl(reader.result);
+      }, false);
+
+      if (file) { reader.readAsDataURL(file); }
+    }
+  }
+
 
 
   /* Types of Fields */
@@ -33,6 +48,9 @@ function editableFieldVM(jsonField) {
   self.isInputText = function() {
     return self.type == "inputText";
   }
+  self.isImage = function() {
+    return self.type == 'image';
+  }
 
   /* Value to be used in the templates */
   self.getTextValue = function() {
@@ -40,6 +58,8 @@ function editableFieldVM(jsonField) {
       return self.textValue();
     } else if (self.isOptions()) {
       return self.selectedOption().text;
+    } else if (self.isImage()) {
+      return self.dataUrl();
     }
   }
 }
