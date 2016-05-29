@@ -19,7 +19,7 @@ function cardVM(editableFields, fields) {
     for (var iField = 0; iField < self.fields().length; iField++) {
       var field = self.fields()[iField];
       if (field.name == fieldName) {
-        return field.textValue();
+        return field.getTextValue();
       }
     }
     return '';

@@ -1,9 +1,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
     <head>
+      <title>Geckos - Editing Cards since ...</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <link rel="stylesheet" type="text/css" href="css/styles.css"></link>
-</head>
+        <link rel="stylesheet" type="text/css" href="css/styles.css"></link>
+    </head>
 <body>
   <div id="wrapper">
     <div class="vspace"></div>
@@ -19,12 +20,8 @@
     <div class="sticker fullWidth">
         <div class="stickerHeading "><h1>Key concepts</h1></div>
         <select size="3" data-bind="options: listCards, optionsText: 'cardName', value: editableCard">
-    <option>text1</option>
-    <option>text2</option>
-    <option>text3</option>
-    <option>text4</option>
-    <option>text5</option>
- </select>
+
+        </select>
         <div class="clear"></div>
     </div>
 
@@ -33,8 +30,12 @@
           <div class="stickerHeading"><h1>Card Details</h1></div>
           Ici se trouvent les éléments définissant la carte
           <div data-bind="foreach: fields">
-            <div>
+            <div data-bind="if: isInputText()">
               <span data-bind="text: label"></span><input type="text" data-bind="value: textValue"></input>
+            </div>
+            <div data-bind="if: isOptions()">
+              <span data-bind="text: label"></span>
+              <select data-bind="options: options, optionsText: 'text', value: selectedOption"></select>
             </div>
           </div>
       </div>
@@ -70,10 +71,21 @@
         { "name": "finesse", "label": "Finesse :", "default": "2d8"},
         { "name": "cunning", "label": "Cunning :", "default": "3d10"},
         { "name": "description", "label": "Description :", "default": "..."},
+        {
+          "name": "characterType", "label": "Type :", "type": "options", "default": "leader",
+          "options" : [
+            { "option" : "leader", "text": "Leader" },
+            { "option" : "sidekick", "text": "Sidekick" },
+            { "option" : "ally", "text": "Ally" },
+            { "option" : "follower", "text": "Follower" },
+            { "option" : "terror", "text": "Terror" },
+            { "option" : "gang", "text": "Gang" }
+          ]
+        }
       ],
       "canvasFields": [
         {"type":"rect", "width": 350, "height":495, "fill":"#CAAB7F"},
-        {"type":"text","text":"Leader :", "fontSize": 22},
+        {"type":"text","text":"$characterType", "fontSize": 22},
         {"type":"text","text":"$name", "fontSize": 22, "fontWeight": "bold", "left": 80},
         {"type":"rect", "width": 170, "height":106, "left":165, "top":37, "fill":"#E07B4F", "stroke":"#000000"},
         {"type":"rect", "width": 170, "height":106, "left":165, "top":150, "fill":"#ACA497", "stroke":"#000000"},
