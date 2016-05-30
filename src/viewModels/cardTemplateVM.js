@@ -18,9 +18,14 @@ function cardTemplateVM(jsonTemplate) {
         var value = field[key];
         if (isNumber(value)) {
           value = parseFloat(value);
+        } else if (typeof(value) == "boolean") {
+          value = (value === 'true');
         } else if (value.indexOf('$') >= 0) {
           var valueField = value.replace('$', '');
           value = cardVM.getValue(valueField);
+        } else if (value.indexOf('?') >= 0) {
+          var valueField = value.replace('?', '');
+          value = cardVM.getBoolValue(valueField);
         }
         generatedObject[key] = value;
       }

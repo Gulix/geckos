@@ -41,6 +41,11 @@
               <span data-bind="text: label"></span>
               <input type="file" data-bind="event: { change: uploadImage($element.files[0])}"></input>
             </div>
+            <div data-bind="if: isCheckbox()">
+              <input type='checkbox' data-bind='checked: checkedValue'>
+                <span data-bind="text: label"></span>
+              </input>
+            </div>
           </div>
       </div>
     </div>
@@ -86,7 +91,8 @@
             { "option" : "gang", "text": "Gang" }
           ]
         },
-        { "name": "portray", "label": "Miniature's image :", "type": "image"}
+        { "name": "portray", "label": "Miniature's image :", "type": "image"},
+        { "name": "isHealthDisplayed", "label": "Health bar visible ?", "type" : "checkbox", "default": true}
       ],
       "canvasFields": [
         {"type":"rect", "width": 350, "height":495, "fill":"#CAAB7F"},
@@ -106,7 +112,8 @@
         {"type":"text","text":"$might", "fontSize": 22, "fontWeight": "bold", "left": 270, "top": 153},
         {"type":"text","text":"$finesse", "fontSize": 22, "fontWeight": "bold", "left": 270, "top": 188},
         {"type":"text","text":"$cunning", "fontSize": 22, "fontWeight": "bold", "left": 270, "top": 223},
-        {"type":"image","left":5, "width":150, "top":40 ,"height":300, "src": "$portray"}
+        {"type":"image","left":5, "width":150, "top":40 ,"height":300, "src": "$portray"},
+        {"type":"rect", "width": 330, "height":40, "left":5, "top":450, "fill":"#B1E29E", "stroke":"#000000", "visible": "?isHealthDisplayed"},
       ],
       "canvasBackground": "#CAAB7F",
       "canvasWidth": 340,

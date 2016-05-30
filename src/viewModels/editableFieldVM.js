@@ -38,7 +38,14 @@ function editableFieldVM(jsonField) {
       if (file) { reader.readAsDataURL(file); }
     }
   }
+  // Optional - Checkbox field
+  if ((jsonField.type != undefined) && (jsonField.type == 'checkbox')) {
 
+    self.type = 'checkbox';
+    var defVal = false;
+    if (jsonField.default != undefined) { defVal = jsonField.default; }
+    self.checkedValue = ko.observable(defVal);
+  }
 
 
   /* Types of Fields */
@@ -50,6 +57,9 @@ function editableFieldVM(jsonField) {
   }
   self.isImage = function() {
     return self.type == 'image';
+  }
+  self.isCheckbox = function() {
+    return self.type == 'checkbox';
   }
 
   /* Value to be used in the templates */

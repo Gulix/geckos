@@ -24,4 +24,14 @@ function cardVM(editableFields, fields) {
     }
     return '';
   }
+
+  self.getBoolValue = function(fieldName) {
+    for (var iField = 0; iField < self.fields().length; iField++) {
+      var field = self.fields()[iField];
+      if (field.name == fieldName) {
+        return field.checkedValue();
+      }
+    }
+    return false;
+  }
 }
