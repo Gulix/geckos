@@ -22,6 +22,18 @@ function engineVM(cardTemplateVM) {
   self.listCards().push(new cardVM(self.editableFields(), self.cardTemplate().fields()));
   self.editableCard = ko.observable(self.listCards()[0]);
 
+  /* Adding / Removing cards from the list */
+  self.addNewCard = function() {
+    var newCard = new cardVM(self.editableFields(), self.cardTemplate().fields());
+    self.listCards.push(newCard);
+    self.editableCard(newCard);
+  }
+  self.removeSelectedCard = function() {
+    if (self.editableCard() != null) {
+      self.listCards.remove(self.editableCard());
+    }
+  }
+
   /* Generated template */
   self.generatedTemplate = ko.pureComputed(function() {
     var jsonCanvas = self.cardTemplate().generateTemplate(self.editableCard());
@@ -29,5 +41,30 @@ function engineVM(cardTemplateVM) {
     return jsonCanvas;
   });
 
+  /* Import / Export data for list of cards */
+  self.exportList = function() {
+    var jsonData = [ ];
+    for(var iCard = 0; iCard < self.listCards().length; iCard++) {
+      jsonData.push(self.listCards()[iCard].getSavedData());
+    }
+    var blob = new Blob([JSON.stringify(jsonData)], {type: "text/plain;charset=utf-8"});
+    saveAs(blob, "listCards.json");
+  }
+  self.loadList = function() {
+    $("#file-load-list").click();
+  }
+  self.importList = function(jsonData) {
+    //self.listCards.removeAll();
+    var cards = [];
+    for(var cardData in jsonData) {
+      var card = new cardVM(self.editableFields(), self.cardTemplate().fields());
+      card.loadFromJson(jsonData[cardData]);
+      cards.push(card);
+    }
+    self.listCards(cards);
+    if (cards.length > 0) {
+      self.editableCard(cards[0]);
+    }
 
+  }
 }

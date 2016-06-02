@@ -34,4 +34,26 @@ function cardVM(editableFields, fields) {
     }
     return false;
   }
+
+  /* Returns the Card Data as Json object, ready to be saved and then loaded later */
+  self.getSavedData = function() {
+    var savedObject = { };
+    for (var iField = 0; iField < self.fields().length; iField++) {
+      var field = self.fields()[iField];
+      savedObject[field.name] = field.getJsonValue();
+    }
+    return savedObject;
+  }
+
+  /* Load data from Json Values */
+  self.loadFromJson = function(jsonData) {
+    for (var data in jsonData) {
+      for (var iField = 0; iField < self.fields().length; iField++) {
+        var field = self.fields()[iField];
+        if (field.name == data) {
+          field.setValue(jsonData[data]);
+        }
+      }
+    }
+  }
 }

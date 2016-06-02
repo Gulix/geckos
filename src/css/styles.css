@@ -50,3 +50,19 @@ ul, ol, dir, menu {
 .clear {
   clear: both;
 }
+
+/* List of cards */
+.list {
+
+}
+
+.list select {
+  width: 100%;
+}
+
+.list-buttons {
+
+}
+.list-buttons input {
+  
+}

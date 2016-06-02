@@ -17,11 +17,14 @@ function editableFieldVM(jsonField) {
     self.options = jsonField.options;
     self.type = "options";
     self.selectedOption = ko.observable(self.options[0]);
-    for (var iOption = 0; iOption < self.options.length; iOption++) {
-      if (self.options[iOption].option == jsonField.default) {
-        self.selectedOption(self.options[iOption]);
+    self.setOptionFromText = function(textOption) {
+      for (var iOption = 0; iOption < self.options.length; iOption++) {
+        if (self.options[iOption].option == textOption) {
+          self.selectedOption(self.options[iOption]);
+        }
       }
     }
+    self.setOptionFromText(jsonField.default);
   }
 
   // Optional - Field of type Image
@@ -70,6 +73,33 @@ function editableFieldVM(jsonField) {
       return self.selectedOption().text;
     } else if (self.isImage()) {
       return self.dataUrl();
+    }
+  }
+
+  /* Value to be exported to be saved */
+  self.getJsonValue = function() {
+    if (self.isInputText()) {
+      return self.textValue();
+    } else if (self.isOptions()) {
+      return self.selectedOption().text;
+    } else if (self.isImage()) {
+      return self.dataUrl();
+    } else if (self.isCheckbox()) {
+      return self.checkedValue();
+    }
+    return null;
+  }
+
+  /* Setting value from Json stored data */
+  self.setValue = function(value) {
+    if (self.isInputText()) {
+      self.textValue(value);
+    } else if (self.isOptions()) {
+      self.setOptionFromText(value);
+    } else if (self.isImage()) {
+      return self.dataUrl(value);
+    } else if (self.isCheckbox()) {
+      return self.checkedValue(value);
     }
   }
 }
