@@ -19,22 +19,46 @@
 
     <div class="sticker fullWidth">
         <div class="stickerHeading "><h1>Cards List</h1></div>
-        <div class="list-buttons">
-          <input type='button' value="Add" data-bind="click: addNewCard"></input>
-          <input type='button' value="Remove" data-bind="click: removeSelectedCard"></input>
-          <input type='button' value="Export" data-bind="click: exportList"></input>
-          <input type='button' value="Import" data-bind="click: loadList"></input>
-          <form style="display:none" id="file-load-list-form">
-  			  <input type="file" id="file-load-list" name="file" class="form-control" style="display:none"
-                />
-  		  </form>
+        <div class="choice-buttons">
+          <input type='button' value="Template" data-bind="click: showTemplateSelection"></input>
+          <input type='button' value="Cards'List" data-bind="click: showCardsList"></input>
         </div>
-        <div class="list">
-          <select size="5" data-bind="options: listCards, optionsText: 'cardName', value: editableCard">
+        <div class="header-content">
+          <div class="cards-list" data-bind="visible: isCardsListVisible">
+            <div class="list-buttons">
+              <input type='button' value="Add" data-bind="click: addNewCard"></input>
+              <input type='button' value="Remove" data-bind="click: removeSelectedCard"></input>
+              <input type='button' value="Export" data-bind="click: exportList"></input>
+              <input type='button' value="Import" data-bind="click: loadList"></input>
+              <form style="display:none" id="file-load-list-form">
+        			  <input type="file" id="file-load-list" name="file" class="form-control" style="display:none"
+                      />
+        		  </form>
+            </div>
+            <div class="list">
+              <select size="5" data-bind="options: listCards, optionsText: 'cardName', value: editableCard">
 
-          </select>
+              </select>
+            </div>
+          </div>
+          <div class="template-selection" data-bind="visible: isTemplateSelectionVisible">
+            <!-- ko with: cardTemplate -->
+            <div class="list-buttons">
+              <input type='button' value="Reset" data-bind="click: resetTemplate"></input>
+              <input type='button' value="Set" data-bind="click: setTemplate"></input>
+              <input type='button' value="Save" data-bind="click: saveTemplate"></input>
+              <input type='button' value="Load" data-bind="click: loadTemplate"></input>
+              <form style="display:none" id="file-load-template-form">
+                <input type="file" id="file-load-template" name="file" class="form-control" style="display:none"
+                      />
+              </form>
+            </div>
+            <div class="template-text">
+              <textarea rows="6" data-bind="value: editableTemplate"></textarea>
+            </div>
+            <!-- /ko -->
+          </div>
         </div>
-
         <div class="clear"></div>
     </div>
 
@@ -806,6 +830,25 @@
          $("#file-load-list-form")[0].reset();
        }
    });
+
+   $("#file-load-template").change(function (evt) {
+
+      if (evt.target.files.length == 1)
+      {
+        var file = evt.target.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function (reader) {
+          var data = this.result;
+          engineVM.cardTemplate().importTemplate(data);
+        };
+
+        reader.readAsText(file);
+
+        // Reset file input
+        $("#file-load-template-form")[0].reset();
+      }
+  });
     </script>
 </body>
 </html>

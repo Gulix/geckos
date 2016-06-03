@@ -54,7 +54,7 @@ function engineVM(cardTemplateVM) {
     $("#file-load-list").click();
   }
   self.importList = function(jsonData) {
-    //self.listCards.removeAll();
+
     var cards = [];
     for(var cardData in jsonData) {
       var card = new cardVM(self.editableFields(), self.cardTemplate().fields());
@@ -65,6 +65,17 @@ function engineVM(cardTemplateVM) {
     if (cards.length > 0) {
       self.editableCard(cards[0]);
     }
-
   }
+
+  /* Visibility of items in the upper part */
+  self.upperPartVisible = ko.observable('template');
+  self.isCardsListVisible = ko.pureComputed(function() {
+    return self.upperPartVisible() == 'cardslist';
+  })
+  self.isTemplateSelectionVisible = ko.pureComputed(function() {
+    return self.upperPartVisible() == 'template';
+  })
+  self.showTemplateSelection = function() { self.upperPartVisible('template'); }
+  self.showCardsList = function() { self.upperPartVisible('cardslist'); }
+
 }

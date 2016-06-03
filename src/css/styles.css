@@ -51,6 +51,25 @@ ul, ol, dir, menu {
   clear: both;
 }
 
+/* Header choice */
+.choice-buttons {
+  float: left !important;
+}
+
+.choice-buttons input {
+  display: block;
+}
+
+.header-content {
+  float: right !important;
+  width: 800px;
+}
+
+/* Managing the template */
+.template-text textarea {
+  width: 100%;
+}
+
 /* List of cards */
 .list {
 
@@ -64,5 +83,5 @@ ul, ol, dir, menu {
 
 }
 .list-buttons input {
-  
+
 }
