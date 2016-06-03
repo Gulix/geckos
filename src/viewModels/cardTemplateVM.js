@@ -13,26 +13,58 @@ function cardTemplateVM(jsonTemplate) {
 
     for (var iObject = 0; iObject < self.canvasFields().length; iObject++) {
       var field = self.canvasFields()[iObject];
-      var generatedObject = { };
-      for(var key in field) {
-        var value = field[key];
-        if (isNumber(value)) {
-          value = parseFloat(value);
-        } else if (typeof(value) == "boolean") {
-          value = (value === 'true');
-        } else if (value.indexOf('$') >= 0) {
-          var valueField = value.replace('$', '');
-          value = cardVM.getValue(valueField);
-        } else if (value.indexOf('?') >= 0) {
-          var valueField = value.replace('?', '');
-          value = cardVM.getBoolValue(valueField);
-        }
-        generatedObject[key] = value;
-      }
+      var generatedObject = self.processObject(cardVM, field);
       generated.objects.push(generatedObject);
     }
 
     return generated;
+  }
+
+  self.processObject = function(cardVM, jsonObject) {
+
+    // A null value is returned as-iss
+    if (jsonObject === null) {
+      return null;
+    }
+    // The object is an Array : the Array is rebuilt by processing each element of the Array
+    // and then rebuilding the Array
+    if (Array.isArray(jsonObject)) {
+      var array = [];
+      for(var iElement = 0; iElement < jsonObject.length; iElement++) {
+        var itemValue = self.processObject(cardVM, jsonObject[iElement]);
+        array.push(itemValue);
+      }
+      return array;
+    }
+    // The object is a Boolean : he's returned as-is
+    if (typeof(jsonObject) == "boolean") {
+      return jsonObject;
+    }
+    // The object is a number : he's returned as-is
+    if (isNumber(jsonObject)) {
+      return jsonObject;
+    }
+    // The object is a string : it is processed with card values
+    if (typeof(jsonObject) == "string") {
+      if (jsonObject.indexOf('$') >= 0) {
+        var valueField = jsonObject.replace('$', '');
+        return cardVM.getValue(valueField);
+      } else if (jsonObject.indexOf('?') >= 0) {
+        var valueField = jsonObject.replace('?', '');
+        return cardVM.getBoolValue(valueField);
+      }
+      return jsonObject;
+    }
+    // The object is a JSON object : each key-value is processed recursively
+    if (typeof(jsonObject) == "object") {
+      var generatedObject = { };
+      for(var key in jsonObject) {
+        generatedObject[key] = self.processObject(cardVM, jsonObject[key]);
+      }
+      return generatedObject;
+    }
+
+    return jsonObject;
   }
 
   self.generateText = function(cardVM) {

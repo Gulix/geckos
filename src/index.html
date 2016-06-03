@@ -41,7 +41,7 @@
     <div class="floatLeft">
       <div class="sticker" style="width: 380px" data-bind="with: editableCard">
           <div class="stickerHeading"><h1>Card Details</h1></div>
-          Ici se trouvent les éléments définissant la carte
+          Here are the defining fields to edit the card
           <div data-bind="foreach: fields">
             <div data-bind="if: isInputText()">
               <span data-bind="text: label"></span><input type="text" data-bind="value: textValue"></input>
@@ -87,51 +87,701 @@
     <script>
     var jsonTemplate = {
       "fields": [
-        { "name": "name", "label": "Name :", "default": "Captain Wolf"},
-        { "name": "brawl", "label": "Brawl :", "default": "3d10"},
-        { "name": "shoot", "label": "Shoot :", "default": "3d10"},
-        { "name": "dodge", "label": "Dodge :", "default": "2d8"},
-        { "name": "might", "label": "Might :", "default": "3d10"},
-        { "name": "finesse", "label": "Finesse :", "default": "2d8"},
-        { "name": "cunning", "label": "Cunning :", "default": "3d10"},
-        { "name": "description", "label": "Description :", "default": "..."},
-        {
-          "name": "characterType", "label": "Type :", "type": "options", "default": "leader",
+        { "name": "character_name", "label": "Character Name :", "default": "Character Name"},
+        { "name": "move_value", "label": "Move", "type": "options", "default": "4",
           "options" : [
-            { "option" : "leader", "text": "Leader" },
-            { "option" : "sidekick", "text": "Sidekick" },
-            { "option" : "ally", "text": "Ally" },
-            { "option" : "follower", "text": "Follower" },
-            { "option" : "terror", "text": "Terror" },
-            { "option" : "gang", "text": "Gang" }
+            { "option" : "1", "text": "1" },
+            { "option" : "2", "text": "2" },
+            { "option" : "3", "text": "3" },
+            { "option" : "4", "text": "4" },
+            { "option" : "5", "text": "5" },
+            { "option" : "6", "text": "6" }
           ]
         },
-        { "name": "portray", "label": "Miniature's image :", "type": "image"},
-        { "name": "isHealthDisplayed", "label": "Health bar visible ?", "type" : "checkbox", "default": true}
+        { "name": "agility_value", "label": "Agility", "type": "options", "default": "4+",
+          "options" : [
+            { "option" : "1", "text": "1+" },
+            { "option" : "2", "text": "2+" },
+            { "option" : "3", "text": "3+" },
+            { "option" : "4", "text": "4+" },
+            { "option" : "5", "text": "5+" },
+            { "option" : "6", "text": "6+" }
+          ]
+        },
+        { "name": "save_value", "label": "Save", "type": "options", "default": "4+",
+          "options" : [
+            { "option" : "1", "text": "1+" },
+            { "option" : "2", "text": "2+" },
+            { "option" : "3", "text": "3+" },
+            { "option" : "4", "text": "4+" },
+            { "option" : "5", "text": "5+" },
+            { "option" : "6", "text": "6+" }
+          ]
+        },
+        { "name": "weapon1_name", "label": "Weapon name", "default": "Weapon Name"},
+        { "name": "weapon1_dice", "label": "Activation Dice", "type": "options", "default": "4+",
+          "options" : [
+            { "option" : "1", "text": "1+" },
+            { "option" : "2", "text": "2+" },
+            { "option" : "3", "text": "3+" },
+            { "option" : "4", "text": "4+" },
+            { "option" : "5", "text": "5+" },
+            { "option" : "6", "text": "6+" }
+          ]
+        },
+        { "name": "weapon1_range", "label": "Range", "type": "options", "default": "combat",
+          "options" : [
+            { "option" : "combat", "text": "Combat" },
+            { "option" : "missile", "text": "Missile" },
+            { "option" : "area", "text": "Area" }
+          ]
+        },
+        { "name": "weapon1_hit", "label": "To Hit", "type": "options", "default": "4+",
+          "options" : [
+            { "option" : "1", "text": "1+" },
+            { "option" : "2", "text": "2+" },
+            { "option" : "3", "text": "3+" },
+            { "option" : "4", "text": "4+" },
+            { "option" : "5", "text": "5+" },
+            { "option" : "6", "text": "6+" }
+          ]
+        },
+        { "name": "weapon1_damage", "label": "Damage", "type": "options", "default": "1",
+          "options" : [
+            { "option" : "1", "text": "1" },
+            { "option" : "2", "text": "2" },
+            { "option" : "3", "text": "3" },
+            { "option" : "d3", "text": "D3" }
+          ]
+        },
+        { "name": "weapon2_name", "label": "Weapon name", "default": "Weapon Name"},
+        { "name": "weapon2_dice", "label": "Activation Dice", "type": "options", "default": "4+",
+          "options" : [
+            { "option" : "1", "text": "1+" },
+            { "option" : "2", "text": "2+" },
+            { "option" : "3", "text": "3+" },
+            { "option" : "4", "text": "4+" },
+            { "option" : "5", "text": "5+" },
+            { "option" : "6", "text": "6+" }
+          ]
+        },
+        { "name": "weapon2_range", "label": "Range", "type": "options", "default": "combat",
+          "options" : [
+            { "option" : "combat", "text": "Combat" },
+            { "option" : "missile", "text": "Missile" },
+            { "option" : "area", "text": "Area" }
+          ]
+        },
+        { "name": "weapon2_hit", "label": "To Hit", "type": "options", "default": "4+",
+          "options" : [
+            { "option" : "1", "text": "1+" },
+            { "option" : "2", "text": "2+" },
+            { "option" : "3", "text": "3+" },
+            { "option" : "4", "text": "4+" },
+            { "option" : "5", "text": "5+" },
+            { "option" : "6", "text": "6+" }
+          ]
+        },
+        { "name": "weapon2_damage", "label": "Damage", "type": "options", "default": "1",
+          "options" : [
+            { "option" : "1", "text": "1" },
+            { "option" : "2", "text": "2" },
+            { "option" : "3", "text": "3" },
+            { "option" : "d3", "text": "D3" }
+          ]
+        },
+        { "name": "weapon3_name", "label": "Weapon name", "default": "Weapon Name"},
+        { "name": "weapon3_dice", "label": "Activation Dice", "type": "options", "default": "4+",
+          "options" : [
+            { "option" : "1", "text": "1+" },
+            { "option" : "2", "text": "2+" },
+            { "option" : "3", "text": "3+" },
+            { "option" : "4", "text": "4+" },
+            { "option" : "5", "text": "5+" },
+            { "option" : "6", "text": "6+" }
+          ]
+        },
+        { "name": "weapon3_range", "label": "Range", "type": "options", "default": "combat",
+          "options" : [
+            { "option" : "combat", "text": "Combat" },
+            { "option" : "missile", "text": "Missile" },
+            { "option" : "area", "text": "Area" }
+          ]
+        },
+        { "name": "weapon3_hit", "label": "To Hit", "type": "options", "default": "4+",
+          "options" : [
+            { "option" : "1", "text": "1+" },
+            { "option" : "2", "text": "2+" },
+            { "option" : "3", "text": "3+" },
+            { "option" : "4", "text": "4+" },
+            { "option" : "5", "text": "5+" },
+            { "option" : "6", "text": "6+" }
+          ]
+        },
+        { "name": "weapon3_damage", "label": "Damage", "type": "options", "default": "1",
+          "options" : [
+            { "option" : "1", "text": "1" },
+            { "option" : "2", "text": "2" },
+            { "option" : "3", "text": "3" },
+            { "option" : "d3", "text": "D3" }
+          ]
+        },
+        { "name": "ability1_name", "label": "Ability name", "default": "Ability Name"},
+        { "name": "ability1_dice", "label": "Activation Dice", "type": "options", "default": "4+",
+          "options" : [
+            { "option" : "1", "text": "1+" },
+            { "option" : "2", "text": "2+" },
+            { "option" : "3", "text": "3+" },
+            { "option" : "4", "text": "4+" },
+            { "option" : "5", "text": "5+" },
+            { "option" : "6", "text": "6+" },
+            { "option" : "-", "text": "-" }
+          ]
+        },
+        { "name": "ability1_description", "label": "Ability description", "default": "Ability Description"},
+        { "name": "ability2_name", "label": "Ability name", "default": "Ability Name"},
+        { "name": "ability2_dice", "label": "Activation Dice", "type": "options", "default": "4+",
+          "options" : [
+            { "option" : "1", "text": "1+" },
+            { "option" : "2", "text": "2+" },
+            { "option" : "3", "text": "3+" },
+            { "option" : "4", "text": "4+" },
+            { "option" : "5", "text": "5+" },
+            { "option" : "6", "text": "6+" },
+            { "option" : "-", "text": "-" }
+          ]
+        },
+        { "name": "ability2_description", "label": "Ability description", "default": "Ability Description"},
+        { "name": "ability3_name", "label": "Ability name", "default": "Ability Name"},
+        { "name": "ability3_dice", "label": "Activation Dice", "type": "options", "default": "4+",
+          "options" : [
+            { "option" : "1", "text": "1+" },
+            { "option" : "2", "text": "2+" },
+            { "option" : "3", "text": "3+" },
+            { "option" : "4", "text": "4+" },
+            { "option" : "5", "text": "5+" },
+            { "option" : "6", "text": "6+" },
+            { "option" : "-", "text": "-" }
+          ]
+        },
+        { "name": "ability3_description", "label": "Ability description", "default": "Ability Description"},
+        { "name": "trait1", "label": "Trait", "default": "Trait"},
+        { "name": "trait2", "label": "Trait", "default": "Trait"},
+        { "name": "renown", "label": "Renown", "default": "How to gain renown"},
       ],
       "canvasFields": [
-        {"type":"rect", "width": 350, "height":495, "fill":"#CAAB7F"},
-        {"type":"text","text":"$characterType", "fontSize": 22},
-        {"type":"text","text":"$name", "fontSize": 22, "fontWeight": "bold", "left": 80},
-        {"type":"rect", "width": 170, "height":106, "left":165, "top":37, "fill":"#E07B4F", "stroke":"#000000"},
-        {"type":"rect", "width": 170, "height":106, "left":165, "top":150, "fill":"#ACA497", "stroke":"#000000"},
-        {"type":"text","text":"Brawl", "fontSize": 22, "fontWeight": "bold", "left": 175, "top": 40},
-        {"type":"text","text":"Shoot", "fontSize": 22, "fontWeight": "bold", "left": 175, "top": 75},
-        {"type":"text","text":"Dodge", "fontSize": 22, "fontWeight": "bold", "left": 175, "top": 110},
-        {"type":"text","text":"Might", "fontSize": 22, "fontWeight": "bold", "left": 175, "top": 153},
-        {"type":"text","text":"Finesse", "fontSize": 22, "fontWeight": "bold", "left": 175, "top": 188},
-        {"type":"text","text":"Cunning", "fontSize": 22, "fontWeight": "bold", "left": 175, "top": 223},
-        {"type":"text","text":"$brawl", "fontSize": 22, "fontWeight": "bold", "left": 270, "top": 40},
-        {"type":"text","text":"$shoot", "fontSize": 22, "fontWeight": "bold", "left": 270, "top": 75},
-        {"type":"text","text":"$dodge", "fontSize": 22, "fontWeight": "bold", "left": 270, "top": 110},
-        {"type":"text","text":"$might", "fontSize": 22, "fontWeight": "bold", "left": 270, "top": 153},
-        {"type":"text","text":"$finesse", "fontSize": 22, "fontWeight": "bold", "left": 270, "top": 188},
-        {"type":"text","text":"$cunning", "fontSize": 22, "fontWeight": "bold", "left": 270, "top": 223},
-        {"type":"image","left":5, "width":150, "top":40 ,"height":300, "src": "$portray"},
-        {"type":"rect", "width": 330, "height":40, "left":5, "top":450, "fill":"#B1E29E", "stroke":"#000000", "visible": "?isHealthDisplayed"},
+        {
+           "type":"path-group",
+           "originX":"left",
+           "originY":"top",
+           "left":0,
+           "top":0,
+           "width":673.28,
+           "height":245.98,
+           "fill":"",
+           "stroke":null,
+           "strokeWidth":1,
+           "strokeDashArray":null,
+           "strokeLineCap":"butt",
+           "strokeLineJoin":"miter",
+           "strokeMiterLimit":10,
+           "scaleX":1,
+           "scaleY":1,
+           "angle":0,
+           "flipX":false,
+           "flipY":false,
+           "opacity":1,
+           "shadow":null,
+           "visible":true,
+           "clipTo":null,
+           "backgroundColor":"",
+           "fillRule":"nonzero",
+           "globalCompositeOperation":"source-over",
+           "transformMatrix":null,
+           "skewX":0,
+           "skewY":0,
+           "paths":[
+              {
+                 "type":"rect",
+                 "originX":"left",
+                 "originY":"top",
+                 "left":-550.66,
+                 "top":-411.48,
+                 "width":533.38,
+                 "height":51.77,
+                 "fill":"rgba(255,182,0,1)",
+                 "stroke":"rgba(255,182,0,1)",
+                 "strokeWidth":5.86,
+                 "strokeDashArray":[
+                    null,
+                    null
+                 ],
+                 "strokeLineCap":"butt",
+                 "strokeLineJoin":"round",
+                 "strokeMiterLimit":4,
+                 "scaleX":1,
+                 "scaleY":1,
+                 "angle":0,
+                 "flipX":false,
+                 "flipY":false,
+                 "opacity":1,
+                 "shadow":null,
+                 "visible":true,
+                 "clipTo":null,
+                 "backgroundColor":"",
+                 "fillRule":"evenodd",
+                 "globalCompositeOperation":"source-over",
+                 "transformMatrix":[
+                    1,
+                    0,
+                    0,
+                    1,
+                    687.62795,
+                    414.40862
+                 ],
+                 "skewX":0,
+                 "skewY":0,
+                 "rx":0,
+                 "ry":0
+              },
+              {
+                 "type":"path",
+                 "originX":"left",
+                 "originY":"top",
+                 "left":82.86,
+                 "top":110.29,
+                 "width":740,
+                 "height":740,
+                 "fill":"rgba(255,255,255,1)",
+                 "stroke":{
+                    "type":"linear",
+                    "coords":{
+                       "x1":73.800644,
+                       "y1":480.28571,
+                       "x2":831.91364,
+                       "y2":480.28571
+                    },
+                    "colorStops":[
+                       {
+                          "offset":1,
+                          "color":"rgb(0,0,0)",
+                          "opacity":0.6875
+                       },
+                       {
+                          "offset":0,
+                          "color":"rgb(255,182,0)",
+                          "opacity":1
+                       }
+                    ],
+                    "offsetX":-82.85714700000005,
+                    "offsetY":-110.28571
+                 },
+                 "strokeWidth":18.11,
+                 "strokeDashArray":[
+                    null,
+                    null
+                 ],
+                 "strokeLineCap":"butt",
+                 "strokeLineJoin":"round",
+                 "strokeMiterLimit":4,
+                 "scaleX":1,
+                 "scaleY":1,
+                 "angle":0,
+                 "flipX":false,
+                 "flipY":false,
+                 "opacity":1,
+                 "shadow":null,
+                 "visible":true,
+                 "clipTo":null,
+                 "backgroundColor":"",
+                 "fillRule":"evenodd",
+                 "globalCompositeOperation":"source-over",
+                 "transformMatrix":[
+                    0.32354283,
+                    0,
+                    0,
+                    0.32354283,
+                    -23.877669999999966,
+                    -32.75198
+                 ],
+                 "skewX":0,
+                 "skewY":0,
+                 "path":[
+                    [
+                       "m",
+                       822.85715,
+                       480.28571
+                    ],
+                    [
+                       "c",
+                       0,
+                       204.34535,
+                       -165.65465,
+                       370,
+                       -370,
+                       370
+                    ],
+                    [
+                       "c",
+                       -204.34536,
+                       0,
+                       -370.000003,
+                       -165.65465,
+                       -370.000003,
+                       -370
+                    ],
+                    [
+                       "c",
+                       0,
+                       -204.34536,
+                       165.654643,
+                       -370,
+                       370.000003,
+                       -370
+                    ],
+                    [
+                       "c",
+                       204.34535,
+                       0,
+                       370,
+                       165.65464,
+                       370,
+                       370
+                    ],
+                    [
+                       "z"
+                    ]
+                 ],
+                 "pathOffset":{
+                    "x":452.85714850000005,
+                    "y":480.28571
+                 }
+              },
+              {
+                 "type":"rect",
+                 "originX":"left",
+                 "originY":"top",
+                 "left":-447.06,
+                 "top":-274.14,
+                 "width":430.65,
+                 "height":19.29,
+                 "fill":"rgba(255,182,0,1)",
+                 "stroke":"rgba(255,182,0,1)",
+                 "strokeWidth":3.21,
+                 "strokeDashArray":[
+                    null,
+                    null
+                 ],
+                 "strokeLineCap":"butt",
+                 "strokeLineJoin":"round",
+                 "strokeMiterLimit":4,
+                 "scaleX":1,
+                 "scaleY":1,
+                 "angle":0,
+                 "flipX":false,
+                 "flipY":false,
+                 "opacity":1,
+                 "shadow":null,
+                 "visible":true,
+                 "clipTo":null,
+                 "backgroundColor":"",
+                 "fillRule":"evenodd",
+                 "globalCompositeOperation":"source-over",
+                 "transformMatrix":[
+                    1,
+                    0,
+                    0,
+                    1,
+                    687.62795,
+                    414.40862
+                 ],
+                 "skewX":0,
+                 "skewY":0,
+                 "rx":0,
+                 "ry":0
+              },
+              {
+                 "type":"path",
+                 "originX":"left",
+                 "originY":"top",
+                 "left":82.86,
+                 "top":110.29,
+                 "width":740,
+                 "height":740,
+                 "fill":"rgba(0,0,0,1)",
+                 "stroke":"rgba(255,182,0,1)",
+                 "strokeWidth":21.17,
+                 "strokeDashArray":[
+                    null,
+                    null
+                 ],
+                 "strokeLineCap":"butt",
+                 "strokeLineJoin":"round",
+                 "strokeMiterLimit":4,
+                 "scaleX":1,
+                 "scaleY":1,
+                 "angle":0,
+                 "flipX":false,
+                 "flipY":false,
+                 "opacity":1,
+                 "shadow":null,
+                 "visible":true,
+                 "clipTo":null,
+                 "backgroundColor":"",
+                 "fillRule":"evenodd",
+                 "globalCompositeOperation":"source-over",
+                 "transformMatrix":[
+                    0.15283328,
+                    0,
+                    0,
+                    0.15283328,
+                    180.53548000000006,
+                    114.40814999999998
+                 ],
+                 "skewX":0,
+                 "skewY":0,
+                 "path":[
+                    [
+                       "m",
+                       822.85715,
+                       480.28571
+                    ],
+                    [
+                       "c",
+                       0,
+                       204.34535,
+                       -165.65465,
+                       370,
+                       -370,
+                       370
+                    ],
+                    [
+                       "c",
+                       -204.34536,
+                       0,
+                       -370.000003,
+                       -165.65465,
+                       -370.000003,
+                       -370
+                    ],
+                    [
+                       "c",
+                       0,
+                       -204.34536,
+                       165.654643,
+                       -370,
+                       370.000003,
+                       -370
+                    ],
+                    [
+                       "c",
+                       204.34535,
+                       0,
+                       370,
+                       165.65464,
+                       370,
+                       370
+                    ],
+                    [
+                       "z"
+                    ]
+                 ],
+                 "pathOffset":{
+                    "x":452.85714850000005,
+                    "y":480.28571
+                 }
+              },
+              {
+                 "type":"path",
+                 "originX":"left",
+                 "originY":"top",
+                 "left":596.93,
+                 "top":807.27,
+                 "width":181.96,
+                 "height":157.58,
+                 "fill":"rgba(255,182,0,1)",
+                 "stroke":"",
+                 "strokeWidth":1,
+                 "strokeDashArray":null,
+                 "strokeLineCap":"butt",
+                 "strokeLineJoin":"miter",
+                 "strokeMiterLimit":10,
+                 "scaleX":1,
+                 "scaleY":1,
+                 "angle":0,
+                 "flipX":false,
+                 "flipY":false,
+                 "opacity":1,
+                 "shadow":null,
+                 "visible":true,
+                 "clipTo":null,
+                 "backgroundColor":"",
+                 "fillRule":"evenodd",
+                 "globalCompositeOperation":"source-over",
+                 "transformMatrix":[
+                    0.03660183,
+                    0,
+                    0,
+                    0.38627047,
+                    224.90344000000005,
+                    -181.58767000000006
+                 ],
+                 "skewX":0,
+                 "skewY":0,
+                 "path":[
+                    [
+                       "m",
+                       687.91388,
+                       807.27391
+                    ],
+                    [
+                       "l",
+                       90.98104,
+                       157.5838
+                    ],
+                    [
+                       "l",
+                       -181.96209,
+                       -0.00001
+                    ],
+                    [
+                       "z"
+                    ]
+                 ],
+                 "pathOffset":{
+                    "x":687.913875,
+                    "y":886.06581
+                 }
+              },
+              {
+                 "type":"path",
+                 "originX":"left",
+                 "originY":"top",
+                 "left":596.93,
+                 "top":807.27,
+                 "width":181.96,
+                 "height":157.58,
+                 "fill":"rgba(255,182,0,1)",
+                 "stroke":"",
+                 "strokeWidth":1,
+                 "strokeDashArray":null,
+                 "strokeLineCap":"butt",
+                 "strokeLineJoin":"miter",
+                 "strokeMiterLimit":10,
+                 "scaleX":1,
+                 "scaleY":1,
+                 "angle":0,
+                 "flipX":false,
+                 "flipY":false,
+                 "opacity":1,
+                 "shadow":null,
+                 "visible":true,
+                 "clipTo":null,
+                 "backgroundColor":"",
+                 "fillRule":"evenodd",
+                 "globalCompositeOperation":"source-over",
+                 "transformMatrix":[
+                    0.02311431,
+                    -0.02837997,
+                    -0.2995026,
+                    -0.24393251,
+                    523.0929500000001,
+                    444.306789
+                 ],
+                 "skewX":0,
+                 "skewY":0,
+                 "path":[
+                    [
+                       "m",
+                       687.91388,
+                       807.27391
+                    ],
+                    [
+                       "l",
+                       90.98104,
+                       157.5838
+                    ],
+                    [
+                       "l",
+                       -181.96209,
+                       -0.00001
+                    ],
+                    [
+                       "z"
+                    ]
+                 ],
+                 "pathOffset":{
+                    "x":687.913875,
+                    "y":886.06581
+                 }
+              },
+              {
+                 "type":"path",
+                 "originX":"left",
+                 "originY":"top",
+                 "left":596.93,
+                 "top":807.27,
+                 "width":181.96,
+                 "height":157.58,
+                 "fill":"rgba(255,182,0,1)",
+                 "stroke":"",
+                 "strokeWidth":1,
+                 "strokeDashArray":null,
+                 "strokeLineCap":"butt",
+                 "strokeLineJoin":"miter",
+                 "strokeMiterLimit":10,
+                 "scaleX":1,
+                 "scaleY":1,
+                 "angle":0,
+                 "flipX":false,
+                 "flipY":false,
+                 "opacity":1,
+                 "shadow":null,
+                 "visible":true,
+                 "clipTo":null,
+                 "backgroundColor":"",
+                 "fillRule":"evenodd",
+                 "globalCompositeOperation":"source-over",
+                 "transformMatrix":[
+                    -0.02311431,
+                    -0.02837997,
+                    0.2995026,
+                    -0.24393251,
+                    -23.682629999999904,
+                    443.87375599999996
+                 ],
+                 "skewX":0,
+                 "skewY":0,
+                 "path":[
+                    [
+                       "m",
+                       687.91388,
+                       807.27391
+                    ],
+                    [
+                       "l",
+                       90.98104,
+                       157.5838
+                    ],
+                    [
+                       "l",
+                       -181.96209,
+                       -0.00001
+                    ],
+                    [
+                       "z"
+                    ]
+                 ],
+                 "pathOffset":{
+                    "x":687.913875,
+                    "y":886.06581
+                 }
+              }
+           ]
+        }
       ],
-      "canvasBackground": "#CAAB7F",
-      "canvasWidth": 340,
+      "canvasBackground": "#CCCCCC",
+      "canvasWidth": 700,
       "canvasHeight": 495
      };
     var template = new cardTemplateVM(jsonTemplate);
