@@ -12,7 +12,20 @@ function cardVM(editableFields, fields) {
   }
 
   self.cardName = ko.pureComputed(function() {
-    return self.getValue('name');
+    var nameFieldExists = false;
+    for (var iField = 0; iField < self.fields().length; iField++) {
+      var field = self.fields()[iField];
+      if (field.isNameField) {
+        return self.getValue(field.name);
+      } else if (field.name == 'name') {
+        nameFieldExists = true;
+      }
+    }
+    if (nameFieldExists == true) {
+      return self.getValue('name');
+    } else {
+      return self.getValue(self.fields()[0].name);
+    }
   });
 
   self.getValue = function(fieldName) {

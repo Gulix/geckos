@@ -7,6 +7,10 @@ function editableFieldVM(jsonField) {
 
   self.name = jsonField.name;
   self.label = jsonField.label;
+  self.isNameField = false;
+  if (jsonField.isNameField != undefined) {
+    self.isNameField = jsonField.isNameField;
+  }
   self.type = "inputText";
   self.textValue = ko.observable(jsonField.default);
 
