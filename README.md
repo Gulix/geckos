@@ -3,6 +3,8 @@ Geckos Edit Cards ... kos ... ?
 
  We don't know why Geckos edit cards, but this tool is aimed to create your own template and cards for gaming. Kinda like the Magic Set Editor, but full web.
 
+[Do you want to test the latest version of Geckos ?](http://gulix.github.io/geckos)
+
 ## The Why
 
 I'm a player. Roleplaying, boardgames, miniatures. And I've found that having cards to store information is great around the table. The spells of my D&D bard, the profiles of my Pulp City heroes, my Pulp Alley league, ...
