@@ -1,7 +1,7 @@
 function engineVM(cardTemplateVM) {
   var self = this;
 
-  self.canvas = new fabric.StaticCanvas('c');
+  self.canvas = new fabric.StaticCanvas('fabricjs-canvas');
 
   /* Card Template */
   self.cardTemplate = ko.observable(cardTemplateVM);
@@ -17,8 +17,6 @@ function engineVM(cardTemplateVM) {
 
   /* List of Editable Card */
   self.listCards = ko.observableArray([]);
-  self.listCards().push(new cardVM(self.editableFields(), self.cardTemplate().fields()));
-  self.listCards().push(new cardVM(self.editableFields(), self.cardTemplate().fields()));
   self.listCards().push(new cardVM(self.editableFields(), self.cardTemplate().fields()));
   self.editableCard = ko.observable(self.listCards()[0]);
 
@@ -45,7 +43,7 @@ function engineVM(cardTemplateVM) {
   self.exportPng = function() {
     if (self.editableCard() != null) {
 
-      var canvas = document.getElementById("c");
+      var canvas = document.getElementById('fabricjs-canvas');
       canvas.toBlob(function(blob) {
         saveAs(blob, self.editableCard().cardName() + ".png");
       });
@@ -91,5 +89,12 @@ function engineVM(cardTemplateVM) {
   })
   self.showTemplateSelection = function() { self.upperPartVisible('template'); }
   self.showCardsList = function() { self.upperPartVisible('cardslist'); }
+
+  /* Header title (depending on what is visible) */
+  self.headerSectionTitle = ko.pureComputed(function() {
+    if (self.isCardsListVisible()) { return "List of Cards"; }
+    if (self.isTemplateSelectionVisible()) { return "Template"; }
+    return "Header";
+  });
 
 }

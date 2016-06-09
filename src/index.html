@@ -7,56 +7,74 @@
     </head>
 <body>
   <div id="wrapper">
-    <div class="vspace"></div>
     <div class="main-menu">
       <ul>
-          <li><a rel="documentation" href="#">Documentation</a></li>
+          <li><a rel="documentation" href="https://github.com/Gulix/geckos/wiki">Documentation</a></li>
           <li><a href="https://github.com/Gulix/geckos">Github Page</a></li>
       </ul>
     </div>
-
     <div class="clear"></div>
+    <div class="page-title">Geckos</div>
+    <div class="page-subtitle">editing cards since 2016 ...</div>
 
     <div class="sticker fullWidth">
-        <div class="stickerHeading "><h1>Cards List</h1></div>
-        <div class="choice-buttons">
-          <input type='button' value="Template" data-bind="click: showTemplateSelection"></input>
-          <input type='button' value="Cards'List" data-bind="click: showCardsList"></input>
-        </div>
-        <div class="header-content">
-          <div class="cards-list" data-bind="visible: isCardsListVisible">
-            <div class="list-buttons">
-              <input type='button' value="Add" data-bind="click: addNewCard"></input>
-              <input type='button' value="Remove" data-bind="click: removeSelectedCard"></input>
-              <input type='button' value="Export" data-bind="click: exportList"></input>
-              <input type='button' value="Import" data-bind="click: loadList"></input>
-              <form style="display:none" id="file-load-list-form">
-        			  <input type="file" id="file-load-list" name="file" class="form-control" style="display:none"
-                      />
-        		  </form>
-            </div>
-            <div class="list">
-              <select size="5" data-bind="options: listCards, optionsText: 'cardName', value: editableCard">
-
-              </select>
-            </div>
+        <div class="stickerHeading ">
+          <h1 data-bind="text: headerSectionTitle">Cards List</h1>
+          <div class="stickerHeading-buttons" data-bind="visible: isCardsListVisible">
+            <span class='button' title='Add a new card'
+                  data-bind="click: addNewCard">Add</span>
+            <span class='button' title='Remove the selected card'
+                  data-bind="click: removeSelectedCard">Remove</span>
+            <span class='button' title='Export the list to a Json file'
+                  data-bind="click: exportList">Export</span>
+            <span class='button' title='Import a list of cards in Json format'
+                  data-bind="click: loadList">Import</span>
+            <form style="display:none" id="file-load-list-form">
+              <input type="file" id="file-load-list" name="file" class="form-control" style="display:none"
+                    />
+            </form>
           </div>
-          <div class="template-selection" data-bind="visible: isTemplateSelectionVisible">
+
+          <div class="stickerHeading-buttons" data-bind="visible: isTemplateSelectionVisible">
             <!-- ko with: cardTemplate -->
-            <div class="list-buttons">
-              <input type='button' value="Reset" data-bind="click: resetTemplate"></input>
-              <input type='button' value="Set" data-bind="click: setTemplate"></input>
-              <input type='button' value="Save" data-bind="click: saveTemplate"></input>
-              <input type='button' value="Load" data-bind="click: loadTemplate"></input>
-              <form style="display:none" id="file-load-template-form">
-                <input type="file" id="file-load-template" name="file" class="form-control" style="display:none"
-                      />
-              </form>
-            </div>
-            <div class="template-text">
-              <textarea rows="6" data-bind="value: editableTemplate"></textarea>
-            </div>
+            <span class='button' title='Cancel all changes and reset template'
+                  data-bind="click: resetTemplate">Reset</span>
+            <span class='button' title='Set current text as the new template'
+                  data-bind="click: setTemplate">Set</span>
+            <span class='button' title='Save template to a Json file'
+                  data-bind="click: saveTemplate">Save</span>
+            <span class='button' title='Load template from a Json file'
+                  data-bind="click: loadTemplate">Load</span>
+            <form style="display:none" id="file-load-template-form">
+              <input type="file" id="file-load-template" name="file" class="form-control" style="display:none"
+                    />
+            </form>
             <!-- /ko -->
+          </div>
+        </div>
+        <div class="header">
+          <div class="header-choice-buttons">
+            <span class='button disabled-button' data-bind="visible: isTemplateSelectionVisible()">Template</span>
+            <span class='button' data-bind="click: showTemplateSelection, visible: !isTemplateSelectionVisible()">Template</span>
+            <span class='button disabled-button' data-bind="visible: isCardsListVisible()">Cards</span>
+            <span class='button' data-bind="click: showCardsList, visible: !isCardsListVisible()">Cards</span>
+          </div>
+          <div class="header-content">
+            <div class="cards-list" data-bind="visible: isCardsListVisible">
+
+              <div class="list">
+                <select size="5" data-bind="options: listCards, optionsText: 'cardName', value: editableCard">
+
+                </select>
+              </div>
+            </div>
+            <div class="template-selection" data-bind="visible: isTemplateSelectionVisible">
+              <!-- ko with: cardTemplate -->
+              <div class="template-text">
+                <textarea rows="6" data-bind="value: editableTemplate"></textarea>
+              </div>
+              <!-- /ko -->
+            </div>
           </div>
         </div>
         <div class="clear"></div>
@@ -65,21 +83,22 @@
     <div class="floatLeft">
       <div class="sticker" style="width: 380px" data-bind="with: editableCard">
           <div class="stickerHeading"><h1>Card Details</h1></div>
-          Here are the defining fields to edit the card
-          <div data-bind="foreach: fields">
-            <div data-bind="if: isInputText()">
-              <span data-bind="text: label"></span><input type="text" data-bind="value: textValue"></input>
+          <div class='editable-fields' data-bind="foreach: fields">
+            <div class='field-flexrow' data-bind="if: isInputText()">
+              <span data-bind="text: label" class='field-label'></span>
+              <input class="field-largeInput" type="text" data-bind="value: textValue"></input>
             </div>
-            <div data-bind="if: isOptions()">
-              <span data-bind="text: label"></span>
-              <select data-bind="options: options, optionsText: 'text', value: selectedOption"></select>
+            <div data-bind="if: isOptions()" class="field-flexrow">
+              <span data-bind="text: label" class="field-label"></span>
+              <select class="field-largeInput" data-bind="options: options, optionsText: 'text', value: selectedOption"></select>
             </div>
-            <div data-bind="if: isImage()">
-              <span data-bind="text: label"></span>
-              <input type="file" data-bind="event: { change: uploadImage($element.files[0])}"></input>
+            <div data-bind="if: isImage()" class="field-flexrow">
+              <span data-bind="text: label" class="field-label"></span>
+              <input class="field-largeInput" type="file" data-bind="event: { change: uploadImage($element.files[0])}"></input>
             </div>
-            <div data-bind="if: isCheckbox()">
-              <label>
+            <div data-bind="if: isCheckbox()" class="field-flexrow">
+              <div class="field-label"></div>
+              <label class="field-largeInput">
                 <input type='checkbox' data-bind='checked: checkedValue'></input>
                 <span data-bind="text: label"></span>
               </label>
@@ -89,11 +108,16 @@
     </div>
 
     <div class="sticker floatRight" style="width:494px">
-        <div class="stickerHeading"><h1>Card View</h1></div>
-        <div class="list-buttons">
-          <input type='button' value="Export to PNG" data-bind="click: exportPng"></input>
+        <div class="stickerHeading">
+          <h1>Card View</h1>
+          <div class="stickerHeading-buttons">
+            <span class='button' title='Export current card to PNG image'
+                  data-bind="click: exportPng">to PNG</span>
+          </div>
         </div>
-        <canvas id="c" data-bind="fabric: generatedTemplate" ></canvas>
+        <div class="canvas-view">
+          <canvas id="fabricjs-canvas" data-bind="fabric: generatedTemplate" ></canvas>
+        </div>
     </div>
 
 </div>
