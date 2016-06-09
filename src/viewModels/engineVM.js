@@ -41,6 +41,20 @@ function engineVM(cardTemplateVM) {
     return jsonCanvas;
   });
 
+  /* Export of the Canvas */
+  self.exportPng = function() {
+    if (self.editableCard() != null) {
+
+      var canvas = document.getElementById("c");
+      canvas.toBlob(function(blob) {
+        saveAs(blob, self.editableCard().cardName() + ".png");
+      });
+    }
+
+
+  }
+
+
   /* Import / Export data for list of cards */
   self.exportList = function() {
     var jsonData = [ ];

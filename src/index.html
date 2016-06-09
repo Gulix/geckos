@@ -90,6 +90,9 @@
 
     <div class="sticker floatRight" style="width:494px">
         <div class="stickerHeading"><h1>Card View</h1></div>
+        <div class="list-buttons">
+          <input type='button' value="Export to PNG" data-bind="click: exportPng"></input>
+        </div>
         <canvas id="c" data-bind="fabric: generatedTemplate" ></canvas>
     </div>
 
