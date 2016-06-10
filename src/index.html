@@ -88,6 +88,10 @@
               <span data-bind="text: label" class='field-label'></span>
               <input class="field-largeInput" type="text" data-bind="value: textValue"></input>
             </div>
+            <div class='field-flexrow' data-bind="if: isMultiLine()">
+              <span data-bind="text: label" class='field-label'></span>
+              <textarea class="field-largeInput" data-bind="value: textValue, attr: { 'rows': nbLines }"></textarea>
+            </div>
             <div data-bind="if: isOptions()" class="field-flexrow">
               <span data-bind="text: label" class="field-label"></span>
               <select class="field-largeInput" data-bind="options: options, optionsText: 'text', value: selectedOption"></select>
@@ -145,7 +149,7 @@
         { "name": "might", "label": "Might :", "default": "3d10"},
         { "name": "finesse", "label": "Finesse :", "default": "2d8"},
         { "name": "cunning", "label": "Cunning :", "default": "3d10"},
-        { "name": "description", "label": "Description :", "default": "..."},
+        { "name": "description", "label": "Description :", "default": "...", "type": "multiline", "lines": 5},
         {
           "name": "characterType", "label": "Type :", "type": "options", "default": "leader",
           "options" : [
@@ -178,8 +182,9 @@
         {"type":"text","text":"$might", "fontSize": 22, "fontWeight": "bold", "left": 270, "top": 153},
         {"type":"text","text":"$finesse", "fontSize": 22, "fontWeight": "bold", "left": 270, "top": 188},
         {"type":"text","text":"$cunning", "fontSize": 22, "fontWeight": "bold", "left": 270, "top": 223},
-        {"type":"image","left":5, "width":150, "top":40 ,"height":300, "src": "$portray"},
+        {"type":"image","left":5, "width":150, "top":40 ,"height":210, "src": "$portray"},
         {"type":"rect", "width": 330, "height":40, "left":5, "top":450, "fill":"#B1E29E", "stroke":"#000000", "visible": "?isHealthDisplayed"},
+        {"type":"textbox", "width": 330, "left":5, "top": 260, "fontSize": 18, "text": "$description" }
       ],
       "canvasBackground": "#CAAB7F",
       "canvasWidth": 340,
