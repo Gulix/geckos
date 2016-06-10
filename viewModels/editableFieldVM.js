@@ -14,6 +14,14 @@ function editableFieldVM(jsonField) {
   self.type = "inputText";
   self.textValue = ko.observable(jsonField.default);
 
+  // Optional - Multiline text
+  if ((jsonField.type != undefined) && (jsonField.type == "multiline")) {
+    self.type = 'multiline';
+    self.nbLines = 4;
+    if (jsonField.lines != undefined) {
+      self.nbLines = jsonField.lines;
+    }
+  }
   // Optional - Field of type Select with Options
   if ((jsonField.type != undefined) && (jsonField.type == "options")
       && (jsonField.options != undefined) && (jsonField.options.length > 0)) {
@@ -68,10 +76,13 @@ function editableFieldVM(jsonField) {
   self.isCheckbox = function() {
     return self.type == 'checkbox';
   }
+  self.isMultiLine = function() {
+    return self.type == 'multiline';
+  }
 
   /* Value to be used in the templates */
   self.getTextValue = function() {
-    if (self.isInputText()) {
+    if (self.isInputText() || self.isMultiLine()) {
       return self.textValue();
     } else if (self.isOptions()) {
       return self.selectedOption().text;
