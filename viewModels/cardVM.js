@@ -7,9 +7,31 @@ function cardVM(editableFields, fields) {
 
   //self.fields = ko.observableArray(editableFields);
   self.fields = ko.observableArray([]);
-  for (var iField = 0; iField < fields.length; iField++) {
-    self.fields.push(new editableFieldVM(fields[iField]));
+  self.getFieldFromName = function(fieldName) {
+    for (var iField = 0; iField < self.fields().length; iField++) {
+      var field = self.fields()[iField];
+      if (field.name == fieldName) {
+        return field;
+      }
+    }
+    return null;
   }
+
+  self.updateFields = function(fieldList) {
+    var fields = [];
+    for (var iField = 0; iField < fieldList.length; iField++) {
+      var editableField = new editableFieldVM(fieldList[iField]);
+      // Getting previous values from actual field with same name
+      var existingField = self.getFieldFromName(editableField.name);
+      if (existingField != null) {
+        editableField.textValue(existingField.textValue());
+      }
+      fields.push(editableField);
+    }
+    self.fields(fields);
+  }
+  self.updateFields(fields);
+
 
   self.cardName = ko.pureComputed(function() {
     var nameFieldExists = false;
@@ -29,21 +51,17 @@ function cardVM(editableFields, fields) {
   });
 
   self.getValue = function(fieldName) {
-    for (var iField = 0; iField < self.fields().length; iField++) {
-      var field = self.fields()[iField];
-      if (field.name == fieldName) {
+    var field = self.getFieldFromName(fieldName);
+    if (field != null) {
         return field.getTextValue();
-      }
     }
     return '';
   }
 
   self.getBoolValue = function(fieldName) {
-    for (var iField = 0; iField < self.fields().length; iField++) {
-      var field = self.fields()[iField];
-      if (field.name == fieldName) {
+    var field = self.getFieldFromName(fieldName);
+    if (field != null) {
         return field.checkedValue();
-      }
     }
     return false;
   }

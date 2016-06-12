@@ -20,6 +20,13 @@ function engineVM(cardTemplateVM) {
   self.listCards().push(new cardVM(self.editableFields(), self.cardTemplate().fields()));
   self.editableCard = ko.observable(self.listCards()[0]);
 
+  /* Updating all the cards when the template is updated */
+  self.cardTemplate().updateCards = function() {
+    for(var iCard = 0; iCard < self.listCards().length; iCard++) {
+      self.listCards()[iCard].updateFields(self.cardTemplate().fields());
+    }
+  }
+
   /* Adding / Removing cards from the list */
   self.addNewCard = function() {
     var newCard = new cardVM(self.editableFields(), self.cardTemplate().fields());
