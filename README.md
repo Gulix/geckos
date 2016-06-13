@@ -3,7 +3,10 @@ Geckos Edit Cards ... kos ... ?
 
  We don't know why Geckos edit cards, but this tool is aimed to create your own template and cards for gaming. Kinda like the Magic Set Editor, but full web.
 
-[Do you want to test the latest version of Geckos ?](http://gulix.github.io/geckos)
+## Where to Start ?
+
+* [You can test the software](http://gulix.github.io/geckos)
+* [You can go the first tutorial](https://github.com/Gulix/geckos/wiki/Tutorial01)
 
 ## The Why
 
