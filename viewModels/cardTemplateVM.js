@@ -88,8 +88,9 @@ function cardTemplateVM(jsonTemplate) {
     self.canvasWidth(self.currentTemplate().canvasWidth);
     self.canvasHeight(self.currentTemplate().canvasHeight);
 
-    // Updating the cards
+    // Updating the cards, the canvas
     self.updateCards();
+    self.updateCanvas();
   }
   self.saveTemplate = function() {
     var blob = new Blob([JSON.stringify(self.currentTemplate())], {type: "text/plain;charset=utf-8"});

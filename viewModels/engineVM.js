@@ -26,6 +26,10 @@ function engineVM(cardTemplateVM) {
       self.listCards()[iCard].updateFields(self.cardTemplate().fields());
     }
   }
+  self.cardTemplate().updateCanvas = function() {
+    self.canvas.setWidth(self.cardTemplate().canvasWidth());
+    self.canvas.setHeight(self.cardTemplate().canvasHeight());
+  }
 
   /* Adding / Removing cards from the list */
   self.addNewCard = function() {
