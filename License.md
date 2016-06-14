@@ -1,3 +1,3 @@
-Well, you can do whatever you wish with this. At least, mention my name and this repository as the source.
+This software and its documentation is released under the [CC-By-SA](https://creativecommons.org/licenses/by-sa/3.0/) license.
 
-And the use of this software is under the Beerware agreement : if you like if, feel free to offer me a beer !
+This software is under the **Beerware agreement** : if you use it and if you like it, feel free to offer me a beer if we meet !

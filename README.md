@@ -7,6 +7,9 @@ Geckos Edit Cards ... kos ... ?
 
 * [You can test the software](http://gulix.github.io/geckos)
 * [You can go the first tutorial](https://github.com/Gulix/geckos/wiki/Tutorial01) and create a template card from scratch.
+* [You can see the list of existing templates](./templates)
+* [You can see if I need some help](https://github.com/Gulix/geckos/labels/help%20wanted)
+* [You can check if any Question is waiting for Answers / Insights](https://github.com/Gulix/geckos/labels/question)
 
 ## The Why
 
