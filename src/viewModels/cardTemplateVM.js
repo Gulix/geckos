@@ -55,6 +55,9 @@ function cardTemplateVM(jsonTemplate) {
       } else if (jsonObject.indexOf('?') >= 0) {
         var valueField = jsonObject.replace('?', '');
         return cardVM.getBoolValue(valueField);
+      } else if (jsonObject.indexOf('£') >= 0) {
+        var valueField = jsonObject.replace('£', '');
+        return cardVM.getStyles(valueField);
       }
       return jsonObject;
     }

@@ -7,7 +7,7 @@
     {	"name": "might", "label": "Might :", "default": "3d10" },
     {	"name": "finesse", "label": "Finesse :", "default": "2d8" },
     { "name": "cunning", "label": "Cunning :", "default": "3d10" },
-    { "name": "description", "label": "Description :", "default": "...", "type": "multiline", "lines": 5 },
+    { "name": "description", "label": "Description :", "default": "...", "type": "richtext" },
     { "name": "characterType", "label": "Type :", "type": "options", "default": "leader", "options":
       [
         { "option": "leader", "text": "Leader" },
@@ -41,7 +41,7 @@
     { "type": "text",	"text": "$cunning",	"fontSize": 22,	"fontWeight": "bold",	"left": 270, "top": 223 },
     {	"type": "image", "left": 5, "width": 150,	"top": 40, "height": 210,	"src": "$portray" },
     { "type": "rect",	"width": 330,	"height": 40,	"left": 5, "top": 450, "fill": "#B1E29E", "stroke": "#000000", "visible": "?isHealthDisplayed" },
-    { "type": "textbox", "width": 330, "left": 5, "top": 260, "fontSize": 18, "text": "$description" }
+    { "type": "textbox", "width": 330, "left": 5, "top": 260, "fontSize": 18, "text": "$description", "styles": "£description" }
   ],
 	"canvasBackground": "#CAAB7F",
 	"canvasWidth": 340,

@@ -71,6 +71,15 @@ function cardVM(editableFields, fields) {
     return false;
   }
 
+  self.getStyles = function(fieldName) {
+    var field = self.getFieldFromName(fieldName);
+    if ((field != null) && field.isRichText()) {
+      return field.styles();
+    } else {
+      return { };
+    }
+  }
+
   /* Returns the Card Data as Json object, ready to be saved and then loaded later */
   self.getSavedData = function() {
     var savedObject = { };

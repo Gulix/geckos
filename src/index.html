@@ -93,11 +93,11 @@
             </div>
             <div class='field-flexrow' data-bind="if: isMultiLine()">
               <span data-bind="text: label" class='field-label'></span>
+              <textarea class="field-largeInput" data-bind="value: textValue, attr: { 'rows': nbLines }"></textarea>
+            </div>
+            <div class='field-flexrow' data-bind="if: isRichText()">
+              <span data-bind="text: label" class='field-label'></span>
               <div class="field-largeInput">
-                  <!--<div id="toolbar" style="display: none;">
-                    <a data-wysihtml5-command="bold" title="CTRL+B">bold</a> |
-                    <a data-wysihtml5-command="italic" title="CTRL+I">italic</a>
-                  </div>-->
                   <textarea data-bind="wysihtml5: textValue"></textarea>
               </div>
             </div>
