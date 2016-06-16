@@ -61,6 +61,18 @@ function editableFieldVM(jsonField) {
     if (jsonField.default != undefined) { defVal = jsonField.default; }
     self.checkedValue = ko.observable(defVal);
   }
+  // Optional - Rich Text Field
+  if ((jsonField.type != undefined) && (jsonField.type == 'richtext')) {
+    self.type = 'richtext';
+    self.textDisplayed = ko.observable(function() {
+      var charTables = getCharsTableFromHtml(self.textValue());
+      return getTextFromCharTable(charTables);
+    });
+    self.styles = function() {
+      var charTables = getCharsTableFromHtml(self.textValue());
+      return getStylesTablesFromCharTables(charTables);
+    };
+  }
 
 
   /* Types of Fields */
@@ -79,6 +91,9 @@ function editableFieldVM(jsonField) {
   self.isMultiLine = function() {
     return self.type == 'multiline';
   }
+  self.isRichText = function() {
+    return self.type == 'richtext';
+  }
 
   /* Value to be used in the templates */
   self.getTextValue = function() {
@@ -88,12 +103,14 @@ function editableFieldVM(jsonField) {
       return self.selectedOption().text;
     } else if (self.isImage()) {
       return self.dataUrl();
+    } else if (self.isRichText()) {
+      return self.textDisplayed();
     }
   }
 
   /* Value to be exported to be saved */
   self.getJsonValue = function() {
-    if (self.isInputText()) {
+    if (self.isInputText() || self.isMultiLine() || self.isRichText()) {
       return self.textValue();
     } else if (self.isOptions()) {
       return self.selectedOption().text;
@@ -107,7 +124,7 @@ function editableFieldVM(jsonField) {
 
   /* Setting value from Json stored data */
   self.setValue = function(value) {
-    if (self.isInputText()) {
+    if (self.isInputText() || self.isMultiLine() || self.isRichText()) {
       self.textValue(value);
     } else if (self.isOptions()) {
       self.setOptionFromText(value);

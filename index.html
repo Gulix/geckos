@@ -4,6 +4,9 @@
       <title>Geckos - Editing Cards since ...</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="css/styles.css"></link>
+        <script src="lib/wysihtml.min.js"></script>
+        <script src="lib/wysihtml-toolbar.min.js"></script>
+        <script src="lib/parser_rules/simple.js"></script>
     </head>
 <body>
   <div id="wrapper">
@@ -92,6 +95,12 @@
               <span data-bind="text: label" class='field-label'></span>
               <textarea class="field-largeInput" data-bind="value: textValue, attr: { 'rows': nbLines }"></textarea>
             </div>
+            <div class='field-flexrow' data-bind="if: isRichText()">
+              <span data-bind="text: label" class='field-label'></span>
+              <div class="field-largeInput">
+                  <textarea data-bind="wysihtml5: textValue"></textarea>
+              </div>
+            </div>
             <div data-bind="if: isOptions()" class="field-flexrow">
               <span data-bind="text: label" class="field-label"></span>
               <select class="field-largeInput" data-bind="options: options, optionsText: 'text', value: selectedOption"></select>
@@ -125,7 +134,7 @@
     </div>
 
     <div class="clear"></div>
-    <div class="page-footer">Alpha version 1 - Last updated 2016-06-13 (master branch)</div>
+    <div class="page-footer">Alpha version 1 - Last updated 2016-06-16 (master branch)</div>
 
 </div>
     <script src="http://code.jquery.com/jquery.js"></script>
@@ -135,6 +144,8 @@
 
     <script src="js/utils.js"></script>
     <script src="js/fabricHandler.js"></script>
+
+    <script src="js/knockoutExtensions.js"></script>
     <!-- ViewModels -->
     <script src="viewModels/cardTemplateVM.js"></script>
     <script src="viewModels/cardVM.js"></script>
@@ -196,6 +207,10 @@
     var template = new cardTemplateVM(jsonTemplate);
     var engineVM = new engineVM(template);
     ko.applyBindings(engineVM);
+      /*var editor = new wysihtml5.Editor('textarea', {
+        toolbar: "toolbar",
+        parserRules:  wysihtml5ParserRules
+      });*/
 
     $("#file-load-list").change(function (evt) {
 

@@ -29,6 +29,11 @@ function cardVM(editableFields, fields) {
       fields.push(editableField);
     }
     self.fields(fields);
+
+    /*var editor = new wysihtml5.Editor('textarea', {
+      toolbar: "toolbar",
+      parserRules:  wysihtml5ParserRules
+    });*/
   }
   self.updateFields(fields);
 
@@ -64,6 +69,15 @@ function cardVM(editableFields, fields) {
         return field.checkedValue();
     }
     return false;
+  }
+
+  self.getStyles = function(fieldName) {
+    var field = self.getFieldFromName(fieldName);
+    if ((field != null) && field.isRichText()) {
+      return field.styles();
+    } else {
+      return { };
+    }
   }
 
   /* Returns the Card Data as Json object, ready to be saved and then loaded later */
