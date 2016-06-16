@@ -29,6 +29,11 @@ function cardVM(editableFields, fields) {
       fields.push(editableField);
     }
     self.fields(fields);
+
+    /*var editor = new wysihtml5.Editor('textarea', {
+      toolbar: "toolbar",
+      parserRules:  wysihtml5ParserRules
+    });*/
   }
   self.updateFields(fields);
 

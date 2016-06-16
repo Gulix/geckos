@@ -4,6 +4,9 @@
       <title>Geckos - Editing Cards since ...</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="css/styles.css"></link>
+        <script src="lib/wysihtml.min.js"></script>
+        <script src="lib/wysihtml-toolbar.min.js"></script>
+        <script src="lib/parser_rules/simple.js"></script>
     </head>
 <body>
   <div id="wrapper">
@@ -90,7 +93,15 @@
             </div>
             <div class='field-flexrow' data-bind="if: isMultiLine()">
               <span data-bind="text: label" class='field-label'></span>
-              <textarea class="field-largeInput" data-bind="value: textValue, attr: { 'rows': nbLines }"></textarea>
+              <div class="field-largeInput">
+                <form>
+                  <div id="toolbar" style="display: none;">
+                    <a data-wysihtml5-command="bold" title="CTRL+B">bold</a> |
+                    <a data-wysihtml5-command="italic" title="CTRL+I">italic</a>
+                  </div>
+                  <textarea id="textarea" data-bind="value: textValue"></textarea>
+                </form>
+              </div>
             </div>
             <div data-bind="if: isOptions()" class="field-flexrow">
               <span data-bind="text: label" class="field-label"></span>
@@ -196,6 +207,10 @@
     var template = new cardTemplateVM(jsonTemplate);
     var engineVM = new engineVM(template);
     ko.applyBindings(engineVM);
+      var editor = new wysihtml5.Editor('textarea', {
+        toolbar: "toolbar",
+        parserRules:  wysihtml5ParserRules
+      });
 
     $("#file-load-list").change(function (evt) {
 
