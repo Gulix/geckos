@@ -49,14 +49,7 @@ function cardTemplateVM(jsonTemplate) {
     }
     // The object is a string : it is processed with card values
     if (typeof(jsonObject) == "string") {
-      if (jsonObject.indexOf('$') >= 0) {
-        var valueField = jsonObject.replace('$', '');
-        return cardVM.getValue(valueField);
-      } else if (jsonObject.indexOf('?') >= 0) {
-        var valueField = jsonObject.replace('?', '');
-        return cardVM.getBoolValue(valueField);
-      }
-      return jsonObject;
+      return cardVM.processString(jsonObject);
     }
     // The object is a JSON object : each key-value is processed recursively
     if (typeof(jsonObject) == "object") {
