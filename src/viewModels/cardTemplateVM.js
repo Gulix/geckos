@@ -84,6 +84,8 @@ function cardTemplateVM(jsonTemplate) {
     self.fields(self.currentTemplate().fields);
     self.canvasFields(self.currentTemplate().canvasFields);
 
+    self.updateFonts();
+
     self.canvasBackground(self.currentTemplate().canvasBackground);
     self.canvasWidth(self.currentTemplate().canvasWidth);
     self.canvasHeight(self.currentTemplate().canvasHeight);
@@ -101,5 +103,31 @@ function cardTemplateVM(jsonTemplate) {
   }
   self.importTemplate = function(data) {
     self.editableTemplate(data);
+  }
+
+  /*********/
+  /* Fonts */
+  /*********/
+  self.updateFonts = function() {
+    $('.canvas-fonts').remove();
+
+    if ((self.currentTemplate() != null) && (self.currentTemplate().fonts != null)) {
+      var canvasFontsStyle = document.createElement('style');
+      canvasFontsStyle.setAttribute('class', 'canvas-fonts');
+      for(var iFont = 0; iFont < self.currentTemplate().fonts.length; iFont++) {
+        var currentFont = self.currentTemplate().fonts[iFont];
+        if ((currentFont != null) && (currentFont.fontFamily != null) && (currentFont.src != null)) {
+          canvasFontsStyle.appendChild(document.createTextNode("\
+            @font-face {\
+                font-family: '" + currentFont.fontFamily + "';\
+                src: url(" + currentFont.src + ");\
+            }\
+          "));
+        }
+      }
+
+      document.head.appendChild(canvasFontsStyle);
+    }
+
   }
 }
