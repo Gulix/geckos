@@ -101,4 +101,34 @@ function cardVM(editableFields, fields) {
       }
     }
   }
+
+  /* Processing the content of a field to get a value */
+  self.processString = function(processedString) {
+    if (processedString.indexOf('$') >= 0) {
+      var valueField = processedString.replace('$', '');
+      return self.getValue(valueField);
+    } else if (processedString.indexOf('?') >= 0) {
+      var valueField = processedString.replace('?', '');
+      return self.getBoolValue(valueField);
+    } else if (processedString.indexOf('£') >= 0) {
+      var valueField = processedString.replace('£', '');
+      return self.getStyles(valueField);
+    }
+
+    // A string that is encapsulated by {{myString}} has to be evaluated as code
+    var regexFindCode = /^\{\{(.*)\}\}$/g;
+    var matchCode = regexFindCode.exec(processedString);
+    if (matchCode != null) {
+      var evaluatedCode = matchCode[0];
+      var value = null;
+      // card[test] => self.getValue('test')
+      var regexBasic = /card\[(.*)\]/g;
+      evaluatedCode = evaluatedCode.replace(regexBasic, function(match, p1, offset, string) { return "self.getValue('" + p1 + "')"});
+    
+      eval(evaluatedCode);
+      return value;
+    }
+
+    return processedString;
+  }
 }
