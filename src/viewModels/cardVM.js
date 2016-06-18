@@ -96,6 +96,9 @@ function cardVM(editableFields, fields) {
     } else if (processedString.indexOf('?') >= 0) {
       var valueField = processedString.replace('?', '');
       return self.getBoolValue(valueField);
+    } else if (processedString.indexOf('£') >= 0) {
+      var valueField = processedString.replace('£', '');
+      return self.getStyles(valueField);
     }
 
     // A string that is encapsulated by {{myString}} has to be evaluated as code
@@ -104,8 +107,10 @@ function cardVM(editableFields, fields) {
     if (matchCode != null) {
       var evaluatedCode = matchCode[0];
       var value = null;
-      // Need to "translate" field values into code eas
-      // "text":"{{if (2 == 2) { value = '!Dodge'; } else { value = 'Dodge'; }}}"
+      // card[test] => self.getValue('test')
+      var regexBasic = /card\[(.*)\]/g;
+      evaluatedCode = evaluatedCode.replace(regexBasic, function(match, p1, offset, string) { return "self.getValue('" + p1 + "')"});
+    
       eval(evaluatedCode);
       return value;
     }
