@@ -133,13 +133,39 @@ function cardVM(editableFields, fields) {
     // For Rich Text Fields, returns the text without formatting
     //                       $variable.html$ returns the html text
     //                       $variable.text$ returns the text without formatting
-    var regexReplace = /\$([a-zA-Z0-9_]*)\$/g;
+    var regexReplace = /\$([a-zA-Z0-9_][a-zA-Z0-9_\.]*[a-zA-Z0-9_])\$/g;
     var matchReplace = null; //regexReplace.exec(processedString);
     var replacedString = processedString;
     var hasBeenProcessed = false;
     while ((matchReplace = regexReplace.exec(processedString)) !== null) {
       var replacedElement = matchReplace[0];
-      var replacingValue = self.getValue(matchReplace[1]);
+      // Standard value or specific value (.value, .text, .html, ...)
+      var fieldName = matchReplace[1];
+      var valueType = 'text';
+      var indexOfPoint = matchReplace[1].indexOf('.');
+      if (indexOfPoint > 0) {
+        fieldName = matchReplace[1].substring(0, indexOfPoint);
+        valueType = matchReplace[1].substring(indexOfPoint + 1);
+      }
+      var replacingValue = '';
+      var field = self.getFieldFromName(fieldName);
+      if (field.isInputText() || field.isMultiLine()) {
+        // These types of fields only returns text value
+        if (valueType == 'text') { replacingValue = field.getTextValue(); }
+      }
+      else if (field.isOptions()) {
+        // Two possibilites : displaying the constant value, or the displayed text
+        var selectedValue = field.selectedOption();
+        if (selectedValue != null) {
+          if (valueType == 'text') { replacingValue = selectedValue.text; }
+          if (valueType == 'value') { replacingValue = selectedValue.option; }
+        }
+      }
+      else if (field.isRichText()) {
+        // Two possibilites : displaying the constant value, or the displayed text
+        if (valueType == 'text') { replacingValue = field.textDisplayed(); }
+        if (valueType == 'html') { replacingValue = field.textValue(); }
+      }
       replacedString = replacedString.replace(replacedElement, replacingValue);
 
       hasBeenProcessed = true;
