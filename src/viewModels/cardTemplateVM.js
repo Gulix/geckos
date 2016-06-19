@@ -12,7 +12,7 @@ function cardTemplateVM(jsonTemplate) {
   self.editableTemplate = ko.observable(JSON.stringify(jsonTemplate));
 
   self.generateTemplate = function(cardVM) {
-    var generated = { "objects" : [], "background": self.canvasBackground() };
+    var generated = { "objects" : [], "backgroundColor": self.canvasBackground() };
 
     for (var iObject = 0; iObject < self.canvasFields().length; iObject++) {
       var field = self.canvasFields()[iObject];
