@@ -4,9 +4,10 @@
       <title>Geckos - Editing Cards since ...</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="css/styles.css"></link>
+        <script src="lib/parser_rules/simple.js"></script>
         <script src="lib/wysihtml.min.js"></script>
         <script src="lib/wysihtml-toolbar.min.js"></script>
-        <script src="lib/parser_rules/simple.js"></script>
+
     </head>
 <body>
   <div id="wrapper">
@@ -206,10 +207,6 @@
     var template = new cardTemplateVM(jsonTemplate);
     var engineVM = new engineVM(template);
     ko.applyBindings(engineVM);
-      /*var editor = new wysihtml5.Editor('textarea', {
-        toolbar: "toolbar",
-        parserRules:  wysihtml5ParserRules
-      });*/
 
     $("#file-load-list").change(function (evt) {
 
