@@ -12,7 +12,7 @@ function cardTemplateVM(jsonTemplate) {
   self.editableTemplate = ko.observable(JSON.stringify(jsonTemplate));
 
   self.generateTemplate = function(cardVM) {
-    var generated = { "objects" : [], "background": self.canvasBackground() };
+    var generated = { "objects" : [], "backgroundColor": self.canvasBackground() };
 
     for (var iObject = 0; iObject < self.canvasFields().length; iObject++) {
       var field = self.canvasFields()[iObject];
@@ -49,17 +49,7 @@ function cardTemplateVM(jsonTemplate) {
     }
     // The object is a string : it is processed with card values
     if (typeof(jsonObject) == "string") {
-      if (jsonObject.indexOf('$') >= 0) {
-        var valueField = jsonObject.replace('$', '');
-        return cardVM.getValue(valueField);
-      } else if (jsonObject.indexOf('?') >= 0) {
-        var valueField = jsonObject.replace('?', '');
-        return cardVM.getBoolValue(valueField);
-      } else if (jsonObject.indexOf('£') >= 0) {
-        var valueField = jsonObject.replace('£', '');
-        return cardVM.getStyles(valueField);
-      }
-      return jsonObject;
+      return cardVM.processString(jsonObject);
     }
     // The object is a JSON object : each key-value is processed recursively
     if (typeof(jsonObject) == "object") {

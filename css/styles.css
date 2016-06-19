@@ -207,6 +207,63 @@ ul, ol, dir, menu {
   display: flex;
 }
 
+/****************************/
+/* --- Rich Text Fields --- */
+/****************************/
+
+.richtext-toolbar {
+	border-radius:2px;
+	background:rgba(255,255,255,.85);
+	box-shadow:0 1px 3px rgba(0,0,0,.2);
+	line-height:1em;
+	/*margin-top:-35px;
+	margin-left:-3px;
+	position:absolute;*/
+	z-index:10000
+}
+.richtext-toolbar a {
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+	color:#1b2124;
+	color:rgba(0,0,0,.75);
+	background-color: #ccf4ed;
+	text-align:center;
+	border: solid 1px #555555;
+	cursor:pointer;
+	padding:0;
+	margin:0;
+	text-shadow:none;
+	width:29px;
+	height:29px;
+	float:left;
+	font-size:0;
+	line-height:0
+}
+.richtext-toolbar a:hover {
+	background-color:#aad4cd;
+}
+.richtext-toolbar a:disabled {
+	opacity:.3
+}
+.richtext-toolbar a:hover {
+	line-height:50px;
+	box-shadow:none;
+	border-bottom:none
+}
+
+.italic-command {
+  background-image: url(../images/italic-command.png);
+  background-repeat:no-repeat;
+  background-position: center center;
+}
+
+.bold-command {
+  background-image: url(../images/bold-command.png);
+  background-repeat:no-repeat;
+  background-position: center center;
+}
+
 /***********************/
 /* --- Canvas View --- */
 /***********************/
