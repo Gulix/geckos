@@ -117,7 +117,7 @@ function editableFieldVM(jsonField) {
     if (self.isInputText() || self.isMultiLine() || self.isRichText()) {
       return self.textValue();
     } else if (self.isOptions()) {
-      return self.selectedOption().text;
+      return self.selectedOption().option;
     } else if (self.isImage()) {
       return self.dataUrl();
     } else if (self.isCheckbox()) {

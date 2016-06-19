@@ -24,7 +24,7 @@ function cardVM(editableFields, fields) {
       // Getting previous values from actual field with same name
       var existingField = self.getFieldFromName(editableField.name);
       if (existingField != null) {
-        editableField.textValue(existingField.textValue());
+        editableField.setValue(existingField.getJsonValue());
       }
       fields.push(editableField);
     }
@@ -124,7 +124,7 @@ function cardVM(editableFields, fields) {
       // card[test] => self.getValue('test')
       var regexBasic = /card\[(.*)\]/g;
       evaluatedCode = evaluatedCode.replace(regexBasic, function(match, p1, offset, string) { return "self.getValue('" + p1 + "')"});
-    
+
       eval(evaluatedCode);
       return value;
     }
