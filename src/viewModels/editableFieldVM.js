@@ -98,7 +98,11 @@ function editableFieldVM(jsonField) {
   /* Value to be used in the templates */
   self.getTextValue = function() {
     if (self.isInputText() || self.isMultiLine()) {
-      return self.textValue();
+      var value = self.textValue();
+      if ((value == null) || (value == undefined)) {
+        value = '';
+      }
+      return value;
     } else if (self.isOptions()) {
       return self.selectedOption().text;
     } else if (self.isImage()) {
