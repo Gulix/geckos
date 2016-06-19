@@ -104,10 +104,7 @@ function cardVM(editableFields, fields) {
 
   /* Processing the content of a field to get a value */
   self.processString = function(processedString) {
-    if (processedString.indexOf('$') >= 0) {
-      var valueField = processedString.replace('$', '');
-      return self.getValue(valueField);
-    } else if (processedString.indexOf('?') >= 0) {
+    if (processedString.indexOf('?') >= 0) {
       var valueField = processedString.replace('?', '');
       return self.getBoolValue(valueField);
     } else if (processedString.indexOf('£') >= 0) {
@@ -127,6 +124,31 @@ function cardVM(editableFields, fields) {
 
       eval(evaluatedCode);
       return value;
+    }
+
+    // Replacing the occurences of $variable$ by the content of the variable (text only)
+    // For options fields, return the Text value.
+    //                     $variable.value$ returns the stored value,
+    //                     $variable.text$ returns the displayed text value
+    // For Rich Text Fields, returns the text without formatting
+    //                       $variable.html$ returns the html text
+    //                       $variable.text$ returns the text without formatting
+    var regexReplace = /\$([a-zA-Z0-9_]*)\$/g;
+    var matchReplace = null; //regexReplace.exec(processedString);
+    var replacedString = processedString;
+    var hasBeenProcessed = false;
+    while ((matchReplace = regexReplace.exec(processedString)) !== null) {
+      var replacedElement = matchReplace[0];
+      var replacingValue = self.getValue(matchReplace[1]);
+      replacedString = replacedString.replace(replacedElement, replacingValue);
+
+      hasBeenProcessed = true;
+    }
+    if (hasBeenProcessed) { return replacedString; }
+
+    if (processedString.indexOf('$') == 0) {
+      var valueField = processedString.replace('$', '');
+      return self.getValue(valueField);
     }
 
     return processedString;
