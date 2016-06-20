@@ -53,7 +53,10 @@ function cardVM(editableFields, fields) {
   self.getValue = function(fieldName) {
     var field = self.getFieldFromName(fieldName);
     if (field != null) {
-        return field.getJsonValue();
+      var fieldValue = field.getJsonValue();
+      if ((fieldValue != null) && (fieldValue != undefined)) {
+        return fieldValue;
+      }
     }
     return '';
   }
