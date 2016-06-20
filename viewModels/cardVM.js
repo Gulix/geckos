@@ -53,7 +53,7 @@ function cardVM(editableFields, fields) {
   self.getValue = function(fieldName) {
     var field = self.getFieldFromName(fieldName);
     if (field != null) {
-        return field.getTextValue();
+        return field.getJsonValue();
     }
     return '';
   }
@@ -99,10 +99,10 @@ function cardVM(editableFields, fields) {
 
   /* Processing the content of a field to get a value */
   self.processString = function(processedString) {
-    if (processedString.indexOf('?') >= 0) {
+    if (processedString.indexOf('?') == 0) {
       var valueField = processedString.replace('?', '');
       return self.getBoolValue(valueField);
-    } else if (processedString.indexOf('£') >= 0) {
+    } else if (processedString.indexOf('£') == 0) {
       var valueField = processedString.replace('£', '');
       return self.getStyles(valueField);
     }
