@@ -147,22 +147,24 @@ function cardVM(editableFields, fields) {
       }
       var replacingValue = '';
       var field = self.getFieldFromName(fieldName);
-      if (field.isInputText() || field.isMultiLine()) {
-        // These types of fields only returns text value
-        if (valueType == 'text') { replacingValue = field.getTextValue(); }
-      }
-      else if (field.isOptions()) {
-        // Two possibilites : displaying the constant value, or the displayed text
-        var selectedValue = field.selectedOption();
-        if (selectedValue != null) {
-          if (valueType == 'text') { replacingValue = selectedValue.text; }
-          if (valueType == 'value') { replacingValue = selectedValue.option; }
+      if (field != null) {
+        if (field.isInputText() || field.isMultiLine()) {
+          // These types of fields only returns text value
+          if (valueType == 'text') { replacingValue = field.getTextValue(); }
         }
-      }
-      else if (field.isRichText()) {
-        // Two possibilites : displaying the constant value, or the displayed text
-        if (valueType == 'text') { replacingValue = field.textDisplayed(); }
-        if (valueType == 'html') { replacingValue = field.textValue(); }
+        else if (field.isOptions()) {
+          // Two possibilites : displaying the constant value, or the displayed text
+          var selectedValue = field.selectedOption();
+          if (selectedValue != null) {
+            if (valueType == 'text') { replacingValue = selectedValue.text; }
+            if (valueType == 'value') { replacingValue = selectedValue.option; }
+          }
+        }
+        else if (field.isRichText()) {
+          // Two possibilites : displaying the constant value, or the displayed text
+          if (valueType == 'text') { replacingValue = field.textDisplayed(); }
+          if (valueType == 'html') { replacingValue = field.textValue(); }
+        }
       }
       replacedString = replacedString.replace(replacedElement, replacingValue);
 
