@@ -117,11 +117,11 @@ function cardVM(editableFields, fields) {
       var evaluatedCode = matchCode[0];
       var value = null;
       // card[test] => self.getValue('test')
-      var regexBasic = /card\[(.*)\]/g;
+      var regexBasic = /card\[([a-zA-Z0-9_]*)\]/g;
       evaluatedCode = evaluatedCode.replace(regexBasic, function(match, p1, offset, string) { return "self.getValue('" + p1 + "')"});
 
       eval(evaluatedCode);
-      return value;
+      return (value != null) ? value : ''; // Maybe setting to default value of the field (need each FabricJS property to be known)
     }
 
     // Replacing the occurences of $variable$ by the content of the variable (text only)
