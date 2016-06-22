@@ -19,6 +19,9 @@ function engineVM(cardTemplateVM) {
   self.listCards = ko.observableArray([]);
   self.listCards().push(new cardVM(self.editableFields(), self.cardTemplate().fields()));
   self.editableCard = ko.observable(self.listCards()[0]);
+  self.isCardSelected = ko.pureComputed(function() {
+    return self.editableCard() != null;
+  })
 
   /* Updating all the cards when the template is updated */
   self.cardTemplate().updateCards = function() {
@@ -40,6 +43,11 @@ function engineVM(cardTemplateVM) {
   self.removeSelectedCard = function() {
     if (self.editableCard() != null) {
       self.listCards.remove(self.editableCard());
+      if (self.listCards().length > 0) {
+        self.editableCard(self.listCards()[0]);
+      } else {
+        self.editableCard(null);
+      }
     }
   }
 
