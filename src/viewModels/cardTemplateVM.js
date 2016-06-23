@@ -14,10 +14,12 @@ function cardTemplateVM(jsonTemplate) {
   self.generateTemplate = function(cardVM) {
     var generated = { "objects" : [], "backgroundColor": self.canvasBackground() };
 
-    for (var iObject = 0; iObject < self.canvasFields().length; iObject++) {
-      var field = self.canvasFields()[iObject];
-      var generatedObject = self.processObject(cardVM, field);
-      generated.objects.push(generatedObject);
+    if (cardVM != null) {
+      for (var iObject = 0; iObject < self.canvasFields().length; iObject++) {
+        var field = self.canvasFields()[iObject];
+        var generatedObject = self.processObject(cardVM, field);
+        generated.objects.push(generatedObject);
+      }
     }
 
     return generated;
@@ -25,7 +27,12 @@ function cardTemplateVM(jsonTemplate) {
 
   self.processObject = function(cardVM, jsonObject) {
 
-    // A null value is returned as-iss
+    // No card associated : the jsonObject is returned as-is
+    if (cardVM == null) {
+      return jsonObject;
+    }
+
+    // A null value is returned as-is
     if (jsonObject === null) {
       return null;
     }
