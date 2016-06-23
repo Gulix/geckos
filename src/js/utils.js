@@ -1,6 +1,10 @@
 function isNumber(obj) { return !isNaN(parseFloat(obj)) }
 
 function getCharsTableFromHtml(sHtml) {
+  // Using CKEditor, this code needs to be updated.
+  // Maybe using a good parser ? jquery.parseHtml ?
+  // Special characters also need to be treated : < > &
+
   // Split into lines, breaking with <br>
   var sLines = sHtml.split("<br>");
   var charLines = [ ];

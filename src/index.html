@@ -4,10 +4,8 @@
       <title>Geckos - Editing Cards since ...</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="css/styles.css"></link>
-        <script src="lib/parser_rules/simple.js"></script>
-        <script src="lib/wysihtml.min.js"></script>
-        <script src="lib/wysihtml-toolbar.min.js"></script>
-
+        <link rel="stylesheet" type="text/css" href="ckeditor/toolbarconfigurator/lib/codemirror/neo.css"></link>
+        <script src="ckeditor/ckeditor.js"></script>
     </head>
 <body>
   <div id="wrapper">
@@ -99,7 +97,7 @@
             <div class='field-flexrow' data-bind="if: isRichText()">
               <span data-bind="text: label" class='field-label'></span>
               <div class="field-largeInput">
-                  <textarea data-bind="wysihtml5: textValue"></textarea>
+                  <textarea data-bind="CKEDITOR: textValue">Test</textarea>
               </div>
             </div>
             <div data-bind="if: isOptions()" class="field-flexrow">
