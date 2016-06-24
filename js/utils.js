@@ -1,41 +1,75 @@
 function isNumber(obj) { return !isNaN(parseFloat(obj)) }
 
 function getCharsTableFromHtml(sHtml) {
-  // Split into lines, breaking with <br>
-  var sLines = sHtml.split("<br>");
+  // Using CKEditor, this code needs to be updated.
+  // Maybe using a good parser ? jquery.parseHtml ?
+  // Special characters also need to be treated : < > &
+
+  // The sHtml variable contains the value returned by the CKEditor
+  // Each line is between <p></p> tags, and the styles are defined by <strong> and <em> tags
+
+  // We need to create an array of Lines for the Canvas
+  // Each line is an array of characters, those characters specifying their style.
+
+  var parsedHtml = $.parseHTML(sHtml);
+
+  // Split into lines
   var charLines = [ ];
-  var isBold = false;
-  var isItalic = false;
-  for (var iLine = 0; iLine < sLines.length; iLine++) {
+  var currentStyle = {
+    "isBold": false,
+    "isItalic": false
+  };
+
+  for (var iLine = 0; iLine < parsedHtml.length; iLine++) {
     var charLine = [ ];
-    var currentLine = sLines[iLine];
-    for (var iChar = 0; iChar < currentLine.length; iChar++) {
-      var notAnalysedString = currentLine.substring(iChar);
-      if (!isBold && (notAnalysedString.indexOf('<b>') == 0)) {
-        isBold = true;
-        iChar += 2;
-      } else if (!isItalic && (notAnalysedString.indexOf('<i>') == 0)) {
-        isItalic = true;
-        iChar += 2;
-      } else if (isBold && (notAnalysedString.indexOf('</b>') == 0)) {
-        isBold = false;
-        iChar += 3;
-      } else if (isItalic && (notAnalysedString.indexOf('</i>') == 0)) {
-        isItalic = false;
-        iChar += 3;
-      } else {
-        var charToAdd = {
-          "char": notAnalysedString.substring(0,1),
-          "bold": isBold,
-          "italic": isItalic
-        };
-        charLine.push(charToAdd);
+    var currentLine = parsedHtml[iLine];
+    if (currentLine.nodeName == '#text') {
+      addCharsFromHtml(currentLine, charLine, currentStyle);
+    } else {
+      for(var iChild = 0; iChild < currentLine.childNodes.length; iChild++) {
+        addCharsFromHtml(currentLine.childNodes[iChild], charLine, currentStyle);
       }
     }
+
     charLines.push(charLine);
   }
 
   return charLines;
+}
+
+function addCharsFromHtml(html, charsArray, style) {
+
+  var styleBefore = {
+    "isBold": style.isBold,
+    "isItalic": style.isItalic
+   };
+
+  // Text element - Each char is added to charsArray with the current style
+  if (html.nodeName == "#text") {
+    for(var iChar = 0; iChar < html.nodeValue.length; iChar++) {
+      var charToAdd = {
+        "char": html.nodeValue[iChar],
+        "bold": ((style != null) && (style.isBold != undefined)) ? style.isBold : false,
+        "italic": ((style != null) && (style.isItalic != undefined)) ? style.isItalic : false
+      };
+      charsArray.push(charToAdd);
+    }
+  } else {
+
+    if (html.nodeName == "STRONG") {
+      style.isBold = true;
+    } else if (html.nodeName == "EM") {
+      style.isItalic = true;
+    }
+
+    for(var iChild = 0; iChild < html.childNodes.length; iChild++) {
+
+      var childElement = html.childNodes[iChild];
+      addCharsFromHtml(childElement, charsArray, style);
+    }
+    style.isBold = styleBefore.isBold;
+    style.isItalic = styleBefore.isItalic;
+  }
 }
 
 function getTextFromCharTable(charTable) {
