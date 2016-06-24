@@ -133,3 +133,8 @@ a > img {
 	border: none;
 	outline: 1px solid #0782C1;
 }
+
+p {
+  margin-top:0px;
+  margin-bottom:5px;
+}
