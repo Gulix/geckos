@@ -18,8 +18,7 @@ ko.bindingHandlers.CKEDITOR = {
 
     var editor = CKEDITOR.replace(id);
     editor.on( 'change', function( evt ) {
-      // getData() returns CKEditor's HTML content.
-
+      
       var observable;
       var content = ko.utils.unwrapObservable(valueAccessor()) || {};
 

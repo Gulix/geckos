@@ -31,4 +31,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Dialog windows are also simplified.
 	config.removeDialogTabs = 'link:advanced';
+
+	// Only paragraphs, no Linebreaks creating <br />
+	config.shiftEnterMode = CKEDITOR.ENTER_P;
 };
