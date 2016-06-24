@@ -13,13 +13,14 @@
       <ul>
           <li><a rel="documentation" href="https://github.com/Gulix/geckos/wiki">Documentation</a></li>
           <li><a href="https://github.com/Gulix/geckos">Github Page</a></li>
+          <li><a href="#" id="openAboutBox">About</a></li>
       </ul>
     </div>
     <div class="clear"></div>
     <div class="page-title">Geckos</div>
     <div class="page-subtitle">editing cards since 2016 ...</div>
 
-    <div class="sticker fullWidth">
+    <div class="sticker">
         <div class="stickerHeading ">
           <h1 data-bind="text: headerSectionTitle">Cards List</h1>
           <div class="stickerHeading-buttons" data-bind="visible: isCardsListVisible">
@@ -135,15 +136,42 @@
     <div class="clear"></div>
     <div class="page-footer">Alpha version 1 - Last updated 2016-06-22 (master branch)</div>
 
-</div>
+    <div class="about-box" id="about-box">
+      <div class="sticker modal-content" >
+        <div class="stickerHeading">
+          <h1>About Geckos</h1>
+          <div class="stickerHeading-buttons">
+            <span class='button close-about-box' title='Close about-box'>Close</span>
+          </div>
+        </div>
+        <div>
+          <p>Geckos is a web-application, created to make cards based on templates.</p>
+          <p>This page is a demo-page for Geckos. By default, it presents a <a href="http://www.pulpalley.com">Pulp Alley</a> Character Card Template.</p>
+          <p>Other templates can be found on <a href="https://github.com/Gulix/geckos/tree/master/templates">this page</a> of the repository.</p>
+          <p>Geckos is open-source, and can be found on <a href="http://www.github.com/gulix/geckos">Github</a>.</p>
+          <p>Geckos is still <a href="http://www.github.com/gulix/geckos/issues">under development</a>, and this demo page is an Alpha version of the software.</p>
+          <p>Geckos uses open-source softwares &amp; libraries :
+            <ul>
+              <li><a href="https://jquery.com/">JQuery</a></li>
+              <li><a href="http://knockoutjs.com/">KnockoutJS</a></li>
+              <li><a href="http://fabricjs.com/">FabricJS</a></li>
+              <li><a href="https://github.com/eligrey/FileSaver.js/">FileSaver.js</a></li>
+              <li><a href="http://ckeditor.com/">CKEditor</a></li>
+            </ul>
+          </p>
+          <p>Any problem ? Any need ? Any question ? Any bug ? Write an <a href="http://www.github.com/gulix/geckos/issues/new">Issue</a> !<p>
+        </div>
+      </div>
+    </div>
+  </div>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="lib/fabric.min.js"></script>
     <script src="lib/knockout-3.4.0.js"></script>
     <script src="lib/FileSaver.min.js"></script>
 
     <script src="js/utils.js"></script>
-
     <script src="js/knockoutExtensions.js"></script>
+    <script src="js/aboutBox.js"></script>
     <!-- ViewModels -->
     <script src="viewModels/cardTemplateVM.js"></script>
     <script src="viewModels/cardVM.js"></script>
@@ -267,6 +295,8 @@
           $("#file-load-template-form")[0].reset();
         }
       });
+
+      initAboutBox();
     });
     </script>
 </body>
