@@ -69,6 +69,19 @@ function cardVM(editableFields, fields) {
     return false;
   }
 
+  self.getNumericValue = function(fieldName) {
+    var field = self.getFieldFromName(fieldName);
+    if ((field != null) && field.isNumeric()) {
+        var numericVal = field.numericValue();
+        if (((numericVal == null) || (numericVal == undefined) || (numericVal == "")) && (field.default != undefined)) {
+          numericVal = field.default;
+        }
+
+        return numericVal;
+    }
+    return false;
+  }
+
   self.getStyles = function(fieldName) {
     var field = self.getFieldFromName(fieldName);
     if ((field != null) && field.isRichText()) {
@@ -108,6 +121,9 @@ function cardVM(editableFields, fields) {
     } else if (processedString.indexOf('£') == 0) {
       var valueField = processedString.replace('£', '');
       return self.getStyles(valueField);
+    } else if (processedString.indexOf('&') == 0) {
+      var valueField = processedString.replace('&', '');
+      return self.getNumericValue(valueField);
     }
 
     // A string that is encapsulated by {{myString}} has to be evaluated as code

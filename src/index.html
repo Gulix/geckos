@@ -116,6 +116,10 @@
                 <span data-bind="text: label"></span>
               </label>
             </div>
+            <div class='field-flexrow' data-bind="if: isNumeric()">
+              <span data-bind="text: label" class='field-label'></span>
+              <input class="field-largeInput" type="number" data-bind="value: numericValue"></input>
+            </div>
           </div>
       </div>
     </div>
