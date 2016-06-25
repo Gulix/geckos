@@ -117,12 +117,12 @@ function cardTemplateVM(jsonTemplate) {
       for(var iFont = 0; iFont < self.currentTemplate().fonts.length; iFont++) {
         var currentFont = self.currentTemplate().fonts[iFont];
         if ((currentFont != null) && (currentFont.fontFamily != null) && (currentFont.src != null)) {
-          canvasFontsStyle.appendChild(document.createTextNode("\
-            @font-face {\
-                font-family: '" + currentFont.fontFamily + "';\
-                src: url(" + currentFont.src + ");\
-            }\
-          "));
+          var fontFace = "@font-face { font-family: '" + currentFont.fontFamily + "'; "
+            + "src: url(" + currentFont.src + "); "
+            + "font-style: " + ((currentFont.fontStyle != undefined) ? currentFont.fontStyle : "normal") + "; "
+            + "}";
+          var fontNode = document.createTextNode(fontFace);
+          canvasFontsStyle.appendChild(fontNode);
         }
       }
 
