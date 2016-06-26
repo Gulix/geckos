@@ -28,6 +28,7 @@ It's free, open-source, and you can get it, modify it, enhance it. Feel free to 
 * knockoutJS
 * FabricJS
 * FileSaver.js
+* CKeditor
 
 ## The How
 
