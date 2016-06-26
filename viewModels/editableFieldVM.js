@@ -74,6 +74,19 @@ function editableFieldVM(jsonField) {
     };
   }
 
+  // Optionnal - Numeric Field
+  if ((jsonField.type != undefined) && (jsonField.type == 'number')) {
+
+    self.type = 'number';
+    var defVal = 0;
+    if (jsonField.default != undefined)
+    {
+       defVal = jsonField.default;
+       self.default = jsonField.default; 
+     }
+    self.numericValue = ko.observable(defVal);
+  }
+
 
   /* Types of Fields */
   self.isOptions = function() {
@@ -94,6 +107,9 @@ function editableFieldVM(jsonField) {
   self.isRichText = function() {
     return self.type == 'richtext';
   }
+  self.isNumeric = function() {
+    return self.type == 'number';
+  }
 
   /* Value to be used in the templates */
   self.getTextValue = function() {
@@ -109,6 +125,8 @@ function editableFieldVM(jsonField) {
       return self.dataUrl();
     } else if (self.isRichText()) {
       return self.textDisplayed();
+    } else if (self.isNumeric()) {
+      return self.numericValue().toString();
     }
   }
 
@@ -122,6 +140,8 @@ function editableFieldVM(jsonField) {
       return self.dataUrl();
     } else if (self.isCheckbox()) {
       return self.checkedValue();
+    } else if (self.isNumeric()) {
+      return self.numericValue();
     }
     return null;
   }
@@ -136,6 +156,8 @@ function editableFieldVM(jsonField) {
       return self.dataUrl(value);
     } else if (self.isCheckbox()) {
       return self.checkedValue(value);
+    } else if (self.isNumeric()) {
+      return self.numericValue(value);
     }
   }
 }
