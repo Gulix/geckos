@@ -164,7 +164,7 @@ function cardVM(editableFields, fields) {
       var replacingValue = '';
       var field = self.getFieldFromName(fieldName);
       if (field != null) {
-        if (field.isInputText() || field.isMultiLine()) {
+        if (field.isInputText() || field.isMultiLine() || field.isColor()) {
           // These types of fields only returns text value
           if (valueType == 'text') { replacingValue = field.getTextValue(); }
         }

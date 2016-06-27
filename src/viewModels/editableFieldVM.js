@@ -74,7 +74,7 @@ function editableFieldVM(jsonField) {
     };
   }
 
-  // Optionnal - Numeric Field
+  // Optional - Numeric Field
   if ((jsonField.type != undefined) && (jsonField.type == 'number')) {
 
     self.type = 'number';
@@ -82,9 +82,14 @@ function editableFieldVM(jsonField) {
     if (jsonField.default != undefined)
     {
        defVal = jsonField.default;
-       self.default = jsonField.default; 
+       self.default = jsonField.default;
      }
     self.numericValue = ko.observable(defVal);
+  }
+
+  // Optional - Color picker
+  if ((jsonField.type != undefined) && (jsonField.type == "color")) {
+    self.type = 'color';
   }
 
 
@@ -110,6 +115,9 @@ function editableFieldVM(jsonField) {
   self.isNumeric = function() {
     return self.type == 'number';
   }
+  self.isColor = function() {
+    return self.type == 'color';
+  }
 
   /* Value to be used in the templates */
   self.getTextValue = function() {
@@ -127,6 +135,8 @@ function editableFieldVM(jsonField) {
       return self.textDisplayed();
     } else if (self.isNumeric()) {
       return self.numericValue().toString();
+    } else if (self.isColor()) {
+      return self.textValue();
     }
   }
 
@@ -142,6 +152,8 @@ function editableFieldVM(jsonField) {
       return self.checkedValue();
     } else if (self.isNumeric()) {
       return self.numericValue();
+    } else if (self.isColor()) {
+      return self.textValue();
     }
     return null;
   }
@@ -153,11 +165,13 @@ function editableFieldVM(jsonField) {
     } else if (self.isOptions()) {
       self.setOptionFromText(value);
     } else if (self.isImage()) {
-      return self.dataUrl(value);
+      self.dataUrl(value);
     } else if (self.isCheckbox()) {
-      return self.checkedValue(value);
+      self.checkedValue(value);
     } else if (self.isNumeric()) {
-      return self.numericValue(value);
+      self.numericValue(value);
+    } else if (self.isColor()) {
+      self.textValue(value);
     }
   }
 }

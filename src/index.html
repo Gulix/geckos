@@ -120,6 +120,10 @@
               <span data-bind="text: label" class='field-label'></span>
               <input class="field-largeInput" type="number" data-bind="value: numericValue"></input>
             </div>
+            <div class='field-flexrow' data-bind="if: isColor()">
+              <span data-bind="text: label" class='field-label'></span>
+              <input class="jscolor field-largeInput" data-bind="jscolor: textValue"></input>
+            </div>
           </div>
       </div>
     </div>
@@ -161,6 +165,7 @@
               <li><a href="http://fabricjs.com/">FabricJS</a></li>
               <li><a href="https://github.com/eligrey/FileSaver.js/">FileSaver.js</a></li>
               <li><a href="http://ckeditor.com/">CKEditor</a></li>
+              <li><a href="http://jscolor.com/">JSColor</a></li>
             </ul>
           </p>
           <p>Any problem ? Any need ? Any question ? Any bug ? Write an <a href="http://www.github.com/gulix/geckos/issues/new">Issue</a> !<p>
@@ -172,6 +177,7 @@
     <script src="lib/fabric.min.js"></script>
     <script src="lib/knockout-3.4.0.js"></script>
     <script src="lib/FileSaver.min.js"></script>
+    <script src="lib/jscolor.min.js"></script>
 
     <script src="js/utils.js"></script>
     <script src="js/knockoutExtensions.js"></script>
