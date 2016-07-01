@@ -94,67 +94,82 @@
             </form>
           </div>
         </section>
-        <section id="section-card">
-          <div class="cards-list">
-            <div class="list">
-              <select size="10" data-bind="options: listCards, optionsText: 'cardName', value: editableCard">
 
-              </select>
-            </div>
-          </div>
+        <!-- ************************************
+         "Card" view, that displays a light list of cards, and the edition fields and canvas view of a card
+         *************************************** -->
+        <section id="section-card" class="section">
+          <div class="section-twocols">
+            <div class="section-colwrap">
+              <div class="col-content">
+                <div class="box-elements">
+                    <select data-bind="options: listCards, optionsText: 'cardName', value: editableCard"
+                            class="cards-list" size="5">
+                    </select>
+                </div>
 
-          <div class="flex-container">
-            <div class="flex-3 box-elements" data-bind="visible: isCardSelected">
-              <div data-bind="with: editableCard">
-                <h3>Card Details</h3>
-                <div class='editable-fields' data-bind="foreach: fields">
-                  <div class="" data-bind="if: isInputText()">
-                    <label data-bind="text: label"></label>
-                    <input type="text" data-bind="value: textValue"></input>
+                <div class="flex-container">
+                  <div class="flex-3 box-elements" data-bind="visible: isCardSelected">
+                    <div data-bind="with: editableCard">
+                      <h3>Card Details</h3>
+                      <div class='editable-fields' data-bind="foreach: fields">
+                        <div class="" data-bind="if: isInputText()">
+                          <label data-bind="text: label"></label>
+                          <input type="text" data-bind="value: textValue"></input>
+                        </div>
+                        <div class='field-flexrow' data-bind="if: isMultiLine()">
+                          <span data-bind="text: label" class='field-label'></span>
+                          <textarea class="field-largeInput" data-bind="value: textValue, attr: { 'rows': nbLines }"></textarea>
+                        </div>
+                        <div data-bind="if: isRichText()">
+                          <label data-bind="text: label" ></label>
+                          <textarea data-bind="CKEDITOR: textValue">Test</textarea>
+                        </div>
+                        <div data-bind="if: isOptions()">
+                          <label data-bind="text: label" ></label>
+                          <select data-bind="options: options, optionsText: 'text', value: selectedOption"></select>
+                        </div>
+                        <div data-bind="if: isImage()">
+                          <span data-bind="text: label" class="field-label"></span>
+                          <input class="field-largeInput" type="file" data-bind="event: { change: uploadImage($element.files[0])}"></input>
+                        </div>
+                        <div data-bind="if: isCheckbox()" class="field-flexrow">
+                          <div class="field-label"></div>
+                          <label class="field-largeInput">
+                            <input type='checkbox' data-bind='checked: checkedValue'></input>
+                            <span data-bind="text: label"></span>
+                          </label>
+                        </div>
+                        <div class='field-flexrow' data-bind="if: isNumeric()">
+                          <span data-bind="text: label" class='field-label'></span>
+                          <input class="field-largeInput" type="number" data-bind="value: numericValue"></input>
+                        </div>
+                        <div class='field-flexrow' data-bind="if: isColor()">
+                          <span data-bind="text: label" class='field-label'></span>
+                          <input class="jscolor field-largeInput" data-bind="jscolor: textValue"></input>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class='field-flexrow' data-bind="if: isMultiLine()">
-                    <span data-bind="text: label" class='field-label'></span>
-                    <textarea class="field-largeInput" data-bind="value: textValue, attr: { 'rows': nbLines }"></textarea>
-                  </div>
-                  <div data-bind="if: isRichText()">
-                    <label data-bind="text: label" ></label>
-                    <textarea data-bind="CKEDITOR: textValue">Test</textarea>
-                  </div>
-                  <div data-bind="if: isOptions()">
-                    <label data-bind="text: label" ></label>
-                    <select data-bind="options: options, optionsText: 'text', value: selectedOption"></select>
-                  </div>
-                  <div data-bind="if: isImage()">
-                    <span data-bind="text: label" class="field-label"></span>
-                    <input class="field-largeInput" type="file" data-bind="event: { change: uploadImage($element.files[0])}"></input>
-                  </div>
-                  <div data-bind="if: isCheckbox()" class="field-flexrow">
-                    <div class="field-label"></div>
-                    <label class="field-largeInput">
-                      <input type='checkbox' data-bind='checked: checkedValue'></input>
-                      <span data-bind="text: label"></span>
-                    </label>
-                  </div>
-                  <div class='field-flexrow' data-bind="if: isNumeric()">
-                    <span data-bind="text: label" class='field-label'></span>
-                    <input class="field-largeInput" type="number" data-bind="value: numericValue"></input>
-                  </div>
-                  <div class='field-flexrow' data-bind="if: isColor()">
-                    <span data-bind="text: label" class='field-label'></span>
-                    <input class="jscolor field-largeInput" data-bind="jscolor: textValue"></input>
+
+                  <div class="box-elements flex-5" data-bind="visible: isCardSelected">
+                    <h3>Card View</h3>
+                    <span class='button' title='Export current card to PNG image'
+                          data-bind="click: exportPng">to PNG</span>
+
+                    <div class="canvas-view">
+                      <canvas id="fabricjs-canvas" data-bind="fabric: generatedTemplate" ></canvas>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div class="box-elements flex-5" data-bind="visible: isCardSelected">
-              <h3>Card View</h3>
-              <span class='button' title='Export current card to PNG image'
-                    data-bind="click: exportPng">to PNG</span>
-
-              <div class="canvas-view">
-                <canvas id="fabricjs-canvas" data-bind="fabric: generatedTemplate" ></canvas>
-              </div>
+            <div class="col-menu">
+              <ul class="vertical-menu">
+              	<li><a href="#" class="icon-shop"><span>Add</span></a></li>
+              	<li><a href="#" class="icon-cup"><span>Remove</span></a></li>
+              	<li><a href="#" class="icon-shop"><span>to PNG</span></a></li>
+              </ul>
             </div>
           </div>
         </section>
