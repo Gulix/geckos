@@ -22,42 +22,38 @@
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link rel="icon" type="image/png" href="images/favicon.png">
 
+    <link rel="stylesheet" type="text/css" href="css/codropsFullWidthTabs.css" />
+
     <link rel="stylesheet" type="text/css" href="css/styles.css"></link>
     <link rel="stylesheet" type="text/css" href="ckeditor/toolbarconfigurator/lib/codemirror/neo.css"></link>
     <script src="ckeditor/ckeditor.js"></script>
   </head>
 <body>
-  <div id="wrapper container">
-    <div class="main-menu">
-      <ul>
-          <li><a rel="documentation" href="https://github.com/Gulix/geckos/wiki">Documentation</a></li>
-          <li><a href="https://github.com/Gulix/geckos">Github Page</a></li>
-          <li><a href="#" id="openAboutBox">About</a></li>
-      </ul>
-    </div>
-    <div class="clear"></div>
+  <div class="container fullwidth-container">
     <div class="page-title">Geckos</div>
     <div class="page-subtitle">editing cards since 2016 ...</div>
 
-    <div class="sticker">
-        <div class="stickerHeading ">
-          <h1 data-bind="text: headerSectionTitle">Cards List</h1>
-          <div class="stickerHeading-buttons" data-bind="visible: isCardsListVisible">
-            <span class='button' title='Add a new card'
-                  data-bind="click: addNewCard">Add</span>
-            <span class='button' title='Remove the selected card'
-                  data-bind="click: removeSelectedCard">Remove</span>
-            <span class='button' title='Export the list to a Json file'
-                  data-bind="click: exportList">Export</span>
-            <span class='button' title='Import a list of cards in Json format'
-                  data-bind="click: loadList">Import</span>
-            <form style="display:none" id="file-load-list-form">
-              <input type="file" id="file-load-list" name="file" class="form-control" style="display:none"
-                    />
-            </form>
+    <div id="tabs" class="tabs">
+			<nav>
+				<ul>
+					<li><a href="#section-home" class="icon-shop"><span>Home</span></a></li>
+					<li><a href="#section-template" class="icon-cup"><span>Template</span></a></li>
+					<li><a href="#section-list" class="icon-food"><span>List</span></a></li>
+					<li class="special-tab"><a href="#section-card" class="icon-lab"><span>Card</span></a></li>
+					<li><a href="#section-about" class="icon-truck"><span>About</span></a></li>
+				</ul>
+			</nav>
+			<div class="content">
+				<section id="section-home">
+          <div class="main-menu clearfix">
+            <ul>
+                <li><a rel="documentation" href="https://github.com/Gulix/geckos/wiki">Documentation</a></li>
+                <li><a href="https://github.com/Gulix/geckos">Github Page</a></li>
+            </ul>
           </div>
-
-          <div class="stickerHeading-buttons" data-bind="visible: isTemplateSelectionVisible">
+        </section>
+        <section id="section-template">
+          <div class="stickerHeading-buttons">
             <!-- ko with: cardTemplate -->
             <span class='button' title='Cancel all changes and reset template'
                   data-bind="click: resetTemplate">Reset</span>
@@ -73,132 +69,135 @@
             </form>
             <!-- /ko -->
           </div>
-        </div>
-        <div class="header">
-          <div class="header-choice-buttons">
-            <span class='button disabled-button' data-bind="visible: isTemplateSelectionVisible()">Template</span>
-            <span class='button' data-bind="click: showTemplateSelection, visible: !isTemplateSelectionVisible()">Template</span>
-            <span class='button disabled-button' data-bind="visible: isCardsListVisible()">Cards</span>
-            <span class='button' data-bind="click: showCardsList, visible: !isCardsListVisible()">Cards</span>
+          <div class="template-selection">
+            <!-- ko with: cardTemplate -->
+            <div class="template-text">
+              <textarea rows="6" data-bind="value: editableTemplate"></textarea>
+            </div>
+            <!-- /ko -->
           </div>
-          <div class="header-content">
-            <div class="cards-list" data-bind="visible: isCardsListVisible">
+        </section>
+        <section id="section-list">
 
-              <div class="list">
-                <select size="5" data-bind="options: listCards, optionsText: 'cardName', value: editableCard">
+          <div class="stickerHeading-buttons" >
+            <span class='button' title='Add a new card'
+                  data-bind="click: addNewCard">Add</span>
+            <span class='button' title='Remove the selected card'
+                  data-bind="click: removeSelectedCard">Remove</span>
+            <span class='button' title='Export the list to a Json file'
+                  data-bind="click: exportList">Export</span>
+            <span class='button' title='Import a list of cards in Json format'
+                  data-bind="click: loadList">Import</span>
+            <form style="display:none" id="file-load-list-form">
+              <input type="file" id="file-load-list" name="file" class="form-control" style="display:none"
+                    />
+            </form>
+          </div>
+        </section>
+        <section id="section-card">
+          <div class="cards-list">
+            <div class="list">
+              <select size="10" data-bind="options: listCards, optionsText: 'cardName', value: editableCard">
 
-                </select>
+              </select>
+            </div>
+          </div>
+
+          <div class="flex-container">
+            <div class="flex-3 box-elements" data-bind="visible: isCardSelected">
+              <div data-bind="with: editableCard">
+                <h3>Card Details</h3>
+                <div class='editable-fields' data-bind="foreach: fields">
+                  <div class="" data-bind="if: isInputText()">
+                    <label data-bind="text: label"></label>
+                    <input type="text" data-bind="value: textValue"></input>
+                  </div>
+                  <div class='field-flexrow' data-bind="if: isMultiLine()">
+                    <span data-bind="text: label" class='field-label'></span>
+                    <textarea class="field-largeInput" data-bind="value: textValue, attr: { 'rows': nbLines }"></textarea>
+                  </div>
+                  <div data-bind="if: isRichText()">
+                    <label data-bind="text: label" ></label>
+                    <textarea data-bind="CKEDITOR: textValue">Test</textarea>
+                  </div>
+                  <div data-bind="if: isOptions()">
+                    <label data-bind="text: label" ></label>
+                    <select data-bind="options: options, optionsText: 'text', value: selectedOption"></select>
+                  </div>
+                  <div data-bind="if: isImage()">
+                    <span data-bind="text: label" class="field-label"></span>
+                    <input class="field-largeInput" type="file" data-bind="event: { change: uploadImage($element.files[0])}"></input>
+                  </div>
+                  <div data-bind="if: isCheckbox()" class="field-flexrow">
+                    <div class="field-label"></div>
+                    <label class="field-largeInput">
+                      <input type='checkbox' data-bind='checked: checkedValue'></input>
+                      <span data-bind="text: label"></span>
+                    </label>
+                  </div>
+                  <div class='field-flexrow' data-bind="if: isNumeric()">
+                    <span data-bind="text: label" class='field-label'></span>
+                    <input class="field-largeInput" type="number" data-bind="value: numericValue"></input>
+                  </div>
+                  <div class='field-flexrow' data-bind="if: isColor()">
+                    <span data-bind="text: label" class='field-label'></span>
+                    <input class="jscolor field-largeInput" data-bind="jscolor: textValue"></input>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="template-selection" data-bind="visible: isTemplateSelectionVisible">
-              <!-- ko with: cardTemplate -->
-              <div class="template-text">
-                <textarea rows="6" data-bind="value: editableTemplate"></textarea>
-              </div>
-              <!-- /ko -->
-            </div>
-          </div>
-        </div>
-        <div class="clear"></div>
-    </div>
 
-    <div class="floatLeft" data-bind="visible: isCardSelected">
-      <div class="sticker" style="width: 380px" data-bind="with: editableCard">
-          <div class="stickerHeading"><h1>Card Details</h1></div>
-          <div class='editable-fields' data-bind="foreach: fields">
-            <div data-bind="if: isInputText()">
-              <label data-bind="text: label"></label>
-              <input type="text" data-bind="value: textValue"></input>
-            </div>
-            <div class='field-flexrow' data-bind="if: isMultiLine()">
-              <span data-bind="text: label" class='field-label'></span>
-              <textarea class="field-largeInput" data-bind="value: textValue, attr: { 'rows': nbLines }"></textarea>
-            </div>
-            <div data-bind="if: isRichText()">
-              <label data-bind="text: label" ></label>
-              <textarea data-bind="CKEDITOR: textValue">Test</textarea>
-            </div>
-            <div data-bind="if: isOptions()">
-              <label data-bind="text: label" ></label>
-              <select data-bind="options: options, optionsText: 'text', value: selectedOption"></select>
-            </div>
-            <div data-bind="if: isImage()">
-              <span data-bind="text: label" class="field-label"></span>
-              <input class="field-largeInput" type="file" data-bind="event: { change: uploadImage($element.files[0])}"></input>
-            </div>
-            <div data-bind="if: isCheckbox()" class="field-flexrow">
-              <div class="field-label"></div>
-              <label class="field-largeInput">
-                <input type='checkbox' data-bind='checked: checkedValue'></input>
-                <span data-bind="text: label"></span>
-              </label>
-            </div>
-            <div class='field-flexrow' data-bind="if: isNumeric()">
-              <span data-bind="text: label" class='field-label'></span>
-              <input class="field-largeInput" type="number" data-bind="value: numericValue"></input>
-            </div>
-            <div class='field-flexrow' data-bind="if: isColor()">
-              <span data-bind="text: label" class='field-label'></span>
-              <input class="jscolor field-largeInput" data-bind="jscolor: textValue"></input>
+            <div class="box-elements flex-5" data-bind="visible: isCardSelected">
+              <h3>Card View</h3>
+              <span class='button' title='Export current card to PNG image'
+                    data-bind="click: exportPng">to PNG</span>
+
+              <div class="canvas-view">
+                <canvas id="fabricjs-canvas" data-bind="fabric: generatedTemplate" ></canvas>
+              </div>
             </div>
           </div>
+        </section>
+
+        <section id="section-about">
+          <div class="container">
+            <h1>About Geckos</h1>
+            <div>
+              <p>Geckos is a web-application, created to make cards based on templates.</p>
+              <p>This page is a demo-page for Geckos. By default, it presents a <a href="http://www.pulpalley.com">Pulp Alley</a> Character Card Template.</p>
+              <p>Other templates can be found on <a href="https://github.com/Gulix/geckos/tree/master/templates">this page</a> of the repository.</p>
+              <p>Geckos is open-source, and can be found on <a href="http://www.github.com/gulix/geckos">Github</a>.</p>
+              <p>Geckos is still <a href="http://www.github.com/gulix/geckos/issues">under development</a>, and this demo page is an Alpha version of the software.</p>
+              <p>Geckos uses open-source softwares &amp; libraries :</p>
+              <ul>
+                <li><a href="https://jquery.com/">JQuery</a></li>
+                <li><a href="http://knockoutjs.com/">KnockoutJS</a></li>
+                <li><a href="http://fabricjs.com/">FabricJS</a></li>
+                <li><a href="https://github.com/eligrey/FileSaver.js/">FileSaver.js</a></li>
+                <li><a href="http://ckeditor.com/">CKEditor</a></li>
+                <li><a href="http://jscolor.com/">JSColor</a></li>
+                <li><a href="http://getskeleton.com">Skeleton</a></li>
+              </ul>
+              <p>Any problem ? Any need ? Any question ? Any bug ? Write an <a href="http://www.github.com/gulix/geckos/issues/new">Issue</a> !<p>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
-
-    <div class="sticker floatRight" style="width:494px" data-bind="visible: isCardSelected">
-        <div class="stickerHeading">
-          <h1>Card View</h1>
-          <div class="stickerHeading-buttons">
-            <span class='button' title='Export current card to PNG image'
-                  data-bind="click: exportPng">to PNG</span>
-          </div>
-        </div>
-        <div class="canvas-view">
-          <canvas id="fabricjs-canvas" data-bind="fabric: generatedTemplate" ></canvas>
-        </div>
-    </div>
-
     <div class="clear"></div>
     <div class="page-footer">Alpha version 2 - Last updated 2016-06-26 (master branch)</div>
-
-    <div class="about-box" id="about-box">
-      <div class="sticker modal-content" >
-        <div class="stickerHeading">
-          <h1>About Geckos</h1>
-          <div class="stickerHeading-buttons">
-            <span class='button close-about-box' title='Close about-box'>Close</span>
-          </div>
-        </div>
-        <div>
-          <p>Geckos is a web-application, created to make cards based on templates.</p>
-          <p>This page is a demo-page for Geckos. By default, it presents a <a href="http://www.pulpalley.com">Pulp Alley</a> Character Card Template.</p>
-          <p>Other templates can be found on <a href="https://github.com/Gulix/geckos/tree/master/templates">this page</a> of the repository.</p>
-          <p>Geckos is open-source, and can be found on <a href="http://www.github.com/gulix/geckos">Github</a>.</p>
-          <p>Geckos is still <a href="http://www.github.com/gulix/geckos/issues">under development</a>, and this demo page is an Alpha version of the software.</p>
-          <p>Geckos uses open-source softwares &amp; libraries :
-            <ul>
-              <li><a href="https://jquery.com/">JQuery</a></li>
-              <li><a href="http://knockoutjs.com/">KnockoutJS</a></li>
-              <li><a href="http://fabricjs.com/">FabricJS</a></li>
-              <li><a href="https://github.com/eligrey/FileSaver.js/">FileSaver.js</a></li>
-              <li><a href="http://ckeditor.com/">CKEditor</a></li>
-              <li><a href="http://jscolor.com/">JSColor</a></li>
-            </ul>
-          </p>
-          <p>Any problem ? Any need ? Any question ? Any bug ? Write an <a href="http://www.github.com/gulix/geckos/issues/new">Issue</a> !<p>
-        </div>
-      </div>
-    </div>
   </div>
+
+
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="lib/fabric.min.js"></script>
     <script src="lib/knockout-3.4.0.js"></script>
     <script src="lib/FileSaver.min.js"></script>
     <script src="lib/jscolor.min.js"></script>
+    <script src="lib/cbpFWTabs.js"></script>
 
     <script src="js/utils.js"></script>
     <script src="js/knockoutExtensions.js"></script>
-    <script src="js/aboutBox.js"></script>
     <!-- ViewModels -->
     <script src="viewModels/cardTemplateVM.js"></script>
     <script src="viewModels/cardVM.js"></script>
@@ -285,6 +284,8 @@
     $( document ).ready(function() {
       ko.applyBindings(engineVM);
 
+      new CBPFWTabs( document.getElementById( 'tabs' ) );
+
       $("#file-load-list").change(function (evt) {
 
          if (evt.target.files.length == 1)
@@ -322,8 +323,6 @@
           $("#file-load-template-form")[0].reset();
         }
       });
-
-      initAboutBox();
     });
     </script>
 </body>

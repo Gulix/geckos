@@ -34,4 +34,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Only paragraphs, no Linebreaks creating <br />
 	config.shiftEnterMode = CKEDITOR.ENTER_P;
+
+	config.width = "auto";
+  config.height = "auto";
 };

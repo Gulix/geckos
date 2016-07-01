@@ -1,10 +1,11 @@
 body {
-  background-color: #195832;
+  background-color: #F1F1EF;
 }
 
-#wrapper {
-  margin: 0 auto;
-  width: 982px;
+.fullwidth-container {
+  width: 100%;
+  max-width: initial;
+  padding: 0 0;
 }
 
 .vspace {
@@ -30,26 +31,21 @@ body {
 }
 .main-menu ul li a, .main-menu ul li a:visited
 {
-  color: #75B58F;
-  background-color: #1F412C;
+  color: #F1F1EF;
+  background-color: #07889B;
 }
 .main-menu ul li a.active, .main-menu ul li a:hover
 {
-   background-color: #75B58F;
-   color: #1F412C;
+   background-color: #66B9BF;
  }
 
-ul, ol, dir, menu {
-  list-style: none;
-}
-
 .page-title {
-  color: #DAE5D6;
+  color: #07889B;
   font-weight: bold;
   font-size: 3em;
 }
 .page-subtitle {
-  color: #B3C6AC;
+  color: #66B9BF;
   font-weight: bold;
   font-style: italic;
   font-size: 1.4em;
@@ -58,33 +54,17 @@ ul, ol, dir, menu {
 }
 
 /* Blocks of information */
-.sticker {
+.box-elements {
 	background-color: white;
   padding: 1.25em 1.45em 1.25em 1.55em;
   margin: 0.5em 0 3em 0;
-  -moz-border-radius: 1em; -webkit-border-radius: 1em; border-radius: 1em;
-	opacity:0.9;
   -moz-box-shadow: 0 0 1.1em #666; -webkit-box-shadow: 0 0 1.1em #666; box-shadow: 0 0 1.1em #666;
 }
 
-.sticker .heading, .sticker h1 {
-  color: #1F412C;
-  margin: 0.25em 0 0.25em 0;
-  font-weight: bold;
-  font-size: 1.2em;
+.box-elements h3 {
+  color: #E37222;
 }
 
-.stickerHeading {
-	background-color: #DAE5D6; height: 1.3em; margin: -2em -1.45em 1.25em -1.55em; padding: 0.4em 1em 1.1em 1.75em;
-	-moz-border-radius-topright: 1em; -moz-border-radius-topleft: 1em;
-	-webkit-border-top-right-radius: 1em; -webkit-border-top-left-radius: 1em;
-	border-top-right-radius: 1em; border-top-left-radius: 1em;
-  border-bottom: solid 1px #ADBDA8;
-}
-
-.stickerHeading h1 {
-  display: inline;
-}
 
 /* Left-Right columns */
 .floatLeft {
@@ -207,6 +187,34 @@ ul, ol, dir, menu {
   display: flex;
 }
 
+/*******************/
+/* Flex management */
+/*******************/
+
+.flex-container {
+  display: flex;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-2 {
+  flex: 2;
+}
+
+.flex-3 {
+  flex: 3;
+}
+
+.flex-4 {
+  flex: 4;
+}
+
+.flex-5 {
+  flex: 5;
+}
+
 /***********************/
 /* --- Canvas View --- */
 /***********************/
@@ -222,7 +230,7 @@ ul, ol, dir, menu {
 }
 
 .page-footer {
-  color: #FFFFFF;
+  color: #e37222;
   text-align: center;
   font-style: italic;
 }
@@ -249,3 +257,8 @@ ul, ol, dir, menu {
    margin: 15% auto; /* 15% from the top and centered */
    width: 600px;
 }
+
+a {
+  color: #07889B; }
+a:hover {
+  color: #E37222; }
