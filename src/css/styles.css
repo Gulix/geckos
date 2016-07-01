@@ -141,6 +141,11 @@ body {
 	transition: background 0.1s ease-in-out;
 }
 
+.vertical-menu li a:active {
+	background: #E37222;
+	color: #EEAA7B;
+}
+
 .vertical-menu li a:hover {
 	background: #07889B;
 	color: #fff;
@@ -153,7 +158,7 @@ body {
 }
 
 .vertical-menu li a:before {
-	font-family: 'icomoon';
+	font-family: 'svgicons';
 	speak: none;
 	font-style: normal;
 	font-weight: normal;
@@ -235,6 +240,7 @@ body {
 /* Managing the template */
 .template-text textarea {
   width: 100%;
+  height: 100%;
 }
 
 /**********************************/

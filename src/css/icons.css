@@ -1,0 +1,47 @@
+@font-face {
+	font-family: 'svgicons';
+  src:    url('../fonts/svgicons/icomoon.eot?olsjsv');
+    src:    url('../fonts/svgicons/icomoon.eot?olsjsv#iefix') format('embedded-opentype'),
+        url('../fonts/svgicons/icomoon.ttf?olsjsv') format('truetype'),
+        url('../fonts/svgicons/icomoon.woff?olsjsv') format('woff'),
+        url('../fonts/svgicons/icomoon.svg?olsjsv#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+} /* Icons created with icomoon.io/app */
+
+.icon {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'svgicons' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-image:before {
+    content: "\e90d";
+}
+.icon-file-empty:before {
+    content: "\e924";
+}
+.icon-download:before {
+    content: "\e960";
+}
+.icon-upload:before {
+    content: "\e961";
+}
+.icon-undo:before {
+    content: "\e965";
+}
+.icon-bin:before {
+    content: "\e9ac";
+}
+.icon-loop2:before {
+    content: "\ea2e";
+}

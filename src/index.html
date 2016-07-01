@@ -25,6 +25,7 @@
     <link rel="stylesheet" type="text/css" href="css/codropsFullWidthTabs.css" />
 
     <link rel="stylesheet" type="text/css" href="css/styles.css"></link>
+    <link rel="stylesheet" type="text/css" href="css/icons.css"></link>
     <link rel="stylesheet" type="text/css" href="ckeditor/toolbarconfigurator/lib/codemirror/neo.css"></link>
     <script src="ckeditor/ckeditor.js"></script>
   </head>
@@ -52,46 +53,73 @@
             </ul>
           </div>
         </section>
+
+        <!-- ********************
+             Template section (editing, loading, ...)
+           -->
         <section id="section-template">
-          <div class="stickerHeading-buttons">
-            <!-- ko with: cardTemplate -->
-            <span class='button' title='Cancel all changes and reset template'
-                  data-bind="click: resetTemplate">Reset</span>
-            <span class='button' title='Set current text as the new template'
-                  data-bind="click: setTemplate">Set</span>
-            <span class='button' title='Save template to a Json file'
-                  data-bind="click: saveTemplate">Save</span>
-            <span class='button' title='Load template from a Json file'
-                  data-bind="click: loadTemplate">Load</span>
-            <form style="display:none" id="file-load-template-form">
-              <input type="file" id="file-load-template" name="file" class="form-control" style="display:none"
-                    />
-            </form>
-            <!-- /ko -->
-          </div>
-          <div class="template-selection">
-            <!-- ko with: cardTemplate -->
-            <div class="template-text">
-              <textarea rows="6" data-bind="value: editableTemplate"></textarea>
+          <div class="section-twocols">
+            <div class="section-colwrap">
+              <div class="col-content">
+                <div class="template-selection">
+                  <!-- ko with: cardTemplate -->
+                  <div class="template-text">
+                    <textarea rows="6" data-bind="value: editableTemplate"></textarea>
+                  </div>
+                  <!-- /ko -->
+                </div>
+              </div>
             </div>
-            <!-- /ko -->
+            <div class="col-menu">
+              <!-- ko with: cardTemplate -->
+              <ul class="vertical-menu icon">
+              	<li><a href="#" class="icon-download" title="Load template from file"
+                       data-bind="click: loadTemplate"><span>Load from file</span></a></li>
+              	<li><a href="#" class="icon-upload" title="Save template to file"
+                       data-bind="click: saveTemplate"><span>Save to file</span></a></li>
+              	<li><a href="#" class="icon-loop2" title="Apply template to cards"
+                       data-bind="click: setTemplate"><span>Apply template</span></a></li>
+                <li><a href="#" class="icon-undo" title="Cancel modifications on template"
+                       data-bind="click: resetTemplate"><span>Cancel modifications</span></a></li>
+              </ul>
+              <form style="display:none" id="file-load-template-form">
+                <input type="file" id="file-load-template" name="file" class="form-control" style="display:none" />
+              </form>
+              <!-- /ko -->
+            </div>
           </div>
         </section>
-        <section id="section-list">
 
-          <div class="stickerHeading-buttons" >
-            <span class='button' title='Add a new card'
-                  data-bind="click: addNewCard">Add</span>
-            <span class='button' title='Remove the selected card'
-                  data-bind="click: removeSelectedCard">Remove</span>
-            <span class='button' title='Export the list to a Json file'
-                  data-bind="click: exportList">Export</span>
-            <span class='button' title='Import a list of cards in Json format'
-                  data-bind="click: loadList">Import</span>
-            <form style="display:none" id="file-load-list-form">
-              <input type="file" id="file-load-list" name="file" class="form-control" style="display:none"
-                    />
-            </form>
+        <!-- ********************
+             List of cards (editing, loading, ...)
+           -->
+        <section id="section-list">
+          <div class="section-twocols">
+            <div class="section-colwrap">
+              <div class="col-content">
+                <div class="box-elements">
+                  <select data-bind="options: listCards, optionsText: 'cardName', value: editableCard"
+                          class="cards-list" size="5">
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-menu">
+              <ul class="vertical-menu icon">
+              	<li><a href="#" class="icon-file-empty" title="Add a new card"
+                       data-bind="click: addNewCard"><span>Add</span></a></li>
+                <li><a href="#" class="icon-bin" title="Delete the selected card"
+                       data-bind="click: removeSelectedCard"><span>Remove</span></a></li>
+              	<li><a href="#" class="icon-download" title="Load list from file"
+                       data-bind="click: loadList"><span>Load list</span></a></li>
+                <li><a href="#" class="icon-upload" title="Save list to file"
+                       data-bind="click: exportList"><span>Save list</span></a></li>
+              </ul>
+              <form style="display:none" id="file-load-list-form">
+                <input type="file" id="file-load-list" name="file" class="form-control" style="display:none"
+                      />
+              </form>
+            </div>
           </div>
         </section>
 
@@ -154,9 +182,6 @@
 
                   <div class="box-elements flex-5" data-bind="visible: isCardSelected">
                     <h3>Card View</h3>
-                    <span class='button' title='Export current card to PNG image'
-                          data-bind="click: exportPng">to PNG</span>
-
                     <div class="canvas-view">
                       <canvas id="fabricjs-canvas" data-bind="fabric: generatedTemplate" ></canvas>
                     </div>
@@ -165,10 +190,13 @@
               </div>
             </div>
             <div class="col-menu">
-              <ul class="vertical-menu">
-              	<li><a href="#" class="icon-shop"><span>Add</span></a></li>
-              	<li><a href="#" class="icon-cup"><span>Remove</span></a></li>
-              	<li><a href="#" class="icon-shop"><span>to PNG</span></a></li>
+              <ul class="vertical-menu icon">
+              	<li><a href="#" class="icon-file-empty" title="Add a new card"
+                       data-bind="click: addNewCard"><span>Add</span></a></li>
+              	<li><a href="#" class="icon-bin" title="Delete the selected card"
+                       data-bind="click: removeSelectedCard"><span>Remove</span></a></li>
+              	<li><a href="#" class="icon-image" title="Export the card to a PNG image"
+                       data-bind="click: exportPng"><span>to PNG</span></a></li>
               </ul>
             </div>
           </div>
