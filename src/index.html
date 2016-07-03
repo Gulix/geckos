@@ -145,9 +145,9 @@
                           <label data-bind="text: label"></label>
                           <input type="text" data-bind="value: textValue"></input>
                         </div>
-                        <div class='field-flexrow' data-bind="if: isMultiLine()">
-                          <span data-bind="text: label" class='field-label'></span>
-                          <textarea class="field-largeInput" data-bind="value: textValue, attr: { 'rows': nbLines }"></textarea>
+                        <div class='' data-bind="if: isMultiLine()">
+                          <label data-bind="text: label"></label>
+                          <textarea data-bind="value: textValue, attr: { 'rows': nbLines }"></textarea>
                         </div>
                         <div data-bind="if: isRichText()">
                           <label data-bind="text: label" ></label>
@@ -167,13 +167,13 @@
                             <span data-bind="text: label"></span>
                           </label>
                         </div>
-                        <div class='field-flexrow' data-bind="if: isNumeric()">
-                          <span data-bind="text: label" class='field-label'></span>
-                          <input class="field-largeInput" type="number" data-bind="value: numericValue"></input>
+                        <div data-bind="if: isNumeric()">
+                          <label data-bind="text: label" ></label>
+                          <input type="number" data-bind="value: numericValue"></input>
                         </div>
-                        <div class='field-flexrow' data-bind="if: isColor()">
-                          <span data-bind="text: label" class='field-label'></span>
-                          <input class="jscolor field-largeInput" data-bind="jscolor: textValue"></input>
+                        <div data-bind="if: isColor()">
+                          <label data-bind="text: label"></label>
+                          <input class="jscolor" data-bind="jscolor: textValue"></input>
                         </div>
                       </div>
                     </div>
@@ -209,7 +209,7 @@
               <p>This page is a demo-page for Geckos. By default, it presents a <a href="http://www.pulpalley.com">Pulp Alley</a> Character Card Template.</p>
               <p>Other templates can be found on <a href="https://github.com/Gulix/geckos/tree/master/templates">this page</a> of the repository.</p>
               <p>Geckos is open-source, and can be found on <a href="http://www.github.com/gulix/geckos">Github</a>.</p>
-              <p>Geckos is still <a href="http://www.github.com/gulix/geckos/issues">under development</a>, and this demo page is an Alpha version of the software.</p>
+              <p>Geckos is still <a href="http://www.github.com/gulix/geckos/issues">under development</a>, and this demo page is a Beta version of the software.</p>
               <p>Geckos uses open-source softwares &amp; libraries :</p>
               <ul>
                 <li><a href="https://jquery.com/">JQuery</a></li>
@@ -227,7 +227,7 @@
       </div>
     </div>
     <div class="clear"></div>
-    <div class="page-footer">Alpha version 2 - Last updated 2016-06-26 (master branch)</div>
+    <div class="page-footer">Beta version 1 (WIP) - Last updated 2016-07-03 (master branch)</div>
   </div>
 
 

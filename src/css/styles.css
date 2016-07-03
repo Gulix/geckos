@@ -8,10 +8,6 @@ body {
   padding: 0 0;
 }
 
-.vspace {
-  height: 2em;
-}
-
 /* Top Main Menu */
 .main-menu {
   display:table;
@@ -179,30 +175,6 @@ body {
 	font-family: 'Lato', Calibri, Arial, sans-serif;
 }
 
-.icon-search:before {
-	content: "\e004";
-}
-
-.icon-archive:before {
-	content: "\e005";
-}
-
-.icon-download:before {
-	content: "\e006";
-}
-
-.icon-location:before {
-	content: "\e007";
-}
-
-.icon-images:before {
-	content: "\e009";
-}
-
-.icon-pencil:before {
-	content: "\e008";
-}
-
 /* Example for media query (depends on total height of menu) */
 @media screen and (max-height: 34.9375em) {
 
@@ -212,29 +184,8 @@ body {
 
 }
 
-
-/* Left-Right columns */
-.floatLeft {
-  float: left !important;
-}
-.floatRight {
-  float: right !important;
-}
-
 .clear {
   clear: both;
-}
-
-/* Header choice */
-.header {
-  display: flex;
-  flex-flow: row;
-}
-
-.header-content {
-  /*float: right !important;
-  width: 832px;*/
-  flex: 6;
 }
 
 /* Managing the template */
@@ -247,88 +198,9 @@ body {
 /* List of cards in the Card view */
 /**********************************/
 
- select.cards-list {
+select.cards-list {
   width: 100%;
   height: 10em;
-}
-
-.button {
-	-moz-box-shadow:inset 0px 1px 0px 0px #9acc85;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #9acc85;
-	box-shadow:inset 0px 1px 0px 0px #9acc85;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #74ad5a), color-stop(1, #68a54b));
-	background:-moz-linear-gradient(top, #74ad5a 5%, #68a54b 100%);
-	background:-webkit-linear-gradient(top, #74ad5a 5%, #68a54b 100%);
-	background:-o-linear-gradient(top, #74ad5a 5%, #68a54b 100%);
-	background:-ms-linear-gradient(top, #74ad5a 5%, #68a54b 100%);
-	background:linear-gradient(to bottom, #74ad5a 5%, #68a54b 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#74ad5a', endColorstr='#68a54b',GradientType=0);
-	background-color:#74ad5a;
-	border:1px solid #3b6e22;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:13px;
-	font-weight:bold;
-	padding:6px 12px;
-	text-decoration:none;
-}
-.button:hover {
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #68a54b), color-stop(1, #74ad5a));
-	background:-moz-linear-gradient(top, #68a54b 5%, #74ad5a 100%);
-	background:-webkit-linear-gradient(top, #68a54b 5%, #74ad5a 100%);
-	background:-o-linear-gradient(top, #68a54b 5%, #74ad5a 100%);
-	background:-ms-linear-gradient(top, #68a54b 5%, #74ad5a 100%);
-	background:linear-gradient(to bottom, #68a54b 5%, #74ad5a 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#68a54b', endColorstr='#74ad5a',GradientType=0);
-	background-color:#68a54b;
-}
-.button:active {
-	position:relative;
-	top:1px;
-}
-
-.header-choice-buttons .button {
-  display: block;
-  flex: 1;
-  text-align: right;
-}
-
-.disabled-button, .disabled-button:hover {
-  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #6c7c7c), color-stop(1, #768d87));
-	background:-moz-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
-	background:-webkit-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
-	background:-o-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
-	background:-ms-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
-	background:linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#6c7c7c', endColorstr='#768d87',GradientType=0);
-	background-color:#6c7c7c;
-  cursor: default;
-}
-.disabled-button:active {
-	position:relative;
-	top:0px;
-}
-
-
-/***************************/
-/* --- Editable fields --- */
-/***************************/
-.editable-fields {
-
-}
-
-.field-label {
-  flex: 1;
-  text-align: right;
-  margin-right: 6px;
-}
-.field-largeInput {
-  flex: 2;
-}
-.field-flexrow {
-  display: flex;
 }
 
 /*******************/
@@ -373,33 +245,14 @@ body {
   display: block;
 }
 
+/***********************/
+/* --- Page Footer --- */
+/***********************/
+
 .page-footer {
   color: #e37222;
   text-align: center;
   font-style: italic;
-}
-
-/*********************/
-/* --- About-Box --- */
-/*********************/
-/* The Modal (background) */
-.about-box {
-   display: none; /* Hidden by default */
-   position: fixed; /* Stay in place */
-   z-index: 1; /* Sit on top */
-   left: 0;
-   top: 0;
-   width: 100%;
-   height: 100%; /* Full height */
-   overflow: auto; /* Enable scroll if needed */
-   background-color: rgb(0,0,0); /* Fallback color */
-   background-color: rgba(0,55,0,0.8); /* Black w/ opacity */
-}
-
-/* Modal Content/Box */
-.modal-content {
-   margin: 15% auto; /* 15% from the top and centered */
-   width: 600px;
 }
 
 a {
