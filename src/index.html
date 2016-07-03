@@ -158,12 +158,11 @@
                           <select data-bind="options: options, optionsText: 'text', value: selectedOption"></select>
                         </div>
                         <div data-bind="if: isImage()">
-                          <span data-bind="text: label" class="field-label"></span>
-                          <input class="field-largeInput" type="file" data-bind="event: { change: uploadImage($element.files[0])}"></input>
+                          <label data-bind="text: label"></label>
+                          <input type="file" data-bind="event: { change: uploadImage($element.files[0])}"></input>
                         </div>
-                        <div data-bind="if: isCheckbox()" class="field-flexrow">
-                          <div class="field-label"></div>
-                          <label class="field-largeInput">
+                        <div data-bind="if: isCheckbox()">
+                          <label>
                             <input type='checkbox' data-bind='checked: checkedValue'></input>
                             <span data-bind="text: label"></span>
                           </label>
