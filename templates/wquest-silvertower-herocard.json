@@ -10,91 +10,91 @@
     { "name": "agility", "label": "Agility", "type": "text" },
     { "name": "save", "label": "Save", "type": "text" },
     { "name": "weapon1name", "label": "Weapon #1", "type": "text" },
-    { "name": "weapon1range", "label": "Range", "type": "options", "default": "combat", "options": 
+    { "name": "weapon1range", "label": "Range", "type": "options", "default": "combat", "options":
         [
             { "option": "combat", "text": "Combat" },
             { "option": "missile", "text": "Missile" },
             { "option": "area", "text": "Area" }
         ]
-    }, 
-    { "name": "weapon1hit", "label": "Hit", "type": "options", "default": "1", "options": 
+    },
+    { "name": "weapon1hit", "label": "Hit", "type": "options", "default": "1", "options":
         [
             { "option": "1", "text": "1+" },
             { "option": "2", "text": "2+" },
-            { "option": "3", "text": "3+" }, 
+            { "option": "3", "text": "3+" },
             { "option": "4", "text": "4+" },
             { "option": "5", "text": "5+" },
             { "option": "6", "text": "6+" }
         ]
     },
-    { "name": "weapon1damage", "label": "Damages", "type": "text" }, 
+    { "name": "weapon1damage", "label": "Damages", "type": "text" },
     { "name": "weapon2visible", "label": "Has Weapon #2 ?", "default": true, "type": "checkbox" },
     { "name": "weapon2name", "label": "Name", "type": "text" },
-    { "name": "weapon2range", "label": "Range", "type": "options", "default": "combat", "options": 
+    { "name": "weapon2range", "label": "Range", "type": "options", "default": "combat", "options":
         [
             { "option": "combat", "text": "Combat" },
             { "option": "missile", "text": "Missile" },
             { "option": "area", "text": "Area" }
         ]
-    }, 
-    { "name": "weapon2hit", "label": "Hit", "type": "options", "default": "1", "options": 
+    },
+    { "name": "weapon2hit", "label": "Hit", "type": "options", "default": "1", "options":
         [
             { "option": "1", "text": "1+" },
             { "option": "2", "text": "2+" },
-            { "option": "3", "text": "3+" }, 
+            { "option": "3", "text": "3+" },
             { "option": "4", "text": "4+" },
             { "option": "5", "text": "5+" },
             { "option": "6", "text": "6+" }
         ]
     },
-    { "name": "weapon2damage", "label": "Damages", "type": "text" }, 
+    { "name": "weapon2damage", "label": "Damages", "type": "text" },
     { "name": "weapon3visible", "label": "Has Weapon #3 ?", "default": false, "type": "checkbox" },
     { "name": "weapon3name", "label": "Name", "type": "text" },
-    { "name": "weapon3range", "label": "Range", "type": "options", "default": "combat", "options": 
+    { "name": "weapon3range", "label": "Range", "type": "options", "default": "combat", "options":
         [
             { "option": "combat", "text": "Combat" },
             { "option": "missile", "text": "Missile" },
             { "option": "area", "text": "Area" }
         ]
-    }, 
-    { "name": "weapon3hit", "label": "Hit", "type": "options", "default": "1", "options": 
+    },
+    { "name": "weapon3hit", "label": "Hit", "type": "options", "default": "1", "options":
         [
             { "option": "1", "text": "1+" },
             { "option": "2", "text": "2+" },
-            { "option": "3", "text": "3+" }, 
+            { "option": "3", "text": "3+" },
             { "option": "4", "text": "4+" },
             { "option": "5", "text": "5+" },
             { "option": "6", "text": "6+" }
         ]
     },
     { "name": "weapon3damage", "label": "Damages", "type": "text" },
-    { "name": "specialTokenVisible", "label": "Has Special Token ?", "default": false, "type": "checkbox" }, 
-    { "name": "specialRules", "label": "Special rules", "default": "", "type": "richtext" }, 
-    { "name": "trait1", "label": "Trait", "type": "options", "default": "bladeborn", "options": 
+    { "name": "specialTokenVisible", "label": "Has Special Token ?", "default": false, "type": "checkbox" },
+    { "name": "specialRules", "label": "Special rules", "default": "", "type": "richtext" },
+    { "name": "trait1", "label": "Trait", "type": "options", "default": "bladeborn", "options":
         [
-            { "option": "academic", "text": "Academic" }, 
-            { "option": "arcane", "text": "Arcane" }, 
+            { "option": "academic", "text": "Academic" },
+            { "option": "arcane", "text": "Arcane" },
             { "option": "bladeborn", "text": "Bladeborn" },
             { "option": "chaotic", "text": "Chaotic" },
-            { "option": "celestial", "text": "Celestial" }, 
-            { "option": "crazed", "text": "Crazed" }, 
+            { "option": "celestial", "text": "Celestial" },
+            { "option": "crazed", "text": "Crazed" },
             { "option": "holy", "text": "Holy" },
-            { "option": "swift", "text": "Swift" }, 
-            { "option": "totemic", "text": "Totemic" }, 
+            { "option": "swift", "text": "Swift" },
+            { "option": "totemic", "text": "Totemic" },
             { "option": "unrelenting", "text": "Unrelenting" }
         ]
     },
-    { "name": "trait2", "label": "Trait", "type": "options", "default": "arcane", "options": 
+    { "name": "trait2", "label": "Trait", "type": "options", "default": "arcane", "options":
         [
-            { "option": "academic", "text": "Academic" }, 
-            { "option": "arcane", "text": "Arcane" }, 
+            { "option": "academic", "text": "Academic" },
+            { "option": "arcane", "text": "Arcane" },
             { "option": "bladeborn", "text": "Bladeborn" },
             { "option": "chaotic", "text": "Chaotic" },
-            { "option": "celestial", "text": "Celestial" }, 
-            { "option": "crazed", "text": "Crazed" }, 
+            { "option": "celestial", "text": "Celestial" },
+            { "option": "crazed", "text": "Crazed" },
             { "option": "holy", "text": "Holy" },
-            { "option": "swift", "text": "Swift" }, 
-            { "option": "totemic", "text": "Totemic" }, 
+            { "option": "swift", "text": "Swift" },
+            { "option": "totemic", "text": "Totemic" },
             { "option": "unrelenting", "text": "Unrelenting" }
         ]
     },
@@ -106,15 +106,15 @@
     { "type": "image", "left": 26, "top": 276, "width": 64, "height": 64, "opacity": 0.5, "visible": "?specialTokenVisible", "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAMAAADDpiTIAAAABGdBTUEAALGPC/xhBQAAAwBQTFRFAAAAAQEBBQUFBgYGCAgICQkJCgoKEBAQEhISExMTFBQUFRUVHBwcHh4ea2trbGxsbW1tbm5ub29vcHBwcXFxcnJyc3NzdHR0dXV1dnZ2d3d3eHh4eXl5enp6e3t7fHx8fX19fn5+f39/gICAgYGBgoKCg4ODhISEhYWFhoaGh4eHiIiIiYmJioqKi4uLjIyMjY2Njo6Oj4+PkJCQkZGRkpKSk5OTlJSUlZWVlpaWl5eXmJiYmZmZmpqam5ubnJycnZ2dnp6en5+foKCgoaGhoqKio6OjpKSkpaWlpqamp6enqKioqampqqqqq6urrKysra2trq6ur6+vsLCwsbGxsrKys7OztLS0tbW1tra2t7e3uLi4ubm5urq6u7u7vLy8vb29vr6+v7+/wMDAwcHBwsLCw8PDxMTExcXFxsbGx8fHyMjIycnJysrKy8vLzMzMzc3Nzs7Oz8/P0NDQ0dHR0tLS09PT1NTU1dXV1tbW19fX2NjY2dnZ2tra29vb3Nzc3d3d3t7e39/f4ODg4eHh4uLi4+Pj5OTk5eXl5ubm5+fn6OjoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaqnVKAAAAQB0Uk5T////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AFP3ByUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuOWwzfk4AAChPSURBVHhe7Z37QxQ314B9v759e48rgkXwAiqiIipei4qgUBTqFhREQSxK1VpLUaFUEAWRIl33j/bbhQPuJZnJ5SSTSeb5Rdmd2+48O5M5OTnZ8vET337xf1sSnOezL7+DE55nU4Cv4e0EL/gaTvuGAN/A6wne8M36mV8X4H/wYoJH/Hft1K8JkNz6veQ/GwIkv39PyV8DcgIk939vybUDcgLAH3k+/y7BeT6Hk50nL8Dm89/nJMETNh34OicA/HfLV/Bmggd8BSc9d/o3BEh+/16xcQ34uOVb+B+8keAJcNq/2/IF/A9eT/AEOO1fboEgUHIH8Ay4B3y2/k/uUgCvJ3jCd3DiN0gE8IxEAM9JBPCcRADPSQTwnEQAz0kE8JxEAM9JBPCcRADPSQTwnEQAz0kE8JxEAM9JBPCcRADPSQTwnEQAz0kE8JxEAM9JBPCcRADPSQTwnEQAz0kE8JxEAM9JBPCcRADPSQTwnESAPFV7cqTgD7/wXICqlu6x6UwWWHo62NbgmQceC5A61vv4Hzj1BbwcuVQHS/iAtwJUdMzCGS8n87ABlnIfTwWo6lmEk81gohmWdB0vBajunobzHMDYSVjabXwUoPU3OMfBLA34cCPwT4Dmu5ut/jBmru6EldzFNwHqfn4NZ5eLJ+dhPWfxS4DKK8/gzPKSuXsM1nUUrwQ48yucVhFe99XD6k7ikQCHb6/AORXk+ZVK2ISDeCPA7p6XcD4leHgWtuIengiwte0POJdyrNw+AltyDT8EaBmDEynP3E+7YWNu4YMADTffwllUYuKSix2F7gtQ3f0XnEFl7jsYHXZegPNP4OxhsDRwEDbrDI4LIBD35cO56LDT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" },
     { "type": "textbox", "left": 227, "top": 15, "width": 463, "textAlign": "center", "text": "$name", "fontFamily": "PompeiStd" },
     { "type": "textbox", "left": 235, "top": 149, "width": 45, "textAlign": "center", "text": "MOVE", "fontFamily": "MinionPro", "fontSize": 12, "fill": "#A5A1A1" },
-    { "type": "textbox", "left": 215, "top": 175, "width": 45, "angle": 30, "textAlign": "left", "text": "SAVE", "fontFamily": "MinionPro", "fontSize": 12, "fill": "#A5A1A1" }, 
-    { "type": "textbox", "left": 260, "top": 198, "width": 45, "angle": -30, "textAlign": "right", "text": "AGILITY", "fontFamily": "MinionPro", "fontSize": 12, "fill": "#A5A1A1" }, 
-    { "type": "textbox", "left": 241, "top": 160, "width": 34, "textAlign": "center", "text": "$move", "fontFamily": "MinionPro", "fontSize": 28, "fontWeigh": "bold", "fill": "#EDEDED" }, 
-    { "type": "textbox", "left": 212, "top": 207, "width": 43, "textAlign": "right", "text": "$save", "fontFamily": "MinionPro", "fontSize": 28, "fontWeigh": "bold", "fill": "#EDEDED" }, 
+    { "type": "textbox", "left": 215, "top": 175, "width": 45, "angle": 30, "textAlign": "left", "text": "SAVE", "fontFamily": "MinionPro", "fontSize": 12, "fill": "#A5A1A1" },
+    { "type": "textbox", "left": 260, "top": 198, "width": 45, "angle": -30, "textAlign": "right", "text": "AGILITY", "fontFamily": "MinionPro", "fontSize": 12, "fill": "#A5A1A1" },
+    { "type": "textbox", "left": 241, "top": 160, "width": 34, "textAlign": "center", "text": "$move", "fontFamily": "MinionPro", "fontSize": 28, "fontWeigh": "bold", "fill": "#EDEDED" },
+    { "type": "textbox", "left": 212, "top": 207, "width": 43, "textAlign": "right", "text": "$save", "fontFamily": "MinionPro", "fontSize": 28, "fontWeigh": "bold", "fill": "#EDEDED" },
     { "type": "textbox", "left": 263, "top": 207, "width": 43, "textAlign": "left", "text": "$agility", "fontFamily": "MinionPro", "fontSize": 28, "fontWeigh": "bold", "fill": "#EDEDED" },
     { "type": "textbox", "left": 633, "top": 150, "width": 56, "textAlign": "center", "text": "Damages", "fontFamily": "MinionPro", "fontSize": 12, "fill": "#000000" },
     { "type": "textbox", "left": 584, "top": 150, "width": 41, "textAlign": "center", "text": "Hit", "fontFamily": "MinionPro", "fontSize": 12, "fill": "#000000" },
     { "type": "textbox", "left": 517, "top": 150, "width": 60, "textAlign": "center", "text": "Range", "fontFamily": "MinionPro", "fontSize": 12, "fill": "#000000" },
-    { "type": "textbox", "left": 304, "top": 150, "width": 209, "textAlign": "center", "text": "Weapon Actions", "fontFamily": "MinionPro", "fontSize": 12, "fill": "#000000" }, 
+    { "type": "textbox", "left": 304, "top": 150, "width": 209, "textAlign": "center", "text": "Weapon Actions", "fontFamily": "MinionPro", "fontSize": 12, "fill": "#000000" },
     { "type": "textbox", "left": 633, "top": 169, "width": 56, "textAlign": "center", "text": "$weapon1damage", "fontFamily": "MinionPro", "fontSize": 15, "fill": "#000000" },
     { "type": "textbox", "left": 584, "top": 169, "width": 41, "textAlign": "center", "text": "$weapon1hit$", "fontFamily": "MinionPro", "fontSize": 15, "fill": "#000000" },
     { "type": "textbox", "left": 517, "top": 169, "width": 60, "textAlign": "center", "text": "$weapon1range$", "fontFamily": "MinionPro", "fontSize": 15, "fill": "#000000" },
@@ -122,13 +122,13 @@
     { "type": "textbox", "left": 633, "top": 193, "width": 56, "textAlign": "center", "text": "$weapon2damage", "fontFamily": "MinionPro", "fontSize": 15, "fill": "#000000", "visible": "?weapon2visible" },
     { "type": "textbox", "left": 584, "top": 193, "width": 41, "textAlign": "center", "text": "$weapon2hit$", "fontFamily": "MinionPro", "fontSize": 15, "fill": "#000000", "visible": "?weapon2visible" },
     { "type": "textbox", "left": 517, "top": 193, "width": 60, "textAlign": "center", "text": "$weapon2range$", "fontFamily": "MinionPro", "fontSize": 15, "fill": "#000000", "visible": "?weapon2visible" },
-    { "type": "textbox", "left": 325, "top": 193, "width": 188, "textAlign": "center", "text": "$weapon2name", "fontFamily": "MinionPro", "fontSize": 15, "fontWeight": "bold", "fill": "#000000", "visible": "?weapon2visible" }, 
+    { "type": "textbox", "left": 325, "top": 193, "width": 188, "textAlign": "center", "text": "$weapon2name", "fontFamily": "MinionPro", "fontSize": 15, "fontWeight": "bold", "fill": "#000000", "visible": "?weapon2visible" },
     { "type": "textbox", "left": 633, "top": 217, "width": 56, "textAlign": "center", "text": "$weapon3damage", "fontFamily": "MinionPro", "fontSize": 15, "fill": "#000000", "visible": "?weapon3visible" },
     { "type": "textbox", "left": 584, "top": 217, "width": 41, "textAlign": "center", "text": "$weapon3hit$", "fontFamily": "MinionPro", "fontSize": 15, "fill": "#000000", "visible": "?weapon3visible" },
     { "type": "textbox", "left": 517, "top": 217, "width": 60, "textAlign": "center", "text": "$weapon3range$", "fontFamily": "MinionPro", "fontSize": 15, "fill": "#000000", "visible": "?weapon3visible" },
-    { "type": "textbox", "left": 325, "top": 217, "width": 188, "textAlign": "center", "text": "$weapon3name", "fontFamily": "MinionPro", "fontSize": 15, "fontWeight": "bold", "fill": "#000000", "visible": "?weapon3visible" }, 
+    { "type": "textbox", "left": 325, "top": 217, "width": 188, "textAlign": "center", "text": "$weapon3name", "fontFamily": "MinionPro", "fontSize": 15, "fontWeight": "bold", "fill": "#000000", "visible": "?weapon3visible" },
     { "type": "textbox", "left": "{{value = (card[specialTokenVisible]) ? 94 : 44;}}", "top": 272, "width": "{{value = (card[specialTokenVisible]) ? 577 : 627;}}", "textAlign": "left", "text": "$specialRules$", "styles": "£specialRules", "fontFamily": "MinionPro", "fontSize": 15, "fill": "#000000" },
-    { "type": "textbox", "left": 45, "top": 440, "width": 632, "textAlign": "left", "text": "TRAITS : The $name$ is $trait1$ and $trait2$", "fontFamily": "MinionPro", "fontSize": 16, "fill": "#000000"}, 
+    { "type": "textbox", "left": 45, "top": 440, "width": 632, "textAlign": "left", "text": "TRAITS : The $name$ is $trait1$ and $trait2$", "fontFamily": "MinionPro", "fontSize": 16, "fill": "#000000"},
     { "type": "textbox", "left": 45, "top": 475, "width": 632, "textAlign": "left", "text": "RENOWN : $renown$", "fontFamily": "MinionPro", "fontSize": 16, "fill": "#000000"}
   ],
   "canvasBackground": "#FFFFFF",

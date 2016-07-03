@@ -24,24 +24,39 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-image:before {
-    content: "\e90d";
+.icon-delete:before {
+    content: "\f014";
 }
-.icon-file-empty:before {
-    content: "\e924";
+.icon-home:before {
+    content: "\f015";
 }
 .icon-download:before {
-    content: "\e960";
+    content: "\f019";
 }
-.icon-upload:before {
-    content: "\e961";
+.icon-save:before {
+    content: "\f0c7";
 }
 .icon-undo:before {
-    content: "\e965";
+    content: "\f0e2";
 }
-.icon-bin:before {
-    content: "\e9ac";
+.icon-add:before {
+    content: "\f0fe";
 }
-.icon-loop2:before {
-    content: "\ea2e";
+.icon-image:before {
+    content: "\f1c5";
+}
+.icon-card:before {
+    content: "\e923";
+}
+.icon-apply-template:before {
+    content: "\e995";
+}
+.icon-template:before {
+    content: "\e996";
+}
+.icon-list:before {
+    content: "\e9bd";
+}
+.icon-about:before {
+    content: "\ea0c";
 }
