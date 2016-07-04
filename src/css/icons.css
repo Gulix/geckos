@@ -1,0 +1,62 @@
+@font-face {
+	font-family: 'svgicons';
+  src:    url('../fonts/svgicons/icomoon.eot?olsjsv');
+    src:    url('../fonts/svgicons/icomoon.eot?olsjsv#iefix') format('embedded-opentype'),
+        url('../fonts/svgicons/icomoon.ttf?olsjsv') format('truetype'),
+        url('../fonts/svgicons/icomoon.woff?olsjsv') format('woff'),
+        url('../fonts/svgicons/icomoon.svg?olsjsv#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+} /* Icons created with icomoon.io/app */
+
+.icon {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'svgicons' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-delete:before {
+    content: "\f014";
+}
+.icon-home:before {
+    content: "\f015";
+}
+.icon-download:before {
+    content: "\f019";
+}
+.icon-save:before {
+    content: "\f0c7";
+}
+.icon-undo:before {
+    content: "\f0e2";
+}
+.icon-add:before {
+    content: "\f0fe";
+}
+.icon-image:before {
+    content: "\f1c5";
+}
+.icon-card:before {
+    content: "\e923";
+}
+.icon-apply-template:before {
+    content: "\e995";
+}
+.icon-template:before {
+    content: "\e996";
+}
+.icon-list:before {
+    content: "\e9bd";
+}
+.icon-about:before {
+    content: "\ea0c";
+}

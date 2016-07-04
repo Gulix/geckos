@@ -67,8 +67,6 @@ function engineVM(cardTemplateVM) {
         saveAs(blob, self.editableCard().cardName() + ".png");
       });
     }
-
-
   }
 
 
@@ -97,23 +95,5 @@ function engineVM(cardTemplateVM) {
       self.editableCard(cards[0]);
     }
   }
-
-  /* Visibility of items in the upper part */
-  self.upperPartVisible = ko.observable('template');
-  self.isCardsListVisible = ko.pureComputed(function() {
-    return self.upperPartVisible() == 'cardslist';
-  })
-  self.isTemplateSelectionVisible = ko.pureComputed(function() {
-    return self.upperPartVisible() == 'template';
-  })
-  self.showTemplateSelection = function() { self.upperPartVisible('template'); }
-  self.showCardsList = function() { self.upperPartVisible('cardslist'); }
-
-  /* Header title (depending on what is visible) */
-  self.headerSectionTitle = ko.pureComputed(function() {
-    if (self.isCardsListVisible()) { return "List of Cards"; }
-    if (self.isTemplateSelectionVisible()) { return "Template"; }
-    return "Header";
-  });
 
 }

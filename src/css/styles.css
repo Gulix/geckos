@@ -1,14 +1,11 @@
 body {
-  background-color: #195832;
+  background-color: #F1F1EF;
 }
 
-#wrapper {
-  margin: 0 auto;
-  width: 982px;
-}
-
-.vspace {
-  height: 2em;
+.fullwidth-container {
+  width: 100%;
+  max-width: initial;
+  padding: 0 0;
 }
 
 /* Top Main Menu */
@@ -30,26 +27,21 @@ body {
 }
 .main-menu ul li a, .main-menu ul li a:visited
 {
-  color: #75B58F;
-  background-color: #1F412C;
+  color: #F1F1EF;
+  background-color: #07889B;
 }
 .main-menu ul li a.active, .main-menu ul li a:hover
 {
-   background-color: #75B58F;
-   color: #1F412C;
+   background-color: #66B9BF;
  }
 
-ul, ol, dir, menu {
-  list-style: none;
-}
-
 .page-title {
-  color: #DAE5D6;
+  color: #07889B;
   font-weight: bold;
   font-size: 3em;
 }
 .page-subtitle {
-  color: #B3C6AC;
+  color: #66B9BF;
   font-weight: bold;
   font-style: italic;
   font-size: 1.4em;
@@ -57,154 +49,186 @@ ul, ol, dir, menu {
   margin-bottom: 25px;
 }
 
+/********************************************/
+/* Section display with left vertical menus */
+/********************************************/
+
+.section {
+  position: relative;
+  clear: both;
+  float: left;
+  width: 100%;
+  overflow: hidden;
+}
+
+.section-twocols {
+  float: left;
+  width: 200%;
+  position: relative;
+  left: 100px;
+}
+
+.section-colwrap {
+  float: right;
+  width: 50%;
+  position: relative;
+  right: 100px;
+  padding-bottom: 1em;
+}
+
+.col-content {
+  margin: 0 15px 0 115px;
+  position: relative;
+  right: 100%;
+  overflow: hidden;
+}
+
+.col-menu {
+  float: left;
+  width: 70px;
+  position: relative;
+  right: 85px;
+}
+
+/*************************/
 /* Blocks of information */
-.sticker {
-	background-color: white;
-  padding: 1.25em 1.45em 1.25em 1.55em;
-  margin: 0.5em 0 3em 0;
-  -moz-border-radius: 1em; -webkit-border-radius: 1em; border-radius: 1em;
-	opacity:0.9;
-  -moz-box-shadow: 0 0 1.1em #666; -webkit-box-shadow: 0 0 1.1em #666; box-shadow: 0 0 1.1em #666;
+/*************************/
+.box-elements {
+	background-color: rgba(238, 170, 123, 0.2); /*#EEAA7B;*/
+  padding: 1em;
+  margin: 10px;
+  border: solid 1px #E37222;
 }
 
-.sticker .heading, .sticker h1 {
-  color: #1F412C;
-  margin: 0.25em 0 0.25em 0;
-  font-weight: bold;
-  font-size: 1.2em;
+.box-elements h3 {
+  color: #E37222;
 }
 
-.stickerHeading {
-	background-color: #DAE5D6; height: 1.3em; margin: -2em -1.45em 1.25em -1.55em; padding: 0.4em 1em 1.1em 1.75em;
-	-moz-border-radius-topright: 1em; -moz-border-radius-topleft: 1em;
-	-webkit-border-top-right-radius: 1em; -webkit-border-top-left-radius: 1em;
-	border-top-right-radius: 1em; border-top-left-radius: 1em;
-  border-bottom: solid 1px #ADBDA8;
+/*****************/
+/* Vertical Menu */
+/*****************/
+
+.vertical-menu {
+	float: left;
+  display: block;
+	overflow: hidden;
+	top: 40;
+	left: 0;
+	height: 100%;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	background: #F1F1EF;
 }
 
-.stickerHeading h1 {
-  display: inline;
+.vertical-menu li a {
+	display: block;
+	text-indent: -500em;
+	height: 5em;
+	width: 5em;
+	line-height: 5em;
+	text-align: center;
+	color: #07889B;
+  background: #F1F1EF;
+	position: relative;
+	border: 1px solid #66B9BF;
+	-webkit-transition: background 0.1s ease-in-out;
+	-moz-transition: background 0.1s ease-in-out;
+	transition: background 0.1s ease-in-out;
 }
 
-/* Left-Right columns */
-.floatLeft {
-  float: left !important;
+.vertical-menu li a:active {
+	background: #E37222;
+	color: #EEAA7B;
 }
-.floatRight {
-  float: right !important;
+
+.vertical-menu li a:hover {
+	background: #07889B;
+	color: #fff;
+}
+
+/* class for current item */
+.vertical-menu li.cbp-vicurrent a {
+	background: #fff;
+	color: #47a3da;
+}
+
+.vertical-menu li a:before {
+	font-family: 'svgicons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	text-indent: 0em;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	font-size: 1.4em;
+	-webkit-font-smoothing: antialiased;
+}
+
+.vertical-menu li a.icon-logo:before {
+	content: "C";
+	font-weight: 700;
+	font-size: 300%;
+	font-family: 'Lato', Calibri, Arial, sans-serif;
+}
+
+/* Example for media query (depends on total height of menu) */
+@media screen and (max-height: 34.9375em) {
+
+	.vertical-menu {
+		font-size: 70%;
+	}
+
 }
 
 .clear {
   clear: both;
 }
 
-/* Header choice */
-.header {
-  display: flex;
-  flex-flow: row;
-}
-
-.header-content {
-  /*float: right !important;
-  width: 832px;*/
-  flex: 6;
-}
-
 /* Managing the template */
 .template-text textarea {
   width: 100%;
+  height: 100%;
 }
 
-/* List of cards */
-.list {
+/**********************************/
+/* List of cards in the Card view */
+/**********************************/
 
-}
-
-.list select {
+select.cards-list {
   width: 100%;
+  height: 10em;
 }
 
-.stickerHeading-buttons {
-  float: right;
+/*******************/
+/* Flex management */
+/*******************/
+
+.flex-container {
+  display: flex;
 }
 
-.button {
-	-moz-box-shadow:inset 0px 1px 0px 0px #9acc85;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #9acc85;
-	box-shadow:inset 0px 1px 0px 0px #9acc85;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #74ad5a), color-stop(1, #68a54b));
-	background:-moz-linear-gradient(top, #74ad5a 5%, #68a54b 100%);
-	background:-webkit-linear-gradient(top, #74ad5a 5%, #68a54b 100%);
-	background:-o-linear-gradient(top, #74ad5a 5%, #68a54b 100%);
-	background:-ms-linear-gradient(top, #74ad5a 5%, #68a54b 100%);
-	background:linear-gradient(to bottom, #74ad5a 5%, #68a54b 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#74ad5a', endColorstr='#68a54b',GradientType=0);
-	background-color:#74ad5a;
-	border:1px solid #3b6e22;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:13px;
-	font-weight:bold;
-	padding:6px 12px;
-	text-decoration:none;
-}
-.button:hover {
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #68a54b), color-stop(1, #74ad5a));
-	background:-moz-linear-gradient(top, #68a54b 5%, #74ad5a 100%);
-	background:-webkit-linear-gradient(top, #68a54b 5%, #74ad5a 100%);
-	background:-o-linear-gradient(top, #68a54b 5%, #74ad5a 100%);
-	background:-ms-linear-gradient(top, #68a54b 5%, #74ad5a 100%);
-	background:linear-gradient(to bottom, #68a54b 5%, #74ad5a 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#68a54b', endColorstr='#74ad5a',GradientType=0);
-	background-color:#68a54b;
-}
-.button:active {
-	position:relative;
-	top:1px;
-}
-
-.header-choice-buttons .button {
-  display: block;
+.flex-1 {
   flex: 1;
-  text-align: right;
 }
 
-.disabled-button, .disabled-button:hover {
-  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #6c7c7c), color-stop(1, #768d87));
-	background:-moz-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
-	background:-webkit-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
-	background:-o-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
-	background:-ms-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
-	background:linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#6c7c7c', endColorstr='#768d87',GradientType=0);
-	background-color:#6c7c7c;
-  cursor: default;
-}
-.disabled-button:active {
-	position:relative;
-	top:0px;
-}
-
-
-/***************************/
-/* --- Editable fields --- */
-/***************************/
-.editable-fields {
-
-}
-
-.field-label {
-  flex: 1;
-  text-align: right;
-  margin-right: 6px;
-}
-.field-largeInput {
+.flex-2 {
   flex: 2;
 }
-.field-flexrow {
-  display: flex;
+
+.flex-3 {
+  flex: 3;
+}
+
+.flex-4 {
+  flex: 4;
+}
+
+.flex-5 {
+  flex: 5;
 }
 
 /***********************/
@@ -221,31 +245,17 @@ ul, ol, dir, menu {
   display: block;
 }
 
+/***********************/
+/* --- Page Footer --- */
+/***********************/
+
 .page-footer {
-  color: #FFFFFF;
+  color: #e37222;
   text-align: center;
   font-style: italic;
 }
 
-/*********************/
-/* --- About-Box --- */
-/*********************/
-/* The Modal (background) */
-.about-box {
-   display: none; /* Hidden by default */
-   position: fixed; /* Stay in place */
-   z-index: 1; /* Sit on top */
-   left: 0;
-   top: 0;
-   width: 100%;
-   height: 100%; /* Full height */
-   overflow: auto; /* Enable scroll if needed */
-   background-color: rgb(0,0,0); /* Fallback color */
-   background-color: rgba(0,55,0,0.8); /* Black w/ opacity */
-}
-
-/* Modal Content/Box */
-.modal-content {
-   margin: 15% auto; /* 15% from the top and centered */
-   width: 600px;
-}
+a {
+  color: #07889B; }
+a:hover {
+  color: #E37222; }
