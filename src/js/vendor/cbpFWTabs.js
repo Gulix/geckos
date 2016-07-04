@@ -4,16 +4,16 @@
  *
  * Licensed under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
- * 
+ *
  * Copyright 2014, Codrops
  * http://www.codrops.com
  */
-;( function( window ) {
-	
+define(['knockout'], function(ko) {
+
 	'use strict';
 
 	function extend( a, b ) {
-		for( var key in b ) { 
+		for( var key in b ) {
 			if( b.hasOwnProperty( key ) ) {
 				a[key] = b[key];
 			}
@@ -72,7 +72,9 @@
 		this.items[ this.current ].className += (this.items[ this.current ].className ? ' ' : '') + 'content-current';
 	};
 
-	// add to global namespace
-	window.CBPFWTabs = CBPFWTabs;
 
-})( window );
+	return {
+		create: function( el, options ) { return new CBPFWTabs( el, options ); }
+	}
+
+});
