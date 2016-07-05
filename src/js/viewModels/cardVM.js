@@ -1,4 +1,4 @@
-define(['knockout', 'viewModels/editableFieldVM'], function(ko, EditableFieldVM) {
+define(['knockout', 'viewModels/field-factory'], function(ko, FieldFactory) {
   /**
    * ViewModel representing a Card and its data.
    * @param  {editableFieldVM table} List of fields used to create the cards
@@ -24,7 +24,7 @@ define(['knockout', 'viewModels/editableFieldVM'], function(ko, EditableFieldVM)
 
       // Creation of the EditableFieldVM
       for (var iField = 0; iField < fieldList.length; iField++) {
-        var editableField = EditableFieldVM.newObject(fieldList[iField]);
+        var editableField = FieldFactory.buildField(fieldList[iField]);
         // Getting previous values from actual field with same name
         var existingField = self.getFieldFromName(editableField.name);
         if (existingField != null) {
@@ -102,7 +102,7 @@ define(['knockout', 'viewModels/editableFieldVM'], function(ko, EditableFieldVM)
 
     self.getStyles = function(fieldName) {
       var field = self.getFieldFromName(fieldName);
-      if ((field != null) && field.isRichText()) {
+      if ((field != null) && (field.styles != undefined)) {
         return field.styles();
       } else {
         return { };
@@ -182,23 +182,7 @@ define(['knockout', 'viewModels/editableFieldVM'], function(ko, EditableFieldVM)
         var replacingValue = '';
         var field = self.getFieldFromName(fieldName);
         if (field != null) {
-          if (field.isInputText() || field.isMultiLine() || field.isColor()) {
-            // These types of fields only returns text value
-            if (valueType == 'text') { replacingValue = field.getTextValue(); }
-          }
-          else if (field.isOptions()) {
-            // Two possibilites : displaying the constant value, or the displayed text
-            var selectedValue = field.selectedOption();
-            if (selectedValue != null) {
-              if (valueType == 'text') { replacingValue = selectedValue.text; }
-              if (valueType == 'value') { replacingValue = selectedValue.option; }
-            }
-          }
-          else if (field.isRichText()) {
-            // Two possibilites : displaying the constant value, or the displayed text
-            if (valueType == 'text') { replacingValue = field.textDisplayed(); }
-            if (valueType == 'html') { replacingValue = field.textValue(); }
-          }
+          replacingValue = field.getAdvancedValue(valueType);
         }
         replacedString = replacedString.replace(replacedElement, replacingValue);
 

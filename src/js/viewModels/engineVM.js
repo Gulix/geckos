@@ -1,8 +1,8 @@
 define(['knockout',
         'fabric',
-        'viewModels/editableFieldVM',
+        'viewModels/field-factory',
         'viewModels/cardVM'
-      ], function(ko, fabric, EditableFieldVM, CardVM) {
+      ], function(ko, fabric, FieldFactory, CardVM) {
 
   function engineVM(cardTemplateVM) {
     var self = this;
@@ -17,7 +17,7 @@ define(['knockout',
     /* Fields to edit the card value */
     var fields = [];
     for (var iField = 0; iField < self.cardTemplate().fields().length; iField++) {
-      fields.push(EditableFieldVM.newObject(self.cardTemplate().fields()[iField]));
+      fields.push(FieldFactory.buildField(self.cardTemplate().fields()[iField]));
     }
     self.editableFields = ko.observableArray(fields);
 
