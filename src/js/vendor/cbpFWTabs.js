@@ -8,7 +8,7 @@
  * Copyright 2014, Codrops
  * http://www.codrops.com
  */
-define(['knockout'], function(ko) {
+define([], function() {
 
 	'use strict';
 

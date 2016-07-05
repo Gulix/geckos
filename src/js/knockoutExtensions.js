@@ -1,4 +1,4 @@
-define(['knockout', 'ckeditor', 'jQuery'], function(ko) {
+define(['knockout', 'jscolor', 'ckeditor', 'jQuery'], function(ko, jscolor) {
 
   /*************************/
   /* Binding with CKEditor */
@@ -68,7 +68,7 @@ define(['knockout', 'ckeditor', 'jQuery'], function(ko) {
       }
 
       var input = document.getElementById(id);
-      var picker = new jscolor(input);
+      var picker = jscolor.create(input);
       picker.fromString(modelValue);
 
       input.onchange = function() {
