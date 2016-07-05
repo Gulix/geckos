@@ -140,41 +140,8 @@
                   <div class="flex-3 box-elements" data-bind="visible: isCardSelected">
                     <div data-bind="with: editableCard">
                       <h3>Card Details</h3>
-                      <div class='editable-fields' data-bind="foreach: fields">
-                        <div class="" data-bind="if: isInputText()">
-                          <label data-bind="text: label"></label>
-                          <input type="text" data-bind="value: textValue"></input>
-                        </div>
-                        <div class='' data-bind="if: isMultiLine()">
-                          <label data-bind="text: label"></label>
-                          <textarea data-bind="value: textValue, attr: { 'rows': nbLines }"></textarea>
-                        </div>
-                        <div data-bind="if: isRichText()">
-                          <label data-bind="text: label" ></label>
-                          <textarea data-bind="CKEDITOR: textValue">Test</textarea>
-                        </div>
-                        <div data-bind="if: isOptions()">
-                          <label data-bind="text: label" ></label>
-                          <select data-bind="options: options, optionsText: 'text', value: selectedOption"></select>
-                        </div>
-                        <div data-bind="if: isImage()">
-                          <label data-bind="text: label"></label>
-                          <input type="file" data-bind="event: { change: uploadImage($element.files[0])}"></input>
-                        </div>
-                        <div data-bind="if: isCheckbox()">
-                          <label>
-                            <input type='checkbox' data-bind='checked: checkedValue'></input>
-                            <span data-bind="text: label"></span>
-                          </label>
-                        </div>
-                        <div data-bind="if: isNumeric()">
-                          <label data-bind="text: label" ></label>
-                          <input type="number" data-bind="value: numericValue"></input>
-                        </div>
-                        <div data-bind="if: isColor()">
-                          <label data-bind="text: label"></label>
-                          <input class="jscolor" data-bind="jscolor: textValue"></input>
-                        </div>
+                      <div class='editable-fields' data-bind="foreach: componentsFields">
+                         <div data-bind="component: $data"></div>
                       </div>
                     </div>
                   </div>
@@ -231,7 +198,7 @@
   </div>
 
 
-    
+
     <!-- ViewModels -->
 
 

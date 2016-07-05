@@ -176,7 +176,29 @@ define(['knockout', 'utils'], function(ko, utils) {
         self.textValue(value);
       }
     }
+
+    self.getComponentName = function() {
+      if (self.isInputText()) {
+        return "input-text";
+      } else if (self.isMultiLine()) {
+        return "input-multiline";
+      } else if (self.isRichText()) {
+        return "input-richtext";
+      } else if (self.isOptions()) {
+        return "input-options";
+      } else if (self.isImage()) {
+        return "input-image";
+      } else if (self.isCheckbox()) {
+        return "input-checkbox";
+      } else if (self.isNumeric()) {
+        return "input-numeric";
+      } else if (self.isColor()) {
+        return "input-color";
+      }
+    }
   }
+
+
 
   return {
     newObject: function(jsonField) { return new editableFieldVM(jsonField); }

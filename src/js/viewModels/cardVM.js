@@ -3,11 +3,12 @@ define(['knockout', 'viewModels/editableFieldVM'], function(ko, EditableFieldVM)
    * ViewModel representing a Card and its data.
    * @param  {editableFieldVM table} List of fields used to create the cards
    */
-  function cardVM(editableFields, fields) {
+  function cardVM(editableFields, jsonEditableFields) {
     var self = this;
 
-    //self.fields = ko.observableArray(editableFields);
     self.fields = ko.observableArray([]);
+    self.componentsFields = ko.observableArray([]);
+
     self.getFieldFromName = function(fieldName) {
       for (var iField = 0; iField < self.fields().length; iField++) {
         var field = self.fields()[iField];
@@ -20,6 +21,8 @@ define(['knockout', 'viewModels/editableFieldVM'], function(ko, EditableFieldVM)
 
     self.updateFields = function(fieldList) {
       var fields = [];
+
+      // Creation of the EditableFieldVM
       for (var iField = 0; iField < fieldList.length; iField++) {
         var editableField = EditableFieldVM.newObject(fieldList[iField]);
         // Getting previous values from actual field with same name
@@ -29,9 +32,23 @@ define(['knockout', 'viewModels/editableFieldVM'], function(ko, EditableFieldVM)
         }
         fields.push(editableField);
       }
+
+      // List of fields to be used as Components
+      var componentsFields = [];
+      for (var iField = 0; iField < fields.length; iField++) {
+        var componentField =
+        {
+          name: fields[iField].getComponentName(),
+          params: fields[iField]
+        };
+        componentsFields.push(componentField);
+      }
+
+      // Filling the Observable Arrays
+      self.componentsFields(componentsFields);
       self.fields(fields);
     }
-    self.updateFields(fields);
+    self.updateFields(jsonEditableFields);
 
 
     self.cardName = ko.pureComputed(function() {
@@ -199,6 +216,6 @@ define(['knockout', 'viewModels/editableFieldVM'], function(ko, EditableFieldVM)
   }
 
   return {
-    newObject: function(editableFields, fields) { return new cardVM(editableFields, fields); }
+    newObject: function(editableFields, jsonEditableFields) { return new cardVM(editableFields, jsonEditableFields); }
   }
 });

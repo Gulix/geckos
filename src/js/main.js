@@ -20,8 +20,9 @@ require(['knockout',
          'viewModels/engineVM',
          'tabs',
          'knockoutExtensions',
+         'components/registration',
          'domReady!'
-       ], function(ko, CardTemplateVM, EngineVM, tabs, koExt){
+       ], function(ko, CardTemplateVM, EngineVM, tabs, koExt, components){
   var jsonTemplate = {
     "fields": [
       {	"name": "name", "label": "Name", "default": "Captain Wolf" },
@@ -97,6 +98,8 @@ require(['knockout',
   };
 
   window.CKEDITOR_BASEPATH = './vendor/ckeditor/';
+
+  components.register();
 
   var template = CardTemplateVM.newObject(jsonTemplate);
   var engineVM = EngineVM.newObject(template);
