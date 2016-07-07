@@ -2,8 +2,6 @@
 	"fields": [
     {	"name": "name", "label": "Name", "default": "Arabesque" },
 		{ "name": "mainColor", "label": "Main color", "default": "#FFFFFF", "type": "color" },
-		{ "name": "secondaryColor", "label": "Secondary color", "default": "#666666", "type": "color" },
-		{ "name": "borderColor", "label": "Border color", "default": "#000000", "type": "color" },
 		{ "name": "image", "label": "Image", "type": "image" }
   ],
 	"canvasFields": [
@@ -46,8 +44,8 @@
 				"top": 0,
 				"width": 880,
 				"height": 1201,
-				"fill": "#$mainColor$",
-				"stroke": "#$borderColor$",
+				"fill": "$mainColor.hexa$",
+				"stroke": "$mainColor.darken30$",
 				"strokeWidth": 4,
 				"strokeDashArray": [null, null],
 				"strokeLineCap": "butt",
@@ -106,8 +104,8 @@
 				"top": 350.5,
 				"width": 645.72,
 				"height": 500,
-				"fill": "#$secondaryColor$",
-				"stroke": "#$borderColor$",
+				"fill": "$mainColor.monochromatic5$",
+				"stroke": "$mainColor.monochromatic4$",
 				"strokeWidth": 2.5,
 				"strokeDashArray": [null, null],
 				"strokeLineCap": "butt",

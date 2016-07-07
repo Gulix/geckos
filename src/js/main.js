@@ -6,7 +6,8 @@ require.config({
         'jscolor': 'vendor/jscolor.min',
         'knockout': 'vendor/knockout-3.4.0',
         'tabs': 'vendor/cbpFWTabs',
-        'ckeditor': 'vendor/ckeditor/ckeditor'
+        'ckeditor': 'vendor/ckeditor/ckeditor',
+        'tinycolor': 'vendor/tinycolor'
     },
     shim: {
         'jQuery': {
