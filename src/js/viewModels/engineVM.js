@@ -42,7 +42,7 @@ define(['knockout',
 
     /* Adding / Removing cards from the list */
     self.addNewCard = function() {
-      var newCard = new cardVM(self.editableFields(), self.cardTemplate().fields());
+      var newCard = CardVM.newObject(self.editableFields(), self.cardTemplate().fields());
       self.listCards.push(newCard);
       self.editableCard(newCard);
     }
@@ -92,7 +92,7 @@ define(['knockout',
 
       var cards = [];
       for(var cardData in jsonData) {
-        var card = new cardVM(self.editableFields(), self.cardTemplate().fields());
+        var card = CardVM.newObject(self.editableFields(), self.cardTemplate().fields());
         card.loadFromJson(jsonData[cardData]);
         cards.push(card);
       }
