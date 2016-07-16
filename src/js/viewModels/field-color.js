@@ -37,94 +37,25 @@ define(['knockout', 'tinycolor'], function(ko, tinycolor) {
 
       // Using tinycolor.js to get specific color values
       var color = tinycolor(self.getTextValue());
-      var regexMatch = null;
-      var regexType = '';
 
-      // Alpha
-      regexType = /^alpha(100|[0-9][0-9]?)$/g;
-      if ((regexMatch = regexType.exec(valueType)) !== null) {
-        var coeff = regexMatch[1];
-        return color.setAlpha(coeff / 100).toString();
+      var transformations = valueType.split('.');
+      for (iTransformation = 0; iTransformation < transformations.length; iTransformation++) {
+        var currentTransformation = transformations[iTransformation];
+
+        // R, G, B values (final value, no transformation on it)
+        if (currentTransformation == 'R') {
+          return color.toRgb().r;
+        } else if (currentTransformation == 'G') {
+          return color.toRgb().g;
+        } else if (currentTransformation == 'B') {
+          return color.toRgb().b;
+        }
+
+        // Consecutive calls of transformations
+        color = recursiveColorTransformation(color, currentTransformation);
       }
 
-      // R, G, B values
-      if (valueType == 'R') {
-        return color.toRgb().r;
-      } else if (valueType == 'G') {
-        return color.toRgb().g;
-      } else if (valueType == 'B') {
-        return color.toRgb().b;
-      }
-
-      // Darken
-      regexType = /^darken([0-9][0-9]?)$/g;
-      if ((regexMatch = regexType.exec(valueType)) !== null) {
-        var coeff = regexMatch[1];
-        return color.darken(coeff).toString();
-      } else if (valueType == 'darken') { return color.darken().toString(); }
-
-      // Lighten
-      regexType = /^lighten([0-9][0-9]?)$/g;
-      if ((regexMatch = regexType.exec(valueType)) !== null) {
-        var coeff = regexMatch[1];
-        return color.lighten(coeff).toString();
-      } else if (valueType == 'lighten') { return color.lighten().toString(); }
-
-      // Brighten
-      regexType = /^brighten([0-9][0-9]?)$/g;
-      if ((regexMatch = regexType.exec(valueType)) !== null) {
-        var coeff = regexMatch[1];
-        return color.brighten(coeff).toString();
-      } else if (valueType == 'brighten') { return color.brighten().toString(); }
-
-      // Desaturate
-      regexType = /^desaturate([0-9][0-9]?)$/g;
-      if ((regexMatch = regexType.exec(valueType)) !== null) {
-        var coeff = regexMatch[1];
-        return color.desaturate(coeff).toString();
-      } else if (valueType == 'desaturate') { return color.desaturate().toString(); }
-
-      // Saturate
-      regexType = /^saturate([0-9][0-9]?)$/g;
-      if ((regexMatch = regexType.exec(valueType)) !== null) {
-        var coeff = regexMatch[1];
-        return color.saturate(coeff).toString();
-      } else if (valueType == 'saturate') { return color.saturate().toString(); }
-
-      // Greyscale
-      if (valueType == 'greyscale') { return color.greyscale().toString(); }
-
-      // Complement
-      if (valueType == 'complement') { return color.complement().toString(); }
-
-      // Split-Complement
-      regexType = /^splitcomplement([123])$/g;
-      if ((regexMatch = regexType.exec(valueType)) !== null) {
-        var index = regexMatch[1];
-        return color.splitcomplement()[index - 1].toString();
-      }
-
-      // Triad
-      regexType = /^triad([123])$/g;
-      if ((regexMatch = regexType.exec(valueType)) !== null) {
-        var index = regexMatch[1];
-        return color.triad()[index - 1].toString();
-      }
-
-      // Tetrad
-      regexType = /^tetrad([1234])$/g;
-      if ((regexMatch = regexType.exec(valueType)) !== null) {
-        var index = regexMatch[1];
-        return color.tetrad()[index - 1].toString();
-      }
-
-      // Analogous
-      regexType = /^analogous([123456])$/g;
-      if ((regexMatch = regexType.exec(valueType)) !== null) {
-        var index = regexMatch[1];
-        return color.analogous()[index - 1].toString();
-      }
-
+      return color.toString();
 
       // Need to think about other functions and recursive call
       // For example : $myVariableColor.complement.brighten50$
@@ -133,9 +64,94 @@ define(['knockout', 'tinycolor'], function(ko, tinycolor) {
       //
       // Also, access to Tinycolor when a variable is with code.
       // Maybe getting the variables BestReadableOnWhite/Black an easy access
-
-      return '';
     }
+  }
+
+  self.recursiveColorTransformation = function(currentColor, transformationKey) {
+
+    // The function will return a Tinycolor object
+    // The TransformationKey will define what operation will be performed
+    // on the currentColor object (also a Tinycolor object)
+    var regexMatch = null;
+    var regexType = '';
+
+    // Alpha
+    regexType = /^alpha(100|[0-9][0-9]?)$/g;
+    if ((regexMatch = regexType.exec(transformationKey)) !== null) {
+      var coeff = regexMatch[1];
+      return currentColor.setAlpha(coeff / 100);
+    }
+
+    // Darken
+    regexType = /^darken([0-9][0-9]?)$/g;
+    if ((regexMatch = regexType.exec(transformationKey)) !== null) {
+      var coeff = regexMatch[1];
+      return currentColor.darken(coeff);
+    } else if (transformationKey == 'darken') { return currentColor.darken(); }
+
+    // Lighten
+    regexType = /^lighten([0-9][0-9]?)$/g;
+    if ((regexMatch = regexType.exec(transformationKey)) !== null) {
+      var coeff = regexMatch[1];
+      return currentColor.lighten(coeff);
+    } else if (transformationKey == 'lighten') { return currentColor.lighten(); }
+
+    // Brighten
+    regexType = /^brighten([0-9][0-9]?)$/g;
+    if ((regexMatch = regexType.exec(transformationKey)) !== null) {
+      var coeff = regexMatch[1];
+      return currentColor.brighten(coeff);
+    } else if (transformationKey == 'brighten') { return currentColor.brighten(); }
+
+    // Desaturate
+    regexType = /^desaturate([0-9][0-9]?)$/g;
+    if ((regexMatch = regexType.exec(transformationKey)) !== null) {
+      var coeff = regexMatch[1];
+      return currentColor.desaturate(coeff);
+    } else if (transformationKey == 'desaturate') { return currentColor.desaturate(); }
+
+    // Saturate
+    regexType = /^saturate([0-9][0-9]?)$/g;
+    if ((regexMatch = regexType.exec(transformationKey)) !== null) {
+      var coeff = regexMatch[1];
+      return currentColor.saturate(coeff);
+    } else if (transformationKey == 'saturate') { return currentColor.saturate(); }
+
+    // Greyscale
+    if (transformationKey == 'greyscale') { return currentColor.greyscale(); }
+
+    // Complement
+    if (transformationKey == 'complement') { return currentColor.complement(); }
+
+    // Split-Complement
+    regexType = /^splitcomplement([123])$/g;
+    if ((regexMatch = regexType.exec(transformationKey)) !== null) {
+      var index = regexMatch[1];
+      return currentColor.splitcomplement()[index - 1];
+    }
+
+    // Triad
+    regexType = /^triad([123])$/g;
+    if ((regexMatch = regexType.exec(transformationKey)) !== null) {
+      var index = regexMatch[1];
+      return currentColor.triad()[index - 1];
+    }
+
+    // Tetrad
+    regexType = /^tetrad([1234])$/g;
+    if ((regexMatch = regexType.exec(transformationKey)) !== null) {
+      var index = regexMatch[1];
+      return currentColor.tetrad()[index - 1];
+    }
+
+    // Analogous
+    regexType = /^analogous([123456])$/g;
+    if ((regexMatch = regexType.exec(transformationKey)) !== null) {
+      var index = regexMatch[1];
+      return currentColor.analogous()[index - 1];
+    }
+
+    return currentColor;
   }
 
   return {
