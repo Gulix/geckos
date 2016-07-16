@@ -1,4 +1,4 @@
-define(['knockout', 'viewModels/field-factory'], function(ko, FieldFactory) {
+define(['knockout', 'viewModels/field-factory', 'tinycolor'], function(ko, FieldFactory, tinycolor) {
   /**
    * ViewModel representing a Card and its data.
    * @param  {editableFieldVM table} List of fields used to create the cards
@@ -71,7 +71,13 @@ define(['knockout', 'viewModels/field-factory'], function(ko, FieldFactory) {
     self.getValue = function(fieldName) {
       var field = self.getFieldFromName(fieldName);
       if (field != null) {
-        var fieldValue = field.getJsonValue();
+        // Some fields can have a specific return value for code
+        var fieldValue = null;
+        if (field.getCodeValue !== undefined) {
+          fieldValue = field.getCodeValue();
+        } else {
+          fieldValue = field.getJsonValue();
+        }
         if ((fieldValue != null) && (fieldValue != undefined)) {
           return fieldValue;
         }

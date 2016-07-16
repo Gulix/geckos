@@ -26,6 +26,12 @@ define(['knockout', 'tinycolor'], function(ko, tinycolor) {
       self.textValue(value);
     }
 
+    /* Object to be used with a Code Variable */
+    self.getCodeValue = function() {
+      var color = tinycolor(self.getTextValue());
+      return color;
+    }
+
     self.getComponentName = function() {
         return "input-color";
     }
