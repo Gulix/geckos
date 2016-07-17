@@ -13,6 +13,10 @@ define(['knockout'], function(ko) {
         viewModel: { require: 'components/input-generic' },
         template: { require: 'text!components/input-color/input-color.html' }
       });
+      ko.components.register('input-color-select', {
+        viewModel: { require: 'components/input-generic' },
+        template: { require: 'text!components/input-color/input-color-select.html' }
+      });
       ko.components.register('input-image', {
         viewModel: { require: 'components/input-generic' },
         template: { require: 'text!components/input-image/input-image.html' }

@@ -11,6 +11,11 @@ define(['knockout', 'tinycolor'], function(ko, tinycolor) {
     }
     self.textValue = ko.observable(jsonField.default);
 
+    self.colorOptions = [];
+    self.colorOptions.push({ 'text': 'Red', 'colorValue': '#FF0000'});
+    self.colorOptions.push({ 'text': 'Green', 'colorValue': '#00FF00'});
+    self.colorOptions.push({ 'text': 'Blue', 'colorValue': '#0000FF'});
+
     /* Value to be used in the templates */
     self.getTextValue = function() {
       return self.textValue();
@@ -33,7 +38,7 @@ define(['knockout', 'tinycolor'], function(ko, tinycolor) {
     }
 
     self.getComponentName = function() {
-        return "input-color";
+        return "input-color-select";
     }
 
     /* Advanced String variables, with specific "valueType" */
