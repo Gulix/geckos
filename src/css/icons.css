@@ -60,3 +60,6 @@
 .icon-about:before {
     content: "\ea0c";
 }
+.icon-clear-list:before {
+    content: "\f01c";
+}

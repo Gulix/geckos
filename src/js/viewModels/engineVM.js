@@ -56,6 +56,10 @@ define(['knockout',
         }
       }
     }
+    self.clearList = function() {
+      self.editableCard(null);
+      self.listCards.removeAll();
+    }
 
     /* Generated template */
     self.generatedTemplate = ko.pureComputed(function() {
