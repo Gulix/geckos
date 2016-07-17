@@ -1,9 +1,7 @@
 define(['knockout', 'utils'], function(ko, utils) {
 
-  console.log("Function : purchaseProduct");
   function cardTemplateVM(jsonTemplate) {
     var self = this;
-    console.log("test");
 
     self.fields = ko.observableArray(jsonTemplate.fields);
     self.canvasFields = ko.observableArray(jsonTemplate.canvasFields);
