@@ -1,7 +1,14 @@
 {
 	"fields": [
     {	"name": "name", "label": "Name", "default": "Arabesque" },
-		{ "name": "mainColor", "label": "Main color", "default": "#FFFFFF", "type": "color" },
+		{ "name": "mainColor", "label": "Main color", "default": "#FFA12E", "type": "color",
+			"options": [
+				{ "text": "Purple", "colorValue": "#B4186E" },
+				{ "text": "Blue", "colorValue": "#31B4A5" },
+				{ "text": "Orange", "colorValue": "#FFA12E" },
+				{ "text": "Green", "colorValue": "#32C639" },
+				{ "text": "Red", "colorValue": "#B42828" }
+			] },
 		{ "name": "image", "label": "Image", "type": "image" }
   ],
 	"canvasFields": [

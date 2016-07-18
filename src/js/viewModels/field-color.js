@@ -11,10 +11,28 @@ define(['knockout', 'tinycolor'], function(ko, tinycolor) {
     }
     self.textValue = ko.observable(jsonField.default);
 
-    self.colorOptions = [];
-    self.colorOptions.push({ 'text': 'Red', 'colorValue': '#FF0000'});
-    self.colorOptions.push({ 'text': 'Green', 'colorValue': '#00FF00'});
-    self.colorOptions.push({ 'text': 'Blue', 'colorValue': '#0000FF'});
+    self.colorOptions = null;
+    if ((jsonField.options != null) && (jsonField.options.length > 0)) {
+      self.colorOptions = [];
+      var defaultColor = null;
+      for(var iOption = 0; iOption < jsonField.options.length; iOption++) {
+        // Creating the option object
+        var colorOption = {
+          'text': jsonField.options[iOption].text,
+          'colorValue': jsonField.options[iOption].colorValue
+        };
+        self.colorOptions.push(colorOption);
+        // Is this the default one ?
+        if (colorOption.colorValue == jsonField.default) {
+          defaultColor = jsonField.default;
+        }
+      }
+      // Default value need to come from the list
+      if (defaultColor == null) {
+        defaultColor = self.colorOptions[0].colorValue;
+      }
+      self.textValue(defaultColor);
+    }
 
     /* Value to be used in the templates */
     self.getTextValue = function() {
@@ -38,7 +56,10 @@ define(['knockout', 'tinycolor'], function(ko, tinycolor) {
     }
 
     self.getComponentName = function() {
+      if ((self.colorOptions != null) && (self.colorOptions.length > 0))
         return "input-color-select";
+      else
+        return "input-color";
     }
 
     /* Advanced String variables, with specific "valueType" */

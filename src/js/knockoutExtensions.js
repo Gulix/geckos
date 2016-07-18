@@ -126,6 +126,7 @@ define(['knockout', 'jscolor', 'simplecolorpicker', 'ckeditor', 'jQuery'], funct
             }
             observable(color);
           });
+      $('#' + id).simplecolorpicker('selectColor', modelValue.textValue());
     }
   };
 });
