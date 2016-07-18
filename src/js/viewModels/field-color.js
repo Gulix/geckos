@@ -64,11 +64,12 @@ define(['knockout', 'tinycolor'], function(ko, tinycolor) {
 
     /* Advanced String variables, with specific "valueType" */
     self.getAdvancedValue = function(valueType) {
-      if (valueType == 'text') { return self.getTextValue(); }
-      if (valueType == 'hexa') { return '#' + self.getTextValue(); }
 
       // Using tinycolor.js to get specific color values
       var color = tinycolor(self.getTextValue());
+
+      if (valueType == 'text') { return color.toHex(); }
+      if (valueType == 'hexa') { return color.toHexString(); }
 
       var transformations = valueType.split('.');
       for (iTransformation = 0; iTransformation < transformations.length; iTransformation++) {
@@ -87,15 +88,7 @@ define(['knockout', 'tinycolor'], function(ko, tinycolor) {
         color = recursiveColorTransformation(color, currentTransformation);
       }
 
-      return color.toString();
-
-      // Need to think about other functions and recursive call
-      // For example : $myVariableColor.complement.brighten50$
-      // The valueType string has all the variable content behind the first '.'
-      // With a while syntax and a regexCall, should be easy to make
-      //
-      // Also, access to Tinycolor when a variable is with code.
-      // Maybe getting the variables BestReadableOnWhite/Black an easy access
+      return color.toHexString();
     }
   }
 
