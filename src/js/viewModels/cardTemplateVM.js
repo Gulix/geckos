@@ -87,7 +87,10 @@ define(['knockout', 'utils'], function(ko, utils) {
     self.setTemplate = function() {
       self.currentTemplate(JSON.parse(self.editableTemplate()));
       self.fields(self.currentTemplate().fields);
-      self.sharedOptions = self.currentTemplate().sharedOptions;
+
+      self.sharedConfiguration = { };
+      self.sharedConfiguration.sharedOptions = self.currentTemplate().sharedOptions;
+
       self.canvasFields(self.currentTemplate().canvasFields);
 
       self.updateFonts();
