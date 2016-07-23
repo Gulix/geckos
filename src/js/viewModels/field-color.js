@@ -88,7 +88,7 @@ define(['knockout', 'tinycolor'], function(ko, tinycolor) {
         color = recursiveColorTransformation(color, currentTransformation);
       }
 
-      return color.toHexString();
+      return color.toRgbString();
     }
   }
 
