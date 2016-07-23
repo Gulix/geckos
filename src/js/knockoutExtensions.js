@@ -1,4 +1,4 @@
-define(['knockout', 'jscolor', 'simplecolorpicker', 'ckeditor', 'jQuery'], function(ko, jscolor, simplecolorpicker) {
+define(['knockout', 'jscolor', 'simplecolorpicker', 'msdropdown', 'ckeditor', 'jQuery'], function(ko, jscolor, simplecolorpicker) {
 
   /*************************/
   /* Binding with CKEditor */
@@ -127,6 +127,50 @@ define(['knockout', 'jscolor', 'simplecolorpicker', 'ckeditor', 'jQuery'], funct
             observable(color);
           });
       $('#' + id).simplecolorpicker('selectColor', modelValue.textValue());
+    }
+  };
+
+  /*****************************/
+  /* Binding with MsDropDown   */
+  /*****************************/
+  ko.bindingHandlers.msdropdown = {
+    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+      var modelValue = ko.utils.unwrapObservable(valueAccessor()) || {};
+      // Id of the element (found or generated)
+      var id = $(element).attr('id');
+      if(id == undefined || id == '') {
+        $(element).attr('id','id_' + Math.floor(new Date().valueOf()));
+        id = $(element).attr('id');
+      }
+
+      // Populating the select input with the options
+      var optionsList = [ ];
+      for (var iOption = 0; iOption < modelValue.options.length; iOption++) {
+        var optionElement = { };
+        optionElement.value = modelValue.options[iOption].option;
+        optionElement.text = modelValue.options[iOption].text;
+
+        optionsList.push(optionElement);
+      }
+
+      $('#' + id).msDropDown( { byJson: { data: optionsList } } ).data("dd");
+      var oDropdown = $("#" + id).msDropdown().data("dd");
+      oDropdown.on("change", function(res) {
+        console.log(res)
+
+
+        var observable;
+        var fieldObject = ko.utils.unwrapObservable(valueAccessor()) || {};
+
+        if (fieldObject.setOptionFromText != undefined) {
+            observable = fieldObject.setOptionFromText;
+        } else {
+            observable = valueAccessor();
+        }
+
+        var selectedValue = oDropdown.get("value");
+        observable(selectedValue);
+      });
     }
   };
 });

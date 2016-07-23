@@ -8,7 +8,8 @@ require.config({
         'tabs': 'vendor/cbpFWTabs',
         'ckeditor': 'vendor/ckeditor/ckeditor',
         'tinycolor': 'vendor/tinycolor',
-        'simplecolorpicker': 'vendor/jquery.simplecolorpicker'
+        'simplecolorpicker': 'vendor/jquery.simplecolorpicker',
+        'msdropdown': 'vendor/jquery.dd.min'
     },
     shim: {
         'jQuery': {
