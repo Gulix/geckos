@@ -13,6 +13,9 @@ define(['knockout', 'utils'], function(ko, utils) {
     self.currentTemplate = ko.observable(jsonTemplate);
     self.editableTemplate = ko.observable(JSON.stringify(jsonTemplate));
 
+    self.sharedConfiguration = { };
+    self.sharedConfiguration.sharedOptions = jsonTemplate.sharedOptions;
+
     self.generateTemplate = function(cardVM) {
       var generated = { "objects" : [], "backgroundColor": self.canvasBackground() };
 
@@ -84,6 +87,7 @@ define(['knockout', 'utils'], function(ko, utils) {
     self.setTemplate = function() {
       self.currentTemplate(JSON.parse(self.editableTemplate()));
       self.fields(self.currentTemplate().fields);
+      self.sharedOptions = self.currentTemplate().sharedOptions;
       self.canvasFields(self.currentTemplate().canvasFields);
 
       self.updateFonts();

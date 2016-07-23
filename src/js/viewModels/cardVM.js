@@ -3,7 +3,7 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor'], function(ko, Field
    * ViewModel representing a Card and its data.
    * @param  {editableFieldVM table} List of fields used to create the cards
    */
-  function cardVM(editableFields, jsonEditableFields) {
+  function cardVM(editableFields, jsonEditableFields, sharedConfiguration) {
     var self = this;
 
     self.fields = ko.observableArray([]);
@@ -19,12 +19,12 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor'], function(ko, Field
       return null;
     }
 
-    self.updateFields = function(fieldList) {
+    self.updateFields = function(fieldList, sharedConfiguration) {
       var fields = [];
 
       // Creation of the EditableFieldVM
       for (var iField = 0; iField < fieldList.length; iField++) {
-        var editableField = FieldFactory.buildField(fieldList[iField]);
+        var editableField = FieldFactory.buildField(fieldList[iField], sharedConfiguration);
         // Getting previous values from actual field with same name
         var existingField = self.getFieldFromName(editableField.name);
         if (existingField != null) {
@@ -48,7 +48,7 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor'], function(ko, Field
       self.componentsFields(componentsFields);
       self.fields(fields);
     }
-    self.updateFields(jsonEditableFields);
+    self.updateFields(jsonEditableFields, sharedConfiguration);
 
 
     self.cardName = ko.pureComputed(function() {
@@ -206,6 +206,7 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor'], function(ko, Field
   }
 
   return {
-    newObject: function(editableFields, jsonEditableFields) { return new cardVM(editableFields, jsonEditableFields); }
+    newObject: function(editableFields, jsonEditableFields, sharedConfiguration)
+      { return new cardVM(editableFields, jsonEditableFields, sharedConfiguration); }
   }
 });

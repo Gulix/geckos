@@ -1,6 +1,6 @@
 define(['knockout'], function(ko) {
 
-  function fieldOptions(jsonField) {
+  function fieldOptions(jsonField, sharedOptions) {
     var self = this;
 
     self.name = jsonField.name;
@@ -16,6 +16,17 @@ define(['knockout'], function(ko) {
       self.selectedOption = ko.observable(self.options[0]);
     } else {
       self.options = [];
+
+      // Getting the SharedOptions (if they exist and are defined)
+      if ((sharedOptions != undefined) && (sharedOptions.length > 0) && (jsonField.sharedOptions != undefined))
+      {
+        for (iShared = 0; iShared < sharedOptions.length; iShared++) {
+          if (sharedOptions[iShared].key == jsonField.sharedOptions) {
+            self.options = sharedOptions[iShared].options;
+            self.selectedOption = ko.observable(self.options[0]);
+          }
+        }
+      }
     }
     self.setOptionFromText = function(textOption) {
       for (var iOption = 0; iOption < self.options.length; iOption++) {
@@ -59,6 +70,6 @@ define(['knockout'], function(ko) {
   }
 
   return {
-    build: function(jsonField) { return new fieldOptions(jsonField); }
+    build: function(jsonField, sharedOptions) { return new fieldOptions(jsonField, sharedOptions); }
   }
 });

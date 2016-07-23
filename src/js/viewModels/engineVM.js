@@ -17,13 +17,18 @@ define(['knockout',
     /* Fields to edit the card value */
     var fields = [];
     for (var iField = 0; iField < self.cardTemplate().fields().length; iField++) {
-      fields.push(FieldFactory.buildField(self.cardTemplate().fields()[iField]));
+      fields.push(FieldFactory.buildField(self.cardTemplate().fields()[iField], self.cardTemplate().sharedConfiguration));
     }
     self.editableFields = ko.observableArray(fields);
 
+    /* Creation of a new cardVM */
+    self.createNewCard = function() {
+      return CardVM.newObject(self.editableFields(), self.cardTemplate().fields(), self.cardTemplate().sharedConfiguration);
+    }
+
     /* List of Editable Card */
     self.listCards = ko.observableArray([]);
-    self.listCards().push(CardVM.newObject(self.editableFields(), self.cardTemplate().fields()));
+    self.listCards().push(self.createNewCard());
     self.editableCard = ko.observable(self.listCards()[0]);
     self.isCardSelected = ko.pureComputed(function() {
       return self.editableCard() != null;
@@ -32,7 +37,7 @@ define(['knockout',
     /* Updating all the cards when the template is updated */
     self.cardTemplate().updateCards = function() {
       for(var iCard = 0; iCard < self.listCards().length; iCard++) {
-        self.listCards()[iCard].updateFields(self.cardTemplate().fields());
+        self.listCards()[iCard].updateFields(self.cardTemplate().fields(), self.cardTemplate().sharedConfiguration);
       }
     }
     self.cardTemplate().updateCanvas = function() {
@@ -42,7 +47,7 @@ define(['knockout',
 
     /* Adding / Removing cards from the list */
     self.addNewCard = function() {
-      var newCard = CardVM.newObject(self.editableFields(), self.cardTemplate().fields());
+      var newCard = self.createNewCard();
       self.listCards.push(newCard);
       self.editableCard(newCard);
     }
@@ -96,7 +101,7 @@ define(['knockout',
 
       var cards = [];
       for(var cardData in jsonData) {
-        var card = CardVM.newObject(self.editableFields(), self.cardTemplate().fields());
+        var card = self.createNewCard();
         card.loadFromJson(jsonData[cardData]);
         cards.push(card);
       }

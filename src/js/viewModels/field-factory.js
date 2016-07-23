@@ -10,7 +10,7 @@ define(['viewModels/field-text',
        function(text, image, richtext, color, checkbox, multiline, options, numeric) {
 
   return {
-    buildField: function(jsonField) {
+    buildField: function(jsonField, sharedConfiguration) {
       var fieldType = '';
 
       if (jsonField.type != undefined) {
@@ -29,7 +29,7 @@ define(['viewModels/field-text',
         case "number":
           return numeric.build(jsonField); break;
         case "options":
-          return options.build(jsonField); break;
+          return options.build(jsonField, sharedConfiguration.sharedOptions); break;
         case "richtext":
           return richtext.build(jsonField); break;
         default:
