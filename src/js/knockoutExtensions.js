@@ -1,4 +1,4 @@
-define(['knockout', 'jscolor', 'simplecolorpicker', 'msdropdown', 'ckeditor', 'jQuery'], function(ko, jscolor, simplecolorpicker) {
+define(['knockout', 'jscolor', 'simplecolorpicker', 'ddslick', 'ckeditor', 'jQuery'], function(ko, jscolor, simplecolorpicker) {
 
   /*************************/
   /* Binding with CKEditor */
@@ -133,7 +133,7 @@ define(['knockout', 'jscolor', 'simplecolorpicker', 'msdropdown', 'ckeditor', 'j
   /*****************************/
   /* Binding with MsDropDown   */
   /*****************************/
-  ko.bindingHandlers.msdropdown = {
+  /*ko.bindingHandlers.msdropdown = {
     init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
       var modelValue = ko.utils.unwrapObservable(valueAccessor()) || {};
       // Id of the element (found or generated)
@@ -171,6 +171,50 @@ define(['knockout', 'jscolor', 'simplecolorpicker', 'msdropdown', 'ckeditor', 'j
         var selectedValue = oDropdown.get("value");
         observable(selectedValue);
       });
+    }
+  };*/
+
+  /************************/
+  /* Binding with ddslick */
+  /************************/
+  ko.bindingHandlers.ddslick = {
+    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+      var modelValue = ko.utils.unwrapObservable(valueAccessor()) || {};
+      // Id of the element (found or generated)
+      var id = $(element).attr('id');
+      if(id == undefined || id == '') {
+        $(element).attr('id','id_' + Math.floor(new Date().valueOf()));
+        id = $(element).attr('id');
+      }
+
+      var optionsList = [ ];
+      for (var iOption = 0; iOption < modelValue.options.length; iOption++) {
+        var optionElement = { };
+        optionElement.value = modelValue.options[iOption].option;
+        optionElement.text = modelValue.options[iOption].text;
+        optionElement.imageSrc = "http://hoganchua.hudbhi7gzmvkzpctzr6hwgk2lbnfnkerebgcjs6k8yq.netdna-cdn.com/wp-content/uploads/2016/05/Instagram2016_black-32px.png";
+
+        optionsList.push(optionElement);
+      }
+
+      $('#' + id).ddslick(
+        {
+          data: optionsList,
+          imagePosition: 'right',
+          onSelected: function(selectedData){
+            var observable;
+            var fieldObject = ko.utils.unwrapObservable(valueAccessor()) || {};
+
+            if (fieldObject.setOptionFromText != undefined) {
+                observable = fieldObject.setOptionFromText;
+            } else {
+                observable = valueAccessor();
+            }
+
+            observable(selectedData.selectedData.value);
+          }
+        }
+      );
     }
   };
 });

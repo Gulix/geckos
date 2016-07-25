@@ -55,10 +55,8 @@ body {
 
 .section {
   position: relative;
-  clear: both;
   float: left;
   width: 100%;
-  overflow: hidden;
 }
 
 .section-twocols {
@@ -80,7 +78,6 @@ body {
   margin: 0 15px 0 115px;
   position: relative;
   right: 100%;
-  overflow: hidden;
 }
 
 .col-menu {
@@ -185,7 +182,7 @@ body {
 }
 
 .clear {
-  clear: both;
+  
 }
 
 /* Managing the template */

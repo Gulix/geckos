@@ -9,7 +9,7 @@ require.config({
         'ckeditor': 'vendor/ckeditor/ckeditor',
         'tinycolor': 'vendor/tinycolor',
         'simplecolorpicker': 'vendor/jquery.simplecolorpicker',
-        'msdropdown': 'vendor/jquery.dd.min'
+        'ddslick': 'vendor/jquery.ddslick.min'
     },
     shim: {
         'jQuery': {
