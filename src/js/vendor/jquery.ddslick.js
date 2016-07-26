@@ -4,7 +4,7 @@
 //Website: http://designwithpc.com
 //Twitter: http://twitter.com/chaudharyp
 
-(function ($) {
+define(['jQuery'], function($) {
 
     $.fn.ddslick = function (method) {
         if (methods[method]) {
@@ -43,6 +43,7 @@
                 '.dd-select{ border-radius:2px; border:solid 1px #ccc; position:relative; cursor:pointer;}' +
                 '.dd-desc { color:#aaa; display:block; overflow: hidden; font-weight:normal; line-height: 1.4em; }' +
                 '.dd-selected{ overflow:hidden; display:block; padding:10px; font-weight:bold;}' +
+                '.dd-selected-open-up { bottom:100%; }' +
                 '.dd-pointer{ width:0; height:0; position:absolute; right:10px; top:50%; margin-top:-3px;}' +
                 '.dd-pointer-down{ border:solid 5px transparent; border-top:solid 5px #000; }' +
                 '.dd-pointer-up{border:solid 5px transparent !important; border-bottom:solid 5px #000 !important; margin-top:-8px;}' +
@@ -52,9 +53,9 @@
                 '.dd-option:hover{ background:#f3f3f3; color:#000;}' +
                 '.dd-selected-description-truncated { text-overflow: ellipsis; white-space:nowrap; }' +
                 '.dd-option-selected { background:#f6f6f6; }' +
-                '.dd-option-image, .dd-selected-image { vertical-align:middle; float:left; margin-right:5px; max-width:64px;}' +
+                '.dd-option-image, .dd-selected-image { vertical-align:middle; float:left; margin-right:5px; max-width:32px;}' +
                 '.dd-image-right { float:right; margin-right:15px; margin-left:5px;}' +
-                '.dd-container{ position:relative;}​ .dd-selected-text { font-weight:bold}​</style>';
+                '.dd-container{ position:relative;}​ .dd-selected-text { font-weight:bold; display: inline; }​</style>';
 
     //Public methods
     methods.init = function (userOptions) {
@@ -98,7 +99,7 @@
                 else options.data = $.merge(ddSelect, options.data);
 
                 //Replace HTML select with empty placeholder, keep the original
-                var original = obj, placeholder = $('<div').attr('id', obj.attr('id') + '-dd-placeholder');
+                var original = obj, placeholder = $('<div />').attr('id', obj.attr('id') + '-dd-placeholder');
                 obj.replaceWith(placeholder);
                 obj = placeholder;
 
@@ -160,6 +161,7 @@
                 //EVENTS
                 //Displaying options
                 obj.find('.dd-select').on('click.ddslick', function () {
+                    adjustSelectedOrientation(obj);
                     open(obj);
                 });
 
@@ -287,6 +289,9 @@
         //Adjust appearence for selected option
         adjustSelectedHeight(obj);
 
+	//Decide open ddselect up or down
+        adjustSelectedOrientation(obj);
+
         //Callback function on selection
         if (typeof settings.onSelected == 'function') {
             settings.onSelected.call(this, pluginData);
@@ -339,7 +344,7 @@
         var descriptionSelected = obj.find('.dd-selected-description');
         var imgSelected = obj.find('.dd-selected-image');
         if (descriptionSelected.length <= 0 && imgSelected.length > 0) {
-            obj.find('.dd-selected-text').css(['lineHeight', 'display'], [ lSHeight, 'inline' ]);
+            //obj.find('.dd-selected-text').css('lineHeight', lSHeight);
         }
     }
 
@@ -356,4 +361,16 @@
         });
     }
 
-})(jQuery);
+    function adjustSelectedOrientation(obj){
+        var totalHeight = 0;
+        obj.find('.dd-option').each(function (index, item) {
+            totalHeight += item.offsetHeight;
+        });
+        if (totalHeight + obj.offset().top + obj.height() > $(window).height() ){
+            obj.find('.dd-options').addClass('dd-selected-open-up');
+        }else{
+            obj.find('.dd-options').removeClass('dd-selected-open-up');
+        }
+    }
+
+});

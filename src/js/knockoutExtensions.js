@@ -192,8 +192,8 @@ define(['knockout', 'jscolor', 'simplecolorpicker', 'ddslick', 'ckeditor', 'jQue
         var optionElement = { };
         optionElement.value = modelValue.options[iOption].option;
         optionElement.text = modelValue.options[iOption].text;
-        optionElement.imageSrc = "http://hoganchua.hudbhi7gzmvkzpctzr6hwgk2lbnfnkerebgcjs6k8yq.netdna-cdn.com/wp-content/uploads/2016/05/Instagram2016_black-32px.png";
-
+        optionElement.imageSrc = "http://image.flaticon.com/icons/svg/33/33702.svg";
+        optionElement.selected = (modelValue.options[iOption].option == modelValue.getJsonValue());
         optionsList.push(optionElement);
       }
 
