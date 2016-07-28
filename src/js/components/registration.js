@@ -33,6 +33,10 @@ define(['knockout'], function(ko) {
         viewModel: { require: 'components/input-generic' },
         template: { require: 'text!components/input-options/input-options.html' }
       });
+      ko.components.register('input-options-images', {
+        viewModel: { require: 'components/input-generic' },
+        template: { require: 'text!components/input-options/input-options-images.html' }
+      });
       ko.components.register('input-richtext', {
         viewModel: { require: 'components/input-generic' },
         template: { require: 'text!components/input-richtext/input-richtext.html' }

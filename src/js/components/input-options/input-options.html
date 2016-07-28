@@ -1,4 +1,4 @@
 <div>
   <label data-bind="text: field.label" ></label>
-  <div data-bind="ddslick: field" ></div>
+  <select data-bind="options: field.options, optionsText: 'text', value: field.selectedOption"></select>
 </div>

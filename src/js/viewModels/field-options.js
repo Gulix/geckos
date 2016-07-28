@@ -53,7 +53,18 @@ define(['knockout'], function(ko) {
     }
 
     self.getComponentName = function() {
-      return "input-options";
+      var withImages = false;
+      for(var iOption = 0; iOption < self.options.length; iOption++) {
+        if ((self.options[iOption].image != undefined) || (self.options[iOption].miniature != undefined)) {
+          withImages = true;
+          break;
+        }
+      }
+      if (withImages) {
+        return "input-options-images";
+      } else {
+        return "input-options";
+      }
     }
 
     /* Advanced String variables, with specific "valueType" */
