@@ -74,6 +74,16 @@ define(['knockout'], function(ko) {
       if (selectedValue != null) {
         if (valueType == 'text') { return selectedValue.text; }
         if (valueType == 'value') { return selectedValue.option; }
+        if (valueType == 'image') {
+          if (selectedValue.image != undefined) { return selectedValue.image; }
+          if (selectedValue.miniature != undefined) { return selectedValue.miniature; }
+          return '';
+        }
+        if (valueType == 'miniature') {
+          if (selectedValue.miniature != undefined) { return selectedValue.miniature; }
+          if (selectedValue.image != undefined) { return selectedValue.image; }
+          return '';
+        }
       }
 
       return '';

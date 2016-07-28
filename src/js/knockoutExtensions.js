@@ -129,7 +129,7 @@ define(['knockout', 'jscolor', 'simplecolorpicker', 'ddslick', 'ckeditor', 'jQue
       $('#' + id).simplecolorpicker('selectColor', modelValue.textValue());
     }
   };
-  
+
   /************************/
   /* Binding with ddslick */
   /************************/
@@ -148,7 +148,11 @@ define(['knockout', 'jscolor', 'simplecolorpicker', 'ddslick', 'ckeditor', 'jQue
         var optionElement = { };
         optionElement.value = modelValue.options[iOption].option;
         optionElement.text = modelValue.options[iOption].text;
-        optionElement.imageSrc = "http://image.flaticon.com/icons/svg/33/33702.svg";
+        if (modelValue.options[iOption].miniature != undefined) {
+          optionElement.imageSrc = modelValue.options[iOption].miniature;
+        } else if (modelValue.options[iOption].image != undefined) {
+          optionElement.imageSrc = modelValue.options[iOption].image;
+        }
         optionElement.selected = (modelValue.options[iOption].option == modelValue.getJsonValue());
         optionsList.push(optionElement);
       }
