@@ -159,8 +159,13 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor'], function(ko, Field
         // card[test] => self.getValue('test')
         var regexBasic = /card\[([a-zA-Z0-9_]*)\]/g;
         evaluatedCode = evaluatedCode.replace(regexBasic, function(match, p1, offset, string) { return "self.getValue('" + p1 + "')"});
-
-        eval(evaluatedCode);
+        try
+        {
+          eval(evaluatedCode);
+        }
+        catch(err) {
+          console.log(err.message);
+        }
         return (value != null) ? value : ''; // Maybe setting to default value of the field (need each FabricJS property to be known)
       }
 
