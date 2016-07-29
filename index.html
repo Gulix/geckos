@@ -1,307 +1,248 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-    <head>
-      <title>Geckos - Editing Cards since ...</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link rel="stylesheet" type="text/css" href="css/styles.css"></link>
-        <link rel="stylesheet" type="text/css" href="ckeditor/toolbarconfigurator/lib/codemirror/neo.css"></link>
-        <script src="ckeditor/ckeditor.js"></script>
-    </head>
+  <head>
+    <meta charset="utf-8">
+    <title>Geckos - Editing Cards since ...</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Mobile Specific Metas
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+    <!-- CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+
+    <!-- Favicon
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="css/codropsFullWidthTabs.css" />
+
+    <link rel="stylesheet" type="text/css" href="css/styles.css"></link>
+    <link rel="stylesheet" type="text/css" href="css/icons.css"></link>
+    <link rel="stylesheet" type="text/css" href="ckeditor/toolbarconfigurator/lib/codemirror/neo.css"></link>
+
+    <link rel="stylesheet" type="text/css" href="css/jquery.simplecolorpicker.css"></link>
+    <link rel="stylesheet" type="text/css" href="css/jquery.simplecolorpicker-fontawesome.css"></link>
+  </head>
 <body>
-  <div id="wrapper">
-    <div class="main-menu">
-      <ul>
-          <li><a rel="documentation" href="https://github.com/Gulix/geckos/wiki">Documentation</a></li>
-          <li><a href="https://github.com/Gulix/geckos">Github Page</a></li>
-          <li><a href="#" id="openAboutBox">About</a></li>
-      </ul>
-    </div>
-    <div class="clear"></div>
+  <div class="container fullwidth-container">
     <div class="page-title">Geckos</div>
     <div class="page-subtitle">editing cards since 2016 ...</div>
 
-    <div class="sticker">
-        <div class="stickerHeading ">
-          <h1 data-bind="text: headerSectionTitle">Cards List</h1>
-          <div class="stickerHeading-buttons" data-bind="visible: isCardsListVisible">
-            <span class='button' title='Add a new card'
-                  data-bind="click: addNewCard">Add</span>
-            <span class='button' title='Remove the selected card'
-                  data-bind="click: removeSelectedCard">Remove</span>
-            <span class='button' title='Export the list to a Json file'
-                  data-bind="click: exportList">Export</span>
-            <span class='button' title='Import a list of cards in Json format'
-                  data-bind="click: loadList">Import</span>
-            <form style="display:none" id="file-load-list-form">
-              <input type="file" id="file-load-list" name="file" class="form-control" style="display:none"
-                    />
-            </form>
+    <div id="tabs" class="tabs">
+			<nav>
+				<ul>
+					<li><a href="#section-home" class="icon-home"><span>Home</span></a></li>
+					<li><a href="#section-template" class="icon-template"><span>Template</span></a></li>
+					<li><a href="#section-list" class="icon-list"><span>List</span></a></li>
+					<li class="special-tab"><a href="#section-card" class="icon-card"><span>Card</span></a></li>
+					<li><a href="#section-about" class="icon-about"><span>About</span></a></li>
+				</ul>
+			</nav>
+			<div class="content">
+				<section id="section-home">
+          <div class="main-menu clearfix">
+            <ul>
+                <li><a rel="documentation" href="https://github.com/Gulix/geckos/wiki">Documentation</a></li>
+                <li><a href="https://github.com/Gulix/geckos">Github Page</a></li>
+            </ul>
           </div>
+          <h1>Welcome to Geckos</h1>
+          <p>Geckos is a web-application which goal is to create <em>Image cards</em>, through the use of predetermined <em>Templates</em>.</p>
+          <p>Those templates are built in a simple language (JSON), and can be easily modified.</p>
+          <p>Set your template, add new cards and edit them, and you can download your images !</p>
+          <p>No login required, all the work is done inside your browser with modern javascript framework !</p>
+          <p>Geckos is fully Open-Source, and the source-code is available to anyone.</p>
+        </section>
 
-          <div class="stickerHeading-buttons" data-bind="visible: isTemplateSelectionVisible">
-            <!-- ko with: cardTemplate -->
-            <span class='button' title='Cancel all changes and reset template'
-                  data-bind="click: resetTemplate">Reset</span>
-            <span class='button' title='Set current text as the new template'
-                  data-bind="click: setTemplate">Set</span>
-            <span class='button' title='Save template to a Json file'
-                  data-bind="click: saveTemplate">Save</span>
-            <span class='button' title='Load template from a Json file'
-                  data-bind="click: loadTemplate">Load</span>
-            <form style="display:none" id="file-load-template-form">
-              <input type="file" id="file-load-template" name="file" class="form-control" style="display:none"
-                    />
-            </form>
-            <!-- /ko -->
-          </div>
-        </div>
-        <div class="header">
-          <div class="header-choice-buttons">
-            <span class='button disabled-button' data-bind="visible: isTemplateSelectionVisible()">Template</span>
-            <span class='button' data-bind="click: showTemplateSelection, visible: !isTemplateSelectionVisible()">Template</span>
-            <span class='button disabled-button' data-bind="visible: isCardsListVisible()">Cards</span>
-            <span class='button' data-bind="click: showCardsList, visible: !isCardsListVisible()">Cards</span>
-          </div>
-          <div class="header-content">
-            <div class="cards-list" data-bind="visible: isCardsListVisible">
-
-              <div class="list">
-                <select size="5" data-bind="options: listCards, optionsText: 'cardName', value: editableCard">
-
-                </select>
+        <!-- ********************
+             Template section (editing, loading, ...)
+           -->
+        <section id="section-template">
+          <div class="section-twocols">
+            <div class="section-colwrap">
+              <div class="col-content">
+                <div class="template-selection">
+                  <!-- ko with: cardTemplate -->
+                  <div class="template-text">
+                    <textarea rows="6" data-bind="value: editableTemplate"></textarea>
+                  </div>
+                  <!-- /ko -->
+                </div>
+                <div class="template-description">
+                  <!-- ko with: cardTemplate -->
+                    <!-- ko if: currentTemplate().description != null -->
+                      <h2 data-bind="text: currentTemplate().description.title"></h2>
+                      <h3 data-bind="text: currentTemplate().description.credits"></h2>
+                      <div data-bind="text: currentTemplate().description.description"></div>
+                      <div><a data-bind="attr: { 'href': currentTemplate().description.url }">Source</a></div>
+                    <!-- /ko -->
+                  <!-- /ko -->
+                </div>
               </div>
             </div>
-            <div class="template-selection" data-bind="visible: isTemplateSelectionVisible">
+            <div class="col-menu">
               <!-- ko with: cardTemplate -->
-              <div class="template-text">
-                <textarea rows="6" data-bind="value: editableTemplate"></textarea>
-              </div>
+              <ul class="vertical-menu icon">
+              	<li><a href="#" class="icon-download" title="Load template from file"
+                       data-bind="click: loadTemplate"><span>Load from file</span></a></li>
+              	<li><a href="#" class="icon-save" title="Save template to file"
+                       data-bind="click: saveTemplate"><span>Save to file</span></a></li>
+              	<li><a href="#" class="icon-apply-template" title="Apply template to cards"
+                       data-bind="click: setTemplate"><span>Apply template</span></a></li>
+                <li><a href="#" class="icon-undo" title="Cancel modifications on template"
+                       data-bind="click: resetTemplate"><span>Cancel modifications</span></a></li>
+              </ul>
+              <form style="display:none" id="file-load-template-form">
+                <input type="file" id="file-load-template" name="file" class="form-control" style="display:none" />
+              </form>
               <!-- /ko -->
             </div>
           </div>
-        </div>
-        <div class="clear"></div>
-    </div>
+        </section>
 
-    <div class="floatLeft" data-bind="visible: isCardSelected">
-      <div class="sticker" style="width: 380px" data-bind="with: editableCard">
-          <div class="stickerHeading"><h1>Card Details</h1></div>
-          <div class='editable-fields' data-bind="foreach: fields">
-            <div class='field-flexrow' data-bind="if: isInputText()">
-              <span data-bind="text: label" class='field-label'></span>
-              <input class="field-largeInput" type="text" data-bind="value: textValue"></input>
-            </div>
-            <div class='field-flexrow' data-bind="if: isMultiLine()">
-              <span data-bind="text: label" class='field-label'></span>
-              <textarea class="field-largeInput" data-bind="value: textValue, attr: { 'rows': nbLines }"></textarea>
-            </div>
-            <div class='field-flexrow' data-bind="if: isRichText()">
-              <span data-bind="text: label" class='field-label'></span>
-              <div class="field-largeInput">
-                  <textarea data-bind="CKEDITOR: textValue">Test</textarea>
+        <!-- ********************
+             List of cards (editing, loading, ...)
+           -->
+        <section id="section-list">
+          <div class="section-twocols">
+            <div class="section-colwrap">
+              <div class="col-content">
+                <div class="box-elements">
+                  <select data-bind="options: listCards, optionsText: 'cardName', value: editableCard"
+                          class="cards-list" size="5">
+                  </select>
+                </div>
               </div>
             </div>
-            <div data-bind="if: isOptions()" class="field-flexrow">
-              <span data-bind="text: label" class="field-label"></span>
-              <select class="field-largeInput" data-bind="options: options, optionsText: 'text', value: selectedOption"></select>
-            </div>
-            <div data-bind="if: isImage()" class="field-flexrow">
-              <span data-bind="text: label" class="field-label"></span>
-              <input class="field-largeInput" type="file" data-bind="event: { change: uploadImage($element.files[0])}"></input>
-            </div>
-            <div data-bind="if: isCheckbox()" class="field-flexrow">
-              <div class="field-label"></div>
-              <label class="field-largeInput">
-                <input type='checkbox' data-bind='checked: checkedValue'></input>
-                <span data-bind="text: label"></span>
-              </label>
-            </div>
-            <div class='field-flexrow' data-bind="if: isNumeric()">
-              <span data-bind="text: label" class='field-label'></span>
-              <input class="field-largeInput" type="number" data-bind="value: numericValue"></input>
+            <div class="col-menu">
+              <ul class="vertical-menu icon">
+              	<li><a href="#" class="icon-add" title="Add a new card"
+                       data-bind="click: addNewCard"><span>Add</span></a></li>
+                <li><a href="#" class="icon-delete" title="Delete the selected card"
+                       data-bind="click: removeSelectedCard"><span>Remove</span></a></li>
+                <li><a href="#" class="icon-clear-list" title="Clear the list"
+                       data-bind="click: clearList"><span>Clear</span></a></li>
+              	<li><a href="#" class="icon-download" title="Load list from file"
+                       data-bind="click: loadList"><span>Load list</span></a></li>
+                <li><a href="#" class="icon-save" title="Save list to file"
+                       data-bind="click: exportList"><span>Save list</span></a></li>
+              </ul>
+              <form style="display:none" id="file-load-list-form">
+                <input type="file" id="file-load-list" name="file" class="form-control" style="display:none"
+                      />
+              </form>
             </div>
           </div>
+        </section>
+
+        <!-- ************************************
+         "Card" view, that displays a light list of cards, and the edition fields and canvas view of a card
+         *************************************** -->
+        <section id="section-card" class="section">
+          <div class="section-twocols">
+            <div class="section-colwrap">
+              <div class="col-content">
+                <div class="box-elements">
+                    <select data-bind="options: listCards, optionsText: 'cardName', value: editableCard"
+                            class="cards-list" size="5">
+                    </select>
+                </div>
+
+                <div class="flex-container">
+                  <!-- ko if: isCardSelected -->
+                  <div class="flex-3">
+                    <card-editable-fields params="cardVM: editableCard"></card-editable-fields>
+                  </div>
+
+                  <div class="box-elements flex-5">
+                    <h3>Card View</h3>
+                    <div class="canvas-view">
+                      <canvas id="fabricjs-canvas" data-bind="fabric: generatedTemplate" ></canvas>
+                    </div>
+                  </div>
+                  <!-- /ko -->
+                </div>
+              </div>
+            </div>
+            <div class="col-menu">
+              <ul class="vertical-menu icon">
+              	<li><a href="#" class="icon-add" title="Add a new card"
+                       data-bind="click: addNewCard"><span>Add</span></a></li>
+              	<li><a href="#" class="icon-delete" title="Delete the selected card"
+                       data-bind="click: removeSelectedCard"><span>Remove</span></a></li>
+              	<li><a href="#" class="icon-image" title="Export the card to a PNG image"
+                       data-bind="click: exportPng"><span>to PNG</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-about">
+          <div class="container">
+            <h1>About Geckos</h1>
+            <div>
+              <p>Geckos is a web-application, created to make cards based on templates.</p>
+              <p>This page is a demo-page for Geckos. By default, it presents a <a href="http://www.pulpalley.com">Pulp Alley</a> Character Card Template.</p>
+              <p>Other templates can be found on <a href="https://github.com/Gulix/geckos/tree/master/templates">this page</a> of the repository.</p>
+              <p>Geckos is open-source, and can be found on <a href="http://www.github.com/gulix/geckos">Github</a>.</p>
+              <p>Geckos is still <a href="http://www.github.com/gulix/geckos/issues">under development</a>, and this demo page is a Beta version of the software.</p>
+              <p>Geckos relies on multiple open-source softwares &amp; libraries :</p>
+              <ul>
+                <li>Geckos main engine
+                  <ul>
+                    <li><a href="https://jquery.com/">JQuery</a></li>
+                    <li><a href="http://knockoutjs.com/">KnockoutJS</a></li>
+                    <li><a href="http://fabricjs.com/">FabricJS</a></li>
+                    <li><a href="http://requirejs.org/">RequireJS</a></li>
+                  </ul>
+                </li>
+                <li>Geckos UI
+                  <ul>
+                    <li><a href="http://getskeleton.com">Skeleton</a></li>
+                    <li><a href="https://github.com/codrops/FullWidthTabs">codrops - Responsive Full Width Tabs</a></li>
+                    <li><a href="https://github.com/codrops/Blueprint-VerticalIconMenu">codrops - Vertical Icon Menu</a></li>
+                    <li><a href="https://icomoon.io">IcoMoon Vector Font generator</a></li>
+                  </ul>
+                </li>
+                <li>Widgets
+                  <ul>
+                    <li><a href="http://ckeditor.com/">CKEditor</a></li>
+                    <li><a href="http://jscolor.com/">JSColor</a></li>
+                    <li><a href="https://github.com/tkrotoff/jquery-simplecolorpicker">JQuery.simplecolorpicker.js</a></li>
+                    <li><a href="http://designwithpc.com/Plugins/ddSlick">ddSlick</a></li>
+                  </ul>
+                </li>
+                <li>Helpers &amp; others libraries
+                  <ul>
+                    <li><a href="https://github.com/eligrey/FileSaver.js/">FileSaver.js</a></li>
+                    <li><a href="http://bgrins.github.io/TinyColor/">TinyColor</a></li>
+                  </ul>
+                </li>
+              </ul>
+              <p>Any problem ? Any need ? Any question ? Any bug ? Write an <a href="http://www.github.com/gulix/geckos/issues/new">Issue</a> !<p>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
-
-    <div class="sticker floatRight" style="width:494px" data-bind="visible: isCardSelected">
-        <div class="stickerHeading">
-          <h1>Card View</h1>
-          <div class="stickerHeading-buttons">
-            <span class='button' title='Export current card to PNG image'
-                  data-bind="click: exportPng">to PNG</span>
-          </div>
-        </div>
-        <div class="canvas-view">
-          <canvas id="fabricjs-canvas" data-bind="fabric: generatedTemplate" ></canvas>
-        </div>
-    </div>
-
     <div class="clear"></div>
-    <div class="page-footer">Alpha version 2 - Last updated 2016-06-26 (master branch)</div>
-
-    <div class="about-box" id="about-box">
-      <div class="sticker modal-content" >
-        <div class="stickerHeading">
-          <h1>About Geckos</h1>
-          <div class="stickerHeading-buttons">
-            <span class='button close-about-box' title='Close about-box'>Close</span>
-          </div>
-        </div>
-        <div>
-          <p>Geckos is a web-application, created to make cards based on templates.</p>
-          <p>This page is a demo-page for Geckos. By default, it presents a <a href="http://www.pulpalley.com">Pulp Alley</a> Character Card Template.</p>
-          <p>Other templates can be found on <a href="https://github.com/Gulix/geckos/tree/master/templates">this page</a> of the repository.</p>
-          <p>Geckos is open-source, and can be found on <a href="http://www.github.com/gulix/geckos">Github</a>.</p>
-          <p>Geckos is still <a href="http://www.github.com/gulix/geckos/issues">under development</a>, and this demo page is an Alpha version of the software.</p>
-          <p>Geckos uses open-source softwares &amp; libraries :
-            <ul>
-              <li><a href="https://jquery.com/">JQuery</a></li>
-              <li><a href="http://knockoutjs.com/">KnockoutJS</a></li>
-              <li><a href="http://fabricjs.com/">FabricJS</a></li>
-              <li><a href="https://github.com/eligrey/FileSaver.js/">FileSaver.js</a></li>
-              <li><a href="http://ckeditor.com/">CKEditor</a></li>
-            </ul>
-          </p>
-          <p>Any problem ? Any need ? Any question ? Any bug ? Write an <a href="http://www.github.com/gulix/geckos/issues/new">Issue</a> !<p>
-        </div>
-      </div>
-    </div>
+    <div class="page-footer">Beta version 1 (WIP) - Last updated 2016-07-29 (master branch)</div>
   </div>
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="lib/fabric.min.js"></script>
-    <script src="lib/knockout-3.4.0.js"></script>
-    <script src="lib/FileSaver.min.js"></script>
 
-    <script src="js/utils.js"></script>
-    <script src="js/knockoutExtensions.js"></script>
-    <script src="js/aboutBox.js"></script>
+
+
     <!-- ViewModels -->
-    <script src="viewModels/cardTemplateVM.js"></script>
-    <script src="viewModels/cardVM.js"></script>
-    <script src="viewModels/editableFieldVM.js"></script>
-    <script src="viewModels/engineVM.js"></script>
 
 
-    <script>
-      var jsonTemplate = {
-      	"fields": [
-          {	"name": "name", "label": "Name", "default": "Captain Wolf" },
-          { "name": "brawl", "label": "Brawl", "default": "3d10" },
-          {	"name": "shoot", "label": "Shoot", "default": "3d10" },
-          {	"name": "dodge", "label": "Dodge", "default": "2d8" },
-          {	"name": "might", "label": "Might", "default": "3d10" },
-          {	"name": "finesse", "label": "Finesse", "default": "2d8" },
-          { "name": "cunning", "label": "Cunning", "default": "3d10" },
-          { "name": "description", "label": "Description", "default": "...", "type": "richtext" },
-          { "name": "characterType", "label": "Type", "type": "options", "default": "leader", "options":
-            [
-              { "option": "leader", "text": "Leader" },
-              { "option": "sidekick", "text": "Sidekick" },
-              { "option": "ally", "text": "Ally" },
-              { "option": "follower", "text": "Follower" },
-              { "option": "terror", "text": "Terror" },
-              { "option": "gang", "text": "Gang" }
-            ]
-          },
-          { "name": "portray", "label": "Miniature's image", "type": "image" },
-          { "name": "health", "label": "Health", "type": "options", "default": "d10", "options":
-      			[
-      				{ "option": "d6*", "text": "d6*" },
-              { "option": "d6", "text": "d6" },
-              { "option": "d8", "text": "d8" },
-              { "option": "d10", "text": "d10" },
-              { "option": "d12", "text": "d12" }
-      			]
-      		}
-        ],
-      	"canvasFields": [
-          { "type": "rect",	"width": 350,	"height": 495, "fill": "#CAAB7F" },
-          { "type": "text", "text": "$characterType$ :", "fontSize": 22 },
-          { "type": "text", "text": "$name", "fontSize": 22, "fontWeight": "bold", "left": 80 },
-          { "type": "rect", "width": 170,	"height": 106, "left": 165,	"top": 36, "fill": "#E07B4F",	"stroke": "#FFDDAA" },
-          { "type": "rect", "width": 170, "height": 106, "left": 165,	"top": 146,	"fill": "#ACA497", "stroke": "#FFFFAA" },
-          { "type": "text", "text": "Brawl", "fontSize": 22, "fontWeight": "bold", "left": 175, "top": 39 },
-          { "type": "text", "text": "Shoot", "fontSize": 22, "fontWeight": "bold", "left": 175, "top": 74 },
-          { "type": "text", "text": "Dodge", "fontSize": 22, "fontWeight": "bold", "left": 175,	"top": 109 },
-          { "type": "text", "text": "Might", "fontSize": 22, "fontWeight": "bold", "left": 175, "top": 149 },
-          { "type": "text", "text": "Finesse", "fontSize": 22, "fontWeight": "bold", "left": 175, "top": 184 },
-          { "type": "text", "text": "Cunning", "fontSize": 22, "fontWeight": "bold", "left": 175, "top": 219 },
-          { "type": "text", "text": "$brawl", "fontSize": 22,	"fontWeight": "bold",	"left": 270, "top": 39 },
-          {	"type": "text",	"text": "$shoot",	"fontSize": 22,	"fontWeight": "bold",	"left": 270, "top": 74 },
-          { "type": "text",	"text": "$dodge",	"fontSize": 22,	"fontWeight": "bold",	"left": 270, "top": 109 },
-          {	"type": "text",	"text": "$might",	"fontSize": 22,	"fontWeight": "bold",	"left": 270, "top": 149 },
-          { "type": "text", "text": "$finesse",	"fontSize": 22,	"fontWeight": "bold",	"left": 270, "top": 184	},
-          { "type": "text",	"text": "$cunning",	"fontSize": 22,	"fontWeight": "bold",	"left": 270, "top": 219 },
-      		{ "type": "rect", "left": 2, "width": 156, "top": 36, "height": 216, "fill": "#DABD9E", "stroke": "#FFDDBB"},
-          {	"type": "image", "left": 6, "width": 150,	"top": 40, "height": 210,	"src": "$portray" },
-      		{ "type": "rect", "width": 336, "left": 2, "top": 256, "height": 190, "fill": "#DABD9E", "stroke": "#FFDDBB"},
-          { "type": "textbox", "width": 330, "left": 5, "top": 260, "fontSize": 18, "text": "$description$", "styles": "£description" },
-      		{ "type": "rect",	"height": 40,	"left": 5, "top": 450, "fill": "#B1E29E", "stroke": "#000000",
-      			"width": "{{value = 330; if (card[health] == 'd6*') { value = 167; } else if (card[health] == 'd6') { value = 209; } else if (card[health] == 'd8') { value = 251; } else if (card[health] == 'd10') { value = 293; } else if (card[health] == 'd12') { value = 330; }}}" },
-      		{ "type": "textbox", "width": 70, "left": 8, "textAlign": "left", "top": 460, "fontWeight": "bold", "fontSize": 20, "text": "Health :" },
-      		{ "type": "textbox", "width": 42, "left": 76, "textAlign": "center", "top": 462, "fontWeight": "bold", "fontSize": 16,
-      			"text": "$health$" },
-      		{ "type": "textbox", "width": 42, "left": 118, "textAlign": "center", "top": 462, "fontWeight": "bold", "fontSize": 16,
-      			"text": "{{if (card[health] == 'd6*') { value = 'Out'; } else if (card[health] == 'd6') { value = 'Down'; } else if (card[health] == 'd8') { value = 'd6'; } else if (card[health] == 'd10') { value = 'd8'; } else if (card[health] == 'd12') { value = 'd10'; }}}" },
-      		{ "type": "textbox", "width": 42, "left": 160, "textAlign": "center", "top": 462, "fontWeight": "bold", "fontSize": 16,
-      			"text": "{{if (card[health] == 'd6') { value = 'Out'; } else if (card[health] == 'd8') { value = 'Down'; } else if (card[health] == 'd10') { value = 'd6'; } else if (card[health] == 'd12') { value = 'd8'; }}}" },
-      		{ "type": "textbox", "width": 42, "left": 202, "textAlign": "center", "top": 462, "fontWeight": "bold", "fontSize": 16,
-      			"text": "{{if (card[health] == 'd8') { value = 'Out'; } else if (card[health] == 'd10') { value = 'Down'; } else if (card[health] == 'd12') { value = 'd6'; }}}" },
-      		{ "type": "textbox", "width": 42, "left": 244, "textAlign": "center", "top": 462, "fontWeight": "bold", "fontSize": 16,
-      			"text": "{{if (card[health] == 'd10') { value = 'Out'; } else if (card[health] == 'd12') { value = 'Down'; }}}" },
-      		{ "type": "textbox", "width": 42, "left": 286, "textAlign": "center", "top": 462, "fontWeight": "bold", "fontSize": 16,
-      			"text": "{{if (card[health] == 'd12') { value = 'Out'; }}}" }
-        ],
-      	"canvasBackground": "#CAAB7F",
-      	"canvasWidth": 340,
-      	"canvasHeight": 495
-      };
-      var template = new cardTemplateVM(jsonTemplate);
-      var engineVM = new engineVM(template);
-    $( document ).ready(function() {
-      ko.applyBindings(engineVM);
 
-      $("#file-load-list").change(function (evt) {
-
-         if (evt.target.files.length == 1)
-         {
-           var file = evt.target.files[0];
-           var reader = new FileReader();
-
-           reader.onload = function (reader) {
-             var data = JSON.parse(this.result);
-             engineVM.importList(data);
-           };
-
-           reader.readAsText(file);
-
-           // Reset file input
-           $("#file-load-list-form")[0].reset();
-         }
-     });
-
-     $("#file-load-template").change(function (evt) {
-
-        if (evt.target.files.length == 1)
-        {
-          var file = evt.target.files[0];
-          var reader = new FileReader();
-
-          reader.onload = function (reader) {
-            var data = this.result;
-            engineVM.cardTemplate().importTemplate(data);
-          };
-
-          reader.readAsText(file);
-
-          // Reset file input
-          $("#file-load-template-form")[0].reset();
-        }
-      });
-
-      initAboutBox();
-    });
-    </script>
+    <script src="js/vendor/require.min.js" data-main="js/main.js"></script>
 </body>
 </html>
