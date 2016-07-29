@@ -1,13 +1,13 @@
 {
 	"fields": [
     {	"name": "name", "label": "Name", "default": "Arabesque" },
-		{ "name": "mainColor", "label": "Main color", "default": "#FFA12E", "type": "color",
+		{ "name": "mainColor", "label": "Main color", "default": "#F5A98D", "type": "color",
 			"options": [
-				{ "text": "Purple", "colorValue": "#B4186E" },
-				{ "text": "Blue", "colorValue": "#31B4A5" },
-				{ "text": "Orange", "colorValue": "#FFA12E" },
-				{ "text": "Green", "colorValue": "#32C639" },
-				{ "text": "Red", "colorValue": "#B42828" }
+				{ "text": "White", "colorValue": "#FCFED4" },
+				{ "text": "Blue", "colorValue": "#ACDCF9" },
+				{ "text": "Black", "colorValue": "#CAC2C0" },
+				{ "text": "Red", "colorValue": "#F5A98D" },
+				{ "text": "Green", "colorValue": "#97D2AC" }
 			] },
 		{ "name": "image", "label": "Image", "type": "image" }
   ],
