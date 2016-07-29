@@ -29,7 +29,7 @@
     <link rel="stylesheet" type="text/css" href="ckeditor/toolbarconfigurator/lib/codemirror/neo.css"></link>
 
     <link rel="stylesheet" type="text/css" href="css/jquery.simplecolorpicker.css"></link>
-    <link rel="stylesheet" type="text/css" href="css/jquery.simplecolorpicker-fontawesome.css"></link>    
+    <link rel="stylesheet" type="text/css" href="css/jquery.simplecolorpicker-fontawesome.css"></link>
   </head>
 <body>
   <div class="container fullwidth-container">
@@ -68,6 +68,16 @@
                   <div class="template-text">
                     <textarea rows="6" data-bind="value: editableTemplate"></textarea>
                   </div>
+                  <!-- /ko -->
+                </div>
+                <div class="template-description">
+                  <!-- ko with: cardTemplate -->
+                    <!-- ko if: currentTemplate().description != null -->
+                      <h2 data-bind="text: currentTemplate().description.title"></h2>
+                      <h3 data-bind="text: currentTemplate().description.credits"></h2>
+                      <div data-bind="text: currentTemplate().description.description"></div>
+                      <div><a data-bind="attr: { 'href': currentTemplate().description.url }">Source</a></div>
+                    <!-- /ko -->
                   <!-- /ko -->
                 </div>
               </div>
