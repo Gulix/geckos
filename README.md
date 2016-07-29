@@ -25,10 +25,24 @@ It's free, open-source, and you can get it, modify it, enhance it. Feel free to 
 
 **Geckos** will not work without those libraries, that I use inside the project :
 
-* knockoutJS
-* FabricJS
-* FileSaver.js
-* CKeditor
+* **Geckos main engine**
+  * [JQuery](https://jquery.com/)
+  * [KnockoutJS](http://knockoutjs.com/)
+  * [FabricJS](http://fabricjs.com/)
+  * [RequireJS](http://requirejs.org/)
+* **Geckos UI**
+  * [Skeleton](http://getskeleton.com)
+  * [codrops - Responsive Full Width Tabs](https://github.com/codrops/FullWidthTabs)
+  * [codrops - Vertical Icon Menu](https://github.com/codrops/Blueprint-VerticalIconMenu)
+  * [IcoMoon Vector Font generator](https://icomoon.io)
+* **Widgets**
+  * [CKEditor](http://ckeditor.com/)
+  * [JSColor](http://jscolor.com/)
+  * [JQuery.simplecolorpicker.js](https://github.com/tkrotoff/jquery-simplecolorpicker)
+  * [ddSlick](http://designwithpc.com/Plugins/ddSlick)
+* **Helpers & others libraries**
+  * [FileSaver.js](https://github.com/eligrey/FileSaver.js/)
+  * [TinyColor](http://bgrins.github.io/TinyColor/)
 
 ## The How
 
