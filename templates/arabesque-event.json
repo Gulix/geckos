@@ -151,7 +151,7 @@
 				}
 			}]
 		},
-		{ "type": "textbox", "text": "$name$", "fontSize": 32, "fontFamily": "Arial", "fill": "#00FF00" , "width": 430, "top": 550, "textAlign": "right" }
+		{ "type": "textbox", "text": "$name$", "fontSize": 32, "fontFamily": "Arial", "fill": "{{value = tinycolor.mostReadable(card[mainColor].complement().toHexString(), ['#DDD', '#888', '#111']).toHexString();}}" , "width": 430, "top": 550, "textAlign": "right" }
   ],
 	"canvasBackground": "#FFFFFF",
 	"canvasWidth": 440,
