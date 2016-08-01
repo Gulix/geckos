@@ -34,8 +34,7 @@ require(['knockout',
 
   components.register();
 
-  var template = CardTemplateVM.newObject(jsonTemplate);
-  var engineVM = EngineVM.newObject(template);
+  var engineVM = EngineVM.newObject(jsonTemplate);
 
   ko.applyBindings(engineVM);
 

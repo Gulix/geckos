@@ -1,6 +1,6 @@
 define(['knockout', 'utils'], function(ko, utils) {
 
-  function cardTemplateVM(jsonTemplate) {
+  function cardTemplateVM(jsonTemplate, updCanvasSize) {
     var self = this;
 
     self.fields = ko.observableArray(jsonTemplate.fields);
@@ -15,6 +15,8 @@ define(['knockout', 'utils'], function(ko, utils) {
 
     self.sharedConfiguration = { };
     self.sharedConfiguration.sharedOptions = jsonTemplate.sharedOptions;
+
+    self.updateCanvasSize = updCanvasSize;
 
     self.generateTemplate = function(cardVM) {
       var generated = { "objects" : [], "backgroundColor": self.canvasBackground() };
@@ -101,7 +103,7 @@ define(['knockout', 'utils'], function(ko, utils) {
 
       // Updating the cards, the canvas
       self.updateCards();
-      self.updateCanvas();
+      self.updateCanvasSize();
     }
     self.saveTemplate = function() {
       var blob = new Blob([JSON.stringify(self.currentTemplate())], {type: "text/plain;charset=utf-8"});
@@ -142,6 +144,6 @@ define(['knockout', 'utils'], function(ko, utils) {
   }
 
   return {
-    newObject: function(jsonTemplate) { return new cardTemplateVM(jsonTemplate); }
+    newObject: function(jsonTemplate, updCanvasSize) { return new cardTemplateVM(jsonTemplate, updCanvasSize); }
   }
 });
