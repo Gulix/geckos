@@ -1,22 +1,31 @@
-define(['knockout', 'utils'], function(ko, utils) {
+define(["knockout", "utils"], function(ko, utils) {
 
-  function cardTemplateVM(jsonTemplate, updCanvasSize) {
+  function cardTemplateVM(jsonTemplate, updCanvasSize, updCardsOnTemplateChange) {
     var self = this;
 
-    self.fields = ko.observableArray(jsonTemplate.fields);
-    self.canvasFields = ko.observableArray(jsonTemplate.canvasFields);
+    /*************************/
+    /* Variables declaration */
+    /*************************/
+    self.fields = ko.observableArray();
+    self.canvasFields = ko.observableArray();
 
-    self.canvasBackground = ko.observable(jsonTemplate.canvasBackground);
-    self.canvasWidth = ko.observable(jsonTemplate.canvasWidth);
-    self.canvasHeight = ko.observable(jsonTemplate.canvasHeight);
+    self.canvasBackground = ko.observable();
+    self.canvasWidth = ko.observable();
+    self.canvasHeight = ko.observable();
 
-    self.currentTemplate = ko.observable(jsonTemplate);
-    self.editableTemplate = ko.observable(JSON.stringify(jsonTemplate));
+    self.currentTemplate = ko.observable();
+    self.editableTemplate = ko.observable();
 
     self.sharedConfiguration = { };
-    self.sharedConfiguration.sharedOptions = jsonTemplate.sharedOptions;
+    /********************************/
+    /* End of Variables declaration */
+    /********************************/
 
+    /*************************/
+    /* Functions declaration */
+    /*************************/
     self.updateCanvasSize = updCanvasSize;
+    self.updateCards = updCardsOnTemplateChange;
 
     self.generateTemplate = function(cardVM) {
       var generated = { "objects" : [], "backgroundColor": self.canvasBackground() };
@@ -77,49 +86,22 @@ define(['knockout', 'utils'], function(ko, utils) {
       return jsonObject;
     }
 
-    self.generateText = function(cardVM) {
-      var retour = "My name is " + cardVM.getValue('name') + ' and I am ' + cardVM.getValue('age') + ' years old.'
-      return retour;
-    }
-
-    /* Template management */
-    self.resetTemplate = function() {
+    self.resetTemplateCode = function() {
       self.editableTemplate(JSON.stringify(self.currentTemplate()));
     }
-    self.setTemplate = function() {
-      self.currentTemplate(JSON.parse(self.editableTemplate()));
-      self.fields(self.currentTemplate().fields);
-
-      self.sharedConfiguration = { };
-      self.sharedConfiguration.sharedOptions = self.currentTemplate().sharedOptions;
-
-      self.canvasFields(self.currentTemplate().canvasFields);
-
-      self.updateFonts();
-
-      self.canvasBackground(self.currentTemplate().canvasBackground);
-      self.canvasWidth(self.currentTemplate().canvasWidth);
-      self.canvasHeight(self.currentTemplate().canvasHeight);
-
-      // Updating the cards, the canvas
-      self.updateCards();
-      self.updateCanvasSize();
-    }
-    self.saveTemplate = function() {
+    self.saveTemplateAsJson = function() {
       var blob = new Blob([JSON.stringify(self.currentTemplate())], {type: "text/plain;charset=utf-8"});
-      saveAs(blob, "template.json");
+      saveAs(blob, "template.json"); // TODO : filename depending of name of template (if provided)
     }
     self.loadTemplate = function() {
       $("#file-load-template").click();
     }
-    self.importTemplate = function(data) {
+    self.importTemplateFromJson = function(data) {
       self.editableTemplate(data);
     }
 
-    /*********/
-    /* Fonts */
-    /*********/
-    self.updateFonts = function() {
+    /* Remove and Replace the fonts embedded in the template */
+    self.updateEmbeddedFonts = function() {
       $('.canvas-fonts').remove();
 
       if ((self.currentTemplate() != null) && (self.currentTemplate().fonts != null)) {
@@ -141,9 +123,41 @@ define(['knockout', 'utils'], function(ko, utils) {
       }
 
     }
+
+    self.initTemplateFromJson = function() {
+      self.currentTemplate(JSON.parse(self.editableTemplate()));
+
+      self.fields(self.currentTemplate().fields);
+
+      self.sharedConfiguration.sharedOptions = self.currentTemplate().sharedOptions;
+
+      self.canvasFields(self.currentTemplate().canvasFields);
+
+      self.updateEmbeddedFonts();
+
+      self.canvasBackground(self.currentTemplate().canvasBackground);
+      self.canvasWidth(self.currentTemplate().canvasWidth);
+      self.canvasHeight(self.currentTemplate().canvasHeight);
+
+      // Updating the cards, the canvas
+      self.updateCards();
+      self.updateCanvasSize();
+    }
+
+    self.setTemplate = function() {
+      self.initTemplateFromJson();
+    }
+    /********************************/
+    /* End of Functions declaration */
+    /********************************/
+    self.editableTemplate(JSON.stringify(jsonTemplate));
+    self.initTemplateFromJson();
   }
 
   return {
-    newObject: function(jsonTemplate, updCanvasSize) { return new cardTemplateVM(jsonTemplate, updCanvasSize); }
+    newCardTemplateVM: function(jsonTemplate, updCanvasSize, updCardsOnTemplateChange)
+    {
+      return new cardTemplateVM(jsonTemplate, updCanvasSize, updCardsOnTemplateChange);
+    }
   }
 });

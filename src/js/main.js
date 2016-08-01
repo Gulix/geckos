@@ -34,7 +34,7 @@ require(['knockout',
 
   components.register();
 
-  var engineVM = EngineVM.newObject(jsonTemplate);
+  var engineVM = EngineVM.newEngineVM(jsonTemplate);
 
   ko.applyBindings(engineVM);
 
@@ -59,6 +59,7 @@ require(['knockout',
      }
  });
 
+ // TODO : can it be moved elsewhere (with the import code for example) ?
  $("#file-load-template").change(function (evt) {
 
     if (evt.target.files.length == 1)
@@ -68,7 +69,7 @@ require(['knockout',
 
       reader.onload = function (reader) {
         var data = this.result;
-        engineVM.cardTemplate().importTemplate(data);
+        engineVM.cardTemplate().saveTemplateAsJson(data);
       };
 
       reader.readAsText(file);
