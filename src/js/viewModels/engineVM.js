@@ -39,14 +39,13 @@ define(['knockout',
       self.editableCard(newCard);
     }
     self.removeSelectedCard = function() {
-      /*if (self.listCards.length == 1) {
-        self.editableCard(null);
-      } else {
-        self.editableCard(self.listCards[0]);
-      }*/
-
-      if (self.editableCard() != null) {
+        if (self.editableCard() != null) {
         self.listCards.remove(self.editableCard());
+        if (self.listCards().length > 0) {
+          self.editableCard(self.listCards()[0]);
+        } else {
+          self.editableCard(null);
+        }
       }
     }
     self.clearList = function() {
