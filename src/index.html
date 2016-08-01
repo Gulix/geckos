@@ -161,14 +161,15 @@
                   <div class="flex-3">
                     <card-editable-fields params="cardVM: editableCard"></card-editable-fields>
                   </div>
+                  <!-- /ko -->
 
-                  <div class="box-elements flex-5">
+                  <div class="box-elements flex-5" data-bind="visible: isCardSelected">
                     <h3>Card View</h3>
                     <div class="canvas-view">
                       <canvas id="fabricjs-canvas" data-bind="fabric: generatedTemplate" ></canvas>
                     </div>
                   </div>
-                  <!-- /ko -->
+
                 </div>
               </div>
             </div>
