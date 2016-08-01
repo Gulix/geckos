@@ -2,7 +2,8 @@ define(['knockout',
         'fabric',
         'viewModels/field-factory',
         'viewModels/cardVM',
-        'viewModels/cardTemplateVM'
+        'viewModels/cardTemplateVM',
+        'FileSaver'
       ], function(ko, fabric, FieldFactory, CardVM, CardTemplateVM) {
 
   function engineVM(jsonTemplate) {
@@ -39,7 +40,10 @@ define(['knockout',
       self.editableCard(newCard);
     }
     self.removeSelectedCard = function() {
-        if (self.editableCard() != null) {
+
+      self.editableCard(self.listCards()[0]);
+
+      if (self.editableCard() != null) {
         self.listCards.remove(self.editableCard());
         if (self.listCards().length > 0) {
           self.editableCard(self.listCards()[0]);
@@ -83,7 +87,10 @@ define(['knockout',
 
     /* Generated template */
     self.generatedTemplate = ko.pureComputed(function() {
-      var jsonCanvas = self.cardTemplate().generateTemplate(self.editableCard());
+      var jsonCanvas = { };
+      if (self.cardTemplate() != null) {
+        jsonCanvas = self.cardTemplate().generateTemplate(self.editableCard());
+      }
 
       return jsonCanvas;
     });
