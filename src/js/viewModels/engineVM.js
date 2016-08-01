@@ -1,10 +1,9 @@
 define(['knockout',
         'fabric',
         'viewModels/field-factory',
-        'viewModels/cardVM',
         'viewModels/cardTemplateVM',
         'FileSaver'
-      ], function(ko, fabric, FieldFactory, CardVM, CardTemplateVM) {
+      ], function(ko, fabric, FieldFactory, CardTemplateVM) {
 
 /***************************************/
 /* Main entry point of the application */
@@ -47,12 +46,12 @@ define(['knockout',
 
     self.updateCardsFields = function() {
       for(var iCard = 0; iCard < self.listCards().length; iCard++) {
-        self.listCards()[iCard].updateFields(self.cardTemplate().fields(), self.cardTemplate().sharedConfiguration);
+        self.cardTemplate().updateFieldsOfCard(self.listCards()[iCard]);
       }
     }
 
     self.createNewCard = function() {
-      return CardVM.newCardVM(self.cardTemplate().fields(), self.cardTemplate().sharedConfiguration);
+      return self.cardTemplate().createNewCard();
     }
 
     /* Adding / Removing cards from the list */
