@@ -155,5 +155,11 @@
   ],
 	"canvasBackground": "#FFFFFF",
 	"canvasWidth": 440,
-	"canvasHeight": 601
+	"canvasHeight": 601,
+	"description": {
+		"description": "Template for playing with colors !",
+    "title":"Arabesque",
+    "credits": "by Nicolas Ronvel",
+    "url": "https://github.com/Gulix/geckos/"
+	}
 }

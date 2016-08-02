@@ -107,5 +107,11 @@
   ],
   "canvasBackground": "#FFFFFF",
   "canvasWidth": 700,
-  "canvasHeight": 525
+  "canvasHeight": 525,
+	"description": {
+		"description": "Character card for Warhammer Quest - Silver Tower (by Games Workshop)",
+    "title":"Warhammer Quest - Silver Tower character",
+    "credits": "by Nicolas Ronvel",
+    "url": "https://github.com/Gulix/geckos/"
+	}
 }

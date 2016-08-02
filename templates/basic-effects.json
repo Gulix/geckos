@@ -22,5 +22,11 @@
   ],
 	"canvasBackground": "#EEEEEE",
 	"canvasWidth": 340,
-	"canvasHeight": 495
+	"canvasHeight": 495,
+	"description": {
+		"description": "Basic Template for a card of various effect (for any type of game)",
+    "title":"Basic - Effects",
+    "credits": "by Nicolas Ronvel",
+    "url": "https://github.com/Gulix/geckos/"
+	}
 }

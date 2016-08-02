@@ -70,5 +70,11 @@
   ],
   "canvasBackground": "#FF0000",
   "canvasWidth": 536,
-  "canvasHeight": 750
+  "canvasHeight": 750,
+	"description": {
+		"description": "Template for Blood Bowl's Starplayers, with the V3 design",
+    "title":"Blood Bowl Classic Starplayer",
+    "credits": "by Nicolas Ronvel",
+    "url": "https://github.com/Gulix/geckos/"
+	}
 }
