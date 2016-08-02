@@ -35,7 +35,7 @@
 			"key": "classic",
 			"name": "Classic template",
 			"description": "The classic template for Pulp Alley.",
-			"isDefault": true,
+			"isDefault": false,
 			"fields": [
 		    {	"name": "name", "label": "Name", "default": "Captain Wolf" },
 		    { "name": "brawl", "label": "Brawl", "default": "3d10" },
@@ -151,5 +151,11 @@
 			"canvasWidth": 340,
 			"canvasHeight": 495
 		}
-	]
+	],
+	"description": {
+		"description": "Basic template for Pulp Alley",
+    "title":"Pulp Alley",
+    "credits": "by Nicolas Ronvel",
+    "url": "https://github.com/Gulix/geckos/"
+	}
 }
