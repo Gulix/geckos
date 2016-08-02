@@ -1,4 +1,4 @@
-define(["knockout", "utils", "viewModels/styleVM"], function(ko, utils, StyleVM) {
+define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"], function(ko, utils, StyleVM, InheritingStyles) {
 
   function cardTemplateVM(jsonTemplate, updCanvasSize, updCardsOnTemplateChange) {
     var self = this;
@@ -96,11 +96,31 @@ define(["knockout", "utils", "viewModels/styleVM"], function(ko, utils, StyleVM)
       self.setStyle(jsonStyle);
     }
 
+    // Create the Style object, getting if needed the SharedConfiguration objects
+    // & inheriting values from another style
     self.buildStyleObject = function(jsonStyle) {
       var jsonCompleteStyle = jsonStyle;
+
+      if (jsonCompleteStyle.basedOn != undefined) {
+        var baseStyle = self.getStyleFromKey(jsonCompleteStyle.basedOn);
+        baseStyle = self.buildStyleObject(baseStyle);
+
+        jsonCompleteStyle = InheritingStyles.getStyleFromBase(jsonCompleteStyle, baseStyle);
+      }
+
       jsonCompleteStyle.sharedOptions = self.currentTemplate().sharedOptions;
 
       return jsonCompleteStyle;
+    }
+
+    self.getStyleFromKey = function(key) {
+      var style = null;
+      for (var iStyle = 0; iStyle < self.styles().length; iStyle++) {
+        if (self.styles()[iStyle].key == key) {
+          style = self.styles()[iStyle];
+        }
+      }
+      return style;
     }
 
     self.getDefaultStyle = function() {

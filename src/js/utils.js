@@ -2,6 +2,10 @@ define(['knockout'], function(ko) {
 
   function isNumber(obj) { return !isNaN(parseFloat(obj)) }
 
+  function clone(obj) {
+    return JSON.parse(JSON.stringify(obj));
+  }
+
   function getCharsTableFromHtml(sHtml) {
     // Using CKEditor, this code needs to be updated.
     // Maybe using a good parser ? jquery.parseHtml ?
@@ -116,6 +120,7 @@ define(['knockout'], function(ko) {
     getCharsTableFromHtml: function(sHtml) { return getCharsTableFromHtml(sHtml); },
     addCharsFromHtml: function(html, charsArray, style) { return addCharsFromHtml(html, charsArray, style); },
     getTextFromCharTable: function(charTable) { return getTextFromCharTable(charTable); },
-    getStylesTablesFromCharTables: function(charTables) { return getStylesTablesFromCharTables(charTables); }
+    getStylesTablesFromCharTables: function(charTables) { return getStylesTablesFromCharTables(charTables); },
+    clone: function(obj) { return clone(obj); }
   }
 });
