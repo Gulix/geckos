@@ -76,6 +76,17 @@
                   </div>
                   <!-- /ko -->
                 </div>
+
+                <!-- ko with: cardTemplate -->
+                <!-- ko if: isMultiStyles() -->
+                <div class="template-styles box-elements">
+                  <label>Style to use</label>
+                  <select data-bind="options: styles, optionsText: 'name', value: selectedStyle"></select>
+                  <div data-bind="text: selectedStyle().description"></div>
+                </div>
+                <!-- /ko -->
+                <!-- /ko -->
+
                 <div class="template-description">
                   <!-- ko with: cardTemplate -->
                     <!-- ko if: currentTemplate().description != null -->

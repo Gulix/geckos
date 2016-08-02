@@ -7,9 +7,15 @@ define(["knockout", "utils", "viewModels/styleVM"], function(ko, utils, StyleVM)
     /* Variables declaration */
     /*************************/
     self.styleVM = ko.observable();
+    self.styles = ko.observableArray([ ]);
+    self.selectedStyle = ko.observable();
 
     self.currentTemplate = ko.observable();
     self.editableTemplate = ko.observable();
+
+    self.isMultiStyles = ko.pureComputed(function() {
+      return (self.styles() != null) && (self.styles().length > 1);
+    });
     /********************************/
     /* End of Variables declaration */
     /********************************/
@@ -65,24 +71,69 @@ define(["knockout", "utils", "viewModels/styleVM"], function(ko, utils, StyleVM)
       }
     }
 
-    self.initTemplateFromJson = function() {
-      self.currentTemplate(JSON.parse(self.editableTemplate()));
+    self.initStyleFromCode = function(jsonStyle) {
+      if (self.styleVM() != null)
+      {
+        self.styleVM().initStyleFromCode(jsonStyle);
+      }
+    }
 
+    self.initTemplateFromJson = function() {
       var jsonStyle = { };
+
+      self.currentTemplate(JSON.parse(self.editableTemplate()));
 
       self.updateEmbeddedFonts();
 
+      if (self.currentTemplate().styles != null) {
+        self.styles(self.currentTemplate().styles);
+        jsonStyle = self.getDefaultStyle();
+        self.selectedStyle(jsonStyle);
+      } else {
+        jsonStyle = self.buildStyleFromRoot();
+      }
+
+      self.setStyle(jsonStyle);
+    }
+
+    self.buildStyleObject = function(jsonStyle) {
+      var jsonCompleteStyle = jsonStyle;
+      jsonCompleteStyle.sharedOptions = self.currentTemplate().sharedOptions;
+
+      return jsonCompleteStyle;
+    }
+
+    self.getDefaultStyle = function() {
+      var selectedStyle = null;
+      for (var iStyle = 0; iStyle < self.styles().length; iStyle++) {
+        if (selectedStyle == null) {
+          selectedStyle = self.styles()[iStyle];
+        }
+        if (self.styles()[iStyle].isDefault) {
+          selectedStyle = self.styles()[iStyle];
+          break;
+        }
+      }
+
+      return selectedStyle;
+    }
+
+    self.setStyle = function(jsonStyle) {
+      var jsonStyleComplete = self.buildStyleObject(jsonStyle);
+      self.initStyleFromCode(jsonStyleComplete);
+    }
+
+    /* When there is no list of styles, style is taken from the root of the template */
+    self.buildStyleFromRoot = function() {
+      var jsonStyle = { };
+
       jsonStyle.fields = self.currentTemplate().fields;
-      jsonStyle.sharedOptions = self.currentTemplate().sharedOptions;
       jsonStyle.canvasFields = self.currentTemplate().canvasFields;
       jsonStyle.canvasBackground = self.currentTemplate().canvasBackground;
       jsonStyle.canvasWidth = self.currentTemplate().canvasWidth;
       jsonStyle.canvasHeight = self.currentTemplate().canvasHeight;
 
-      if (self.styleVM() != null)
-      {
-        self.styleVM().initStyleFromCode(jsonStyle);
-      }
+      return jsonStyle;
     }
 
     self.setTemplate = function() {
@@ -111,6 +162,10 @@ define(["knockout", "utils", "viewModels/styleVM"], function(ko, utils, StyleVM)
     /* Style initialization */
     var styleVM = StyleVM.newStyleVM({ }, self.updateCanvasSize, self.updateCards);
     self.styleVM(styleVM);
+
+    self.selectedStyle.subscribe(function (newValue) {
+      self.setStyle(newValue);
+    }, self);
 
     self.editableTemplate(JSON.stringify(jsonTemplate));
     self.initTemplateFromJson();
