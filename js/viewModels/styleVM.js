@@ -1,4 +1,4 @@
-define(["knockout", "utils", "viewModels/cardVm"], function(ko, utils, CardVM) {
+define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
 
   function styleVM(jsonStyle, updCanvasSize, updCardsOnTemplateChange) {
     var self = this;
