@@ -3,7 +3,7 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor'], function(ko, Field
    * ViewModel representing a Card and its data.
    * @param  {editableFieldVM table} List of fields used to create the cards
    */
-  function cardVM(editableFields, jsonEditableFields, sharedConfiguration) {
+  function cardVM(jsonEditableFields, sharedConfiguration) {
     var self = this;
 
     self.fields = ko.observableArray([]);
@@ -164,7 +164,7 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor'], function(ko, Field
           eval(evaluatedCode);
         }
         catch(err) {
-          console.log(err.message);
+          console.log("Error when evaluating a 'code variable' from the template : " + err.message);
         }
         return (value != null) ? value : ''; // Maybe setting to default value of the field (need each FabricJS property to be known)
       }
@@ -211,7 +211,7 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor'], function(ko, Field
   }
 
   return {
-    newObject: function(editableFields, jsonEditableFields, sharedConfiguration)
-      { return new cardVM(editableFields, jsonEditableFields, sharedConfiguration); }
+    newCardVM: function(jsonEditableFields, sharedConfiguration)
+      { return new cardVM(jsonEditableFields, sharedConfiguration); }
   }
 });

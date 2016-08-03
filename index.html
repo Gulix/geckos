@@ -11,7 +11,7 @@
 
     <!-- FONT
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
 
     <!-- CSS
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -26,7 +26,7 @@
 
     <link rel="stylesheet" type="text/css" href="css/styles.css"></link>
     <link rel="stylesheet" type="text/css" href="css/icons.css"></link>
-    <link rel="stylesheet" type="text/css" href="ckeditor/toolbarconfigurator/lib/codemirror/neo.css"></link>
+    <!--<link rel="stylesheet" type="text/css" href="ckeditor/toolbarconfigurator/lib/codemirror/neo.css"></link>-->
 
     <link rel="stylesheet" type="text/css" href="css/jquery.simplecolorpicker.css"></link>
     <link rel="stylesheet" type="text/css" href="css/jquery.simplecolorpicker-fontawesome.css"></link>
@@ -76,6 +76,17 @@
                   </div>
                   <!-- /ko -->
                 </div>
+
+                <!-- ko with: cardTemplate -->
+                <!-- ko if: isMultiStyles() -->
+                <div class="template-styles box-elements">
+                  <label>Style to use</label>
+                  <select data-bind="options: styles, optionsText: 'name', value: selectedStyle"></select>
+                  <div data-bind="text: selectedStyle().description"></div>
+                </div>
+                <!-- /ko -->
+                <!-- /ko -->
+
                 <div class="template-description">
                   <!-- ko with: cardTemplate -->
                     <!-- ko if: currentTemplate().description != null -->
@@ -94,11 +105,11 @@
               	<li><a href="#" class="icon-download" title="Load template from file"
                        data-bind="click: loadTemplate"><span>Load from file</span></a></li>
               	<li><a href="#" class="icon-save" title="Save template to file"
-                       data-bind="click: saveTemplate"><span>Save to file</span></a></li>
+                       data-bind="click: saveTemplateAsJson"><span>Save to file</span></a></li>
               	<li><a href="#" class="icon-apply-template" title="Apply template to cards"
                        data-bind="click: setTemplate"><span>Apply template</span></a></li>
                 <li><a href="#" class="icon-undo" title="Cancel modifications on template"
-                       data-bind="click: resetTemplate"><span>Cancel modifications</span></a></li>
+                       data-bind="click: resetTemplateCode"><span>Cancel modifications</span></a></li>
               </ul>
               <form style="display:none" id="file-load-template-form">
                 <input type="file" id="file-load-template" name="file" class="form-control" style="display:none" />
@@ -161,14 +172,15 @@
                   <div class="flex-3">
                     <card-editable-fields params="cardVM: editableCard"></card-editable-fields>
                   </div>
+                  <!-- /ko -->
 
-                  <div class="box-elements flex-5">
+                  <div class="box-elements flex-5" data-bind="visible: isCardSelected">
                     <h3>Card View</h3>
                     <div class="canvas-view">
                       <canvas id="fabricjs-canvas" data-bind="fabric: generatedTemplate" ></canvas>
                     </div>
                   </div>
-                  <!-- /ko -->
+
                 </div>
               </div>
             </div>
@@ -234,7 +246,7 @@
       </div>
     </div>
     <div class="clear"></div>
-    <div class="page-footer">Beta version 1 (WIP) - Last updated 2016-07-29 (master branch)</div>
+    <div class="page-footer">Beta version 1 (WIP 0.1.1) - Last updated 2016-08-03 (master branch)</div>
   </div>
 
 

@@ -1,48 +1,57 @@
 define(['knockout',
         'fabric',
         'viewModels/field-factory',
-        'viewModels/cardVM'
-      ], function(ko, fabric, FieldFactory, CardVM) {
+        'viewModels/cardTemplateVM',
+        'FileSaver'
+      ], function(ko, fabric, FieldFactory, CardTemplateVM) {
 
-  function engineVM(cardTemplateVM) {
+/***************************************/
+/* Main entry point of the application */
+/***************************************/
+  function engineVM(jsonTemplate) {
     var self = this;
 
-    self.canvas = new fabric.StaticCanvas('fabricjs-canvas');
-
-    /* Card Template */
-    self.cardTemplate = ko.observable(cardTemplateVM);
-    self.canvas.setWidth(self.cardTemplate().canvasWidth());
-    self.canvas.setHeight(self.cardTemplate().canvasHeight());
-
-    /* Fields to edit the card value */
-    var fields = [];
-    for (var iField = 0; iField < self.cardTemplate().fields().length; iField++) {
-      fields.push(FieldFactory.buildField(self.cardTemplate().fields()[iField], self.cardTemplate().sharedConfiguration));
-    }
-    self.editableFields = ko.observableArray(fields);
-
-    /* Creation of a new cardVM */
-    self.createNewCard = function() {
-      return CardVM.newObject(self.editableFields(), self.cardTemplate().fields(), self.cardTemplate().sharedConfiguration);
-    }
-
-    /* List of Editable Card */
+    /*************************/
+    /* Variables declaration */
+    /*************************/
+    self.cardTemplate = ko.observable(null);
     self.listCards = ko.observableArray([]);
-    self.listCards().push(self.createNewCard());
-    self.editableCard = ko.observable(self.listCards()[0]);
+    self.editableCard = ko.observable(null);
+
     self.isCardSelected = ko.pureComputed(function() {
       return self.editableCard() != null;
-    })
+    });
 
-    /* Updating all the cards when the template is updated */
-    self.cardTemplate().updateCards = function() {
-      for(var iCard = 0; iCard < self.listCards().length; iCard++) {
-        self.listCards()[iCard].updateFields(self.cardTemplate().fields(), self.cardTemplate().sharedConfiguration);
+    self.generatedTemplate = ko.pureComputed(function() {
+      var jsonCanvas = { };
+      if (self.cardTemplate() != null) {
+        jsonCanvas = self.cardTemplate().generateTemplate(self.editableCard());
+      }
+
+      return jsonCanvas;
+    });
+    /********************************/
+    /* End of Variables declaration */
+    /********************************/
+
+    /*************************/
+    /* Functions declaration */
+    /*************************/
+    self.updateCanvasSize = function() {
+      if ((self.canvas != undefined) && (self.cardTemplate() != undefined)) {
+        self.canvas.setWidth(self.cardTemplate().canvasWidth());
+        self.canvas.setHeight(self.cardTemplate().canvasHeight());
       }
     }
-    self.cardTemplate().updateCanvas = function() {
-      self.canvas.setWidth(self.cardTemplate().canvasWidth());
-      self.canvas.setHeight(self.cardTemplate().canvasHeight());
+
+    self.updateCardsFields = function() {
+      for(var iCard = 0; iCard < self.listCards().length; iCard++) {
+        self.cardTemplate().updateFieldsOfCard(self.listCards()[iCard]);
+      }
+    }
+
+    self.createNewCard = function() {
+      return self.cardTemplate().createNewCard();
     }
 
     /* Adding / Removing cards from the list */
@@ -52,6 +61,9 @@ define(['knockout',
       self.editableCard(newCard);
     }
     self.removeSelectedCard = function() {
+
+      self.editableCard(self.listCards()[0]);
+
       if (self.editableCard() != null) {
         self.listCards.remove(self.editableCard());
         if (self.listCards().length > 0) {
@@ -66,24 +78,16 @@ define(['knockout',
       self.listCards.removeAll();
     }
 
-    /* Generated template */
-    self.generatedTemplate = ko.pureComputed(function() {
-      var jsonCanvas = self.cardTemplate().generateTemplate(self.editableCard());
-
-      return jsonCanvas;
-    });
-
-    /* Export of the Canvas */
+    /* Export the content of the Canvas as a PNG */
+    /* TODO : Getting a dedicated object / function to export a card (template + data) as a PNG */
     self.exportPng = function() {
       if (self.editableCard() != null) {
-
         var canvas = document.getElementById('fabricjs-canvas');
         canvas.toBlob(function(blob) {
           saveAs(blob, self.editableCard().cardName() + ".png");
         });
       }
     }
-
 
     /* Import / Export data for list of cards */
     self.exportList = function() {
@@ -110,9 +114,24 @@ define(['knockout',
         self.editableCard(cards[0]);
       }
     }
+    /*******************************/
+    /*End of Functions declaration */
+    /*******************************/
+
+    /* Initialization of the FabricJS canvas object */
+    self.canvas = new fabric.StaticCanvas('fabricjs-canvas');
+
+    /* Initialization of the Card Template */
+    var cardTemplateVM = CardTemplateVM.newCardTemplateVM(jsonTemplate, self.updateCanvasSize, self.updateCardsFields);
+    self.cardTemplate(cardTemplateVM);
+    self.updateCanvasSize();
+
+    /* Initializing the list with one item */
+    self.listCards().push(self.createNewCard());
+    self.editableCard(self.listCards()[0]);
 
   }
   return {
-    newObject: function(cardTemplate) { return new engineVM(cardTemplate); }
+    newEngineVM: function(jsonTemplate) { return new engineVM(jsonTemplate); }
   }
 });
