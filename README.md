@@ -6,7 +6,7 @@ Geckos Edit Cards ... kos ... ?
 ## Where to Start ?
 
 * [You can test the software](http://gulix.github.io/geckos)
-* [You can go the first tutorial](https://github.com/Gulix/geckos/wiki/Tutorial01) and create a template card from scratch.
+* [You can go the first tutorial](http://www.gulix.fr/geckos/wiki/doku.php?id=en:tutorial:tutorial01) and create a template card from scratch.
 * [You can see the list of existing templates](./templates)
 * [You can see if I need some help](https://github.com/Gulix/geckos/labels/help%20wanted)
 * [You can check if any Question is waiting for Answers / Insights](https://github.com/Gulix/geckos/labels/question)
@@ -48,7 +48,7 @@ It's free, open-source, and you can get it, modify it, enhance it. Feel free to 
 
 Since the first Alpha release, **Geckos** have its [own page](http://gulix.github.io/geckos). You can also download the source code and launch the index.html page to test it locally.
 
-The [wiki](https://github.com/Gulix/geckos/wiki) will provide guides on [how to create a template](https://github.com/Gulix/geckos/wiki/Tutorial01), to use it to make cards, and how in general **Geckos** is working. Something is missing ? Feel free to use the [Issues](https://github.com/Gulix/geckos/issues) to ask for an explanation.
+The [wiki](http://www.gulix.fr/geckos/wiki/) will provide guides on [how to create a template](http://www.gulix.fr/geckos/wiki/doku.php?id=en:tutorial:tutorial01), to use it to make cards, and how in general **Geckos** is working. Something is missing ? Feel free to use the [Issues](https://github.com/Gulix/geckos/issues) to ask for an explanation.
 
 ## The Who
 
