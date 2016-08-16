@@ -13,4 +13,4 @@ If you want to add some of your templates to this _official_ list, feel free to 
 | [Pulp Alley character](pulpalley-charactercard.json) | A card for the **Pulp Alley** game, to create profile cards for miniatures. | _In progress_ | Beta 0.1.1 and beyond |
 | [Blood Bowl Star Player](bloodbowl-starplayerv3.json) | A classic card created through the [first tutorial](http://github.com/gulix/geckos/wiki/Tutorial01). Recreate the **Blood Bowl** Star Player card of the third verison of the game. | **Completed** | Alpha 0.0.1 and beyond |
 | [WQ Silver Tower Hero card](wquest-silvertower-herocard.json) | A card for the heroes of **Warhammer Quest Silver Tower**, to create profile cards for miniatures. | _In progress_ | Beta 0.1.1 and beyond |
-| [Basic Effect card](basic-effects.json) | A card for any game, to include some random effects cards | _In progress_ | Alpha 0.0.2 and beyond |
+| [Basic Effect card](basic-effects.json) | A card for any game, to include some random effects cards | _In progress_ | Beta 0.1.2 and beyond |
