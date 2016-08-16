@@ -1,4 +1,4 @@
-define(['knockout', 'utils'], function(ko, utils) {
+define(['knockout', 'fabricjs-textStyles'], function(ko, styles) {
 
   function fieldRichtext(jsonField) {
     var self = this;
@@ -13,12 +13,10 @@ define(['knockout', 'utils'], function(ko, utils) {
     self.textValue = ko.observable(jsonField.default);
 
     self.textDisplayed = ko.observable(function() {
-      var charTables = utils.getCharsTableFromHtml(self.textValue());
-      return utils.getTextFromCharTable(charTables);
+      return styles.generateTextFromHtml(self.textValue());
     });
     self.styles = function() {
-      var charTables = utils.getCharsTableFromHtml(self.textValue());
-      return utils.getStylesTablesFromCharTables(charTables);
+      return styles.generateStylesFromHtml(self.textValue());
     };
 
     /* Value to be used in the templates */

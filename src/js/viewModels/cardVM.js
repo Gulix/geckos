@@ -1,4 +1,4 @@
-define(['knockout', 'viewModels/field-factory', 'tinycolor'], function(ko, FieldFactory, tinycolor) {
+define(['knockout', 'viewModels/field-factory', 'tinycolor', 'fabricjs-textStyles'], function(ko, FieldFactory, tinycolor, styles) {
   /**
    * ViewModel representing a Card and its data.
    * @param  {editableFieldVM table} List of fields used to create the cards
@@ -139,9 +139,15 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor'], function(ko, Field
 
     /* Processing the content of a field to get a value */
     self.processString = function(processedString) {
+
+      // TODO : better match code with the possible variables names (Regex ?)
       if (processedString.indexOf('?') == 0) {
         var valueField = processedString.replace('?', '');
         return self.getBoolValue(valueField);
+      } else if (processedString.indexOf('££') == 0) {
+        var valueField = processedString.replace('££', '');
+        var formattedText = self.processString(valueField);
+        return styles.generateStylesFromFormattedText(formattedText);
       } else if (processedString.indexOf('£') == 0) {
         var valueField = processedString.replace('£', '');
         return self.getStyles(valueField);

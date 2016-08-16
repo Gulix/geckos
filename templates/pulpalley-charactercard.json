@@ -51,8 +51,7 @@
 		  ],
 			"canvasFields": [
 		    { "type": "rect",	"width": 350,	"height": 495, "fill": "#CAAB7F" },
-		    { "type": "text", "text": "$characterType$ :", "fontSize": 22 },
-		    { "type": "text", "text": "$name", "fontSize": 22, "fontWeight": "bold", "left": 80 },
+		    { "type": "textbox", "text": "$characterType$ : $name$", "fontSize": 22, "styles": "££$characterType$ : **$name$**", "width": 346, "top": 2, "left": 2 },
 		    { "type": "rect", "width": 170,	"height": 106, "left": 165,	"top": 36, "fill": "#E07B4F",	"stroke": "#FFDDAA" },
 		    { "type": "rect", "width": 170, "height": 106, "left": 165,	"top": 146,	"fill": "#ACA497", "stroke": "#FFFFAA" },
 		    { "id": "brawlLabel", "type": "text", "text": "Brawl", "fontSize": 22, "fontWeight": "bold", "left": 175, "top": 39 },
@@ -117,7 +116,7 @@
 		    { "id": "mightLabel", "text": "Puissance" },
 		    { "id": "finesseLabel", "text": "Habileté" },
 		    { "id": "cunningLabel", "text": "Ruse" },
-				{ "id": "healthLabel", "text": "Santé :" },
+				{ "id": "healthLabel", "text": "Santé :" }
 		  ]
 		}
 	],
