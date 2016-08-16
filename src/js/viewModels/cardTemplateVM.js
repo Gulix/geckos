@@ -109,8 +109,20 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"], functio
       }
 
       jsonCompleteStyle.sharedOptions = self.currentTemplate().sharedOptions;
+      jsonCompleteStyle.fields.sort(self.compareFieldOrder);
+      jsonCompleteStyle.canvasFields.sort(self.compareFieldOrder);
 
       return jsonCompleteStyle;
+    }
+    self.compareFieldOrder = function(fieldA, fieldB) {
+      var orderA = (fieldA.order != undefined) ? fieldA.order : 1;
+      var orderB = (fieldB.order != undefined) ? fieldB.order : 1;
+
+      if (orderA < orderB)
+         return -1;
+      if (orderA > orderB)
+         return 1;
+      return 0;
     }
 
     self.getStyleFromKey = function(key) {
