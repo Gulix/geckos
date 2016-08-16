@@ -19,9 +19,9 @@ define(['utils'], function(Utils) {
       var parentField = getFieldByName(parentStyle.fields, childField.name);
       if (parentField == null) {
         // Field not modified by parentStyle
-        builtStyle.fields.push(childField);
-      } else if (heri) {
-        builtStyle.fields.push(Object.assign(childField, parentField));
+        addElementTo(childField, builtStyle.fields);
+      } else {
+        addElementTo(Object.assign(childField, parentField), builtStyle.fields);
       }
     }
     // Adding the fields existing only in the parentStyle
@@ -29,7 +29,7 @@ define(['utils'], function(Utils) {
       var parentField = Utils.clone(parentStyle.fields[iParentField]);
       var childField = getFieldByName(childStyle.fields, parentField.name);
       if (childField == null) {
-        builtStyle.fields.push(parentField);
+        addElementTo(parentField, builtStyle.fields);
       }
     }
 
@@ -44,9 +44,9 @@ define(['utils'], function(Utils) {
       }
       if (parentField == null) {
         // Field not modified by parentStyle
-        builtStyle.canvasFields.push(childField);
+        addElementTo(childField, builtStyle.canvasFields);
       } else {
-        builtStyle.canvasFields.push(Object.assign(childField, parentField));
+        addElementTo(Object.assign(childField, parentField), builtStyle.canvasFields);
       }
     }
     // Adding the canvasFields existing only in the parentStyle
@@ -57,7 +57,7 @@ define(['utils'], function(Utils) {
         childField = getCanvasFieldById(childStyle.canvasFields, parentField.id);
       }
       if (childField == null) {
-        builtStyle.canvasFields.push(parentField);
+        addElementTo(parentField, builtStyle.canvasFields);
       }
     }
 
@@ -82,6 +82,14 @@ define(['utils'], function(Utils) {
     }
 
     return field;
+  }
+
+  // Simply push the element to an array, unless it is 'ignored'
+  function addElementTo(element, arrayTo) {
+    if ((element != null) && (arrayTo != null) && (element.ignored != true))
+    {
+      arrayTo.push(element);
+    }
   }
 
   return {
