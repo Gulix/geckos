@@ -68,6 +68,10 @@
           <div class="section-twocols">
             <div class="section-colwrap">
               <div class="col-content">
+                <!-- ko foreach: templates -->
+                  <div data-bind="text: description.title"></div>
+                <!-- /ko -->
+
                 <div class="template-selection">
                   <!-- ko with: cardTemplate -->
                   <div class="template-text">

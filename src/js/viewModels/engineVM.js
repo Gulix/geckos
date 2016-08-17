@@ -2,8 +2,9 @@ define(['knockout',
         'fabric',
         'viewModels/field-factory',
         'viewModels/cardTemplateVM',
+        'templates/load-templates',
         'FileSaver'
-      ], function(ko, fabric, FieldFactory, CardTemplateVM) {
+      ], function(ko, fabric, FieldFactory, CardTemplateVM, Templates) {
 
 /***************************************/
 /* Main entry point of the application */
@@ -17,6 +18,7 @@ define(['knockout',
     self.cardTemplate = ko.observable(null);
     self.listCards = ko.observableArray([]);
     self.editableCard = ko.observable(null);
+    self.templates = Templates.load();
 
     self.isCardSelected = ko.pureComputed(function() {
       return self.editableCard() != null;
