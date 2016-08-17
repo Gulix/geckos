@@ -173,9 +173,9 @@
                   </div>
                   <!-- /ko -->
 
-                  <div class="box-elements flex-5" data-bind="visible: isCardSelected">
-                    <h3>Card View</h3>
-                    <div class="canvas-view">
+                  <div id="card-canvas-box" class="box-elements flex-5" data-bind="visible: isCardSelected">
+                    <h3 id="card-canvas-header">Card View</h3>
+                    <div id="card-canvas-view" class="canvas-view">
                       <canvas id="fabricjs-canvas" data-bind="fabric: generatedTemplate" ></canvas>
                     </div>
                   </div>
@@ -251,9 +251,6 @@
 
 
     <!-- ViewModels -->
-
-
-
     <script src="js/vendor/require.min.js" data-main="js/main.js"></script>
 </body>
 </html>

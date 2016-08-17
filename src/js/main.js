@@ -78,4 +78,23 @@ require(['knockout',
       $("#file-load-template-form")[0].reset();
     }
   });
+
+/* Scrolling let's the Canvas on top (see also Issue #87) */
+$(window).scroll(function(){
+  var existingDiff = $('#card-canvas-header').outerHeight();
+  console.log(existingDiff);
+  var scrollTop = $(window).scrollTop();
+  var boxTop = $('#card-canvas-box').offset().top;
+  if (scrollTop > (boxTop + existingDiff)) {
+    var diff = scrollTop - boxTop - existingDiff;
+    $('#card-canvas-view').css({'margin-top': diff + 'px'});
+  } else {
+    $('#card-canvas-view').css({'margin-top': '0px'});
+  }
+
+
+  //$('#card-canvas-view').toggleClass('scrolling-position', $(window).scrollTop() > $('#card-canvas-box').offset().top);
+});
+
+
 });
