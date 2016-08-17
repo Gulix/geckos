@@ -73,6 +73,8 @@ define(['knockout'], function(ko) {
       var selectedValue = self.selectedOption();
       if (selectedValue != null) {
         if (valueType == 'text') { return selectedValue.text; }
+        if (valueType == 'lower') { return selectedValue.text.toLowerCase(); }
+        if (valueType == 'upper') { return selectedValue.text.toUpperCase(); }
         if (valueType == 'value') { return selectedValue.option; }
         if (valueType == 'image') {
           if (selectedValue.image != undefined) { return selectedValue.image; }
