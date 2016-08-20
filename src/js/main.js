@@ -9,7 +9,8 @@ require.config({
         'ckeditor': 'vendor/ckeditor/ckeditor',
         'tinycolor': 'vendor/tinycolor',
         'simplecolorpicker': 'vendor/jquery.simplecolorpicker',
-        'ddslick': 'vendor/jquery.ddslick'
+        'ddslick': 'vendor/jquery.ddslick',
+        'owlCarousel': 'vendor/owl.carousel'
     },
     shim: {
         'jQuery': {

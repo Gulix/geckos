@@ -29,6 +29,8 @@
 
     <link rel="stylesheet" type="text/css" href="css/jquery.simplecolorpicker.css"></link>
     <link rel="stylesheet" type="text/css" href="css/jquery.simplecolorpicker-fontawesome.css"></link>
+    <link rel="stylesheet" type="text/css" href="css/owl.carousel.css"></link>
+    <link rel="stylesheet" type="text/css" href="css/owl.theme.default.css"></link>
   </head>
 <body>
   <div class="container fullwidth-container">
@@ -68,9 +70,7 @@
           <div class="section-twocols">
             <div class="section-colwrap">
               <div class="col-content">
-                <!-- ko foreach: templates -->
-                  <div data-bind="text: description.title"></div>
-                <!-- /ko -->
+                <div id="templates-carousel" data-bind="owlCarousel: templates"></div>
 
                 <div class="template-selection">
                   <!-- ko with: cardTemplate -->

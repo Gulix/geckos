@@ -1,4 +1,4 @@
-define(['knockout', 'jscolor', 'simplecolorpicker', 'ddslick', 'ckeditor', 'jQuery'], function(ko, jscolor, simplecolorpicker) {
+define(['knockout', 'jscolor', 'simplecolorpicker', 'ddslick', 'ckeditor', 'jQuery', 'owlCarousel'], function(ko, jscolor, simplecolorpicker) {
 
   /*************************/
   /* Binding with CKEditor */
@@ -177,4 +177,49 @@ define(['knockout', 'jscolor', 'simplecolorpicker', 'ddslick', 'ckeditor', 'jQue
       );
     }
   };
+
+
+  /*****************************/
+  /* Binding with owl.carousel */
+  /*****************************/
+  ko.bindingHandlers.owlCarousel = {
+    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+      var itemsArray = ko.utils.unwrapObservable(valueAccessor()) || {};
+
+      // Id of the element (found or generated)
+      var id = $(element).attr('id');
+      if(id == undefined || id == '') {
+        $(element).attr('id','id_' + Math.floor(new Date().valueOf()));
+        id = $(element).attr('id');
+      }
+
+      $('#' + id).addClass('owl-carousel owl-theme');
+
+      for (var iItem = 0; iItem < itemsArray.length; iItem++) {
+        var item = itemsArray[iItem];
+        $('#' + id).append("<div class='template-item'>" + item.description.title + "</div>");
+      }
+
+      $('#' + id).owlCarousel(
+        {
+          center: true,
+          loop:false,
+          margin:10,
+          nav:true,
+          responsive:{
+              0:{
+                  items:1
+              },
+              600:{
+                  items:3
+              },
+              1000:{
+                  items:5
+              }
+          }
+        });
+    }
+  };
+
+
 });
