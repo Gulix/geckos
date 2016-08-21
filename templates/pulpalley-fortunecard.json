@@ -36,6 +36,7 @@
         { "name":"challenge", "label":"Challenge", "default":"Roll X successes with :" },
         { "name":"challenge_skills", "label":"Challenge's skills", "default":"Skill A or Skill B" },
         { "name":"peril", "label":"Peril", "default":"1 hit if failed" },
+		{ "name":"not_peril", "label":"Is not peril ?", "default":false, "type": "checkbox" },
         { "name":"x_number", "label":"X-Number", "default":"1", "type": "numeric"},
         { "name":"icon", "label":"Icon", "default":"flash", "type": "options", 
           "options": [
@@ -47,7 +48,8 @@
             { "option":"flash", "text":"Flash" },
             { "option":"search", "text":"Search" }
           ]        
-        }
+        }, 
+		{ "name":"card_type", "label":"Card type", "default":"Carte de Fortune" }
       ],
       "canvasFields":[
         {
@@ -1416,14 +1418,47 @@
         { "type": "textbox", "textAlign": "left", "left": 41, "top":64, "width": 362, "text": "$fortune_effect$", "styles": "£fortune_effect", "fontSize": "$fortune_effect_size", "fontFamily": "Rokkitt" },
         { "type": "textbox", "textAlign": "center", "left": 10, "top":292, "width": 420, "text": "$caption$", "fontStyle": "italic", "fontSize": 14, "lineHeight": 1, "fontFamily": "Lato" }, 
         { "type": "textbox", "textAlign": "center", "left": 24, "top":387, "width": 392, "text": "$challenge$", "fontSize": 26, "fontFamily": "Rokkitt" }, 
-        { "type": "textbox", "textAlign": "center", "left": 24, "top":438, "width": 392, "text": "$challenge_skills$", "fontWeight": "bold", "fontSize": 44, "fontFamily": "Rokkitt" },
-        { "type": "textbox", "textAlign": "left", "left": 64, "top":505, "width": 392, "text": "Peril : $peril$", "styles": "££**Peril :** $peril$", "fontSize": 26, "fontFamily": "Rokkitt" },
-        { "type": "textbox", "textAlign": "center", "left": 17, "top":554, "width": 50, "text": "$x_number$", "fontSize": 44, "fontWeight": "bold", "fontFamily": "Rokkitt" }
+        { "type": "textbox", "textAlign": "center", "left": 24, "top":438, "width": 392, "text": "$challenge_skills$", "fontWeight": "bold", "fontSize": "{{value = (card[challenge_skills].length < 18) ? 44 : 32;}}", "lineHeight": 1, "fontFamily": "Rokkitt" },
+        { "id": "peril", "type": "textbox", "visible": "{{value = !card[not_peril];}}", "textAlign": "left", "left": 64, "top":505, "width": 392, "text": "Peril : $peril$", "styles": "££**Peril :** $peril$", "fontSize": 26, "fontFamily": "Rokkitt" },
+		{ "type": "textbox", "visible": "?not_peril", "textAlign": "center", "left": 14, "top":505, "width": 392, "text": "$peril$", "fontSize": 26, "fontFamily": "Rokkitt" },
+        { "type": "textbox", "textAlign": "center", "left": 17, "top":554, "width": 50, "text": "$x_number$", "fontSize": 44, "fontWeight": "bold", "fontFamily": "Rokkitt" },
+		{ "type": "textbox", "textAlign": "center", "left": 75, "top":560, "width": 290, "text": "$card_type$", "fontSize": 36, "fontFamily": "Rokkitt" }
       ],
       "canvasBackground":"#FFFFFF",
       "canvasWidth":440,
       "canvasHeight":600
-    }
+    }, {
+	  "key":"baronny_bw_fr",
+	  "basedOn": "baronny_bw",
+      "name":"Baronny BW Template (français)",
+      "description":"Template Noir & Blanc pour les cartes de Fortune de Pulp Alley, basé sur un modèle de BaronVonJ",
+      "fields": [ 
+		{ "name":"name", "label":"Nom", "default":"Carte de Fortune" },
+        { "name":"fortune_effect", "label":"Effet", "default":"<p><strong>Quand :</strong> Quand la jouer ?</p><p></p><p><strong>Effet :</strong> Effets de la carte</p>" },
+        { "name":"fortune_effect_size", "label":"Police" },
+        { "name":"caption", "label":"Texte d'ambiance", "default":"Un petit moment pulp ..." },
+        { "name":"challenge", "label":"Défi", "default":"Obtenez X succès avec" },
+        { "name":"challenge_skills", "label":"Compétences du défi", "default":"Compétence A ou B" },
+        { "name":"peril", "label":"Péril", "default":"X touches en cas d'échec" },
+		{ "name":"not_peril", "label":"Pas un péril ?" },
+        { "name":"x_number", "label":"Chiffre X" },
+        { "name":"icon", "label":"Icône",  
+          "options": [
+            { "option":"cogs", "text":"Engrenage" },
+            { "option":"lock", "text":"Verrou" },
+            { "option":"flames", "text":"Flamme" },
+            { "option":"organization", "text":"Organisation" },
+            { "option":"world", "text":"Monde" },
+            { "option":"flash", "text":"Eclair" },
+            { "option":"search", "text":"Fouille" }
+          ]        
+        }, 
+		{ "name":"card_type", "label":"Type de carte", "default":"Carte Solo" }
+	  ],
+	  "canvasFields": [
+		{ "id": "peril", "text": "Péril : $peril$", "styles": "££**Péril :** $peril$" }
+	  ]
+	}
   ],
   "description":{
     "description":"Fortune cards template for Pulp Alley",
