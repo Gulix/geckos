@@ -13,18 +13,21 @@
     -webkit-tap-highlight-color: transparent;
 }
 .owl-theme .owl-nav [class*='owl-'] {
-    color: #FFF;
+    color: #07889B;
     font-size: 14px;
     margin: 5px;
     padding: 4px 7px;
-    background: #D6D6D6;
+    background: #F1F1EF;
     display: inline-block;
     cursor: pointer;
-    border-radius: 3px;
+    border-radius: 1px;
+    border-width: 1px;
+    border-color: #07889B;
+    border-style: solid;
 }
 .owl-theme .owl-nav [class*='owl-']:hover {
-    background: #4DC7A0;
-    color: #FFF;
+    background: #07889B;
+    color: #F1F1EF;
     text-decoration: none;
 }
 .owl-theme .owl-nav .disabled {
@@ -55,13 +58,46 @@
 }
 .owl-theme .owl-dots .owl-dot.active span,
 .owl-theme .owl-dots .owl-dot:hover span {
-    background: #4DC7A0;
+    background: #07889B;
 }
+
+/* Css to display the template in the control */
 .owl-carousel .center .template-item {
-    background: #AACC44;
+    height: 400px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 1rem;
+    background-color: #07889B;
+    border: solid 1px #07889B;
+    color: #F1F1EF;
 }
 .owl-carousel .template-item {
-    height: 5em;
-    background: #44CCAA;
-    padding: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    max-width: 200px; /* Need to be responsive on that */
+    background: #D1D1D1;
+    border: solid 1px #07889B;
+    color: #07889B;
+}
+.owl-carousel .center .template-item .template-item-img {
+  margin: 1rem;
+}
+.owl-carousel .template-item .template-item-img {
+  margin-left: 3rem;
+  margin-right: 3rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.owl-carousel .template-item-title {
+  text-align: center;
+  font-weight: bold;
+}
+.owl-carousel .template-item-description {
+  display: none;
+}
+.owl-carousel .center .template-item-description {
+  display: block;
+  font-size: 1.2rem;
+  text-align: justify;
 }

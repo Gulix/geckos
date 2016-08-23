@@ -116,6 +116,12 @@ define(['knockout',
         self.editableCard(cards[0]);
       }
     }
+
+    self.loadTemplateFromIndex = function(index)
+    {
+      self.cardTemplate().importTemplateFromJson(JSON.stringify(self.templates[index]));
+      self.cardTemplate().setTemplate();
+    }
     /*******************************/
     /*End of Functions declaration */
     /*******************************/

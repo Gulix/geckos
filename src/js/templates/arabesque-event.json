@@ -160,6 +160,7 @@
 		"description": "Template for playing with colors !",
     "title":"Arabesque",
     "credits": "by Nicolas Ronvel",
-    "url": "https://github.com/Gulix/geckos/"
+    "url": "https://github.com/Gulix/geckos/",
+		"logo": "http://www.webosnation.com/sites/webosnation.com/files/resource_images/w/word-ace-card-back.jpg"
 	}
 }

@@ -50,6 +50,7 @@
 		"description": "Basic Template for a card of various effect (for any type of game)",
     "title":"Basic - Effects",
     "credits": "by Nicolas Ronvel",
-    "url": "https://github.com/Gulix/geckos/"
+    "url": "https://github.com/Gulix/geckos/",
+		"logo": "http://opengameart.org/sites/default/files/card%20back%20orange.png"
 	}
 }

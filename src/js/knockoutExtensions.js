@@ -179,12 +179,12 @@ define(['knockout', 'jscolor', 'simplecolorpicker', 'ddslick', 'ckeditor', 'jQue
   };
 
 
-  /*****************************/
-  /* Binding with owl.carousel */
-  /*****************************/
-  ko.bindingHandlers.owlCarousel = {
+  /*******************************************************/
+  /* Binding with owl.carousel for the list of templates */
+  /*******************************************************/
+  ko.bindingHandlers.templatesList = {
     init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
-      var itemsArray = ko.utils.unwrapObservable(valueAccessor()) || {};
+      var engineVM = ko.utils.unwrapObservable(valueAccessor()) || {};
 
       // Id of the element (found or generated)
       var id = $(element).attr('id');
@@ -195,28 +195,46 @@ define(['knockout', 'jscolor', 'simplecolorpicker', 'ddslick', 'ckeditor', 'jQue
 
       $('#' + id).addClass('owl-carousel owl-theme');
 
-      for (var iItem = 0; iItem < itemsArray.length; iItem++) {
-        var item = itemsArray[iItem];
-        $('#' + id).append("<div class='template-item'>" + item.description.title + "</div>");
+      var nbTemplates = engineVM.templates.length;
+
+      //for (var i = 0; i < 4; i++)
+      //{
+      for (var iItem = 0; iItem < nbTemplates; iItem++) {
+        var item = engineVM.templates[iItem];
+        $('#' + id).append("<div class='template-item'><div class='template-item-img'><img src='"
+        + item.description.logo
+        + "'></img></div><div class='template-item-title'>"
+        + item.description.title
+        + "</div><div class='template-item-description'>"
+        + item.description.description
+        + "</div></div>");
       }
+      //}
+
+
+      //var nbItems = itemsArray.length * 4;
 
       $('#' + id).owlCarousel(
         {
           center: true,
-          loop:false,
+          loop: nbTemplates > 5,
           margin:10,
           nav:true,
           responsive:{
               0:{
-                  items:1
+                  items: 1
               },
               600:{
-                  items:3
+                  items: (3 <= nbTemplates) ? 3 : (nbTemplates - 1)
               },
               1000:{
-                  items:5
+                  items: (5 <= nbTemplates) ? 5 : (nbTemplates - 1)
               }
           }
+        });
+        $('#' + id).owlCarousel().on('changed.owl.carousel', function(event) {
+          console.log("Sélection de l'index : " + event.item.index);
+          engineVM.loadTemplateFromIndex(event.item.index);
         });
     }
   };
