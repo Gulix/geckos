@@ -9,6 +9,7 @@ define(['knockout'], function(ko) {
     if (jsonField.isNameField != undefined) {
       self.isNameField = jsonField.isNameField;
     }
+    self.maxLength = (jsonField.maxlength != undefined) ? jsonField.maxlength : 524288;
 
     self.textValue = ko.observable(jsonField.default);
 

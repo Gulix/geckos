@@ -29,6 +29,14 @@ define(['knockout'], function(ko) {
         viewModel: { require: 'components/input-generic' },
         template: { require: 'text!components/input-numeric/input-numeric.html' }
       });
+      ko.components.register('input-numeric-minmax', {
+        viewModel: { require: 'components/input-generic' },
+        template: { require: 'text!components/input-numeric/input-minmax.html' }
+      });
+      ko.components.register('input-numeric-range', {
+        viewModel: { require: 'components/input-generic' },
+        template: { require: 'text!components/input-numeric/input-range.html' }
+      });
       ko.components.register('input-options', {
         viewModel: { require: 'components/input-generic' },
         template: { require: 'text!components/input-options/input-options.html' }
