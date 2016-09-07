@@ -2,9 +2,9 @@ define(['knockout',
         'fabric',
         'viewModels/field-factory',
         'viewModels/cardTemplateVM',
-        'templates/load-templates',
+        'viewModels/UItemplates',
         'FileSaver'
-      ], function(ko, fabric, FieldFactory, CardTemplateVM, Templates) {
+      ], function(ko, fabric, FieldFactory, CardTemplateVM, UITemplates) {
 
 /***************************************/
 /* Main entry point of the application */
@@ -18,7 +18,6 @@ define(['knockout',
     self.cardTemplate = ko.observable(null);
     self.listCards = ko.observableArray([]);
     self.editableCard = ko.observable(null);
-    self.templates = Templates.load();
 
     self.isCardSelected = ko.pureComputed(function() {
       return self.editableCard() != null;
@@ -32,6 +31,8 @@ define(['knockout',
 
       return jsonCanvas;
     });
+
+    self.UItemplates = ko.observable(null);
     /********************************/
     /* End of Variables declaration */
     /********************************/
@@ -117,11 +118,6 @@ define(['knockout',
       }
     }
 
-    self.loadTemplateFromIndex = function(index)
-    {
-      self.cardTemplate().importTemplateFromJson(JSON.stringify(self.templates[index]));
-      self.cardTemplate().setTemplate();
-    }
     /*******************************/
     /*End of Functions declaration */
     /*******************************/
@@ -137,6 +133,9 @@ define(['knockout',
     /* Initializing the list with one item */
     self.listCards().push(self.createNewCard());
     self.editableCard(self.listCards()[0]);
+
+    /* Initializing the UI parts */
+    self.UItemplates(UITemplates.getUItemplates(self));
 
   }
   return {

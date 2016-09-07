@@ -184,7 +184,7 @@ define(['knockout', 'jscolor', 'simplecolorpicker', 'ddslick', 'ckeditor', 'jQue
   /*******************************************************/
   ko.bindingHandlers.templatesList = {
     init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
-      var engineVM = ko.utils.unwrapObservable(valueAccessor()) || {};
+      var UItemplates = ko.utils.unwrapObservable(valueAccessor()) || {};
 
       // Id of the element (found or generated)
       var id = $(element).attr('id');
@@ -195,12 +195,12 @@ define(['knockout', 'jscolor', 'simplecolorpicker', 'ddslick', 'ckeditor', 'jQue
 
       $('#' + id).addClass('owl-carousel owl-theme');
 
-      var nbTemplates = engineVM.templates.length;
+      var nbTemplates = UItemplates.templates.length;
 
       //for (var i = 0; i < 4; i++)
       //{
       for (var iItem = 0; iItem < nbTemplates; iItem++) {
-        var item = engineVM.templates[iItem];
+        var item = UItemplates.templates[iItem];
         $('#' + id).append("<div class='template-item'><div class='template-item-img'><img src='"
         + item.description.logo
         + "'></img></div><div class='template-item-title'>"
@@ -233,8 +233,7 @@ define(['knockout', 'jscolor', 'simplecolorpicker', 'ddslick', 'ckeditor', 'jQue
           }
         });
         $('#' + id).owlCarousel().on('changed.owl.carousel', function(event) {
-          console.log("Sélection de l'index : " + event.item.index);
-          engineVM.loadTemplateFromIndex(event.item.index);
+          UItemplates.loadTemplateFromIndex(event.item.index);
         });
     }
   };

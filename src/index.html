@@ -67,20 +67,26 @@
              Template section (editing, loading, ...)
            -->
         <section id="section-template">
+          <!-- ko with: UItemplates -->
           <div class="section-twocols">
             <div class="section-colwrap">
               <div class="col-content">
-                <div id="templates-carousel" data-bind="templatesList: $data"></div>
 
-                <div class="template-selection">
-                  <!-- ko with: cardTemplate -->
+                <!-- ko if: isListModeActive -->
+                <div id="templates-carousel" data-bind="templatesList: $data"></div>
+                <!-- /ko -->
+
+                <!-- ko if: isEditionModeActive -->
+                <div class="template-edition">
+                  <!-- ko with: currentTemplate -->
                   <div class="template-text">
                     <textarea rows="6" data-bind="value: editableTemplate"></textarea>
                   </div>
                   <!-- /ko -->
                 </div>
+                <!-- /ko -->
 
-                <!-- ko with: cardTemplate -->
+                <!-- ko with: currentTemplate -->
                 <!-- ko if: isMultiStyles() -->
                 <div class="template-styles box-elements">
                   <label>Style to use</label>
@@ -91,7 +97,7 @@
                 <!-- /ko -->
 
                 <div class="template-description">
-                  <!-- ko with: cardTemplate -->
+                  <!-- ko with: currentTemplate -->
                     <!-- ko if: currentTemplate().description != null -->
                       <h2 data-bind="text: currentTemplate().description.title"></h2>
                       <h3 data-bind="text: currentTemplate().description.credits"></h2>
@@ -103,23 +109,27 @@
               </div>
             </div>
             <div class="col-menu">
-              <!-- ko with: cardTemplate -->
               <ul class="vertical-menu icon">
-              	<li><a href="#" class="icon-download" title="Load template from file"
-                       data-bind="click: loadTemplate"><span>Load from file</span></a></li>
+                <li><a href="#" class="icon-edition-mode" title="Go to 'Edition mode'"
+                       data-bind="click: goEditionMode, visible: isGoEditionModeVisible"><span>Go to 'Edition mode'</span></a></li>
+                <li><a href="#" class="icon-list" title="Go to 'List mode'"
+                       data-bind="click: goListMode, visible: isGoListModeVisible"><span>Go to 'List mode'</span></a></li>
+                <li><a href="#" class="icon-apply-template" title="Use this template"
+                       data-bind="click: setTemplate"><span>Use this template</span></a></li>
+                <li><a href="#" class="icon-download" title="Load template from file"
+                       data-bind="click: currentTemplate().loadTemplate, visible: isEditionModeActive"><span>Load from file</span></a></li>
               	<li><a href="#" class="icon-save" title="Save template to file"
-                       data-bind="click: saveTemplateAsJson"><span>Save to file</span></a></li>
-              	<li><a href="#" class="icon-apply-template" title="Apply template to cards"
-                       data-bind="click: setTemplate"><span>Apply template</span></a></li>
+                       data-bind="click: currentTemplate().saveTemplateAsJson"><span>Save to file</span></a></li>
                 <li><a href="#" class="icon-undo" title="Cancel modifications on template"
-                       data-bind="click: resetTemplateCode"><span>Cancel modifications</span></a></li>
+                       data-bind="click: currentTemplate().resetTemplateCode, visible: isEditionModeActive"><span>Cancel modifications</span></a></li>
               </ul>
               <form style="display:none" id="file-load-template-form">
                 <input type="file" id="file-load-template" name="file" class="form-control" style="display:none" />
               </form>
-              <!-- /ko -->
+
             </div>
           </div>
+          <!-- /ko -->
         </section>
 
         <!-- ********************
