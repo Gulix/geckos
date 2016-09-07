@@ -63,3 +63,6 @@
 .icon-clear-list:before {
     content: "\f01c";
 }
+.icon-edition-mode:before {
+    content: "\f058";
+}
