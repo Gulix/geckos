@@ -10,7 +10,8 @@ require.config({
         'tinycolor': 'vendor/tinycolor',
         'simplecolorpicker': 'vendor/jquery.simplecolorpicker',
         'ddslick': 'vendor/jquery.ddslick',
-        'owlCarousel': 'vendor/owl.carousel'
+        'owlCarousel': 'vendor/owl.carousel',
+        'lodash': 'vendor/lodash'
     },
     shim: {
         'jQuery': {
