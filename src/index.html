@@ -73,7 +73,9 @@
               <div class="col-content">
 
                 <!-- ko if: isListModeActive -->
+                <!-- ko with: uiList -->
                 <div id="templates-carousel" data-bind="templatesList: $data"></div>
+                <!-- /ko -->
                 <!-- /ko -->
 
                 <!-- ko if: isEditionModeActive -->
@@ -97,13 +99,11 @@
                 <!-- /ko -->
 
                 <div class="template-description">
-                  <!-- ko with: currentTemplate -->
-                    <!-- ko if: currentTemplate().description != null -->
-                      <h2 data-bind="text: currentTemplate().description.title"></h2>
-                      <h3 data-bind="text: currentTemplate().description.credits"></h2>
-                      <div data-bind="text: currentTemplate().description.description"></div>
-                      <div><a data-bind="attr: { 'href': currentTemplate().description.url }">Source</a></div>
-                    <!-- /ko -->
+                  <!-- ko if: (currentTemplate() != null) && (currentTemplate().description != null) -->
+                  <h2 data-bind="text: currentTemplate().description.title"></h2>
+                  <h3 data-bind="text: currentTemplate().description.credits"></h2>
+                  <div data-bind="text: currentTemplate().description.description"></div>
+                  <div><a data-bind="attr: { 'href': currentTemplate().description.url }">Source</a></div>
                   <!-- /ko -->
                 </div>
               </div>
@@ -117,11 +117,11 @@
                 <li><a href="#" class="icon-apply-template" title="Use this template"
                        data-bind="click: setTemplate"><span>Use this template</span></a></li>
                 <li><a href="#" class="icon-download" title="Load template from file"
-                       data-bind="click: currentTemplate().loadTemplate, visible: isEditionModeActive"><span>Load from file</span></a></li>
+                       data-bind="click: loadTemplate, visible: isEditionModeActive"><span>Load from file</span></a></li>
               	<li><a href="#" class="icon-save" title="Save template to file"
-                       data-bind="click: currentTemplate().saveTemplateAsJson"><span>Save to file</span></a></li>
+                       data-bind="click: saveTemplateAsJson"><span>Save to file</span></a></li>
                 <li><a href="#" class="icon-undo" title="Cancel modifications on template"
-                       data-bind="click: currentTemplate().resetTemplateCode, visible: isEditionModeActive"><span>Cancel modifications</span></a></li>
+                       data-bind="click: resetTemplateCode, visible: isEditionModeActive"><span>Cancel modifications</span></a></li>
               </ul>
               <form style="display:none" id="file-load-template-form">
                 <input type="file" id="file-load-template" name="file" class="form-control" style="display:none" />

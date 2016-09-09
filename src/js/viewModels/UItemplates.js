@@ -1,7 +1,9 @@
 define(['knockout', 'config', 'lodash',
         'templates/load-templates',
-        'viewModels/cardTemplateVM'],
-  function(ko, config, _, Templates, CardTemplateVM) {
+        'viewModels/cardTemplateVM',
+        'viewModels/UItemplatesList',
+        'viewModels/UItemplatesEdition'],
+  function(ko, config, _, Templates, CardTemplateVM, uiList, uiEdition) {
   /**
    * Used to manage the "Templates" part of the UI
    * Stored as an object in the EngineVM main object
@@ -19,32 +21,37 @@ define(['knockout', 'config', 'lodash',
     // General configuration
     self.isListModeEnabled = config.templates.listMode;
     self.isEditionModeEnabled = config.templates.editionMode;
-    // Visibility of the modes
-    self.activeMode = ko.observable('');
-    self.isListModeActive = ko.pureComputed(function() {
-      return self.activeMode() == 'list';
-    });
-    self.isEditionModeActive = ko.pureComputed(function() {
-      return self.activeMode() == 'edition';
-    });
-    // List of templates
-    self.templates = [];
-    // Selected / Current template
-    self.currentTemplate = ko.observable(null);
+    // The modes
+    self.uiList = ko.observable(null);
+    self.uiEdition = ko.observable(null);
 
     /*****************
      *** Functions ***
      *****************/
-    // When selecting via the Carousel, this method is called to load the displayed template
-    self.loadTemplateFromIndex = function(index)
-    {
-      self.currentTemplate().importTemplateFromJson(JSON.stringify(self.templates[index]));
-      self.currentTemplate().setTemplate();
-    }
+    self.getActiveMode = ko.pureComputed(function() {
+      if ((self.uiList() != null) && self.uiList().isActive())
+        return self.uiList();
+      if ((self.uiEdition() != null) && self.uiEdition().isActive())
+        return self.uiEdition();
+      return null;
+    });
+    self.currentTemplate = ko.pureComputed(function() {
+      if (self.getActiveMode() != null)
+        return self.getActiveMode().currentTemplate();
+      return null;
+    });
+
+    // Visibility of the modes
+    self.isListModeActive = ko.pureComputed(function() {
+      return (self.uiList() != null) && self.uiList().isActive();
+    });
+    self.isEditionModeActive = ko.pureComputed(function() {
+      return (self.uiEdition() != null) && self.uiEdition().isActive();
+    });
 
     // Modes of the UI
-    self.goListMode = function() { self.activeMode('list'); }
-    self.goEditionMode = function() { self.activeMode('edition'); }
+    self.goListMode = function() { if (self.uiList() != null) self.uiList().isActive(true); }
+    self.goEditionMode = function() { if (self.uiEdition() != null) self.uiEdition().isActive(true); }
     self.isGoListModeVisible = ko.pureComputed(function() {
       return self.isListModeEnabled && !self.isListModeActive();
     });
@@ -56,6 +63,21 @@ define(['knockout', 'config', 'lodash',
     self.setTemplate = function() {
       self.engineVM.cardTemplate().editableTemplate(self.currentTemplate().editableTemplate());
       self.engineVM.cardTemplate().setTemplate();
+    }
+    self.loadTemplate = function() {
+      if ((self.uiEdition() != null) && self.uiEdition().isActive()) {
+        // Do something
+      }
+    }
+    self.saveTemplateAsJson = function() {
+      if ((self.uiEdition() != null) && self.uiEdition().isActive()) {
+        // Do something
+      }
+    }
+    self.resetTemplateCode = function() {
+      if ((self.uiEdition() != null) && self.uiEdition().isActive()) {
+        // Do something
+      }
     }
 
     /*****************************
@@ -70,19 +92,8 @@ define(['knockout', 'config', 'lodash',
      if (!_.includes(['list', 'edition'], config.templates.defaultMode)) {
        defaultMode = self.isEditionModeEnabled ? 'edition' : 'list';
      }
-     self.activeMode(defaultMode);
-
-     // List of templates
-     if (self.isListModeEnabled) {
-       self.templates = Templates.load();
-     }
-
-     // The default template
-     if (self.isListModeActive()) {
-       var jsonTemplate = self.templates[0];
-       //self.currentTemplate(CardTemplateVM.newCardTemplateVM(jsonTemplate, self.updateCanvasSize, self.updateCardsFields);
-       self.currentTemplate(CardTemplateVM.newCardTemplateVM(jsonTemplate, function() { }, function() { }));
-     }
+     // The two modes
+     self.uiList(uiList.getUI(self, defaultMode == 'list'));
   }
 
   return {
