@@ -10,13 +10,15 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"], functio
     self.styles = ko.observableArray([ ]);
     self.selectedStyle = ko.observable();
 
-    self.currentTemplate = ko.observable();
+    self.currentTemplate = ko.observable(); // This needs to disappear or be renamed
     self.editableTemplate = ko.observable();
 
+    self.description = ko.observable();
+
     self.isMultiStyles = ko.pureComputed(function() {
-      console.log('test');
       return (self.styles() != null) && (self.styles().length > 1);
     });
+
     /********************************/
     /* End of Variables declaration */
     /********************************/
@@ -93,6 +95,8 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"], functio
       } else {
         jsonStyle = self.buildStyleFromRoot();
       }
+
+      self.description(self.currentTemplate().description);
 
       self.setStyle(jsonStyle);
     }

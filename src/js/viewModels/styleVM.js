@@ -100,7 +100,7 @@ define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
 
       // Updating the cards, the canvas
       self.updateCards();
-      self.updateCanvasSize();
+      self.updateCanvasSize();      
     }
 
     self.createNewCard = function() {

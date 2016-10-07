@@ -99,11 +99,11 @@
                 <!-- /ko -->
 
                 <div class="template-description">
-                  <!-- ko if: (currentTemplate() != null) && (currentTemplate().description != null) -->
-                  <h2 data-bind="text: currentTemplate().description.title"></h2>
-                  <h3 data-bind="text: currentTemplate().description.credits"></h2>
-                  <div data-bind="text: currentTemplate().description.description"></div>
-                  <div><a data-bind="attr: { 'href': currentTemplate().description.url }">Source</a></div>
+                  <!-- ko if: (currentTemplate() != null) && (currentTemplate().description() != null) -->
+                  <h2 data-bind="text: currentTemplate().description().title"></h2>
+                  <h3 data-bind="text: currentTemplate().description().credits"></h2>
+                  <div data-bind="text: currentTemplate().description().description"></div>
+                  <div><a data-bind="attr: { 'href': currentTemplate().description().url }">Source</a></div>
                   <!-- /ko -->
                 </div>
               </div>
