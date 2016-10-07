@@ -25,10 +25,11 @@ require(['knockout',
          'viewModels/engineVM',
          'defaultTemplate',
          'tabs',
-         'knockoutExtensions',
          'components/registration',
+         'knockoutExtensions',
+         /*'ko-ext/ckeditor',*/ 'ko-ext/ddslick', 'ko-ext/fabric', 'ko-ext/jscolor', 'ko-ext/simplecolorpicker', 'ko-ext/templates-list',
          'domReady!'
-       ], function(ko, CardTemplateVM, EngineVM, defaultTemplate, tabs, koExt, components){
+       ], function(ko, CardTemplateVM, EngineVM, defaultTemplate, tabs, components, koExt){
 
   var jsonTemplate = defaultTemplate.getTemplate();
 
