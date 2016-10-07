@@ -14,6 +14,7 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"], functio
     self.editableTemplate = ko.observable();
 
     self.isMultiStyles = ko.pureComputed(function() {
+      console.log('test');
       return (self.styles() != null) && (self.styles().length > 1);
     });
     /********************************/

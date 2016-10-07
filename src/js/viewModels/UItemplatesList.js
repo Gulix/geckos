@@ -25,8 +25,7 @@ define(['knockout', 'config', 'lodash',
     // When selecting via the Carousel, this method is called to load the displayed template
     self.loadTemplateFromIndex = function(index)
     {
-      self.selectedTemplate().importTemplateFromJson(JSON.stringify(self.templates[index]));
-      self.selectedTemplate().setTemplate();
+      self.selectedTemplate(CardTemplateVM.newCardTemplateVM(self.templates[index], function() { }, function() { }));      
     }
 
     /***************************************************
@@ -36,6 +35,7 @@ define(['knockout', 'config', 'lodash',
     self.isActive = ko.observable(isActive);
     // Current template for displaying Description & Preview
     self.currentTemplate = ko.pureComputed(function() {
+      console.log('update de currentTemplate()');
       return self.selectedTemplate();
     })
     // Returns the JSON of the selected template
