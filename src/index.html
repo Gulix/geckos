@@ -79,13 +79,13 @@
                 <!-- /ko -->
 
                 <!-- ko if: isEditionModeActive -->
+                <!-- ko with: uiEdition -->
                 <div class="template-edition">
-                  <!-- ko with: currentTemplate -->
                   <div class="template-text">
-                    <textarea rows="6" data-bind="value: editableTemplate"></textarea>
+                    <textarea rows="6" data-bind="value: _editableJson"></textarea>
                   </div>
-                  <!-- /ko -->
                 </div>
+                <!-- /ko -->
                 <!-- /ko -->
 
                 <!-- ko with: currentTemplate -->
@@ -114,6 +114,8 @@
                        data-bind="click: goEditionMode, visible: isGoEditionModeVisible"><span>Go to 'Edition mode'</span></a></li>
                 <li><a href="#" class="icon-list" title="Go to 'List mode'"
                        data-bind="click: goListMode, visible: isGoListModeVisible"><span>Go to 'List mode'</span></a></li>
+                <li><a href="#" class="icon-edition-mode" title="Validate the edited template"
+                       data-bind="click: useTemplateCode, visible: isEditionModeActive"><span>Validate the edited template</span></a></li>
                 <li><a href="#" class="icon-apply-template" title="Use this template"
                        data-bind="click: setTemplate"><span>Use this template</span></a></li>
                 <li><a href="#" class="icon-download" title="Load template from file"

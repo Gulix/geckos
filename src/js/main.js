@@ -23,15 +23,16 @@ require.config({
 require(['knockout',
          'viewModels/cardTemplateVM',
          'viewModels/engineVM',
-         'defaultTemplate',
          'tabs',
          'components/registration',
+         'templates/load-templates',
          'knockoutExtensions',
          /*'ko-ext/ckeditor',*/ 'ko-ext/ddslick', 'ko-ext/fabric', 'ko-ext/jscolor', 'ko-ext/simplecolorpicker', 'ko-ext/templates-list',
          'domReady!'
-       ], function(ko, CardTemplateVM, EngineVM, defaultTemplate, tabs, components, koExt){
+       ], function(ko, CardTemplateVM, EngineVM, tabs, components, Templates){
 
-  var jsonTemplate = defaultTemplate.getTemplate();
+
+  var jsonTemplate = Templates.load()[0];
 
   window.CKEDITOR_BASEPATH = './vendor/ckeditor/';
 

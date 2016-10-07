@@ -28,7 +28,7 @@
 			"key": "pictureless",
 			"basedOn": "default",
       "name": "Default Style (without a picture)",
-      "description": "Basic Template for a card of various effect (for any type of game)",
+      "description": "Basic Template (witout a picture) for a card of various effect (for any type of game)",
 			"fields": [
 		    { "name": "displayImage", "ignored": true },
 		    { "name": "image", "ignored": true }

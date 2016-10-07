@@ -1,9 +1,8 @@
 define(['knockout', 'config', 'lodash',
-        'templates/load-templates',
         'viewModels/cardTemplateVM',
         'viewModels/UItemplatesList',
         'viewModels/UItemplatesEdition'],
-  function(ko, config, _, Templates, CardTemplateVM, uiList, uiEdition) {
+  function(ko, config, _, CardTemplateVM, uiList, uiEdition) {
   /**
    * Used to manage the "Templates" part of the UI
    * Stored as an object in the EngineVM main object
@@ -12,6 +11,12 @@ define(['knockout', 'config', 'lodash',
    */
   function UItemplates(engineVM) {
     var self = this;
+
+    /****************************
+     *** Constants Definition ***
+     ****************************/
+    var _EDITION_MODE_KEY = 'edition';
+    var _LIST_MODE_KEY = 'list';
 
     /****************************
      *** Variables Definition ***
@@ -50,8 +55,16 @@ define(['knockout', 'config', 'lodash',
     });
 
     // Modes of the UI
-    self.goListMode = function() { if (self.uiList() != null) self.uiList().isActive(true); }
-    self.goEditionMode = function() { if (self.uiEdition() != null) self.uiEdition().isActive(true); }
+    self.goMode = function(keyMode) {
+      if (self.uiList() != null) {
+        self.uiList().isActive(keyMode == _LIST_MODE_KEY);
+      }
+      if (self.uiEdition() != null) {
+        self.uiEdition().isActive(keyMode == _EDITION_MODE_KEY);
+      }
+    }
+    self.goListMode = function() { self.goMode(_LIST_MODE_KEY); }
+    self.goEditionMode = function() { self.goMode(_EDITION_MODE_KEY); }
     self.isGoListModeVisible = ko.pureComputed(function() {
       return self.isListModeEnabled && !self.isListModeActive();
     });
@@ -61,8 +74,7 @@ define(['knockout', 'config', 'lodash',
 
     // Set the currentTemplate as the one being used in the Engine
     self.setTemplate = function() {
-      self.engineVM.cardTemplate().editableTemplate(self.currentTemplate().editableTemplate());
-      self.engineVM.cardTemplate().setTemplate();
+      self.engineVM.cardTemplate().setTemplate(self.currentTemplate().getJson());
     }
     self.loadTemplate = function() {
       if ((self.uiEdition() != null) && self.uiEdition().isActive()) {
@@ -76,7 +88,12 @@ define(['knockout', 'config', 'lodash',
     }
     self.resetTemplateCode = function() {
       if ((self.uiEdition() != null) && self.uiEdition().isActive()) {
-        // Do something
+        self.uiEdition().reset();
+      }
+    }
+    self.useTemplateCode = function() {
+      if ((self.uiEdition() != null) && self.uiEdition().isActive()) {
+        self.uiEdition().useEditableCode();
       }
     }
 
@@ -89,11 +106,12 @@ define(['knockout', 'config', 'lodash',
      }
      // Mode displayed by default
      var defaultMode = config.templates.defaultMode;
-     if (!_.includes(['list', 'edition'], config.templates.defaultMode)) {
-       defaultMode = self.isEditionModeEnabled ? 'edition' : 'list';
+     if (!_.includes([_LIST_MODE_KEY, _EDITION_MODE_KEY], config.templates.defaultMode)) {
+       defaultMode = self.isEditionModeEnabled ? _EDITION_MODE_KEY : _LIST_MODE_KEY;
      }
      // The two modes
-     self.uiList(uiList.getUI(self, defaultMode == 'list'));
+     self.uiList(uiList.getUI(self, defaultMode == _LIST_MODE_KEY));
+     self.uiEdition(uiEdition.getUI(self, defaultMode == _EDITION_MODE_KEY));
   }
 
   return {

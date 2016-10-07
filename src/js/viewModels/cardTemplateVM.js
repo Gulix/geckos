@@ -10,8 +10,7 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"], functio
     self.styles = ko.observableArray([ ]);
     self.selectedStyle = ko.observable();
 
-    self.currentTemplate = ko.observable(); // This needs to disappear or be renamed
-    self.editableTemplate = ko.observable();
+    self._activeTemplateJson = { }; // The 'active' JSON code of the template
 
     self.description = ko.observable();
 
@@ -37,29 +36,26 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"], functio
       return generated;
     }
 
-    self.resetTemplateCode = function() {
-      self.editableTemplate(JSON.stringify(self.currentTemplate()));
-    }
     self.saveTemplateAsJson = function() {
-      var blob = new Blob([JSON.stringify(self.currentTemplate())], {type: "text/plain;charset=utf-8"});
+      var blob = new Blob([JSON.stringify(self._activeTemplateJson)], {type: "text/plain;charset=utf-8"});
       saveAs(blob, "template.json"); // TODO : filename depending of name of template (if provided)
     }
     self.loadTemplate = function() {
       $("#file-load-template").click();
     }
-    self.importTemplateFromJson = function(data) {
-      self.editableTemplate(data);
+    self.getJson = function() {
+      return self._activeTemplateJson;
     }
 
     /* Remove and Replace the fonts embedded in the template */
     self.updateEmbeddedFonts = function() {
       $('.canvas-fonts').remove();
 
-      if ((self.currentTemplate() != null) && (self.currentTemplate().fonts != null)) {
+      if ((self._activeTemplateJson != null) && (self._activeTemplateJson.fonts != null)) {
         var canvasFontsStyle = document.createElement('style');
         canvasFontsStyle.setAttribute('class', 'canvas-fonts');
-        for(var iFont = 0; iFont < self.currentTemplate().fonts.length; iFont++) {
-          var currentFont = self.currentTemplate().fonts[iFont];
+        for(var iFont = 0; iFont < self._activeTemplateJson.fonts.length; iFont++) {
+          var currentFont = self._activeTemplateJson.fonts[iFont];
           if ((currentFont != null) && (currentFont.fontFamily != null) && (currentFont.src != null)) {
             var fontFace = "@font-face { font-family: '" + currentFont.fontFamily + "'; "
               + "src: url(" + currentFont.src + "); "
@@ -84,19 +80,17 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"], functio
     self.initTemplateFromJson = function() {
       var jsonStyle = { };
 
-      self.currentTemplate(JSON.parse(self.editableTemplate()));
-
       self.updateEmbeddedFonts();
 
-      if (self.currentTemplate().styles != null) {
-        self.styles(self.currentTemplate().styles);
+      if (self._activeTemplateJson.styles != null) {
+        self.styles(self._activeTemplateJson.styles);
         jsonStyle = self.getDefaultStyle();
         self.selectedStyle(jsonStyle);
       } else {
         jsonStyle = self.buildStyleFromRoot();
       }
 
-      self.description(self.currentTemplate().description);
+      self.description(self._activeTemplateJson.description);
 
       self.setStyle(jsonStyle);
     }
@@ -113,7 +107,7 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"], functio
         jsonCompleteStyle = InheritingStyles.getStyleFromBase(jsonCompleteStyle, baseStyle);
       }
 
-      jsonCompleteStyle.sharedOptions = self.currentTemplate().sharedOptions;
+      jsonCompleteStyle.sharedOptions = self._activeTemplateJson.sharedOptions;
       jsonCompleteStyle.fields.sort(self.compareFieldOrder);
       jsonCompleteStyle.canvasFields.sort(self.compareFieldOrder);
 
@@ -164,16 +158,17 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"], functio
     self.buildStyleFromRoot = function() {
       var jsonStyle = { };
 
-      jsonStyle.fields = self.currentTemplate().fields;
-      jsonStyle.canvasFields = self.currentTemplate().canvasFields;
-      jsonStyle.canvasBackground = self.currentTemplate().canvasBackground;
-      jsonStyle.canvasWidth = self.currentTemplate().canvasWidth;
-      jsonStyle.canvasHeight = self.currentTemplate().canvasHeight;
+      jsonStyle.fields = self._activeTemplateJson.fields;
+      jsonStyle.canvasFields = self._activeTemplateJson.canvasFields;
+      jsonStyle.canvasBackground = self._activeTemplateJson.canvasBackground;
+      jsonStyle.canvasWidth = self._activeTemplateJson.canvasWidth;
+      jsonStyle.canvasHeight = self._activeTemplateJson.canvasHeight;
 
       return jsonStyle;
     }
 
-    self.setTemplate = function() {
+    self.setTemplate = function(jsonCode) {
+      self._activeTemplateJson = jsonCode;
       self.initTemplateFromJson();
     }
 
@@ -204,7 +199,7 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"], functio
       self.setStyle(newValue);
     }, self);
 
-    self.editableTemplate(JSON.stringify(jsonTemplate));
+    self._activeTemplateJson = jsonTemplate;
     self.initTemplateFromJson();
   }
 
