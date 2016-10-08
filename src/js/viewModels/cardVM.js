@@ -10,13 +10,13 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor', 'fabricjs-textStyle
      *** Variables Declaration ***
      *****************************/
 
-    self.fields = ko.observableArray([]);
+    self._fields = ko.observableArray([]);
     self.componentsFields = ko.observableArray([]);
 
     self.cardName = ko.pureComputed(function() {
       var nameFieldExists = false;
-      for (var iField = 0; iField < self.fields().length; iField++) {
-        var field = self.fields()[iField];
+      for (var iField = 0; iField < self._fields().length; iField++) {
+        var field = self._fields()[iField];
         if (field.isNameField) {
           return self._getValue(field.name);
         } else if (field.name == 'name') {
@@ -26,7 +26,7 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor', 'fabricjs-textStyle
       if (nameFieldExists == true) {
         return self._getValue('name');
       } else {
-        return self._getValue(self.fields()[0].name);
+        return self._getValue(self._fields()[0].name);
       }
     });
 
@@ -60,28 +60,31 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor', 'fabricjs-textStyle
 
        // Filling the Observable Arrays
        self.componentsFields(componentsFields);
-       self.fields(fields);
+       self._fields(fields);
      }
 
      /* Returns the Card Data as Json object, ready to be saved and then loaded later */
      self.getSavedData = function() {
-       var savedObject = { };
-       for (var iField = 0; iField < self.fields().length; iField++) {
-         var field = self.fields()[iField];
-         savedObject[field.name] = field.getJsonValue();
+       var savedObject = { "data": { }, "conf": { } };
+       // Retrieving the data
+       for (var iField = 0; iField < self._fields().length; iField++) {
+         var field = self._fields()[iField];
+         savedObject.data[field.name] = field.getJsonValue();
        }
+       // Retrieving the card configuration
+       savedObject.conf.styleKey = '';
        return savedObject;
      }
 
      /* Load data from Json Values */
-     self.loadFromJson = function(jsonData) {
-       for (var data in jsonData) {
-         for (var iField = 0; iField < self.fields().length; iField++) {
-           var field = self.fields()[iField];
-           if (field.name == data) {
-             field.setValue(jsonData[data]);
-           }
-         }
+     self.loadFromJson = function(jsonCard) {
+       // Compatibility with version before 0.1.2
+       if ((jsonCard.data == undefined) || (jsonCard.conf == undefined)) {
+         self._loadCardData(jsonCard);
+       }
+       else
+       {
+         self._loadCardData(jsonCard.data);
        }
      }
 
@@ -167,8 +170,8 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor', 'fabricjs-textStyle
      *************************/
 
     self._getFieldFromName = function(fieldName) {
-      for (var iField = 0; iField < self.fields().length; iField++) {
-        var field = self.fields()[iField];
+      for (var iField = 0; iField < self._fields().length; iField++) {
+        var field = self._fields()[iField];
         if (field.name == fieldName) {
           return field;
         }
@@ -221,6 +224,22 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor', 'fabricjs-textStyle
       } else {
         return { };
       }
+    }
+
+    /* Managing the data and conf stored in the object */
+    self._loadCardData = function(jsonData){
+      for (var data in jsonData) {
+        var field = self._getFieldFromName(data);
+        if (field != null) {
+          field.setValue(jsonData[data]);
+        }
+      }
+    }
+    self._loadCardConf = function(jsonConf) {
+      self._setStyleKey(jsonConf.styleKey);
+    }
+    self._setStyleKey = function(key) {
+
     }
 
     /*****************************
