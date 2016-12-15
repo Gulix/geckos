@@ -72,6 +72,41 @@
             <div class="section-colwrap">
               <div class="col-content">
 
+                <!-- ko with: engineVM.cardTemplate -->
+                <div class="template-description box-elements flex-container">
+                  <!-- ko if: (description() != null) && (description().logo != null) -->
+                  <div class="flex-1 template-logo">
+                    <img data-bind="attr: { src: description().logo }"></img>
+                  </div>
+                  <!-- /ko -->
+
+                  <div class="flex-6">
+                    <!-- ko if: description() != null -->
+                    <div>
+                      <span class="template-title" data-bind="text: description().title"></span>&nbsp;&nbsp;&nbsp;
+                      <span class="template-credits" data-bind="text: description().credits"></span>
+                    </div>
+                    <div data-bind="text: description().description"></div>
+                    <!-- ko if: description().url != null -->
+                    <div><a data-bind="attr: { 'href': description().url }">Source</a></div>
+                    <!-- /ko -->
+                    <!-- /ko -->
+
+                    <!-- ko if: isMultiStyles() -->
+                    <label>Default style used on all cards</label>
+                    <div>
+                      <select data-bind="options: styles, optionsText: 'name', value: selectedStyle, enable: isStyleSelectionActive"></select>
+                      <span class="word-link" data-bind="visible: !isStyleSelectionActive(), click: activateStyleSelection">Change</span>
+                      <span class="word-link" data-bind="visible: isStyleSelectionActive, click: confirmStyleSelection">Confirm</span>
+                      <span data-bind="visible: isStyleSelectionActive"> - </span>
+                      <span class="word-link word-link-cancel" data-bind="visible: isStyleSelectionActive, click: cancelStyleSelection">Cancel</span>
+                    </div>
+                    <div data-bind="text: selectedStyle().description"></div>
+                    <!-- /ko -->
+                  </div>
+                </div>
+                <!-- /ko -->
+
                 <!-- ko if: isListModeActive -->
                 <!-- ko with: uiList -->
                 <div id="templates-carousel" data-bind="templatesList: $data"></div>
@@ -87,25 +122,6 @@
                 </div>
                 <!-- /ko -->
                 <!-- /ko -->
-
-                <!-- ko with: currentTemplate -->
-                <!-- ko if: isMultiStyles() -->
-                <div class="template-styles box-elements">
-                  <label>Style to use</label>
-                  <select data-bind="options: styles, optionsText: 'name', value: selectedStyle"></select>
-                  <div data-bind="text: selectedStyle().description"></div>
-                </div>
-                <!-- /ko -->
-                <!-- /ko -->
-
-                <div class="template-description">
-                  <!-- ko if: (currentTemplate() != null) && (currentTemplate().description() != null) -->
-                  <h2 data-bind="text: currentTemplate().description().title"></h2>
-                  <h3 data-bind="text: currentTemplate().description().credits"></h2>
-                  <div data-bind="text: currentTemplate().description().description"></div>
-                  <div><a data-bind="attr: { 'href': currentTemplate().description().url }">Source</a></div>
-                  <!-- /ko -->
-                </div>
               </div>
             </div>
             <div class="col-menu">

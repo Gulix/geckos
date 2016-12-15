@@ -191,6 +191,56 @@ body {
   height: 100%;
 }
 
+/*****************************/
+/* Description of a Template */
+/*****************************/
+
+.template-title {
+  font-size: 3.6rem;
+  line-height: 1.25;
+  letter-spacing: -.1rem;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+.template-credits {
+  font-size: 3.0rem;
+  line-height: 1.25;
+  letter-spacing: -.1rem;
+  color: #E37222;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+
+.template-logo {
+  margin-right: 15px;
+}
+
+.template-logo img {
+  max-width: 100%;
+}
+
+/**************/
+/* Word Links */
+/**************/
+
+.word-link {
+  font-weight: bold;
+  cursor: pointer;
+  color: #66B9BF;
+}
+.word-link:hover {
+  color: #07889B;
+  text-decoration: underline;
+}
+.word-link-cancel {
+  color: #EEAA7B;
+}
+.word-link-cancel:hover {
+  color: #E37222;
+}
+
 /**********************************/
 /* List of cards in the Card view */
 /**********************************/
@@ -226,6 +276,10 @@ select.cards-list {
 
 .flex-5 {
   flex: 5;
+}
+
+.flex-6 {
+  flex: 6;
 }
 
 /***********************/

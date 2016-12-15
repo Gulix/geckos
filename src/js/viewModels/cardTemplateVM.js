@@ -1,4 +1,5 @@
-define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"], function(ko, utils, StyleVM, InheritingStyles) {
+define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"],
+  function(ko, utils, StyleVM, InheritingStyles) {
 
   function cardTemplateVM(jsonTemplate, updCanvasSize, updCardsOnTemplateChange) {
     var self = this;
@@ -8,7 +9,7 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"], functio
     /*************************/
     self.styleVM = ko.observable();
     self.styles = ko.observableArray([ ]);
-    self.selectedStyle = ko.observable();
+    self.defaultStyle = ko.observable();
 
     self._activeTemplateJson = { }; // The 'active' JSON code of the template
 
@@ -17,6 +18,10 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"], functio
     self.isMultiStyles = ko.pureComputed(function() {
       return (self.styles() != null) && (self.styles().length > 1);
     });
+
+    // Selection of the Default template
+    self.isStyleSelectionActive = ko.observable(false);
+    self.selectedStyle = ko.observable();
 
     /********************************/
     /* End of Variables declaration */
@@ -85,7 +90,7 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"], functio
       if (self._activeTemplateJson.styles != null) {
         self.styles(self._activeTemplateJson.styles);
         jsonStyle = self.getDefaultStyle();
-        self.selectedStyle(jsonStyle);
+        self.defaultStyle(jsonStyle);
       } else {
         jsonStyle = self.buildStyleFromRoot();
       }
@@ -135,18 +140,18 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"], functio
     }
 
     self.getDefaultStyle = function() {
-      var selectedStyle = null;
+      var defaultStyle = null;
       for (var iStyle = 0; iStyle < self.styles().length; iStyle++) {
-        if (selectedStyle == null) {
-          selectedStyle = self.styles()[iStyle];
+        if (defaultStyle == null) {
+          defaultStyle = self.styles()[iStyle];
         }
         if (self.styles()[iStyle].isDefault) {
-          selectedStyle = self.styles()[iStyle];
+          defaultStyle = self.styles()[iStyle];
           break;
         }
       }
 
-      return selectedStyle;
+      return defaultStyle;
     }
 
     self.setStyle = function(jsonStyle) {
@@ -187,6 +192,20 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"], functio
     self.updateFieldsOfCard = function(card) {
       self.styleVM().updateFieldsOfCard(card);
     }
+
+    /* --- Selection of a Style --- */
+    self.activateStyleSelection = function() {
+      self.isStyleSelectionActive(true);
+    }
+    self.cancelStyleSelection = function() {
+      self.selectedStyle(self.defaultStyle());
+      self.isStyleSelectionActive(false);
+    }
+    self.confirmStyleSelection = function() {
+      self.defaultStyle(self.selectedStyle());
+      self.isStyleSelectionActive(false);
+    }
+
     /********************************/
     /* End of Functions declaration */
     /********************************/
@@ -195,8 +214,9 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"], functio
     var styleVM = StyleVM.newStyleVM({ }, self.updateCanvasSize, self.updateCards);
     self.styleVM(styleVM);
 
-    self.selectedStyle.subscribe(function (newValue) {
+    self.defaultStyle.subscribe(function (newValue) {
       self.setStyle(newValue);
+      self.selectedStyle(newValue);
     }, self);
 
     self._activeTemplateJson = jsonTemplate;
