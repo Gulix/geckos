@@ -95,7 +95,7 @@
                     <!-- ko if: isMultiStyles() -->
                     <label>Default style used on all cards</label>
                     <div>
-                      <select data-bind="options: styles, optionsText: 'name', value: selectedStyle, enable: isStyleSelectionActive"></select>
+                      <select data-bind="options: jsonStylesList, optionsText: 'name', value: selectedStyle, enable: isStyleSelectionActive"></select>
                       <span class="word-link" data-bind="visible: !isStyleSelectionActive(), click: activateStyleSelection">Change</span>
                       <span class="word-link" data-bind="visible: isStyleSelectionActive, click: confirmStyleSelection">Confirm</span>
                       <span data-bind="visible: isStyleSelectionActive"> - </span>
@@ -201,6 +201,14 @@
                 <div class="flex-container">
                   <!-- ko if: isCardSelected -->
                   <div class="flex-3">
+
+                    <!-- ko if: cardTemplate().isMultiStyles() -->
+                    <div class="box-elements">
+                      <label>Style to apply to the card</label>
+                      <select data-bind="options: cardTemplate().stylesForCard, optionsText: 'text', optionsValue: 'key', value: editableCard().selectedStyleKey"></select>
+                    </div>
+                    <!-- /ko -->
+
                     <card-editable-fields params="cardVM: editableCard"></card-editable-fields>
                   </div>
                   <!-- /ko -->

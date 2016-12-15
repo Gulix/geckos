@@ -86,20 +86,21 @@ define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
     }
 
     self.initStyleFromCode = function(jsonCode) {
+      if (jsonCode != null) {
+        self.fields(jsonCode.fields);
 
-      self.fields(jsonCode.fields);
+        self.sharedConfiguration.sharedOptions = jsonCode.sharedOptions;
 
-      self.sharedConfiguration.sharedOptions = jsonCode.sharedOptions;
+        self.canvasFields(jsonCode.canvasFields);
 
-      self.canvasFields(jsonCode.canvasFields);
+        self.canvasBackground(jsonCode.canvasBackground);
+        self.canvasWidth(jsonCode.canvasWidth);
+        self.canvasHeight(jsonCode.canvasHeight);
 
-      self.canvasBackground(jsonCode.canvasBackground);
-      self.canvasWidth(jsonCode.canvasWidth);
-      self.canvasHeight(jsonCode.canvasHeight);
-
-      // Updating the cards, the canvas
-      self.updateCards();
-      self.updateCanvasSize();
+        // Updating the cards, the canvas
+        self.updateCards();
+        self.updateCanvasSize();
+      }
     }
 
     self.createNewCard = function() {

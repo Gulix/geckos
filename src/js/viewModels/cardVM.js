@@ -12,6 +12,7 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor', 'fabricjs-textStyle
 
     self._fields = ko.observableArray([]);
     self.componentsFields = ko.observableArray([]);
+    self.selectedStyleKey = ko.observable();
 
     self.cardName = ko.pureComputed(function() {
       var nameFieldExists = false;
@@ -36,15 +37,18 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor', 'fabricjs-textStyle
      self.updateFields = function(fieldList, sharedConfiguration) {
        var fields = [];
 
-       // Creation of the EditableFieldVM
-       for (var iField = 0; iField < fieldList.length; iField++) {
-         var editableField = FieldFactory.buildField(fieldList[iField], sharedConfiguration);
-         // Getting previous values from actual field with same name
-         var existingField = self._getFieldFromName(editableField.name);
-         if (existingField != null) {
-           editableField.setValue(existingField.getJsonValue());
+       if (fieldList != null)
+       {
+         // Creation of the EditableFieldVM
+         for (var iField = 0; iField < fieldList.length; iField++) {
+           var editableField = FieldFactory.buildField(fieldList[iField], sharedConfiguration);
+           // Getting previous values from actual field with same name
+           var existingField = self._getFieldFromName(editableField.name);
+           if (existingField != null) {
+             editableField.setValue(existingField.getJsonValue());
+           }
+           fields.push(editableField);
          }
-         fields.push(editableField);
        }
 
        // List of fields to be used as Components
@@ -71,8 +75,12 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor', 'fabricjs-textStyle
          var field = self._fields()[iField];
          savedObject.data[field.name] = field.getJsonValue();
        }
-       // Retrieving the card configuration
+       // Retrieving the card configuration (style of the card)
        savedObject.conf.styleKey = '';
+       if (self.selectedStyleKey() != null) {
+         savedObject.conf.styleKey = self.selectedStyleKey();
+       }
+
        return savedObject;
      }
 
@@ -85,6 +93,7 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor', 'fabricjs-textStyle
        else
        {
          self._loadCardData(jsonCard.data);
+         self._loadCardConf(jsonCard.conf);
        }
      }
 
@@ -217,6 +226,7 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor', 'fabricjs-textStyle
       return false;
     }
 
+    /* Returns the Styles array for FabricJS TextBox element */
     self._getStyles = function(fieldName) {
       var field = self._getFieldFromName(fieldName);
       if ((field != null) && (field.styles != undefined)) {
@@ -238,8 +248,10 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor', 'fabricjs-textStyle
     self._loadCardConf = function(jsonConf) {
       self._setStyleKey(jsonConf.styleKey);
     }
-    self._setStyleKey = function(key) {
 
+    /* Style selection */
+    self._setStyleKey = function(key) {
+      self.selectedStyleKey(key);
     }
 
     /*****************************

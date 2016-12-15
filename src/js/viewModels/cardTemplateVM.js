@@ -7,8 +7,9 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"],
     /*************************/
     /* Variables declaration */
     /*************************/
-    self.styleVM = ko.observable();
-    self.styles = ko.observableArray([ ]);
+    self.styleVM = null;
+
+    self.jsonStylesList = ko.observableArray([ ]);
     self.defaultStyle = ko.observable();
 
     self._activeTemplateJson = { }; // The 'active' JSON code of the template
@@ -16,7 +17,7 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"],
     self.description = ko.observable();
 
     self.isMultiStyles = ko.pureComputed(function() {
-      return (self.styles() != null) && (self.styles().length > 1);
+      return (self.jsonStylesList() != null) && (self.jsonStylesList().length > 1);
     });
 
     // Selection of the Default template
@@ -35,8 +36,9 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"],
 
     self.generateTemplate = function(cardVM) {
       var generated = { "objects" : [] };
-      if (self.styleVM() != null) {
-        generated = self.styleVM().generateTemplate(cardVM);
+      var styleForCard = self.styleForCard(cardVM);
+      if (styleForCard != null) {
+        generated = styleForCard.generateTemplate(cardVM);
       }
       return generated;
     }
@@ -75,12 +77,12 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"],
       }
     }
 
-    self.initStyleFromCode = function(jsonStyle) {
+    /*self.initStyleFromCode = function(jsonStyle) {
       if (self.styleVM() != null)
       {
-        self.styleVM().initStyleFromCode(jsonStyle);
       }
-    }
+        self.styleVM().initStyleFromCode(jsonStyle);
+    }*/
 
     self.initTemplateFromJson = function() {
       var jsonStyle = { };
@@ -88,7 +90,7 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"],
       self.updateEmbeddedFonts();
 
       if (self._activeTemplateJson.styles != null) {
-        self.styles(self._activeTemplateJson.styles);
+        self.jsonStylesList(self._activeTemplateJson.styles);
         jsonStyle = self.getDefaultStyle();
         self.defaultStyle(jsonStyle);
       } else {
@@ -131,9 +133,9 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"],
 
     self.getStyleFromKey = function(key) {
       var style = null;
-      for (var iStyle = 0; iStyle < self.styles().length; iStyle++) {
-        if (self.styles()[iStyle].key == key) {
-          style = self.styles()[iStyle];
+      for (var iStyle = 0; iStyle < self.jsonStylesList().length; iStyle++) {
+        if (self.jsonStylesList()[iStyle].key == key) {
+          style = self.jsonStylesList()[iStyle];
         }
       }
       return style;
@@ -141,12 +143,12 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"],
 
     self.getDefaultStyle = function() {
       var defaultStyle = null;
-      for (var iStyle = 0; iStyle < self.styles().length; iStyle++) {
+      for (var iStyle = 0; iStyle < self.jsonStylesList().length; iStyle++) {
         if (defaultStyle == null) {
-          defaultStyle = self.styles()[iStyle];
+          defaultStyle = self.jsonStylesList()[iStyle];
         }
-        if (self.styles()[iStyle].isDefault) {
-          defaultStyle = self.styles()[iStyle];
+        if (self.jsonStylesList()[iStyle].isDefault) {
+          defaultStyle = self.jsonStylesList()[iStyle];
           break;
         }
       }
@@ -156,8 +158,18 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"],
 
     self.setStyle = function(jsonStyle) {
       var jsonStyleComplete = self.buildStyleObject(jsonStyle);
-      self.initStyleFromCode(jsonStyleComplete);
+      //self.initStyleFromCode(jsonStyleComplete);
     }
+
+    self.stylesForCard = ko.pureComputed(function() {
+      var cardStyles = [ ];
+      cardStyles.push({ key: '', text: '<Use default style defined for the template>' });
+      _.forEach(self.jsonStylesList(), function(stl) {
+        cardStyles.push({ key: stl.key, text: stl.name });
+      })
+
+      return cardStyles;
+    });
 
     /* When there is no list of styles, style is taken from the root of the template */
     self.buildStyleFromRoot = function() {
@@ -178,19 +190,23 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"],
     }
 
     self.canvasWidth = function() {
-      if (self.styleVM() != null) return self.styleVM().canvasWidth();
+      var style = self.styleForCard();
+      if (style != null) return style.canvasWidth();
       return 0;
     }
     self.canvasHeight = function() {
-      if (self.styleVM() != null) return self.styleVM().canvasHeight();
+      var style = self.styleForCard();
+      if (style != null) return style.canvasHeight();
       return 0;
     }
 
     self.createNewCard = function() {
-      return self.styleVM().createNewCard();
+      return self.styleForCard().createNewCard();
     }
+
     self.updateFieldsOfCard = function(card) {
-      self.styleVM().updateFieldsOfCard(card);
+      if (card.selectedStyle())
+      self.styleForCard(card).updateFieldsOfCard(card);
     }
 
     /* --- Selection of a Style --- */
@@ -206,13 +222,26 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"],
       self.isStyleSelectionActive(false);
     }
 
+    self.styleForCard = function(cardVM) {
+      // Object initiatlization
+      if (self.styleVM == null) {
+        return null;
+      }
+
+      // Which style to apply to the card
+      if ((cardVM == null) || (cardVM.selectedStyleKey() == null) || (cardVM.selectedStyleKey() == ''))
+      {
+        self.styleVM.initStyleFromCode(self.defaultStyle());
+      } else {
+        // Style from card
+      }
+
+      return self.styleVM;
+    }
+
     /********************************/
     /* End of Functions declaration */
     /********************************/
-
-    /* Style initialization */
-    var styleVM = StyleVM.newStyleVM({ }, self.updateCanvasSize, self.updateCards);
-    self.styleVM(styleVM);
 
     self.defaultStyle.subscribe(function (newValue) {
       self.setStyle(newValue);
@@ -220,6 +249,8 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"],
     }, self);
 
     self._activeTemplateJson = jsonTemplate;
+    self.styleVM = StyleVM.newStyleVM({ }, self.updateCanvasSize, self.updateCards);
+
     self.initTemplateFromJson();
   }
 
