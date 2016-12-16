@@ -210,6 +210,7 @@ body {
   color: #E37222;
   margin-top: 0;
   margin-bottom: 2rem;
+  margin-left: 10px;
   font-weight: 300;
 }
 
@@ -219,6 +220,50 @@ body {
 
 .template-logo img {
   max-width: 100%;
+}
+
+/*********************/
+/* List of Templates */
+/*********************/
+.template-listitem {
+  display: inline-block;
+  width: 300px;
+  height: 200px;
+  background-color: #96C7CA;
+  border-color: #07889B;
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 5px;
+  margin-left: 10px;
+  padding: 5px;
+  position: relative;
+}
+
+.template-listitem-title {
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+.template-listitem-description {
+  font-size: 0.8em;
+}
+
+.template-listitem-logo {
+  margin-right: 15px;
+  height: 100%;
+}
+
+.template-listitem-logo img {
+  width: 100%;
+}
+
+.template-listitem-toolbar {
+  position: absolute;
+  background: black;
+  height: auto;
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
 }
 
 /**************/

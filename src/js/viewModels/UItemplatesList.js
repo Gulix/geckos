@@ -15,7 +15,8 @@ define(['knockout', 'config', 'lodash',
     // Parent object
     self.uiTemplates = uiTemplatesMain; // TODO : Remove if not used (currently not used)
     // List of templates
-    self.templates = [];
+    self.jsonTemplates = [];
+    self.objTemplates = ko.observableArray([ ]);
     // Selected / Current template
     self.selectedTemplate = ko.observable(null);
 
@@ -25,7 +26,7 @@ define(['knockout', 'config', 'lodash',
     // When selecting via the Carousel, this method is called to load the displayed template
     self.loadTemplateFromIndex = function(index)
     {
-      self.selectedTemplate(CardTemplateVM.newCardTemplateVM(self.templates[index], function() { }, function() { }));
+      self.selectedTemplate(CardTemplateVM.newCardTemplateVM(self.jsonTemplates[index], function() { }, function() { }));
     }
 
     /***************************************************
@@ -50,8 +51,12 @@ define(['knockout', 'config', 'lodash',
      *****************************/
 
      // List of templates
-     self.templates = Templates.load();
-     var jsonTemplate = self.templates[0];
+     self.jsonTemplates = Templates.load();
+     self.objTemplates([ ]);
+     _.forEach(self.jsonTemplates, function(tpl) {
+       self.objTemplates.push(CardTemplateVM.newCardTemplateVM(tpl, function() { }, function() { }));
+     });
+     var jsonTemplate = self.jsonTemplates[0];
      self.selectedTemplate(CardTemplateVM.newCardTemplateVM(jsonTemplate, function() { }, function() { }));
   }
 
