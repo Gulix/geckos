@@ -61,6 +61,14 @@ define(['knockout'], function(ko) {
         viewModel: { require: 'components/card-editable-fields/card-editable-fields' },
         template: { require: 'text!components/card-editable-fields/card-editable-fields.html' }
       });
+
+      /****************************/
+      /* Displaying the Templates */
+      /****************************/
+      ko.components.register('template-style-description', {
+        viewModel: { require: 'components/template-style-description/template-style-description' },
+        template: { require: 'text!components/template-style-description/template-style-description.html' }
+      });
     }
   };
 });
