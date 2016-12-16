@@ -32,13 +32,11 @@ require(['knockout',
        ], function(ko, CardTemplateVM, EngineVM, tabs, components, Templates){
 
 
-  var jsonTemplate = Templates.load()[0];
-
   window.CKEDITOR_BASEPATH = './vendor/ckeditor/';
 
   components.register();
 
-  var engineVM = EngineVM.newEngineVM(jsonTemplate);
+  var engineVM = EngineVM.newEngineVM();
 
   ko.applyBindings(engineVM);
 

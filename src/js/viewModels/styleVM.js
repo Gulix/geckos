@@ -6,8 +6,8 @@ define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
     /*************************/
     /* Variables declaration */
     /*************************/
-    self.fields = ko.observableArray();
-    self.canvasFields = ko.observableArray();
+    self.fields = ko.observableArray([ ]);
+    self.canvasFields = ko.observableArray([ ]);
 
     self.canvasBackground = ko.observable();
     self.canvasWidth = ko.observable();
@@ -91,7 +91,12 @@ define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
 
         self.sharedConfiguration.sharedOptions = jsonCode.sharedOptions;
 
-        self.canvasFields(jsonCode.canvasFields);
+        if (jsonCode.canvasFields != null) {
+          self.canvasFields(jsonCode.canvasFields);
+        } else {
+          self.canvasFields([ ]);
+        }
+
 
         self.canvasBackground(jsonCode.canvasBackground);
         self.canvasWidth(jsonCode.canvasWidth);

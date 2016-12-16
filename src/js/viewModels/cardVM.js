@@ -26,8 +26,10 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor', 'fabricjs-textStyle
       }
       if (nameFieldExists == true) {
         return self._getValue('name');
-      } else {
+      } else if (self._fields().length > 0) {
         return self._getValue(self._fields()[0].name);
+      } else {
+        return 'Unknown';
       }
     });
 

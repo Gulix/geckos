@@ -95,6 +95,7 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"],
         self.defaultStyle(jsonStyle);
       } else {
         jsonStyle = self.buildStyleFromRoot();
+        self.defaultStyle(jsonStyle);
       }
 
       self.description(self._activeTemplateJson.description);

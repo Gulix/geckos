@@ -9,7 +9,7 @@ define(['knockout',
 /***************************************/
 /* Main entry point of the application */
 /***************************************/
-  function engineVM(jsonTemplate) {
+  function engineVM() {
     var self = this;
 
     /*************************/
@@ -25,7 +25,7 @@ define(['knockout',
 
     self.generatedTemplate = ko.pureComputed(function() {
       var jsonCanvas = { };
-      if (self.cardTemplate() != null) {
+      if (self.isCardSelected() && (self.cardTemplate() != null)) {
         jsonCanvas = self.cardTemplate().generateTemplate(self.editableCard());
       }
 
@@ -40,8 +40,16 @@ define(['knockout',
     /*************************/
     /* Functions declaration */
     /*************************/
+    self.changeTemplate = function(newTemplate) {
+      self.clearList();
+      newTemplate.updateCanvasSize = self.updateCanvasSize;
+      newTemplate.updateCards = self.updateCardsFields;
+      self.cardTemplate(newTemplate);
+      self.updateCanvasSize();
+    }
+
     self.updateCanvasSize = function() {
-      if ((self.canvas != undefined) && (self.cardTemplate() != undefined)) {
+      if ((self.canvas != null) && (self.cardTemplate() != null)) {
         self.canvas.setWidth(self.cardTemplate().canvasWidth());
         self.canvas.setHeight(self.cardTemplate().canvasHeight());
       }
@@ -54,7 +62,10 @@ define(['knockout',
     }
 
     self.createNewCard = function() {
-      return self.cardTemplate().createNewCard();
+      if (self.cardTemplate() != null) {
+        return self.cardTemplate().createNewCard();
+      }
+      return null;
     }
 
     /* Adding / Removing cards from the list */
@@ -126,19 +137,19 @@ define(['knockout',
     self.canvas = new fabric.StaticCanvas('fabricjs-canvas');
 
     /* Initialization of the Card Template */
-    var cardTemplateVM = CardTemplateVM.newCardTemplateVM(jsonTemplate, self.updateCanvasSize, self.updateCardsFields);
-    self.cardTemplate(cardTemplateVM);
-    self.updateCanvasSize();
+    //var cardTemplateVM = CardTemplateVM.newCardTemplateVM(jsonTemplate, self.updateCanvasSize, self.updateCardsFields);
+    //self.cardTemplate(cardTemplateVM);
+    //self.updateCanvasSize();
 
     /* Initializing the list with one item */
-    self.listCards().push(self.createNewCard());
-    self.editableCard(self.listCards()[0]);
+    //self.listCards().push(self.createNewCard());
+    //self.editableCard(self.listCards()[0]);
 
     /* Initializing the UI parts */
     self.UItemplates(UITemplates.getUItemplates(self));
 
   }
   return {
-    newEngineVM: function(jsonTemplate) { return new engineVM(jsonTemplate); }
+    newEngineVM: function() { return new engineVM(); }
   }
 });

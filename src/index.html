@@ -158,9 +158,11 @@
             <div class="section-colwrap">
               <div class="col-content">
                 <div class="box-elements">
+                  <!-- ko if: cardTemplate() != null -->
                   <select data-bind="options: listCards, optionsText: 'cardName', value: editableCard"
                           class="cards-list" size="5">
                   </select>
+                  <!-- /ko -->
                 </div>
               </div>
             </div>
@@ -193,9 +195,11 @@
             <div class="section-colwrap">
               <div class="col-content">
                 <div class="box-elements">
+                    <!-- ko if: cardTemplate() != null -->
                     <select data-bind="options: listCards, optionsText: 'cardName', value: editableCard"
                             class="cards-list" size="5">
                     </select>
+                    <!-- /ko -->
                 </div>
 
                 <div class="flex-container">
