@@ -259,12 +259,25 @@ body {
 
 .template-listitem-toolbar {
   position: absolute;
-  background: black;
+  background: #07889B;
   height: auto;
   left: 0px;
   bottom: 0px;
   width: 100%;
 }
+
+.select-item-toolbar {
+  text-align: center;
+  width: 100%;
+  color: #96C7CA;
+}
+
+.select-item-toolbar:hover {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
 
 /**************/
 /* Word Links */

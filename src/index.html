@@ -91,11 +91,13 @@
                         <div class="template-listitem-description" data-bind="text: description().description"></div>
                       </div>
                       <div class="template-listitem-toolbar" data-bind="slideBottomListItem: $data">
-                        TEST BATEAU
+                        <div class="select-item-toolbar" data-bind="click: $parent.selectTemplate">Select</div>
                       </div>
                     </div>
                   </div>
                 </div>
+
+                <template-style-description params="templateVM: selectedTemplate"></template-style-description>
                 <!-- /ko -->
                 <!-- /ko -->
 

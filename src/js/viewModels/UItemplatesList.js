@@ -29,6 +29,10 @@ define(['knockout', 'config', 'lodash',
       self.selectedTemplate(CardTemplateVM.newCardTemplateVM(self.jsonTemplates[index], function() { }, function() { }));
     }
 
+    self.selectTemplate = function() {
+      self.selectedTemplate(this);
+    }
+
     /***************************************************
      *** Methods needed for the calls in UItemplates ***
      ***************************************************/
