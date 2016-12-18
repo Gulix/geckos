@@ -10,7 +10,6 @@ require.config({
         'tinycolor': 'vendor/tinycolor',
         'simplecolorpicker': 'vendor/jquery.simplecolorpicker',
         'ddslick': 'vendor/jquery.ddslick',
-        'owlCarousel': 'vendor/owl.carousel',
         'lodash': 'vendor/lodash'
     },
     shim: {
@@ -28,7 +27,7 @@ require(['knockout',
          'templates/load-templates',
          'knockoutExtensions',
          /*'ko-ext/ckeditor',*/ 'ko-ext/ddslick', 'ko-ext/fabric', 'ko-ext/jscolor', 'ko-ext/simplecolorpicker',
-         'ko-ext/templates-list', 'ko-ext/slideBottomListItem',
+         'ko-ext/slideBottomListItem',
          'domReady!'
        ], function(ko, CardTemplateVM, EngineVM, tabs, components, Templates){
 

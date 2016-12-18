@@ -195,6 +195,18 @@ body {
 /* Description of a Template */
 /*****************************/
 
+.template-description-header {
+  margin-bottom: 0px;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-weight: bold;
+  color: #E37222;
+}
+
+.template-description {
+  margin-top: 0px;
+}
+
 .template-title {
   font-size: 3.6rem;
   line-height: 1.25;
@@ -237,6 +249,11 @@ body {
   margin-left: 10px;
   padding: 5px;
   position: relative;
+}
+
+.template-listitem.selected {
+  background-color: #E37222;
+  border-color: #EEAA7B;
 }
 
 .template-listitem-title {

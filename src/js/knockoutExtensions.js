@@ -1,4 +1,4 @@
-define(['knockout', 'jscolor', 'simplecolorpicker', 'ddslick', 'ckeditor', 'jQuery', 'owlCarousel'], function(ko, jscolor, simplecolorpicker) {
+define(['knockout', 'jscolor', 'simplecolorpicker', 'ddslick', 'ckeditor', 'jQuery'], function(ko, jscolor, simplecolorpicker) {
 
   /*************************/
   /* Binding with CKEditor */

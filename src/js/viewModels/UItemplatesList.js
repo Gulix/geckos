@@ -23,14 +23,23 @@ define(['knockout', 'config', 'lodash',
     /*****************
      *** Functions ***
      *****************/
-    // When selecting via the Carousel, this method is called to load the displayed template
-    self.loadTemplateFromIndex = function(index)
-    {
-      self.selectedTemplate(CardTemplateVM.newCardTemplateVM(self.jsonTemplates[index], function() { }, function() { }));
-    }
 
     self.selectTemplate = function() {
       self.selectedTemplate(this);
+      $('html, body').animate({
+        scrollTop: $("#selected-template-description").offset().top
+      }, 500);
+    }
+
+    self.setTemplate = function() {
+      self.uiTemplates.setTemplate();
+      $('html, body').animate({
+        scrollTop: $("#active-template-description-header").offset().top
+      }, 500);
+    }
+
+    self.isTemplateSelected = function(template) {
+      return template == self.selectedTemplate();
     }
 
     /***************************************************
@@ -60,8 +69,8 @@ define(['knockout', 'config', 'lodash',
      _.forEach(self.jsonTemplates, function(tpl) {
        self.objTemplates.push(CardTemplateVM.newCardTemplateVM(tpl, function() { }, function() { }));
      });
-     var jsonTemplate = self.jsonTemplates[0];
-     self.selectedTemplate(CardTemplateVM.newCardTemplateVM(jsonTemplate, function() { }, function() { }));
+     //var jsonTemplate = self.jsonTemplates[0];
+     //self.selectedTemplate(CardTemplateVM.newCardTemplateVM(jsonTemplate, function() { }, function() { }));
   }
 
   return {
