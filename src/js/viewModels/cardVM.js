@@ -3,7 +3,7 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor', 'fabricjs-textStyle
    * ViewModel representing a Card and its data.
    * @param  {editableFieldVM table} List of fields used to create the cards
    */
-  function cardVM(jsonEditableFields, sharedConfiguration) {
+  function cardVM(jsonEditableFields, sharedConfiguration, onStyleChanged) {
     var self = this;
 
     /*****************************
@@ -12,6 +12,7 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor', 'fabricjs-textStyle
 
     self._fields = ko.observableArray([]);
     self.componentsFields = ko.observableArray([]);
+    self.onStyleChanged = onStyleChanged;
     self.selectedStyleKey = ko.observable();
 
     self.cardName = ko.pureComputed(function() {
@@ -209,7 +210,7 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor', 'fabricjs-textStyle
 
     self._getBoolValue = function(fieldName) {
       var field = self._getFieldFromName(fieldName);
-      if (field != null) {
+      if ((field != null) && (field.checkedValue != null)) {
           return field.checkedValue();
       }
       return false;
@@ -259,11 +260,16 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor', 'fabricjs-textStyle
     /*****************************
      *** Object initialization ***
      *****************************/
+     self.selectedStyleKey.subscribe(function (newValue) {
+       self.onStyleChanged(self);
+     }, self);
+
+
      self.updateFields(jsonEditableFields, sharedConfiguration);
   }
 
   return {
-    newCardVM: function(jsonEditableFields, sharedConfiguration)
-      { return new cardVM(jsonEditableFields, sharedConfiguration); }
+    newCardVM: function(jsonEditableFields, sharedConfiguration, onStyleChanged)
+      { return new cardVM(jsonEditableFields, sharedConfiguration, onStyleChanged); }
   }
 });

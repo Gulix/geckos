@@ -122,8 +122,10 @@
                        data-bind="click: goListMode, visible: isGoListModeVisible"><span>Go to 'List mode'</span></a></li>
                 <li><a href="#" class="icon-edition-mode" title="Validate the edited template"
                        data-bind="click: useTemplateCode, visible: isEditionModeActive"><span>Validate the edited template</span></a></li>
-                <li><a href="#" class="icon-apply-template" title="Use this template"
-                       data-bind="click: setTemplate"><span>Use this template</span></a></li>
+                <li><a href="#" class="icon-apply-template" title="Use the selected template"
+                       data-bind="click: setTemplate, visible: isListModeActive"><span>Use the selected template</span></a></li>
+                <li><a href="#" class="icon-apply-template" title="Use the template in edition"
+                       data-bind="click: setTemplate, visible: isEditionModeActive"><span>Use the template in edition</span></a></li>
                 <li><a href="#" class="icon-download" title="Load template from file"
                        data-bind="click: loadTemplate, visible: isEditionModeActive"><span>Load from file</span></a></li>
               	<li><a href="#" class="icon-save" title="Save template to file"

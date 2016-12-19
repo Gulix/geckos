@@ -1,6 +1,6 @@
 define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
 
-  function styleVM(jsonStyle, updCanvasSize, updCardsOnTemplateChange) {
+  function styleVM(jsonStyle, updCanvasSize, updCardsOnTemplateChange, cardFieldsUpdate) {
     var self = this;
 
     /*************************/
@@ -25,6 +25,7 @@ define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
     /*************************/
     self.updateCanvasSize = updCanvasSize;
     self.updateCards = updCardsOnTemplateChange;
+    self.cardFieldsUpdate = cardFieldsUpdate;
 
     self.generateTemplate = function(cardVM) {
       var generated = { "objects" : [], "backgroundColor": self.canvasBackground() };
@@ -109,7 +110,7 @@ define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
     }
 
     self.createNewCard = function() {
-      return CardVM.newCardVM(self.fields(), self.sharedConfiguration);
+      return CardVM.newCardVM(self.fields(), self.sharedConfiguration, self.cardFieldsUpdate);
     }
     self.updateFieldsOfCard = function(card) {
       card.updateFields(self.fields(), self.sharedConfiguration);
@@ -122,9 +123,9 @@ define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
   }
 
   return {
-    newStyleVM: function(jsonStyle, updCanvasSize, updCardsOnTemplateChange)
+    newStyleVM: function(jsonStyle, updCanvasSize, updCardsOnTemplateChange, cardFieldsUpdate)
     {
-      return new styleVM(jsonStyle, updCanvasSize, updCardsOnTemplateChange);
+      return new styleVM(jsonStyle, updCanvasSize, updCardsOnTemplateChange, cardFieldsUpdate);
     }
   }
 });
