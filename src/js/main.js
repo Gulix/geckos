@@ -10,7 +10,8 @@ require.config({
         'tinycolor': 'vendor/tinycolor',
         'simplecolorpicker': 'vendor/jquery.simplecolorpicker',
         'ddslick': 'vendor/jquery.ddslick',
-        'lodash': 'vendor/lodash'
+        'lodash': 'vendor/lodash',
+        'ajv': 'vendor/ajv.min'
     },
     shim: {
         'jQuery': {

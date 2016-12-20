@@ -91,9 +91,9 @@ define(['knockout', 'config', 'lodash',
         self.uiEdition().reset();
       }
     }
-    self.useTemplateCode = function() {
+    self.validateTemplateCode = function() {
       if ((self.uiEdition() != null) && self.uiEdition().isActive()) {
-        self.uiEdition().useEditableCode();
+        self.uiEdition().validateTemplate();
       }
     }
 

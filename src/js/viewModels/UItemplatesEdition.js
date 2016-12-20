@@ -1,7 +1,8 @@
-define(['knockout', 'config', 'lodash',
+define(['knockout', 'config', 'lodash', 'ajv',
         'templates/load-templates',
-        'viewModels/cardTemplateVM'],
-  function(ko, config, _, Templates, CardTemplateVM) {
+        'viewModels/cardTemplateVM',
+        'json/load-schemas'],
+  function(ko, config, _, Ajv, Templates, CardTemplateVM, Schemas) {
   /**
    * Used to manage the "List of Templates" part of the UI
    * Stored as an object in the UItemplates object
@@ -18,18 +19,43 @@ define(['knockout', 'config', 'lodash',
     self.selectedTemplate = ko.observable(null);
 
     self._editableJson = ko.observable();
+    self.compilingErrors = ko.observableArray([]);
 
+
+    self.withCompilingErrors = ko.pureComputed(function() {
+      return self.compilingErrors().length > 0;
+    })
     /*****************
      *** Functions ***
      *****************/
     // Reset the editable json code to the current template json code
     self.reset = function() {
-       self._editableJson(JSON.stringify(self.selectedTemplate().getJson()));
+      if (self.selectedTemplate() != null) {
+        self._editableJson(JSON.stringify(self.selectedTemplate().getJson()));
+      }
     }
     // Puts the editable code into the current template
-    self.useEditableCode = function() {
-      // TODO : add tests on the code to check integrity
-      self.selectedTemplate().setTemplate(JSON.parse(self._editableJson()));
+    self.validateTemplate = function() {
+      self.compilingErrors([]);
+      var jsonTemplate = JSON.parse(self._editableJson());
+      var jsonTemplateSchema = Schemas.loadTemplateSchema();
+      var ajv = Ajv(); // options can be passed, e.g. {allErrors: true}
+      var validate = ajv.compile(jsonTemplateSchema);
+      var valid = validate(jsonTemplate);
+      if (!valid)
+      {
+        self.compilingErrors(validate.errors);
+      } else
+      {
+        self.selectedTemplate(CardTemplateVM.newCardTemplateVM(jsonTemplate, function() { }, function() { }));
+      }
+    }
+
+    self.setTemplate = function() {
+      self.uiTemplates.setTemplate();
+      $('html, body').animate({
+        scrollTop: $("#active-template-description-header").offset().top
+      }, 500);
     }
 
 
@@ -57,8 +83,7 @@ define(['knockout', 'config', 'lodash',
      // List of templates
      self.templates = Templates.load();
      var jsonTemplate = self.templates[0];
-     self.selectedTemplate(CardTemplateVM.newCardTemplateVM(jsonTemplate, function() { }, function() { }));
-     self.reset();
+     self._editableJson(JSON.stringify(jsonTemplate));
   }
 
   return {

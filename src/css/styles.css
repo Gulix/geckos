@@ -294,6 +294,20 @@ body {
   cursor: pointer;
 }
 
+/**********************/
+/* Errors on Template */
+/**********************/
+.compiling-errors-header {
+  margin-bottom: 0px;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-weight: bold;
+  color: #E32B22;
+}
+
+.compiling-errors {
+  margin-top: 0px;
+}
 
 
 /**************/
