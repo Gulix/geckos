@@ -75,6 +75,7 @@ define(['knockout', 'config', 'lodash',
     // Set the currentTemplate as the one being used in the Engine
     self.setTemplate = function() {
       self.engineVM.changeTemplate(self.currentTemplate());
+      self.currentTemplate().updateEmbeddedFonts();
     }
     self.loadTemplate = function() {
       if ((self.uiEdition() != null) && self.uiEdition().isActive()) {

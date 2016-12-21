@@ -168,10 +168,10 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"],
       return jsonStyle;
     }
 
-    self.setTemplate = function(jsonCode) {
-      self._activeTemplateJson = jsonCode;
-      self.initTemplateFromJson();
-    }
+    //self.setTemplate = function(jsonCode) {
+    //  self._activeTemplateJson = jsonCode;
+    //  self.initTemplateFromJson();
+    //}
 
     self.canvasWidth = function() {
       var style = self._styleForCard();
@@ -189,7 +189,7 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"],
     }
 
     self.updateFieldsOfCard = function(card) {
-      self._styleForCard(card).updateFieldsOfCard(card);      
+      self._styleForCard(card).updateFieldsOfCard(card);
     }
 
     /* --- Selection of a Style --- */
