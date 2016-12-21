@@ -28,7 +28,7 @@
 			"key": "pictureless",
 			"basedOn": "default",
       "name": "Default Style (without a picture)",
-      "description": "Basic Template (witout a picture) for a card of various effect (for any type of game)",
+      "description": "Basic Template for a card of various effect (for any type of game)",
 			"fields": [
 		    { "name": "displayImage", "ignored": true },
 		    { "name": "image", "ignored": true }
@@ -50,7 +50,6 @@
 		"description": "Basic Template for a card of various effect (for any type of game)",
     "title":"Basic - Effects",
     "credits": "by Nicolas Ronvel",
-    "url": "https://github.com/Gulix/geckos/",
-		"logo": "http://opengameart.org/sites/default/files/card%20back%20orange.png"
+    "url": "https://github.com/Gulix/geckos/"
 	}
 }

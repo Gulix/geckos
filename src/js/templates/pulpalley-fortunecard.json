@@ -37,7 +37,7 @@
         { "name":"challenge_skills", "label":"Challenge's skills", "default":"Skill A or Skill B" },
         { "name":"peril", "label":"Peril", "default":"1 hit if failed" },
 		{ "name":"not_peril", "label":"Is not peril ?", "default":false, "type": "checkbox" },
-        { "name":"x_number", "label":"X-Number", "default":"1", "type": "numeric"},
+        { "name":"x_number", "label":"X-Number", "default":"1", "type": "number"},
         { "name":"icon", "label":"Icon", "default":"flash", "type": "options",
           "options": [
             { "option":"cogs", "text":"Cogs" },
