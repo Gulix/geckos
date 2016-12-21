@@ -1,7 +1,7 @@
 require.config({
     paths: {
         'jQuery': 'vendor/jquery-3.0.0.min',
-        'fabric': 'vendor/fabric.require.1.6.3',
+        'fabric': 'vendor/fabric.require.1.6.7', // Higher doesn't work right now
         'FileSaver': 'vendor/FileSaver.min',
         'jscolor': 'vendor/jscolor.min',
         'knockout': 'vendor/knockout-3.4.0',
