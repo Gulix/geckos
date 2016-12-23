@@ -48,7 +48,7 @@
 .icon-card:before {
     content: "\e923";
 }
-.icon-apply-template:before {
+.icon-compile-template:before {
     content: "\e995";
 }
 .icon-template:before {
@@ -62,4 +62,10 @@
 }
 .icon-clear-list:before {
     content: "\f01c";
+}
+.icon-edition-mode:before {
+    content: "\f058";
+}
+.icon-apply-template:before {
+  content: "\ea52";
 }

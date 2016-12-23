@@ -1,4 +1,5 @@
-define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"], function(ko, utils, StyleVM, InheritingStyles) {
+define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"],
+  function(ko, utils, StyleVM, InheritingStyles) {
 
   function cardTemplateVM(jsonTemplate, updCanvasSize, updCardsOnTemplateChange) {
     var self = this;
@@ -6,16 +7,23 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"], functio
     /*************************/
     /* Variables declaration */
     /*************************/
-    self.styleVM = ko.observable();
-    self.styles = ko.observableArray([ ]);
-    self.selectedStyle = ko.observable();
+    self.styleVM = null;
 
-    self.currentTemplate = ko.observable();
-    self.editableTemplate = ko.observable();
+    self.jsonStylesList = ko.observableArray([ ]);
+    self.defaultStyle = ko.observable();
+
+    self._activeTemplateJson = { }; // The 'active' JSON code of the template
+
+    self.description = ko.observable();
 
     self.isMultiStyles = ko.pureComputed(function() {
-      return (self.styles() != null) && (self.styles().length > 1);
+      return (self.jsonStylesList() != null) && (self.jsonStylesList().length > 1);
     });
+
+    // Selection of the Default template
+    self.isStyleSelectionActive = ko.observable(false);
+    self.selectedStyle = ko.observable();
+
     /********************************/
     /* End of Variables declaration */
     /********************************/
@@ -28,35 +36,33 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"], functio
 
     self.generateTemplate = function(cardVM) {
       var generated = { "objects" : [] };
-      if (self.styleVM() != null) {
-        generated = self.styleVM().generateTemplate(cardVM);
+      var styleForCard = self._styleForCard(cardVM);
+      if (styleForCard != null) {
+        generated = styleForCard.generateTemplate(cardVM);
       }
       return generated;
     }
 
-    self.resetTemplateCode = function() {
-      self.editableTemplate(JSON.stringify(self.currentTemplate()));
-    }
     self.saveTemplateAsJson = function() {
-      var blob = new Blob([JSON.stringify(self.currentTemplate())], {type: "text/plain;charset=utf-8"});
+      var blob = new Blob([JSON.stringify(self._activeTemplateJson)], {type: "text/plain;charset=utf-8"});
       saveAs(blob, "template.json"); // TODO : filename depending of name of template (if provided)
     }
     self.loadTemplate = function() {
       $("#file-load-template").click();
     }
-    self.importTemplateFromJson = function(data) {
-      self.editableTemplate(data);
+    self.getJson = function() {
+      return self._activeTemplateJson;
     }
 
     /* Remove and Replace the fonts embedded in the template */
     self.updateEmbeddedFonts = function() {
       $('.canvas-fonts').remove();
 
-      if ((self.currentTemplate() != null) && (self.currentTemplate().fonts != null)) {
+      if ((self._activeTemplateJson != null) && (self._activeTemplateJson.fonts != null)) {
         var canvasFontsStyle = document.createElement('style');
         canvasFontsStyle.setAttribute('class', 'canvas-fonts');
-        for(var iFont = 0; iFont < self.currentTemplate().fonts.length; iFont++) {
-          var currentFont = self.currentTemplate().fonts[iFont];
+        for(var iFont = 0; iFont < self._activeTemplateJson.fonts.length; iFont++) {
+          var currentFont = self._activeTemplateJson.fonts[iFont];
           if ((currentFont != null) && (currentFont.fontFamily != null) && (currentFont.src != null)) {
             var fontFace = "@font-face { font-family: '" + currentFont.fontFamily + "'; "
               + "src: url(" + currentFont.src + "); "
@@ -71,123 +77,170 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"], functio
       }
     }
 
-    self.initStyleFromCode = function(jsonStyle) {
-      if (self.styleVM() != null)
-      {
-        self.styleVM().initStyleFromCode(jsonStyle);
-      }
-    }
-
     self.initTemplateFromJson = function() {
       var jsonStyle = { };
 
-      self.currentTemplate(JSON.parse(self.editableTemplate()));
-
       self.updateEmbeddedFonts();
 
-      if (self.currentTemplate().styles != null) {
-        self.styles(self.currentTemplate().styles);
+      if (self._activeTemplateJson.styles != null) {
+        self.jsonStylesList(self._activeTemplateJson.styles);
         jsonStyle = self.getDefaultStyle();
-        self.selectedStyle(jsonStyle);
+        self.defaultStyle(jsonStyle);
       } else {
         jsonStyle = self.buildStyleFromRoot();
+        self.defaultStyle(jsonStyle);
       }
 
-      self.setStyle(jsonStyle);
+      self.description(self._activeTemplateJson.description);
     }
 
     // Create the Style object, getting if needed the SharedConfiguration objects
     // & inheriting values from another style
-    self.buildStyleObject = function(jsonStyle) {
+    self._buildStyleObject = function(jsonStyle) {
       var jsonCompleteStyle = jsonStyle;
 
       if (jsonCompleteStyle.basedOn != undefined) {
-        var baseStyle = self.getStyleFromKey(jsonCompleteStyle.basedOn);
-        baseStyle = self.buildStyleObject(baseStyle);
+        var baseStyle = self._getStyleFromKey(jsonCompleteStyle.basedOn);
+        baseStyle = self._buildStyleObject(baseStyle);
 
         jsonCompleteStyle = InheritingStyles.getStyleFromBase(jsonCompleteStyle, baseStyle);
       }
 
-      jsonCompleteStyle.sharedOptions = self.currentTemplate().sharedOptions;
+      jsonCompleteStyle.sharedOptions = self._activeTemplateJson.sharedOptions;
+      jsonCompleteStyle.fields.sort(self.compareFieldOrder);
+      jsonCompleteStyle.canvasFields.sort(self.compareFieldOrder);
 
       return jsonCompleteStyle;
     }
+    self.compareFieldOrder = function(fieldA, fieldB) {
+      var orderA = (fieldA.order != undefined) ? fieldA.order : 1;
+      var orderB = (fieldB.order != undefined) ? fieldB.order : 1;
 
-    self.getStyleFromKey = function(key) {
-      var style = null;
-      for (var iStyle = 0; iStyle < self.styles().length; iStyle++) {
-        if (self.styles()[iStyle].key == key) {
-          style = self.styles()[iStyle];
-        }
-      }
-      return style;
+      if (orderA < orderB)
+         return -1;
+      if (orderA > orderB)
+         return 1;
+      return 0;
+    }
+
+    self._getStyleFromKey = function(key) {
+
+      return _.find(self.jsonStylesList(), function(o) {
+        return o.key == key;
+      });
     }
 
     self.getDefaultStyle = function() {
-      var selectedStyle = null;
-      for (var iStyle = 0; iStyle < self.styles().length; iStyle++) {
-        if (selectedStyle == null) {
-          selectedStyle = self.styles()[iStyle];
+      var defaultStyle = null;
+      for (var iStyle = 0; iStyle < self.jsonStylesList().length; iStyle++) {
+        if (defaultStyle == null) {
+          defaultStyle = self.jsonStylesList()[iStyle];
         }
-        if (self.styles()[iStyle].isDefault) {
-          selectedStyle = self.styles()[iStyle];
+        if (self.jsonStylesList()[iStyle].isDefault) {
+          defaultStyle = self.jsonStylesList()[iStyle];
           break;
         }
       }
 
-      return selectedStyle;
+      return defaultStyle;
     }
 
-    self.setStyle = function(jsonStyle) {
-      var jsonStyleComplete = self.buildStyleObject(jsonStyle);
-      self.initStyleFromCode(jsonStyleComplete);
-    }
+    self.stylesForCard = ko.pureComputed(function() {
+      var cardStyles = [ ];
+      cardStyles.push({ key: '', text: '<Use default style defined for the template>' });
+      _.forEach(self.jsonStylesList(), function(stl) {
+        cardStyles.push({ key: stl.key, text: stl.name });
+      })
+
+      return cardStyles;
+    });
 
     /* When there is no list of styles, style is taken from the root of the template */
     self.buildStyleFromRoot = function() {
       var jsonStyle = { };
 
-      jsonStyle.fields = self.currentTemplate().fields;
-      jsonStyle.canvasFields = self.currentTemplate().canvasFields;
-      jsonStyle.canvasBackground = self.currentTemplate().canvasBackground;
-      jsonStyle.canvasWidth = self.currentTemplate().canvasWidth;
-      jsonStyle.canvasHeight = self.currentTemplate().canvasHeight;
+      jsonStyle.fields = self._activeTemplateJson.fields;
+      jsonStyle.canvasFields = self._activeTemplateJson.canvasFields;
+      jsonStyle.canvasBackground = self._activeTemplateJson.canvasBackground;
+      jsonStyle.canvasWidth = self._activeTemplateJson.canvasWidth;
+      jsonStyle.canvasHeight = self._activeTemplateJson.canvasHeight;
 
       return jsonStyle;
     }
 
-    self.setTemplate = function() {
-      self.initTemplateFromJson();
-    }
+    //self.setTemplate = function(jsonCode) {
+    //  self._activeTemplateJson = jsonCode;
+    //  self.initTemplateFromJson();
+    //}
 
     self.canvasWidth = function() {
-      if (self.styleVM() != null) return self.styleVM().canvasWidth();
+      var style = self._styleForCard();
+      if (style != null) return style.canvasWidth();
       return 0;
     }
     self.canvasHeight = function() {
-      if (self.styleVM() != null) return self.styleVM().canvasHeight();
+      var style = self._styleForCard();
+      if (style != null) return style.canvasHeight();
       return 0;
     }
 
     self.createNewCard = function() {
-      return self.styleVM().createNewCard();
+      return self._styleForCard().createNewCard();
     }
+
     self.updateFieldsOfCard = function(card) {
-      self.styleVM().updateFieldsOfCard(card);
+      self._styleForCard(card).updateFieldsOfCard(card);
     }
+
+    /* --- Selection of a Style --- */
+    self.activateStyleSelection = function() {
+      self.isStyleSelectionActive(true);
+    }
+    self.cancelStyleSelection = function() {
+      self.selectedStyle(self.defaultStyle());
+      self.isStyleSelectionActive(false);
+    }
+    self.confirmStyleSelection = function() {
+      self.defaultStyle(self.selectedStyle());
+      self.isStyleSelectionActive(false);
+    }
+
+    self._styleForCard = function(cardVM) {
+      // Object initiatlization
+      if (self.styleVM == null) {
+        return null;
+      }
+
+      // Which style to apply to the card
+      if ((cardVM == null) || (cardVM.selectedStyleKey() == null) || (cardVM.selectedStyleKey() == ''))
+      {
+        var completeJsonStyle = self._buildStyleObject(self.defaultStyle());
+        self.styleVM.initStyleFromCode(completeJsonStyle);
+      } else {
+        // Style from card
+        console.log('style from card');
+        var jsonCardStyle = self._getStyleFromKey(cardVM.selectedStyleKey());
+        if (jsonCardStyle == null) {
+          jsonCardStyle = self.defaultStyle();
+        }
+        var completeJsonStyle = self._buildStyleObject(jsonCardStyle);
+        self.styleVM.initStyleFromCode(completeJsonStyle);
+      }
+
+      return self.styleVM;
+    }
+
     /********************************/
     /* End of Functions declaration */
     /********************************/
 
-    /* Style initialization */
-    var styleVM = StyleVM.newStyleVM({ }, self.updateCanvasSize, self.updateCards);
-    self.styleVM(styleVM);
-
-    self.selectedStyle.subscribe(function (newValue) {
-      self.setStyle(newValue);
+    self.defaultStyle.subscribe(function (newValue) {
+      self.selectedStyle(newValue);
     }, self);
 
-    self.editableTemplate(JSON.stringify(jsonTemplate));
+    self._activeTemplateJson = jsonTemplate;
+    self.styleVM = StyleVM.newStyleVM({ }, self.updateCanvasSize, self.updateCards, self.updateFieldsOfCard);
+
     self.initTemplateFromJson();
   }
 

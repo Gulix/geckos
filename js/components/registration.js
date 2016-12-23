@@ -29,6 +29,14 @@ define(['knockout'], function(ko) {
         viewModel: { require: 'components/input-generic' },
         template: { require: 'text!components/input-numeric/input-numeric.html' }
       });
+      ko.components.register('input-numeric-minmax', {
+        viewModel: { require: 'components/input-generic' },
+        template: { require: 'text!components/input-numeric/input-minmax.html' }
+      });
+      ko.components.register('input-numeric-range', {
+        viewModel: { require: 'components/input-generic' },
+        template: { require: 'text!components/input-numeric/input-range.html' }
+      });
       ko.components.register('input-options', {
         viewModel: { require: 'components/input-generic' },
         template: { require: 'text!components/input-options/input-options.html' }
@@ -52,6 +60,14 @@ define(['knockout'], function(ko) {
       ko.components.register('card-editable-fields', {
         viewModel: { require: 'components/card-editable-fields/card-editable-fields' },
         template: { require: 'text!components/card-editable-fields/card-editable-fields.html' }
+      });
+
+      /****************************/
+      /* Displaying the Templates */
+      /****************************/
+      ko.components.register('template-style-description', {
+        viewModel: { require: 'components/template-style-description/template-style-description' },
+        template: { require: 'text!components/template-style-description/template-style-description.html' }
       });
     }
   };

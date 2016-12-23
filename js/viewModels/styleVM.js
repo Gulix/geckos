@@ -1,20 +1,19 @@
 define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
 
-  function styleVM(jsonStyle, updCanvasSize, updCardsOnTemplateChange) {
+  function styleVM(jsonStyle, updCanvasSize, updCardsOnTemplateChange, cardFieldsUpdate) {
     var self = this;
 
     /*************************/
     /* Variables declaration */
     /*************************/
-    self.fields = ko.observableArray();
-    self.canvasFields = ko.observableArray();
+    self.fields = ko.observableArray([ ]);
+    self.canvasFields = ko.observableArray([ ]);
 
     self.canvasBackground = ko.observable();
     self.canvasWidth = ko.observable();
     self.canvasHeight = ko.observable();
 
     self.currentTemplate = ko.observable();
-    self.editableTemplate = ko.observable();
 
     self.sharedConfiguration = { };
     /********************************/
@@ -26,6 +25,7 @@ define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
     /*************************/
     self.updateCanvasSize = updCanvasSize;
     self.updateCards = updCardsOnTemplateChange;
+    self.cardFieldsUpdate = cardFieldsUpdate;
 
     self.generateTemplate = function(cardVM) {
       var generated = { "objects" : [], "backgroundColor": self.canvasBackground() };
@@ -87,24 +87,30 @@ define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
     }
 
     self.initStyleFromCode = function(jsonCode) {
+      if (jsonCode != null) {
+        self.fields(jsonCode.fields);
 
-      self.fields(jsonCode.fields);
+        self.sharedConfiguration.sharedOptions = jsonCode.sharedOptions;
 
-      self.sharedConfiguration.sharedOptions = jsonCode.sharedOptions;
+        if (jsonCode.canvasFields != null) {
+          self.canvasFields(jsonCode.canvasFields);
+        } else {
+          self.canvasFields([ ]);
+        }
 
-      self.canvasFields(jsonCode.canvasFields);
 
-      self.canvasBackground(jsonCode.canvasBackground);
-      self.canvasWidth(jsonCode.canvasWidth);
-      self.canvasHeight(jsonCode.canvasHeight);
+        self.canvasBackground(jsonCode.canvasBackground);
+        self.canvasWidth(jsonCode.canvasWidth);
+        self.canvasHeight(jsonCode.canvasHeight);
 
-      // Updating the cards, the canvas
-      self.updateCards();
-      self.updateCanvasSize();
+        // Updating the cards, the canvas
+        self.updateCards();
+        self.updateCanvasSize();
+      }
     }
 
     self.createNewCard = function() {
-      return CardVM.newCardVM(self.fields(), self.sharedConfiguration);
+      return CardVM.newCardVM(self.fields(), self.sharedConfiguration, self.cardFieldsUpdate);
     }
     self.updateFieldsOfCard = function(card) {
       card.updateFields(self.fields(), self.sharedConfiguration);
@@ -117,9 +123,9 @@ define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
   }
 
   return {
-    newStyleVM: function(jsonStyle, updCanvasSize, updCardsOnTemplateChange)
+    newStyleVM: function(jsonStyle, updCanvasSize, updCardsOnTemplateChange, cardFieldsUpdate)
     {
-      return new styleVM(jsonStyle, updCanvasSize, updCardsOnTemplateChange);
+      return new styleVM(jsonStyle, updCanvasSize, updCardsOnTemplateChange, cardFieldsUpdate);
     }
   }
 });

@@ -1,7 +1,7 @@
 require.config({
     paths: {
         'jQuery': 'vendor/jquery-3.0.0.min',
-        'fabric': 'vendor/fabric.require.1.6.3',
+        'fabric': 'vendor/fabric.require.1.6.7', // Higher doesn't work right now
         'FileSaver': 'vendor/FileSaver.min',
         'jscolor': 'vendor/jscolor.min',
         'knockout': 'vendor/knockout-3.4.0',
@@ -9,7 +9,9 @@ require.config({
         'ckeditor': 'vendor/ckeditor/ckeditor',
         'tinycolor': 'vendor/tinycolor',
         'simplecolorpicker': 'vendor/jquery.simplecolorpicker',
-        'ddslick': 'vendor/jquery.ddslick'
+        'ddslick': 'vendor/jquery.ddslick',
+        'lodash': 'vendor/lodash',
+        'ajv': 'vendor/ajv.min'
     },
     shim: {
         'jQuery': {
@@ -21,20 +23,21 @@ require.config({
 require(['knockout',
          'viewModels/cardTemplateVM',
          'viewModels/engineVM',
-         'defaultTemplate',
          'tabs',
-         'knockoutExtensions',
          'components/registration',
+         'templates/load-templates',
+         'knockoutExtensions',
+         /*'ko-ext/ckeditor',*/ 'ko-ext/ddslick', 'ko-ext/fabric', 'ko-ext/jscolor', 'ko-ext/simplecolorpicker',
+         'ko-ext/slideBottomListItem',
          'domReady!'
-       ], function(ko, CardTemplateVM, EngineVM, defaultTemplate, tabs, koExt, components){
+       ], function(ko, CardTemplateVM, EngineVM, tabs, components, Templates){
 
-  var jsonTemplate = defaultTemplate.getTemplate();
 
   window.CKEDITOR_BASEPATH = './vendor/ckeditor/';
 
   components.register();
 
-  var engineVM = EngineVM.newEngineVM(jsonTemplate);
+  var engineVM = EngineVM.newEngineVM();
 
   ko.applyBindings(engineVM);
 
@@ -78,4 +81,23 @@ require(['knockout',
       $("#file-load-template-form")[0].reset();
     }
   });
+
+/* Scrolling let's the Canvas on top (see also Issue #87) */
+$(window).scroll(function(){
+  var existingDiff = $('#card-canvas-header').outerHeight();
+  console.log(existingDiff);
+  var scrollTop = $(window).scrollTop();
+  var boxTop = $('#card-canvas-box').offset().top;
+  if (scrollTop > (boxTop + existingDiff)) {
+    var diff = scrollTop - boxTop - existingDiff;
+    $('#card-canvas-view').css({'margin-top': diff + 'px'});
+  } else {
+    $('#card-canvas-view').css({'margin-top': '0px'});
+  }
+
+
+  //$('#card-canvas-view').toggleClass('scrolling-position', $(window).scrollTop() > $('#card-canvas-box').offset().top);
+});
+
+
 });

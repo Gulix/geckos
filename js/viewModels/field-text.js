@@ -9,6 +9,7 @@ define(['knockout'], function(ko) {
     if (jsonField.isNameField != undefined) {
       self.isNameField = jsonField.isNameField;
     }
+    self.maxLength = (jsonField.maxlength != undefined) ? jsonField.maxlength : 524288;
 
     self.textValue = ko.observable(jsonField.default);
 
@@ -37,13 +38,20 @@ define(['knockout'], function(ko) {
 
     /* Advanced String variables, with specific "valueType" */
     self.getAdvancedValue = function(valueType) {
-      if (valueType == 'text') { return self.getTextValue(); }
-
-      return '';
+      return getTextAdvancedValue(valueType, self.getTextValue());
     }
   }
 
+  function getTextAdvancedValue(valueType, textValue) {
+    if (valueType == 'text') { return textValue; }
+    if (valueType == 'lower') { return textValue.toLowerCase(); }
+    if (valueType == 'upper') { return textValue.toUpperCase(); }
+
+    return '';
+  }
+
   return {
-    build: function(jsonField) { return new fieldText(jsonField); }
+    build: function(jsonField) { return new fieldText(jsonField); },
+    getTextAdvancedValue: function(valueType, textValue) { return getTextAdvancedValue(valueType, textValue); }
   }
 });

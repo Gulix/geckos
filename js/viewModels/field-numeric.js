@@ -10,6 +10,16 @@ define(['knockout'], function(ko) {
       self.isNameField = jsonField.isNameField;
     }
 
+    if ((jsonField.min != undefined) && (jsonField.max != undefined) && (jsonField.min < jsonField.max)) {
+      self.min = jsonField.min;
+      self.max = jsonField.max;
+      self.step = 1;
+    }
+    if (jsonField.step != undefined) {
+      self.step = jsonField.step;
+    }
+    self.is_range = (jsonField.is_range != undefined) ? jsonField.is_range : false;
+
     self.textValue = ko.observable(jsonField.default);
 
     var defVal = 0;
@@ -35,6 +45,11 @@ define(['knockout'], function(ko) {
     }
 
     self.getComponentName = function() {
+      if (self.is_range)
+        return "input-numeric-range";
+      if ((self.min != undefined) && (self.max != undefined))
+        return "input-numeric-minmax";
+
       return "input-numeric";
     }
 

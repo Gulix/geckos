@@ -26,7 +26,6 @@
 
     <link rel="stylesheet" type="text/css" href="css/styles.css"></link>
     <link rel="stylesheet" type="text/css" href="css/icons.css"></link>
-    <!--<link rel="stylesheet" type="text/css" href="ckeditor/toolbarconfigurator/lib/codemirror/neo.css"></link>-->
 
     <link rel="stylesheet" type="text/css" href="css/jquery.simplecolorpicker.css"></link>
     <link rel="stylesheet" type="text/css" href="css/jquery.simplecolorpicker-fontawesome.css"></link>
@@ -50,7 +49,7 @@
 				<section id="section-home">
           <div class="main-menu clearfix">
             <ul>
-                <li><a rel="documentation" href="https://github.com/Gulix/geckos/wiki">Documentation</a></li>
+                <li><a rel="documentation" href="https://www.gulix.fr/geckos/wiki/">Documentation</a></li>
                 <li><a href="https://github.com/Gulix/geckos">Github Page</a></li>
             </ul>
           </div>
@@ -62,61 +61,95 @@
           <p>Geckos is fully Open-Source, and the source-code is available to anyone.</p>
         </section>
 
-        <!-- ********************
+        <!-- ****************************************
              Template section (editing, loading, ...)
-           -->
+         ******************************************** -->
         <section id="section-template">
+          <!-- ko with: UItemplates -->
           <div class="section-twocols">
             <div class="section-colwrap">
               <div class="col-content">
-                <div class="template-selection">
-                  <!-- ko with: cardTemplate -->
+
+                <!-- ko if: engineVM.cardTemplate() != null -->
+                <div id="active-template-description-header" class="template-description-header">Active template - Currently in use in Geckos</div>
+                <template-style-description params="templateVM: engineVM.cardTemplate"></template-style-description>
+                <!-- /ko -->
+
+                <!-- ko if: isListModeActive -->
+                <!-- ko with: uiList -->
+                <div class="templates-list" data-bind="foreach: objTemplates">
+                  <div class="template-listitem listitem" data-bind="css: { selected: $parent.isTemplateSelected($data) }">
+                    <div class="flex-container">
+                      <!-- ko if: (description() != null) && (description().logo != null) -->
+                      <div class="flex-1 template-listitem-logo">
+                        <img data-bind="attr: { src: description().logo }"></img>
+                      </div>
+                      <!-- /ko -->
+                      <div class="flex-2">
+                        <div class="template-listitem-title" data-bind="text: description().title"></div>
+                        <div class="template-listitem-description" data-bind="text: description().description"></div>
+                      </div>
+                      <!-- ko if: !$parent.isTemplateSelected($data) -->
+                      <div class="template-listitem-toolbar" data-bind="slideBottomListItem: $data">
+                        <div class="select-item-toolbar" data-bind="click: $parent.selectTemplate">Select</div>
+                      </div>
+                      <!-- /ko -->
+                    </div>
+                  </div>
+                </div>
+
+                <div class="template-description-header">Selected template - <span class="word-link" data-bind="click: setTemplate">Activate it</span> to use it in Geckos</div>
+                <template-style-description id="selected-template-description" params="templateVM: selectedTemplate"></template-style-description>
+                <!-- /ko -->
+                <!-- /ko -->
+
+                <!-- ko if: isEditionModeActive -->
+                <!-- ko with: uiEdition -->
+                <div class="template-edition">
                   <div class="template-text">
-                    <textarea rows="6" data-bind="value: editableTemplate"></textarea>
+                    <textarea rows="6" data-bind="value: _editableJson"></textarea>
+                  </div>
+                  <!-- ko if: withCompilingErrors -->
+                  <div class="compiling-errors-header">The template is not valid</div>
+                  <div class="box-elements compiling-errors" data-bind="foreach: compilingErrors">
+                    <div class="compiling-error" data-bind="text: message"></div>
                   </div>
                   <!-- /ko -->
-                </div>
-
-                <!-- ko with: cardTemplate -->
-                <!-- ko if: isMultiStyles() -->
-                <div class="template-styles box-elements">
-                  <label>Style to use</label>
-                  <select data-bind="options: styles, optionsText: 'name', value: selectedStyle"></select>
-                  <div data-bind="text: selectedStyle().description"></div>
-                </div>
-                <!-- /ko -->
-                <!-- /ko -->
-
-                <div class="template-description">
-                  <!-- ko with: cardTemplate -->
-                    <!-- ko if: currentTemplate().description != null -->
-                      <h2 data-bind="text: currentTemplate().description.title"></h2>
-                      <h3 data-bind="text: currentTemplate().description.credits"></h2>
-                      <div data-bind="text: currentTemplate().description.description"></div>
-                      <div><a data-bind="attr: { 'href': currentTemplate().description.url }">Source</a></div>
-                    <!-- /ko -->
+                  <!-- ko if: selectedTemplate() != null -->
+                  <div class="template-description-header">Template tested and valid - <span class="word-link" data-bind="click: setTemplate">Activate it</span> to use it in Geckos</div>
+                  <template-style-description id="selected-template-description" params="templateVM: selectedTemplate"></template-style-description>
                   <!-- /ko -->
                 </div>
+                <!-- /ko -->
+                <!-- /ko -->
               </div>
             </div>
             <div class="col-menu">
-              <!-- ko with: cardTemplate -->
               <ul class="vertical-menu icon">
-              	<li><a href="#" class="icon-download" title="Load template from file"
-                       data-bind="click: loadTemplate"><span>Load from file</span></a></li>
+                <li><a href="#" class="icon-edition-mode" title="Go to 'Edition mode'"
+                       data-bind="click: goEditionMode, visible: isGoEditionModeVisible"><span>Go to 'Edition mode'</span></a></li>
+                <li><a href="#" class="icon-list" title="Go to 'List mode'"
+                       data-bind="click: goListMode, visible: isGoListModeVisible"><span>Go to 'List mode'</span></a></li>
+                <li><a href="#" class="icon-compile-template" title="Validate the edited template"
+                       data-bind="click: validateTemplateCode, visible: isEditionModeActive"><span>Validate the edited template</span></a></li>
+                <li><a href="#" class="icon-apply-template" title="Use the selected template"
+                       data-bind="click: setTemplate, visible: isListModeActive"><span>Use the selected template</span></a></li>
+                <li><a href="#" class="icon-apply-template" title="Use the template in edition"
+                       data-bind="click: setTemplate, visible: isEditionModeActive"><span>Use the template in edition</span></a></li>
+                <li><a href="#" class="icon-download" title="Load template from file"
+                       data-bind="click: loadTemplate, visible: isEditionModeActive"><span>Load from file</span></a></li>
               	<li><a href="#" class="icon-save" title="Save template to file"
                        data-bind="click: saveTemplateAsJson"><span>Save to file</span></a></li>
-              	<li><a href="#" class="icon-apply-template" title="Apply template to cards"
-                       data-bind="click: setTemplate"><span>Apply template</span></a></li>
                 <li><a href="#" class="icon-undo" title="Cancel modifications on template"
-                       data-bind="click: resetTemplateCode"><span>Cancel modifications</span></a></li>
+                       data-bind="click: resetTemplateCode, visible: isEditionModeActive"><span>Cancel modifications</span></a></li>
               </ul>
               <form style="display:none" id="file-load-template-form">
                 <input type="file" id="file-load-template" name="file" class="form-control" style="display:none" />
               </form>
-              <!-- /ko -->
+
             </div>
           </div>
+          <!-- /ko -->
         </section>
 
         <!-- ********************
@@ -127,9 +160,11 @@
             <div class="section-colwrap">
               <div class="col-content">
                 <div class="box-elements">
+                  <!-- ko if: cardTemplate() != null -->
                   <select data-bind="options: listCards, optionsText: 'cardName', value: editableCard"
                           class="cards-list" size="5">
                   </select>
+                  <!-- /ko -->
                 </div>
               </div>
             </div>
@@ -162,21 +197,31 @@
             <div class="section-colwrap">
               <div class="col-content">
                 <div class="box-elements">
+                    <!-- ko if: cardTemplate() != null -->
                     <select data-bind="options: listCards, optionsText: 'cardName', value: editableCard"
                             class="cards-list" size="5">
                     </select>
+                    <!-- /ko -->
                 </div>
 
                 <div class="flex-container">
                   <!-- ko if: isCardSelected -->
                   <div class="flex-3">
+
+                    <!-- ko if: cardTemplate().isMultiStyles() -->
+                    <div class="box-elements">
+                      <label>Style to apply to the card</label>
+                      <select data-bind="options: cardTemplate().stylesForCard, optionsText: 'text', optionsValue: 'key', value: editableCard().selectedStyleKey"></select>
+                    </div>
+                    <!-- /ko -->
+
                     <card-editable-fields params="cardVM: editableCard"></card-editable-fields>
                   </div>
                   <!-- /ko -->
 
-                  <div class="box-elements flex-5" data-bind="visible: isCardSelected">
-                    <h3>Card View</h3>
-                    <div class="canvas-view">
+                  <div id="card-canvas-box" class="box-elements flex-5" data-bind="visible: isCardSelected">
+                    <h3 id="card-canvas-header">Card View</h3>
+                    <div id="card-canvas-view" class="canvas-view">
                       <canvas id="fabricjs-canvas" data-bind="fabric: generatedTemplate" ></canvas>
                     </div>
                   </div>
@@ -252,9 +297,6 @@
 
 
     <!-- ViewModels -->
-
-
-
     <script src="js/vendor/require.min.js" data-main="js/main.js"></script>
 </body>
 </html>

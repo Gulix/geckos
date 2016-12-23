@@ -1,4 +1,4 @@
-define(['knockout'], function(ko) {
+define(['knockout', 'viewModels/field-text'], function(ko, fieldText) {
 
   function fieldMultiline(jsonField) {
     var self = this;
@@ -40,9 +40,9 @@ define(['knockout'], function(ko) {
 
     /* Advanced String variables, with specific "valueType" */
     self.getAdvancedValue = function(valueType) {
-      if (valueType == 'text') { return self.getTextValue(); }
+      var value = fieldText.getTextAdvancedValue(valueType, self.getTextValue());
 
-      return '';
+      return value;
     }
   }
 

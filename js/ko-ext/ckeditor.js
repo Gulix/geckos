@@ -1,4 +1,4 @@
-define(['knockout', 'jscolor', 'simplecolorpicker', 'ddslick', 'ckeditor', 'jQuery'], function(ko, jscolor, simplecolorpicker) {
+define(['knockout', 'ckeditor', 'jQuery'], function(ko) {
 
   /*************************/
   /* Binding with CKEditor */
@@ -42,5 +42,4 @@ define(['knockout', 'jscolor', 'simplecolorpicker', 'ddslick', 'ckeditor', 'jQue
 
     }
   };
-
 });

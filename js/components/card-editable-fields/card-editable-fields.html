@@ -1,6 +1,9 @@
-<div class="box-elements" data-bind="with: currentCard">
+<!-- ko with: currentCard -->
+<div class="box-elements">
   <h3>Card Details</h3>
+
   <div class='editable-fields' data-bind="foreach: componentsFields">
      <div data-bind="component: $data"></div>
   </div>
 </div>
+<!-- /ko -->
