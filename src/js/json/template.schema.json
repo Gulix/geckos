@@ -40,7 +40,7 @@
                                 "type":
                                 {
                                     "type": "string",
-                                    "enum": [ "richtext", "multiline", "checkbox", "color", "image", "number", "options", "text"]
+                                    "enum": [ "richtext", "multiline", "checkbox", "color", "image", "number", "options", "text", "group"]
                                 },
                                 "options": { "$ref": "#/definitions/options" },
                                 "sharedOptions": { "type": "string" }

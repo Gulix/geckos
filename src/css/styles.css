@@ -402,3 +402,59 @@ a {
   color: #07889B; }
 a:hover {
   color: #E37222; }
+
+/***************************/
+/* --- Editable Fields --- */
+/***************************/
+.editable-field {
+
+}
+
+.editable-field label {
+  margin-bottom: 0px;
+  font-size: 0.8em;
+}
+
+.editable-field.input-text input {
+  width: 100%;
+  padding: 0px 8px;
+  margin: 0px;
+  height: 32px;
+}
+
+/***************************/
+/* --- Group of Fields --- */
+/***************************/
+.editable-fields-group {
+  width: 100%;
+  position: relative;
+  border: solid 1px #07889B;
+  margin-bottom: 4px;
+}
+
+.editable-fields-group .editable-fields {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.group-expand-button {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  cursor: pointer;
+}
+
+.group-expand-button:hover {
+  color: #C1C1BF;
+}
+
+.group-header {
+  background-color: #07889B;
+  padding: 0px 8px;
+  font-weight: 800;
+  color: #F1F1EF;
+}
+
+.group-label {
+
+}

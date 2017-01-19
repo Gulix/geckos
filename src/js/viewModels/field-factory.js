@@ -6,8 +6,9 @@ define(['viewModels/field-text',
         'viewModels/field-multiline',
         'viewModels/field-options',
         'viewModels/field-numeric',
+        'viewModels/fields-group'
        ],
-       function(text, image, richtext, color, checkbox, multiline, options, numeric) {
+       function(text, image, richtext, color, checkbox, multiline, options, numeric, group) {
 
   return {
     buildField: function(jsonField, sharedConfiguration) {
@@ -32,6 +33,8 @@ define(['viewModels/field-text',
           return options.build(jsonField, sharedConfiguration.sharedOptions); break;
         case "richtext":
           return richtext.build(jsonField); break;
+        case "group":
+          return group.build(jsonField); break;
         default:
           return text.build(jsonField); break;
       }

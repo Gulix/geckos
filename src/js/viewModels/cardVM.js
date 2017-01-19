@@ -1,4 +1,5 @@
-define(['knockout', 'viewModels/field-factory', 'tinycolor', 'fabricjs-textStyles'], function(ko, FieldFactory, tinycolor, styles) {
+define(['knockout', 'lodash', 'viewModels/field-factory', 'tinycolor', 'fabricjs-textStyles'],
+   function(ko, _, FieldFactory, tinycolor, styles) {
   /**
    * ViewModel representing a Card and its data.
    * @param  {editableFieldVM table} List of fields used to create the cards
@@ -50,6 +51,10 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor', 'fabricjs-textStyle
            if (existingField != null) {
              editableField.setValue(existingField.getJsonValue());
            }
+           if ((fieldList[iField].group != null) && (fieldList[iField].group.length > 0))
+           {
+             editableField.groupName = fieldList[iField].group;
+           }
            fields.push(editableField);
          }
        }
@@ -64,6 +69,20 @@ define(['knockout', 'viewModels/field-factory', 'tinycolor', 'fabricjs-textStyle
          };
          componentsFields.push(componentField);
        }
+
+       // If there is at least one group, each field that is in the group is put in it, and removed from the general list
+       var groups = _.filter(componentsFields, function(f) { return f.name == "fields-group"; });
+       var fieldsGrouped = [ ];
+       _.forEach(componentsFields, function(field) {
+         if (field.params.groupName != null) {
+           var groupOfField = _.find(groups, function(g) { return g.params.name == field.params.groupName; });
+           if (groupOfField != null) {
+             groupOfField.params.addField(field);
+             fieldsGrouped.push(field);
+           }
+         }
+       });
+       _.remove(componentsFields, function(f1) { return _.some(fieldsGrouped, function(f2) { return f1.params.name == f2.params.name; }); });
 
        // Filling the Observable Arrays
        self.componentsFields(componentsFields);

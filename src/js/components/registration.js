@@ -53,6 +53,10 @@ define(['knockout'], function(ko) {
         viewModel: { require: 'components/input-generic' },
         template: { require: 'text!components/input-text/input-text.html' }
       });
+      ko.components.register('fields-group', {
+        viewModel: { require: 'components/input-generic' },
+        template: { require: 'text!components/fields-group/fields-group.html' }
+      });
 
       /******************/
       /* Editing a Card */
