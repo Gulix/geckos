@@ -69,3 +69,9 @@
 .icon-apply-template:before {
   content: "\ea52";
 }
+.icon-circle-up:before {
+  content: "\ea41";
+}
+.icon-circle-down:before {
+  content: "\ea43";
+}
