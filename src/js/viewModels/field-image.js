@@ -1,4 +1,4 @@
-define(['knockout'], function(ko) {
+define(['knockout', 'cropper'], function(ko, cropper) {
 
   function fieldImage(jsonField) {
     var self = this;
@@ -14,6 +14,29 @@ define(['knockout'], function(ko) {
     // TODO : default value of an image field ?
     self.dataUrl = ko.observable('');
 
+    self.uniqueId = ko.pureComputed(function() {
+      return "img_crop_" + self.name;
+    });
+    self.isCropShown = ko.observable(false);
+    self.showCrop = function() {
+      var id = self.uniqueId();
+      $('#' + id).cropper(
+        {
+          aspectRatio: 4 / 3,
+          crop: function(e) {
+            // Output the result data for cropping image.
+            console.log(e.x);
+            console.log(e.y);
+            console.log(e.width);
+            console.log(e.height);
+            console.log(e.rotate);
+            console.log(e.scaleX);
+            console.log(e.scaleY);
+          }
+        }
+      );
+      self.isCropShown(true);
+    }
 
     self.uploadImage = function(file) {
       var reader  = new FileReader();

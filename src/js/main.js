@@ -11,7 +11,8 @@ require.config({
         'simplecolorpicker': 'vendor/jquery.simplecolorpicker',
         'ddslick': 'vendor/jquery.ddslick',
         'lodash': 'vendor/lodash',
-        'ajv': 'vendor/ajv.min'
+        'ajv': 'vendor/ajv.min',
+        'cropper': 'vendor/cropper'
     },
     shim: {
         'jQuery': {
