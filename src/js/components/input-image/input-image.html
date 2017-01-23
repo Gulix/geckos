@@ -2,7 +2,16 @@
   <label data-bind="text: field.label"></label>
   <input type="file" data-bind="event: { change: field.uploadImage($element.files[0])}"></input>
   <div data-bind="click: field.showCrop">Crop</div>
-  <div style="display:none; position: fixed; width: 100%; height: 100%; background-color: #000000; top: 0px; left: 0px; z-index: 2;" data-bind="visible: field.isCropShown">
-    <img style="max-width: 100%" data-bind="attr: { src: field.dataUrl, id: field.uniqueId }"></img>
+  <div style="display:none;" class="crop-modal-box" data-bind="visible: field.isCropShown">
+    <div class="crop-modal-wrapper">
+      <div class="crop-modal-header">Header</div>
+      <div class="crop-modal-main">
+        <div class="crop-modal-container">
+          <img data-bind="attr: { src: field.dataUrl, id: field.uniqueId }"></img>
+        </div>
+        <div class="crop-modal-right">Right</div>
+      </div>
+      <div class="crop-modal-footer">Footer</div>
+    </div>
   </div>
 </div>

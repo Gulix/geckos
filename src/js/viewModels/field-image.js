@@ -19,6 +19,7 @@ define(['knockout', 'cropper'], function(ko, cropper) {
     });
     self.isCropShown = ko.observable(false);
     self.showCrop = function() {
+      self.isCropShown(true);
       var id = self.uniqueId();
       $('#' + id).cropper(
         {
@@ -35,7 +36,6 @@ define(['knockout', 'cropper'], function(ko, cropper) {
           }
         }
       );
-      self.isCropShown(true);
     }
 
     self.uploadImage = function(file) {
