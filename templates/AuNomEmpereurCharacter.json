@@ -38,97 +38,135 @@
             "type": "image",
             "group": "powers"
         }, {
+            "name": "abilities",
+            "label": "Caractéristiques",
+            "type": "group",
+            "expanded": false
+        }, {
             "name": "movement",
             "label": "Mouvement",
             "default": "1",
-            "type": "text"
+            "type": "text",
+            "group": "abilities"
         }, {
             "name": "combat",
             "label": "Combat",
             "default": "4",
-            "type": "text"
+            "type": "text",
+            "group": "abilities"
         }, {
             "name": "shoot",
             "label": "Tir",
             "default": "4",
-            "type": "text"
+            "type": "text",
+            "group": "abilities"
         }, {
             "name": "cran",
             "label": "Cran",
             "default": "2",
-            "type": "text"
+            "type": "text",
+            "group": "abilities"
         }, {
             "name": "defense",
             "label": "Défense",
             "default": "7",
-            "type": "text"
+            "type": "text",
+            "group": "abilities"
         }, {
             "name": "points",
             "label": "Points",
             "default": "41",
             "type": "text"
         }, {
+            "name": "weapon1",
+            "label": "Arme 1",
+            "type": "group",
+            "expanded": false
+        }, {
             "name": "weapon1range",
             "label": "Arme 1 - Portée",
             "default": "6",
-            "type": "text"
+            "type": "text",
+            "group": "weapon1"
         }, {
             "name": "weapon1damages",
             "label": "Arme 1 - Dommages",
             "default": "1",
-            "type": "text"
+            "type": "text",
+            "group": "weapon1"
         }, {
             "name": "weapon1cran",
             "label": "Arme 1 - Malus de cran",
             "default": "0",
-            "type": "text"
+            "type": "text",
+            "group": "weapon1"
         }, {
             "name": "weapon1picture",
             "label": "Arme 1 - Image",
-            "type": "image"
+            "type": "image",
+            "group": "weapon1"
+        }, {
+            "name": "weapon2",
+            "label": "Arme 2",
+            "type": "group",
+            "expanded": false
         }, {
             "name": "weapon2range",
             "label": "Arme 2 - Portée",
             "default": "6",
-            "type": "text"
+            "type": "text",
+            "group": "weapon2"
         }, {
             "name": "weapon2damages",
             "label": "Arme 2 - Dommages",
             "default": "1",
-            "type": "text"
+            "type": "text",
+            "group": "weapon2"
         }, {
             "name": "weapon2cran",
             "label": "Arme 2 - Malus de cran",
             "default": "0",
-            "type": "text"
+            "type": "text",
+            "group": "weapon2"
         }, {
             "name": "weapon2picture",
             "label": "Arme 2 - Image",
-            "type": "image"
+            "type": "image",
+            "group": "weapon2"
+        }, {
+            "name": "weapon3",
+            "label": "Arme 3",
+            "type": "group",
+            "expanded": false
         }, {
             "name": "withoutweapon3",
             "label": "Pas de troisième arme",
             "type": "checkbox",
-            "default": true
+            "default": true,
+            "group": "weapon3"
         }, {
             "name": "weapon3range",
             "label": "Arme 3 - Portée",
             "default": "6",
-            "type": "text"
+            "type": "text",
+            "group": "weapon3"
         }, {
             "name": "weapon3damages",
             "label": "Arme 3 - Dommages",
             "default": "1",
-            "type": "text"
+            "type": "text",
+            "group": "weapon3"
         }, {
             "name": "weapon3cran",
             "label": "Arme 3 - Malus de cran",
             "default": "0",
-            "type": "text"
+            "type": "text",
+            "group": "weapon3"
         }, {
             "name": "weapon3picture",
             "label": "Arme 3 - Image",
-            "type": "image"
+            "type": "image",
+            "group": "weapon3"
         }],
         "canvasFields": [{
             "type": "image",
