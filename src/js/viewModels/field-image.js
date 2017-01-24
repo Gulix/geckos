@@ -5,6 +5,10 @@ define(['knockout', 'cropper'], function(ko, cropper) {
 
     self.name = jsonField.name;
     self.label = jsonField.label;
+    self.ratio = 1;
+    if (jsonField.ratio != undefined) {
+      self.ratio = jsonField.ratio;
+    }
     self.isNameField = false;
     if (jsonField.isNameField != undefined) {
       self.isNameField = jsonField.isNameField;
@@ -13,39 +17,62 @@ define(['knockout', 'cropper'], function(ko, cropper) {
     self.textValue = ko.observable(jsonField.default);
     // TODO : default value of an image field ?
     self.dataUrl = ko.observable('');
+    self.isDisabled = ko.pureComputed(function() {
+      return (self.dataUrl() == undefined)
+        || (self.dataUrl() == null)
+        || (self.dataUrl().length == 0);
+    });
 
-    self.uniqueId = ko.pureComputed(function() {
+    /*******************************/
+    /* --- Image Editor / Crop --- */
+    /*******************************/
+    self.uniqueCropId = ko.pureComputed(function() {
       return "img_crop_" + self.name;
     });
     self.isCropShown = ko.observable(false);
-    self.showCrop = function() {
-      self.isCropShown(true);
-      var id = self.uniqueId();
-      $('#' + id).cropper(
-        {
-          aspectRatio: 4 / 3,
-          crop: function(e) {
-            // Output the result data for cropping image.
-            console.log(e.x);
-            console.log(e.y);
-            console.log(e.width);
-            console.log(e.height);
-            console.log(e.rotate);
-            console.log(e.scaleX);
-            console.log(e.scaleY);
+
+    self.editImage = function() {
+      if (!self.isDisabled()) {
+        self.isCropShown(true);
+        $('#' + self.uniqueCropId()).cropper(
+          {
+            aspectRatio: self.ratio
           }
-        }
-      );
+        );
+      }
+    }
+    self.closeCrop = function() {
+      $('#' + self.uniqueCropId()).cropper('destroy');
+      self.isCropShown(false);
+    }
+    self.crop = function() {
+      var canvas = $('#' + self.uniqueCropId()).cropper('getCroppedCanvas');
+      self.dataUrl(canvas.toDataURL('image/jpg'));
+      self.isCropShown(false);
+    }
+
+    /****************************/
+    /* --- Loading the File --- */
+    /****************************/
+    self.uniqueInputId = ko.pureComputed(function() {
+      return "img_input_" + self.name;
+    });
+    self.loadImage = function() {
+      $('#' + self.uniqueInputId()).click();
     }
 
     self.uploadImage = function(file) {
       var reader  = new FileReader();
       reader.addEventListener("load", function () {
         self.dataUrl(reader.result);
+        self.editImage();
       }, false);
 
       if (file) { reader.readAsDataURL(file); }
     }
+
+
+
 
     /* Value to be used in the templates */
     self.getTextValue = function() {

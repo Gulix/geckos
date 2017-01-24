@@ -407,7 +407,7 @@ a:hover {
 /* --- Editable Fields --- */
 /***************************/
 .editable-field {
-
+  margin-bottom: 4px;
 }
 
 .editable-field label {
@@ -422,14 +422,45 @@ a:hover {
   height: 32px;
 }
 
+.image-field-buttons {
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+}
+
+.image-field-buttons .button {
+  border: solid 1px #07889B;
+  padding: 0px 8px;
+  text-align: center;
+  font-weight: 400;
+  color: #07889B;
+  background-color: #F1E3D8;
+  cursor: pointer;
+  margin-right: 10px;
+  flex: 1;
+  width: 100%;
+}
+.image-field-buttons .button:hover {
+  border: solid 2px #07889B;
+  font-weight: 800;
+  background-color: #ddbba0;
+}
+.image-field-buttons .button.disabled {
+  border: solid 1px #a89e97;
+  font-weight: 400;
+  background-color: #c0b5ac;
+  cursor: default;
+}
+
 /***************************/
 /* --- Group of Fields --- */
 /***************************/
 .editable-fields-group {
   width: 100%;
   position: relative;
-  border: solid 1px #07889B;
+  border: solid 2px #07889B;
   margin-bottom: 4px;
+  background-color: rgba(7, 136, 155, 0.3);
 }
 
 .editable-fields-group .editable-fields {
@@ -482,30 +513,40 @@ a:hover {
   width: 80%;
   height: 80%;
   margin: 5% 10%;
+  background-color: #F1E3D8;
+  padding: 1em;
+  border: solid 1px #E37222;
 }
 
 .crop-modal-header {
   flex: 2;
-  background: grey;
+  position: relative;
 }
+.crop-modal-close {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  font-weight: 1000;
+  cursor: pointer;
+  font-size: 32px;
+}
+
 .crop-modal-footer {
   flex: 7;
-  background: violet;
+  position: relative;
 }
 .crop-modal-right {
-  background: aliceblue;
+  display: none;
   flex: 1;
 }
 .crop-modal-main {
   flex: 16;
-  background: olive;
   display: flex;
   flex-flow: row;
   max-height: 80%;
 }
 .crop-modal-container {
   flex: 4;
-  background: red;
 }
 
 .crop-modal-container img {
@@ -513,4 +554,20 @@ a:hover {
   width: auto;
   max-width:100%;
   max-height: 100%;
+}
+.crop-modal-footer .button {
+  background-color: #07889B;
+  padding: 0px 8px;
+  font-weight: 800;
+  color: #F1F1EF;
+  cursor: pointer;
+  padding: 0px 8px;
+  text-align: center;
+  font-weight: 400;
+  position: absolute;
+  right: 0px;
+}
+.crop-modal-footer .button:hover {
+  font-weight: 800;
+  background-color: #056c7c;
 }
