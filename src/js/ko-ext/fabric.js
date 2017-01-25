@@ -7,18 +7,22 @@ define(['knockout', 'jQuery'], function(ko) {
           var viewModel = bindingContext.$data;
           var jsonValue = viewModel.generatedTemplate();
           var canvas = viewModel.canvas;
-          var cardSize = viewModel.canvasSizeForCurrentCard();
-          if (viewModel.cardTemplate() != null)
+    
+          if ((jsonValue.objects != undefined) && (jsonValue.objects != null)
+             && (jsonValue.objects.length > 0))
           {
-            if ((canvas.width != cardSize.width)
-               || (canvas.height != cardSize.height))
+            var cardSize = viewModel.canvasSizeForCurrentCard();
+            if (viewModel.cardTemplate() != null)
             {
-              canvas.setWidth(cardSize.width);
-              canvas.setHeight(cardSize.height);
+              if ((canvas.width != cardSize.width)
+                 || (canvas.height != cardSize.height))
+              {
+                canvas.setWidth(cardSize.width);
+                canvas.setHeight(cardSize.height);
+              }
             }
+            canvas.loadFromJSON(jsonValue, canvas.renderAll.bind(canvas));
           }
-
-          canvas.loadFromJSON(jsonValue, canvas.renderAll.bind(canvas));
       }
   };
 
