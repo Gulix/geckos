@@ -32,8 +32,8 @@ define(['knockout',
       return jsonCanvas;
     });
     self.canvasSizeForCurrentCard = function() {
-      if (self.cardTemplate() != null) {
-        var cardStyle = self.cardTemplate()._getStyleFromKey(self.editableCard().selectedStyleKey());
+      if ((self.cardTemplate() != null) && (self.editableCard() != null)) {
+        var cardStyle = self.cardTemplate()._styleForCard(self.editableCard());
         return { height: cardStyle.canvasHeight, width: cardStyle.canvasWidth };
       }
       return { height: 0, width: 0 };
