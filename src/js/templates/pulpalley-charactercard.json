@@ -148,7 +148,8 @@
         {
           "name":"portray",
           "label":"Miniature's image",
-          "type":"image"
+          "type":"image",
+          "ratio": 0.7142
         },
         {
           "name":"health",
@@ -482,7 +483,8 @@
         },
         {
           "name":"portray",
-          "label":"Image"
+          "label":"Image",
+          "ratio": 0.79919
         },
         {
           "name":"health",

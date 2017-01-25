@@ -14,7 +14,7 @@
 						{ "text": "Red", "colorValue": "#F5A98D" },
 						{ "text": "Green", "colorValue": "#97D2AC" }
 					] },
-				{ "name": "image", "label": "Image", "type": "image" }
+				{ "name": "image", "label": "Image", "type": "image", "ratio": 0.75517 }
 		  ],
 			"canvasFields": [
 				  {"type":"image","left":1, "width":438, "top":1 ,"height":580, "src": "$image"},
