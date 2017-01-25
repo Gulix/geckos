@@ -175,12 +175,13 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"],
 
     self.canvasWidth = function() {
       var style = self._styleForCard();
-      if (style != null) return style.canvasWidth();
+      if (style != null) return style.canvasWidth;
+      console.log('canvas width accessed');
       return 0;
     }
     self.canvasHeight = function() {
       var style = self._styleForCard();
-      if (style != null) return style.canvasHeight();
+      if (style != null) return style.canvasHeight;
       return 0;
     }
 

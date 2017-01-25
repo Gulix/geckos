@@ -69,8 +69,6 @@ define(['knockout', 'config', 'lodash',
      _.forEach(self.jsonTemplates, function(tpl) {
        self.objTemplates.push(CardTemplateVM.newCardTemplateVM(tpl, function() { }, function() { }));
      });
-     //var jsonTemplate = self.jsonTemplates[0];
-     //self.selectedTemplate(CardTemplateVM.newCardTemplateVM(jsonTemplate, function() { }, function() { }));
   }
 
   return {

@@ -31,6 +31,13 @@ define(['knockout',
 
       return jsonCanvas;
     });
+    self.canvasSizeForCurrentCard = function() {
+      if (self.cardTemplate() != null) {
+        var cardStyle = self.cardTemplate()._getStyleFromKey(self.editableCard().selectedStyleKey());
+        return { height: cardStyle.canvasHeight, width: cardStyle.canvasWidth };
+      }
+      return { height: 0, width: 0 };
+    }
 
     self.UItemplates = ko.observable(null);
     /********************************/
@@ -49,6 +56,7 @@ define(['knockout',
     }
 
     self.updateCanvasSize = function() {
+      console.log('engineVM.updateCanvasSize');
       if ((self.canvas != null) && (self.cardTemplate() != null)) {
         self.canvas.setWidth(self.cardTemplate().canvasWidth());
         self.canvas.setHeight(self.cardTemplate().canvasHeight());

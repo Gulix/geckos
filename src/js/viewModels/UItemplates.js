@@ -29,6 +29,7 @@ define(['knockout', 'config', 'lodash',
     // The modes
     self.uiList = ko.observable(null);
     self.uiEdition = ko.observable(null);
+    self.updateCanvasSize = engineVM.updateCanvasSize;
 
     /*****************
      *** Functions ***

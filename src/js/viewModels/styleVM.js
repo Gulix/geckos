@@ -10,8 +10,8 @@ define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
     self.canvasFields = ko.observableArray([ ]);
 
     self.canvasBackground = ko.observable();
-    self.canvasWidth = ko.observable();
-    self.canvasHeight = ko.observable();
+    self.canvasWidth = null;
+    self.canvasHeight = null;
 
     self.currentTemplate = ko.observable();
 
@@ -100,8 +100,8 @@ define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
 
 
         self.canvasBackground(jsonCode.canvasBackground);
-        self.canvasWidth(jsonCode.canvasWidth);
-        self.canvasHeight(jsonCode.canvasHeight);
+        self.canvasWidth = jsonCode.canvasWidth;
+        self.canvasHeight = jsonCode.canvasHeight;
 
         // Updating the cards, the canvas
         self.updateCards();
@@ -109,11 +109,18 @@ define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
       }
     }
 
+    self.onCardStyleChanged = function() {
+      self.cardFieldsUpdate();
+
+    }
+
     self.createNewCard = function() {
-      return CardVM.newCardVM(self.fields(), self.sharedConfiguration, self.cardFieldsUpdate);
+      return CardVM.newCardVM(self.fields(), self.sharedConfiguration, self.onCardStyleChanged);
     }
     self.updateFieldsOfCard = function(card) {
-      card.updateFields(self.fields(), self.sharedConfiguration);
+      if (card != null) {
+        card.updateFields(self.fields(), self.sharedConfiguration);
+      }
     }
     /********************************/
     /* End of Functions declaration */
