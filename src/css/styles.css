@@ -237,8 +237,13 @@ body {
 /*********************/
 /* List of Templates */
 /*********************/
+.templates-list {
+  display: flex;
+  flex-flow: row wrap;
+}
+
 .template-listitem {
-  display: inline-block;
+  display: inline-flex;
   width: 300px;
   height: 200px;
   background-color: #96C7CA;

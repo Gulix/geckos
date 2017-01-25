@@ -99,7 +99,7 @@
                   </div>
                 </div>
 
-                <div class="template-description-header">Selected template - <span class="word-link" data-bind="click: setTemplate">Activate it</span> to use it in Geckos</div>
+                <div class="template-description-header" data-bind="visible: selectedTemplate() != null">Selected template - <span class="word-link" data-bind="click: setTemplate">Activate it</span> to use it in Geckos</div>
                 <template-style-description id="selected-template-description" params="templateVM: selectedTemplate"></template-style-description>
                 <!-- /ko -->
                 <!-- /ko -->
