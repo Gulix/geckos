@@ -254,11 +254,13 @@ body {
   margin-left: 10px;
   padding: 5px;
   position: relative;
+  cursor: pointer;
 }
 
-.template-listitem.selected {
+.template-listitem.active {
   background-color: #E37222;
   border-color: #EEAA7B;
+  cursor: default;
 }
 
 .template-listitem-title {
@@ -279,25 +281,40 @@ body {
   width: 100%;
 }
 
-.template-listitem-toolbar {
-  position: absolute;
-  background: #07889B;
-  height: auto;
+.modal-box {
+  position: fixed;
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0, 0.8);
+  top: 0px;
   left: 0px;
   bottom: 0px;
-  width: 100%;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
 }
 
-.select-item-toolbar {
-  text-align: center;
-  width: 100%;
-  color: #96C7CA;
+.modal-box-content {
+  width: 80%;
+  height: 80%;
+  margin: 5% 10%;
+  background-color: #F1E3D8;
+  padding: 1em;
+  border: solid 1px #E37222;
+  position: relative;
 }
 
-.select-item-toolbar:hover {
-  font-weight: bold;
+.modal-close {
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  font-weight: 1000;
   cursor: pointer;
+  font-size: 32px;
 }
+
 
 /**********************/
 /* Errors on Template */

@@ -79,7 +79,7 @@
                 <!-- ko if: isListModeActive -->
                 <!-- ko with: uiList -->
                 <div class="templates-list" data-bind="foreach: objTemplates">
-                  <div class="template-listitem listitem" data-bind="css: { selected: $parent.isTemplateSelected($data) }">
+                  <div class="template-listitem listitem" data-bind="click: $parent.selectTemplate">
                     <div class="flex-container">
                       <!-- ko if: (description() != null) && (description().logo != null) -->
                       <div class="flex-1 template-listitem-logo">
@@ -90,17 +90,17 @@
                         <div class="template-listitem-title" data-bind="text: description().title"></div>
                         <div class="template-listitem-description" data-bind="text: description().description"></div>
                       </div>
-                      <!-- ko if: !$parent.isTemplateSelected($data) -->
-                      <div class="template-listitem-toolbar" data-bind="slideBottomListItem: $data">
-                        <div class="select-item-toolbar" data-bind="click: $parent.selectTemplate">Select</div>
-                      </div>
-                      <!-- /ko -->
                     </div>
                   </div>
                 </div>
 
-                <div class="template-description-header" data-bind="visible: selectedTemplate() != null">Selected template - <span class="word-link" data-bind="click: setTemplate">Activate it</span> to use it in Geckos</div>
-                <template-style-description id="selected-template-description" params="templateVM: selectedTemplate"></template-style-description>
+                <div style="display:none;" class="modal-box" data-bind="visible: hasSelectedTemplate">
+                  <div class="modal-box-content">
+                    <div class="modal-close" data-bind="click: cancelSelectedTemplate">X</div>
+                    <div class="template-description-header">Selected template - <span class="word-link" data-bind="click: setTemplate">Activate it</span> to use it in Geckos</div>
+                    <template-style-description id="selected-template-description" params="templateVM: selectedTemplate"></template-style-description>
+                  </div>
+                </div>
                 <!-- /ko -->
                 <!-- /ko -->
 

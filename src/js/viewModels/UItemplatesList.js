@@ -26,20 +26,17 @@ define(['knockout', 'config', 'lodash',
 
     self.selectTemplate = function() {
       self.selectedTemplate(this);
-      $('html, body').animate({
-        scrollTop: $("#selected-template-description").offset().top
-      }, 500);
+    }
+    self.hasSelectedTemplate = ko.pureComputed(function() {
+      return self.selectedTemplate() != null;
+    });
+    self.cancelSelectedTemplate = function() {
+      self.selectedTemplate(null);
     }
 
     self.setTemplate = function() {
       self.uiTemplates.setTemplate();
-      $('html, body').animate({
-        scrollTop: $("#active-template-description-header").offset().top
-      }, 500);
-    }
-
-    self.isTemplateSelected = function(template) {
-      return template == self.selectedTemplate();
+      self.cancelSelectedTemplate();
     }
 
     /***************************************************
