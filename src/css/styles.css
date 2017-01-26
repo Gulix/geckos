@@ -8,6 +8,37 @@ body {
   padding: 0 0;
 }
 
+/******************/
+/* --- Header --- */
+/******************/
+.header {
+
+}
+
+.header-logo {
+  float: left;
+  width: 15%;
+}
+
+.header-text {
+
+}
+
+.page-title {
+  color: #07889B;
+  font-weight: bold;
+  font-size: 3em;
+}
+.page-subtitle {
+  color: #66B9BF;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 1.4em;
+  margin-left: 25px;
+  margin-bottom: 25px;
+}
+
+
 /* Top Main Menu */
 .main-menu {
   display:table;
@@ -34,21 +65,6 @@ body {
 {
    background-color: #66B9BF;
  }
-
-.page-title {
-  color: #07889B;
-  font-weight: bold;
-  font-size: 3em;
-}
-.page-subtitle {
-  color: #66B9BF;
-  font-weight: bold;
-  font-style: italic;
-  font-size: 1.4em;
-  margin-left: 25px;
-  margin-bottom: 25px;
-}
-
 /********************************************/
 /* Section display with left vertical menus */
 /********************************************/
@@ -298,12 +314,16 @@ body {
 
 .modal-box-content {
   width: 80%;
-  height: 80%;
+  max-height: 80%;
   margin: 5% 10%;
   background-color: #F1E3D8;
   padding: 1em;
   border: solid 1px #E37222;
   position: relative;
+}
+
+.modal-box-content h3 {
+  color: #E37222;
 }
 
 .modal-close {
@@ -315,6 +335,33 @@ body {
   font-size: 32px;
 }
 
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-button {
+  color: #E57222;
+  border: 1px solid #E57222;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 0 15px;
+  font-size: 11px;
+  text-transform: uppercase;
+  display: flex;
+  height: 32px;
+  align-items: center;
+}
+
+.modal-button .icon {
+  font-size: 2em;
+  margin: 10px;
+}
+
+.modal-button:hover {
+  background-color: #F1D8C6;
+  font-weight: 800;
+}
 
 /**********************/
 /* Errors on Template */

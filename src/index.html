@@ -33,8 +33,15 @@
   </head>
 <body>
   <div class="container fullwidth-container">
-    <div class="page-title">Geckos</div>
-    <div class="page-subtitle">editing cards since 2016 ...</div>
+    <div class="header">
+      <div class="header-logo">
+        <img src="images/logo.svg" />
+      </div>
+      <div class="header-text">
+        <div class="page-title">Geckos</div>
+        <div class="page-subtitle">editing cards since 2016 ...</div>
+      </div>
+    </div>
 
     <div id="tabs" class="tabs">
 			<nav>
@@ -97,8 +104,11 @@
                 <div style="display:none;" class="modal-box" data-bind="visible: hasSelectedTemplate">
                   <div class="modal-box-content">
                     <div class="modal-close" data-bind="click: cancelSelectedTemplate">X</div>
-                    <div class="template-description-header">Selected template - <span class="word-link" data-bind="click: setTemplate">Activate it</span> to use it in Geckos</div>
+                    <h3>Template description</h3>
                     <template-style-description id="selected-template-description" params="templateVM: selectedTemplate"></template-style-description>
+                    <div class="modal-buttons">
+                      <div class="modal-button" data-bind="click: setTemplate"><div class="icon icon-apply-template"></div>Use this Template</div>
+                    </div>
                   </div>
                 </div>
                 <!-- /ko -->
