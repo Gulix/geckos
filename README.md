@@ -1,3 +1,5 @@
+![Geckos Logo](https://raw.githubusercontent.com/Gulix/geckos/master/logo-250.png)
+
 # geckos
 Geckos Edit Cards ... kos ... ?
 
