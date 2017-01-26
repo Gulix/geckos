@@ -23,14 +23,14 @@ define(['knockout',
       return self.editableCard() != null;
     });
 
-    self.generatedTemplate = function() {
+    self.generatedTemplate = ko.pureComputed(function() {
       var jsonCanvas = { };
       if (self.isCardSelected() && (self.cardTemplate() != null)) {
         jsonCanvas = self.cardTemplate().generateTemplate(self.editableCard());
       }
 
       return jsonCanvas;
-    };
+    });
     self.canvasSizeForCurrentCard = function() {
       if ((self.cardTemplate() != null) && (self.editableCard() != null)) {
         var cardStyle = self.cardTemplate()._styleForCard(self.editableCard());
