@@ -17,10 +17,10 @@ define(['knockout', 'cropper'], function(ko, cropper) {
     self.textValue = ko.observable(jsonField.default);
     // TODO : default value of an image field ?
     self.dataUrl = ko.observable('');
+    self.editedDataUrl = ko.observable('');
     self.isDisabled = ko.pureComputed(function() {
-      return (self.dataUrl() == undefined)
-        || (self.dataUrl() == null)
-        || (self.dataUrl().length == 0);
+      return ((self.dataUrl() == undefined) || (self.dataUrl() == null) || (self.dataUrl().length == 0))
+        && ((self.editedDataUrl() == undefined) || (self.editedDataUrl() == null) || (self.editedDataUrl().length == 0));
     });
 
     /*******************************/
@@ -32,8 +32,13 @@ define(['knockout', 'cropper'], function(ko, cropper) {
     self.isCropShown = ko.observable(false);
 
     self.editImage = function() {
-      if (!self.isDisabled()) {
+      if (!self.isDisabled())
+      {
         self.isCropShown(true);
+        if ((self.editedDataUrl() == null) || (self.editedDataUrl().length <= 0)) {
+          self.editedDataUrl(self.dataUrl());
+        }
+
         $('#' + self.uniqueCropId()).cropper(
           {
             aspectRatio: self.ratio
@@ -43,12 +48,14 @@ define(['knockout', 'cropper'], function(ko, cropper) {
     }
     self.closeCrop = function() {
       $('#' + self.uniqueCropId()).cropper('destroy');
+      self.editedDataUrl('');
       self.isCropShown(false);
     }
     self.crop = function() {
       var canvas = $('#' + self.uniqueCropId()).cropper('getCroppedCanvas');
       self.dataUrl(canvas.toDataURL('image/jpg'));
-      self.isCropShown(false);
+
+      self.closeCrop();
     }
 
     /****************************/
@@ -64,15 +71,12 @@ define(['knockout', 'cropper'], function(ko, cropper) {
     self.uploadImage = function(file) {
       var reader  = new FileReader();
       reader.addEventListener("load", function () {
-        self.dataUrl(reader.result);
+        self.editedDataUrl(reader.result);
         self.editImage();
       }, false);
 
       if (file) { reader.readAsDataURL(file); }
     }
-
-
-
 
     /* Value to be used in the templates */
     self.getTextValue = function() {
