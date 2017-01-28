@@ -12,6 +12,7 @@
     <!-- FONT
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link href="http://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
 
     <!-- CSS
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -64,7 +65,7 @@
           <h1>Welcome to Geckos</h1>
           <p>Geckos is a web-application which goal is to create <em>Image cards</em>, through the use of predetermined <em>Templates</em>.</p>
           <p>Those templates are built in a simple language (JSON), and can be easily modified.</p>
-          <p>Set your template, add new cards and edit them, and you can download your images !</p>
+          <p>Choose your template in the list, or create your own, add new cards and edit them, and you can download your images !</p>
           <p>No login required, all the work is done inside your browser with modern javascript framework !</p>
           <p>Geckos is fully Open-Source, and the source-code is available to anyone.</p>
         </section>
@@ -85,6 +86,7 @@
 
                 <!-- ko if: isListModeActive -->
                 <!-- ko with: uiList -->
+                <h3>Installed Templates</h3>
                 <div class="templates-list" data-bind="foreach: objTemplates">
                   <div class="template-listitem listitem" data-bind="click: $parent.selectTemplate">
                     <div class="flex-container">
@@ -118,17 +120,29 @@
                 <!-- ko with: uiEdition -->
                 <div class="template-edition">
                   <div class="template-text">
-                    <textarea rows="6" data-bind="value: _editableJson"></textarea>
+                    <h3>Template Code</h3>
+                    <textarea rows="12" data-bind="value: _editableJson"></textarea>
+                    <div class="modal-buttons">
+                      <div class="modal-button" data-bind="click: validateTemplate"><div class="icon icon-compile-template"></div>Compile your code</div>
+                    </div>
                   </div>
                   <!-- ko if: withCompilingErrors -->
                   <div class="compiling-errors-header">The template is not valid</div>
                   <div class="box-elements compiling-errors" data-bind="foreach: compilingErrors">
-                    <div class="compiling-error" data-bind="text: message"></div>
+                    <div class="compiling-error" data-bind="text: $data"></div>
                   </div>
                   <!-- /ko -->
-                  <!-- ko if: selectedTemplate() != null -->
-                  <div class="template-description-header">Template tested and valid - <span class="word-link" data-bind="click: setTemplate">Activate it</span> to use it in Geckos</div>
-                  <template-style-description id="selected-template-description" params="templateVM: selectedTemplate"></template-style-description>
+                  <!-- ko if: compiledTemplate() != null -->
+                  <div style="display:none;" class="modal-box" data-bind="visible: isCompiledTemplateVisible">
+                    <div class="modal-box-content">
+                      <div class="modal-close" data-bind="click: cancelTemplateCompiledPreview">X</div>
+                      <h3>Template validated !</h3>
+                      <template-style-description id="selected-template-description" params="templateVM: compiledTemplate"></template-style-description>
+                      <div class="modal-buttons">
+                        <div class="modal-button" data-bind="click: setTemplate"><div class="icon icon-apply-template"></div>Use this Template</div>
+                      </div>
+                    </div>
+                  </div>
                   <!-- /ko -->
                 </div>
                 <!-- /ko -->
@@ -145,8 +159,6 @@
                        data-bind="click: validateTemplateCode, visible: isEditionModeActive"><span>Validate the edited template</span></a></li>
                 <li><a href="#" class="icon-apply-template" title="Use the selected template"
                        data-bind="click: setTemplate, visible: isListModeActive"><span>Use the selected template</span></a></li>
-                <li><a href="#" class="icon-apply-template" title="Use the template in edition"
-                       data-bind="click: setTemplate, visible: isEditionModeActive"><span>Use the template in edition</span></a></li>
                 <li><a href="#" class="icon-download" title="Load template from file"
                        data-bind="click: loadTemplate, visible: isEditionModeActive"><span>Load from file</span></a></li>
               	<li><a href="#" class="icon-save" title="Save template to file"
@@ -258,8 +270,8 @@
             <h1>About Geckos</h1>
             <div>
               <p>Geckos is a web-application, created to make cards based on templates.</p>
-              <p>This page is a demo-page for Geckos. By default, it presents a <a href="http://www.pulpalley.com">Pulp Alley</a> Character Card Template.</p>
-              <p>Other templates can be found on <a href="https://github.com/Gulix/geckos/tree/master/templates">this page</a> of the repository.</p>
+              <p>This page is a demo-page for Geckos. A list of templates are pre-installed, feel free to use them, or create your own.</p>
+              <p>Templates can be found on <a href="https://github.com/Gulix/geckos/tree/master/templates">this page</a> of the repository, and there is a <a href="http://www.gulix.fr/geckos/wiki">Documentation Wiki</a> to help you create your own.</p>
               <p>Geckos is open-source, and can be found on <a href="http://www.github.com/gulix/geckos">Github</a>.</p>
               <p>Geckos is still <a href="http://www.github.com/gulix/geckos/issues">under development</a>, and this demo page is a Beta version of the software.</p>
               <p>Geckos relies on multiple open-source softwares &amp; libraries :</p>
@@ -292,6 +304,8 @@
                   <ul>
                     <li><a href="https://github.com/eligrey/FileSaver.js/">FileSaver.js</a></li>
                     <li><a href="http://bgrins.github.io/TinyColor/">TinyColor</a></li>
+                    <li><a href="https://github.com/epoberezkin/ajv">AJV</a></li>
+                    <li><a href="https://github.com/fengyuanchen/cropper">Cropper</a></li>
                   </ul>
                 </li>
               </ul>
@@ -302,7 +316,7 @@
       </div>
     </div>
     <div class="clear"></div>
-    <div class="page-footer">Beta version 1 (WIP 0.1.1) - Last updated 2016-08-03 (master branch)</div>
+    <div class="page-footer">Beta version 2 (WIP 0.2.0) - Last updated 2017-01-28 (master branch)</div>
   </div>
 
 
