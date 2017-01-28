@@ -1,0 +1,55 @@
+{
+	"styles": [
+		{
+			"key": "default",
+      "name": "Default Style",
+      "description": "Basic Template for a card of various effect (for any type of game)",
+			"canvasBackground": "#EEEEEE",
+			"canvasWidth": 340,
+			"canvasHeight": 495,
+			"fields": [
+		    {	"name": "name", "label": "Name", "default": "Some Basic Effects" },
+		    { "name": "description", "type": "multiline", "label": "Description", "default": "Here comes some short description of the effect" },
+		    {	"name": "effect", "type": "richtext", "label": "Effect", "default": "<p>The full description of the effect, with possibilities to set <strong>bold</strong> and <i>italic</i> text.</p>" },
+		    { "name": "displayTag", "label": "Display Tags ?", "type": "checkbox", "default": false },
+		    {	"name": "tag", "label": "Tags", "default": "Tag" },
+		    { "name": "displayImage", "label": "Display Image ?", "type": "checkbox", "default": true },
+		    { "name": "image", "type": "image", "label": "Image", "ratio": 1.5619 }
+		  ],
+			"canvasFields": [
+		    {	"type": "image", "left": 6, "width": 328,	"top": 40, "height": 210,	"src": "$image", "visible": "?displayImage" },
+		    { "type": "textbox", "text": "$name$", "fontSize": 32, "fontFamily": "FrederickatheGreat", "width": 340, "top": 10, "textAlign": "center" },
+		    { "type": "textbox", "text": "$description$", "fontSize": 14, "fontFamily": "JosefinSlab", "fontStyle": "italic", "width": 320, "left": 10, "top": "{{if (card[displayImage]) value = 260; else value = 50}}", "textAlign": "center" },
+		    { "type": "textbox", "text": "$effect$", "styles": "£effect", "fontSize": 16, "fontFamily": "JosefinSlab", "width": 330, "left": 5, "top": "{{if (card[displayImage]) value = 300; else value = 90}}", "textAlign": "left", "backgroundColor": "#DDDDDD" },
+		    { "type": "textbox", "text": "$tag$", "fontSize": 18, "fontFamily": "FrederickatheGreat", "width": 335, "top": 475, "textAlign": "right", "visible": "?displayTag" }
+		  ]
+		},
+		{
+			"key": "pictureless",
+			"basedOn": "default",
+      "name": "Default Style (without a picture)",
+      "description": "Basic Template for a card of various effect (for any type of game)",
+			"fields": [
+		    { "name": "displayImage", "ignored": true },
+		    { "name": "image", "ignored": true }
+		  ],
+			"canvasFields": [
+		    {	"type": "image", "ignored": true },
+		    { "type": "textbox", "text": "$description$", "fontSize": 14, "fontFamily": "JosefinSlab", "fontStyle": "italic", "width": 320, "left": 10, "top": "50", "textAlign": "center" },
+		    { "type": "textbox", "text": "$effect$", "styles": "£effect", "fontSize": 16, "fontFamily": "JosefinSlab", "width": 330, "left": 5, "top": "90", "textAlign": "left", "backgroundColor": "#DDDDDD" },
+		    { "type": "textbox", "text": "$tag$", "fontSize": 18, "fontFamily": "FrederickatheGreat", "width": 335, "top": 475, "textAlign": "right", "visible": "?displayTag" }
+		  ]
+		}
+	],
+  "fonts": [
+    { "fontFamily": "FrederickatheGreat", "src": "https://fonts.gstatic.com/s/frederickathegreat/v5/7Es8Lxoku-e5eOZWpxw18hsRj2C0BvLNQqKHRdEu66Y.woff2" },
+    { "fontFamily": "JosefinSlab", "src": "https://fonts.gstatic.com/s/josefinslab/v6/46aYWdgz-1oFX11flmyEfegdm0LZdjqr5-oayXSOefg.woff2" },
+    { "fontFamily": "JosefinSlab", "src": "https://fonts.gstatic.com/s/josefinslab/v6/etsUjZYO8lTLU85lDhZwUhMBlNeli-0RcAdOFWWLdxQ.woff2", "fontStyle": "italic" }
+  ],
+	"description": {
+		"description": "Basic Template for a card of various effect (for any type of game)",
+    "title":"Basic - Effects",
+    "credits": "by Nicolas Ronvel",
+    "url": "https://github.com/Gulix/geckos/"
+	}
+}

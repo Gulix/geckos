@@ -1,0 +1,144 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "description": "Validation Schema for the Templates in Geckos",
+    "title": "Geckos' Templates",
+    "type":"object",
+    "properties":
+    {
+        "styles":
+        {
+            "type":"array",
+            "minItems": 1,
+            "items":
+            {
+                "type":"object",
+                "title": "Style",
+                "description": "A style to use in the template",
+                "properties":
+                {
+                    "key": { "type":"string" },
+                    "basedOn": { "type":"string" },
+                    "isDefault": { "type": "boolean" },
+                    "name": { "type":"string" },
+                    "description": { "type":"string" },
+                    "canvasBackground": { "type": "string", "pattern": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$" },
+                    "canvasWidth": { "type": "integer", "minimum": 10 },
+                    "canvasHeight": { "type": "integer", "minimum": 10 },
+                    "fields":
+                    {
+                        "type":"array",
+                        "minItems": 1,
+                        "items":
+                        {
+                            "type":"object",
+                            "properties":
+                            {
+                                "name":{ "type":"string", "pattern": "^[a-zA-Z_0-9]+$" },
+                                "ignored":{ "type":"boolean" },
+                                "label": { "type": "string" },
+                                "default": { "type": ["string", "boolean", "number"]},
+                                "type":
+                                {
+                                    "type": "string",
+                                    "enum": [ "richtext", "multiline", "checkbox", "color", "image", "number", "options", "text", "group"]
+                                },
+                                "options": { "$ref": "#/definitions/options" },
+                                "sharedOptions": { "type": "string" }
+                            },
+                            "required": [ "name" ]
+                        }
+                    },
+                    "canvasFields":
+                    {
+                        "type":"array",
+                        "items":{
+                            "type":"object"
+                        }
+                    }
+                },
+                "required": [ "key", "name" ]
+            }
+        },
+        "fonts":
+        {
+            "type":"array",
+            "items":{
+                "type":"object",
+                "properties":{
+                    "fontFamily":{ "type":"string" },
+                    "src":{ "type":"string", "format": "uri" },
+                    "fontStyle":
+                    {
+                        "type":"string",
+                        "enum": [ "italic", "normal" ]
+                    }
+                },
+                "required":[
+                    "fontFamily",
+                    "src"
+                ]
+            }
+        },
+        "description":
+        {
+            "type":"object",
+            "properties":
+            {
+                "description":{ "type":"string" },
+                "title":{ "type":"string" },
+                "credits":{ "type":"string" },
+                "url":{ "type":"string", "format": "uri" },
+                "logo": { "logo": "string", "format": "uri" }
+            },
+            "required": [ "description", "title" ]
+        },
+        "sharedOptions":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "key": { "type": "string" },
+                    "options": { "$ref": "#/definitions/options" }
+                },
+                "required": [ "key", "options" ]
+            }
+        }
+    },
+    "required":[
+        "styles",
+        "description"
+    ],
+    "definitions": {
+        "options":
+        {
+            "type": "array",
+            "minItems": 1,
+            "items":
+            {
+                "type": "object",
+                "oneOf":
+                [
+                    {
+                        "properties":
+                        {
+                           "option": { "type": [ "string", "integer" ] },
+                           "text": { "type": "string" }
+                        },
+                        "required": ["option", "text"]
+                    },
+                    {
+                        "properties":
+                        {
+                           "colorValue": { "type": "string", "pattern": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$" },
+                           "text": { "type": "string" }
+                        },
+                        "required": ["colorValue", "text"]
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,10 @@
+<div class="editable-fields-group">
+  <div class="group-header">
+    <div class="group-label" data-bind="text: field.label"></div>
+    <div class="group-expand-button icon" data-bind="click: field.toggleExpanded, css: { 'icon-circle-up': field.isExpanded(), 'icon-circle-down': !field.isExpanded() }"></div>
+  </div>
+
+  <div class='editable-fields' data-bind="foreach: field.componentsFields, visible: field.isExpanded">
+     <div data-bind="component: $data"></div>
+  </div>
+</div>
