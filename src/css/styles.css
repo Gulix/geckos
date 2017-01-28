@@ -113,10 +113,6 @@ body {
   border: solid 1px #E37222;
 }
 
-.box-elements h3 {
-  color: #E37222;
-}
-
 /*****************/
 /* Vertical Menu */
 /*****************/
@@ -205,6 +201,12 @@ body {
 .template-text textarea {
   width: 100%;
   height: 100%;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow-x: auto;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 /*****************************/
@@ -320,10 +322,6 @@ body {
   padding: 1em;
   border: solid 1px #E37222;
   position: relative;
-}
-
-.modal-box-content h3 {
-  color: #E37222;
 }
 
 .modal-close {

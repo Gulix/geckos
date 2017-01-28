@@ -48,13 +48,6 @@ define(['knockout', 'config', 'lodash',
     self.currentTemplate = ko.pureComputed(function() {
       return self.selectedTemplate();
     })
-    // Returns the JSON of the selected template
-    self.getCurrentJSON = function() {
-      if (self.selectedTemplate() != null) {
-        return self.selectedTemplate().getJson();
-      }
-      return { };
-    }
 
     /*****************************
      *** Object Initialization ***
