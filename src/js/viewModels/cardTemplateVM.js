@@ -79,8 +79,6 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles", "webfont
 
       // Webfonts loaded by TypeKit.Webfont
       if ((self._activeTemplateJson != null) && (self._activeTemplateJson.webfonts != null)) {
-        console.log('Webfont loading');
-        console.log(JSON.stringify(self._activeTemplateJson.webfonts));
         WebFont.load(self._activeTemplateJson.webfonts);
       }
     }
