@@ -12,7 +12,8 @@ require.config({
         'ddslick': 'vendor/jquery.ddslick',
         'lodash': 'vendor/lodash',
         'ajv': 'vendor/ajv.min',
-        'cropper': 'vendor/cropper'
+        'cropper': 'vendor/cropper',
+        'webfont': 'vendor/webfont'
     },
     shim: {
         'jQuery': {
