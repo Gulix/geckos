@@ -14,7 +14,7 @@
 		    { "name": "displayTag", "label": "Display Tags ?", "type": "checkbox", "default": false },
 		    {	"name": "tag", "label": "Tags", "default": "Tag" },
 		    { "name": "displayImage", "label": "Display Image ?", "type": "checkbox", "default": true },
-		    { "name": "image", "type": "image", "label": "Image" }
+		    { "name": "image", "type": "image", "label": "Image", "ratio": 1.5619 }
 		  ],
 			"canvasFields": [
 		    {	"type": "image", "left": 6, "width": 328,	"top": 40, "height": 210,	"src": "$image", "visible": "?displayImage" },
