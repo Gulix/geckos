@@ -1,4 +1,9 @@
 {
+	"webfonts": {
+		"google": {
+      "families": [ "Pacifico" ]
+    }
+	},
 	"styles":
 	[
 		{
@@ -6,14 +11,7 @@
 			"name": "Default",
 			"fields": [
 		    {	"name": "name", "label": "Name", "default": "Arabesque" },
-				{ "name": "mainColor", "label": "Main color", "default": "#F5A98D", "type": "color",
-					"options": [
-						{ "text": "White", "colorValue": "#FCFED4" },
-						{ "text": "Blue", "colorValue": "#ACDCF9" },
-						{ "text": "Black", "colorValue": "#CAC2C0" },
-						{ "text": "Red", "colorValue": "#F5A98D" },
-						{ "text": "Green", "colorValue": "#97D2AC" }
-					] },
+				{ "name": "mainColor", "label": "Main color", "default": "#F745A4", "type": "color" },
 				{ "name": "image", "label": "Image", "type": "image", "ratio": 0.75517 }
 		  ],
 			"canvasFields": [
@@ -156,7 +154,7 @@
 						}
 					}]
 				},
-				{ "type": "textbox", "text": "$name$", "fontSize": 32, "fontFamily": "Arial", "fill": "{{value = tinycolor.mostReadable(card[mainColor].complement().toHexString(), ['#DDD', '#888', '#111']).toHexString();}}" , "width": 430, "top": 550, "textAlign": "right" }
+				{ "type": "textbox", "text": "$name$", "fontSize": 32, "fontFamily": "Pacifico", "fill": "{{value = tinycolor.mostReadable(card[mainColor].complement().toHexString(), ['#DDD', '#888', '#111']).toHexString();}}" , "width": 430, "top": 550, "textAlign": "right" }
 		  ],
 			"canvasBackground": "#FFFFFF",
 			"canvasWidth": 440,
@@ -167,7 +165,6 @@
 		"description": "Template for playing with colors !",
     "title":"Arabesque",
     "credits": "by Nicolas Ronvel",
-    "url": "https://github.com/Gulix/geckos/",
-		"logo": "http://www.webosnation.com/sites/webosnation.com/files/resource_images/w/word-ace-card-back.jpg"
+    "url": "https://github.com/Gulix/geckos/"
 	}
 }
