@@ -1797,15 +1797,16 @@
       "name":"Reward Card",
       "description":"Reward Card for Pulp Alley",
       "fields": [
-		{ "name":"name", "default":"Reward" },
+		    { "name":"name", "default":"Reward" },
         { "name":"fortune_effect", "default":"<p><strong>Bonus duration</strong></p><p></p><p><strong>Bonus :</strong> Bonus of the Reward</p>" },
         { "name":"fortune_effect_size", "label":"Font size" },
         { "name":"caption", "ignored": true },
         { "name":"challenge", "label":"Reward", "default":"For holding this card at the end of the game your league receives :" },
         { "name":"challenge_skills", "label":"Reward bonus", "default":"+1 " },
         { "name":"peril", "ignored": true },
-		{ "name":"not_peril", "ignored": true },
+		    { "name":"not_peril", "ignored": true },
         { "name":"x_number", "ignored": true },
+        { "name": "grp_peril", "ignored": true },
         { "name":"icon", "label":"Icon",
           "options": [
             { "option":"xp", "text":"XP" },
