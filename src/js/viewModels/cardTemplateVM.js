@@ -196,6 +196,7 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles", "webfont
     }
 
     self.updateFieldsOfCard = function(card) {
+      console.log('cardTemplateVM.updateFieldsOfCard');
       self._styleForCard(card).updateFieldsOfCard(card);
     }
 
@@ -225,7 +226,6 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles", "webfont
         self.styleVM.initStyleFromCode(completeJsonStyle);
       } else {
         // Style from card
-        console.log('style from card');
         var jsonCardStyle = self._getStyleFromKey(cardVM.selectedStyleKey());
         if (jsonCardStyle == null) {
           jsonCardStyle = self.defaultStyle();

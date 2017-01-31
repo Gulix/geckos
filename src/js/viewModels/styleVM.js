@@ -109,9 +109,8 @@ define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
       }
     }
 
-    self.onCardStyleChanged = function() {
-      self.cardFieldsUpdate();
-
+    self.onCardStyleChanged = function(card) {
+      self.cardFieldsUpdate(card);
     }
 
     self.createNewCard = function() {
@@ -119,6 +118,7 @@ define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
     }
     self.updateFieldsOfCard = function(card) {
       if (card != null) {
+        console.log('styleVM.updateFieldsOfCard');
         card.updateFields(self.fields(), self.sharedConfiguration);
       }
     }
