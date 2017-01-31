@@ -18,10 +18,10 @@
 		  ],
 			"canvasFields": [
 		    {	"type": "image", "left": 6, "width": 328,	"top": 40, "height": 210,	"src": "$image", "visible": "?displayImage" },
-		    { "type": "textbox", "text": "$name$", "fontSize": 32, "fontFamily": "FrederickatheGreat", "width": 340, "top": 10, "textAlign": "center" },
-		    { "type": "textbox", "text": "$description$", "fontSize": 14, "fontFamily": "JosefinSlab", "fontStyle": "italic", "width": 320, "left": 10, "top": "{{if (card[displayImage]) value = 260; else value = 50}}", "textAlign": "center" },
-		    { "type": "textbox", "text": "$effect$", "styles": "£effect", "fontSize": 16, "fontFamily": "JosefinSlab", "width": 330, "left": 5, "top": "{{if (card[displayImage]) value = 300; else value = 90}}", "textAlign": "left", "backgroundColor": "#DDDDDD" },
-		    { "type": "textbox", "text": "$tag$", "fontSize": 18, "fontFamily": "FrederickatheGreat", "width": 335, "top": 475, "textAlign": "right", "visible": "?displayTag" }
+		    { "type": "textbox", "text": "$name$", "fontSize": 32, "fontFamily": "Fredericka the Great", "width": 340, "top": 10, "textAlign": "center" },
+		    { "type": "textbox", "text": "$description$", "fontSize": 14, "fontFamily": "Josefin Slab", "fontStyle": "italic", "width": 320, "left": 10, "top": "{{if (card[displayImage]) value = 260; else value = 50}}", "textAlign": "center" },
+		    { "type": "textbox", "text": "$effect$", "styles": "£effect", "fontSize": 16, "fontFamily": "Josefin Slab", "width": 330, "left": 5, "top": "{{if (card[displayImage]) value = 300; else value = 90}}", "textAlign": "left", "backgroundColor": "#DDDDDD" },
+		    { "type": "textbox", "text": "$tag$", "fontSize": 18, "fontFamily": "Fredericka the Great", "width": 335, "top": 475, "textAlign": "right", "visible": "?displayTag" }
 		  ]
 		},
 		{
@@ -35,17 +35,16 @@
 		  ],
 			"canvasFields": [
 		    {	"type": "image", "ignored": true },
-		    { "type": "textbox", "text": "$description$", "fontSize": 14, "fontFamily": "JosefinSlab", "fontStyle": "italic", "width": 320, "left": 10, "top": "50", "textAlign": "center" },
-		    { "type": "textbox", "text": "$effect$", "styles": "£effect", "fontSize": 16, "fontFamily": "JosefinSlab", "width": 330, "left": 5, "top": "90", "textAlign": "left", "backgroundColor": "#DDDDDD" },
-		    { "type": "textbox", "text": "$tag$", "fontSize": 18, "fontFamily": "FrederickatheGreat", "width": 335, "top": 475, "textAlign": "right", "visible": "?displayTag" }
+		    { "type": "textbox", "text": "$description$", "fontSize": 14, "fontFamily": "Josefin Slab", "fontStyle": "italic", "width": 320, "left": 10, "top": "50", "textAlign": "center" },
+		    { "type": "textbox", "text": "$effect$", "styles": "£effect", "fontSize": 16, "fontFamily": "Josefin Slab", "width": 330, "left": 5, "top": "90", "textAlign": "left", "backgroundColor": "#DDDDDD" },
+		    { "type": "textbox", "text": "$tag$", "fontSize": 18, "fontFamily": "Fredericka the Great", "width": 335, "top": 475, "textAlign": "right", "visible": "?displayTag" }
 		  ]
 		}
 	],
-  "fonts": [
-    { "fontFamily": "FrederickatheGreat", "src": "https://fonts.gstatic.com/s/frederickathegreat/v5/7Es8Lxoku-e5eOZWpxw18hsRj2C0BvLNQqKHRdEu66Y.woff2" },
-    { "fontFamily": "JosefinSlab", "src": "https://fonts.gstatic.com/s/josefinslab/v6/46aYWdgz-1oFX11flmyEfegdm0LZdjqr5-oayXSOefg.woff2" },
-    { "fontFamily": "JosefinSlab", "src": "https://fonts.gstatic.com/s/josefinslab/v6/etsUjZYO8lTLU85lDhZwUhMBlNeli-0RcAdOFWWLdxQ.woff2", "fontStyle": "italic" }
-  ],
+  "webfonts":
+	{
+		"google": { "families": [ "Fredericka the Great", "Josefin Slab" ] }
+	},
 	"description": {
 		"description": "Basic Template for a card of various effect (for any type of game)",
     "title":"Basic - Effects",
