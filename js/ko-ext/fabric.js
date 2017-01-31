@@ -7,7 +7,7 @@ define(['knockout', 'jQuery'], function(ko) {
           var viewModel = bindingContext.$data;
           var jsonValue = viewModel.generatedTemplate();
           var canvas = viewModel.canvas;
-    
+
           if ((jsonValue.objects != undefined) && (jsonValue.objects != null)
              && (jsonValue.objects.length > 0))
           {
@@ -21,7 +21,9 @@ define(['knockout', 'jQuery'], function(ko) {
                 canvas.setHeight(cardSize.height);
               }
             }
-            canvas.loadFromJSON(jsonValue, canvas.renderAll.bind(canvas));
+            // canvas.loadFromJSON modofies the JSON passed in parameters
+            // By using Stringify, it's not modified
+            canvas.loadFromJSON(JSON.stringify(jsonValue), canvas.renderAll.bind(canvas));
           }
       }
   };

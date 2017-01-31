@@ -26,7 +26,7 @@ define(['knockout',
     self.generatedTemplate = ko.pureComputed(function() {
       var jsonCanvas = { };
       if (self.isCardSelected() && (self.cardTemplate() != null)) {
-        jsonCanvas = self.cardTemplate().generateTemplate(self.editableCard());
+        jsonCanvas = self.cardTemplate().generateTemplate(self.editableCard());        
       }
 
       return jsonCanvas;

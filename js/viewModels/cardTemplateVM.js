@@ -1,5 +1,5 @@
-define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"],
-  function(ko, utils, StyleVM, InheritingStyles) {
+define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles", "webfont"],
+  function(ko, utils, StyleVM, InheritingStyles, WebFont) {
 
   function cardTemplateVM(jsonTemplate, updCanvasSize, updCardsOnTemplateChange) {
     var self = this;
@@ -58,6 +58,7 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"],
     self.updateEmbeddedFonts = function() {
       $('.canvas-fonts').remove();
 
+      // Fonts embedded in the Templates
       if ((self._activeTemplateJson != null) && (self._activeTemplateJson.fonts != null)) {
         var canvasFontsStyle = document.createElement('style');
         canvasFontsStyle.setAttribute('class', 'canvas-fonts');
@@ -74,6 +75,11 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"],
         }
 
         document.head.appendChild(canvasFontsStyle);
+      }
+
+      // Webfonts loaded by TypeKit.Webfont
+      if ((self._activeTemplateJson != null) && (self._activeTemplateJson.webfonts != null)) {
+        WebFont.load(self._activeTemplateJson.webfonts);
       }
     }
 
@@ -190,6 +196,7 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"],
     }
 
     self.updateFieldsOfCard = function(card) {
+      console.log('cardTemplateVM.updateFieldsOfCard');
       self._styleForCard(card).updateFieldsOfCard(card);
     }
 
@@ -219,7 +226,6 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles"],
         self.styleVM.initStyleFromCode(completeJsonStyle);
       } else {
         // Style from card
-        console.log('style from card');
         var jsonCardStyle = self._getStyleFromKey(cardVM.selectedStyleKey());
         if (jsonCardStyle == null) {
           jsonCardStyle = self.defaultStyle();
