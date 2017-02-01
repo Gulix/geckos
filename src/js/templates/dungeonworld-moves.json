@@ -1,33 +1,74 @@
 {
-  "description": {
+	"description": {
 		"description": "Moves Cards for Dungeon World",
-    "title":"Dungeon World - Moves",
-    "credits": "by Nicolas Ronvel",
-    "url": "https://github.com/Gulix/geckos/"
+		"title": "Dungeon World - Moves",
+		"credits": "by Nicolas Ronvel",
+		"url": "https://github.com/Gulix/geckos/"
 	},
-  "webfonts": {
-    "typekit": {
-      "id": "aclonica",
-      "api": "http://use.edgefonts.net/"
-    },
-    "google": {
-      "families" : [ "Boogaloo"]
-    }
-  },
-  "sharedOptions": [
-    { "key": "stats", "options":
-      [
-          { "option": "strength", "text": "+STR" },
-          { "option": "constitution", "text": "+CON" },
-          { "option": "dexterity", "text": "+DEX" },
-          { "option": "intelligence", "text": "+INT" },
-          { "option": "wisdom", "text": "+SAG" },
-          { "option": "charisma", "text": "+CHA" },
-          { "option": "bond", "text": "+BOND" },
-          { "option": "any", "text": "+ANY" }
-      ]
-    }
-  ],
+	"webfonts": {
+		"typekit": {
+			"id": "aclonica",
+			"api": "http://use.edgefonts.net/"
+		},
+		"google": {
+			"families": ["Boogaloo"]
+		}
+	},
+	"sharedOptions": [{
+		"key": "stats",
+		"options": [{
+			"option": "strength",
+			"text": "+STR"
+		}, {
+			"option": "constitution",
+			"text": "+CON"
+		}, {
+			"option": "dexterity",
+			"text": "+DEX"
+		}, {
+			"option": "intelligence",
+			"text": "+INT"
+		}, {
+			"option": "wisdom",
+			"text": "+WIS"
+		}, {
+			"option": "charisma",
+			"text": "+CHA"
+		}, {
+			"option": "bond",
+			"text": "+BOND"
+		}, {
+			"option": "any",
+			"text": "+ANY"
+		}]
+	}, {
+		"key": "stats_fr",
+		"options": [{
+			"option": "strength",
+			"text": "+FOR"
+		}, {
+			"option": "constitution",
+			"text": "+CON"
+		}, {
+			"option": "dexterity",
+			"text": "+DEX"
+		}, {
+			"option": "intelligence",
+			"text": "+INT"
+		}, {
+			"option": "wisdom",
+			"text": "+SAG"
+		}, {
+			"option": "charisma",
+			"text": "+CHA"
+		}, {
+			"option": "bond",
+			"text": "+LIEN"
+		}, {
+			"option": "any",
+			"text": "+???"
+		}]
+	}],
 	"styles": [{
 		"key": "default",
 		"name": "Basic Move",
@@ -42,23 +83,27 @@
 		}, {
 			"name": "trigger",
 			"label": "Trigger",
-			"default": "Quand vous agissez malgré une menace imminente ou que vous subissez une catastrophe, décrivez la façon de vous y prendre et lancez"
-    }, {
+			"default": "When you do something, roll ..."
+		}, {
 			"name": "stats",
 			"label": "Stat",
-      "type": "options",
-      "sharedOptions": "stats",
-      "default": "strength"
+			"type": "options",
+			"sharedOptions": "stats",
+			"default": "strength"
 		}, {
 			"name": "consequences",
 			"type": "richtext",
 			"label": "Consequences",
-			"default": "<p><strong>On 10+</strong> it's very good.<br/><strong>On 7-9</strong>, it's not so good ...</p>"
+			"default": "<p><strong>On 10+</strong> it's very good.</p><p><strong>On 7-9</strong>, it's not so good ...</p>"
 		}, {
 			"name": "image",
 			"type": "image",
 			"label": "Image",
 			"ratio": 2.3174
+    }, {
+			"name": "description",
+			"label": "Description",
+			"default": "Basic Move"
 		}],
 		"canvasFields": [{
 			"type": "path-group",
@@ -126,9 +171,9 @@
 				"type": "rect",
 				"originX": "left",
 				"originY": "top",
-				"left": 7.5,
+				"left": 7,
 				"top": 457.99,
-				"width": 425.63,
+				"width": 427,
 				"height": 56.44,
 				"fill": {
 					"type": "linear",
@@ -230,9 +275,9 @@
 				"type": "rect",
 				"originX": "left",
 				"originY": "top",
-				"left": 7.5,
+				"left": 7,
 				"top": 709.24,
-				"width": 425.63,
+				"width": 427,
 				"height": 77.27,
 				"fill": {
 					"type": "linear",
@@ -469,13 +514,129 @@
 					["a", 2.3977293, 1.4452979, 88.228462, 0, 1, 0.8401, -1.50624],
 					["z"]
 				]
+			}, {
+				"type": "polygon",
+				"originX": "left",
+				"originY": "top",
+				"points": [{
+					"x": 47,
+					"y": 640
+				}, {
+					"x": 67,
+					"y": 602
+				}, {
+					"x": 403,
+					"y": 602
+				}, {
+					"x": 423,
+					"y": 640
+				}],
+				"fill": {
+					"type": "linear",
+					"coords": {
+						"x1": 347,
+						"y1": 0,
+						"x2": 47,
+						"y2": 38
+					},
+					"colorStops": [{
+						"offset": 1,
+						"color": "rgb(45,28,11)",
+						"opacity": 1
+					}, {
+						"offset": 0,
+						"color": "rgb(136,16,0)",
+						"opacity": 1
+					}],
+					"offsetX": -7.5,
+					"offsetY": -457.98718,
+					"gradientTransform": [1.0996545, 0, 0, 2.3412299, -0.60012973, -662.24029]
+				}
 			}]
-		},
-    { "type": "textbox", "text": "$name$", "fontSize": 38, "fontFamily": "Aclonica", "width": 470, "top": 10, "textAlign": "center", "fill": "#FFFFFF" },
-    { "type": "textbox", "text": "$trigger$", "fontSize": 18, "fontFamily": "Boogaloo", "width": 352, "left": 15, "top": 281, "textAlign": "left", "fill": "#FFFFFF" },
-    { "type": "textbox", "text": "$stats.text$", "fontSize": 24, "fontFamily": "Aclonica", "width": 79, "left": 382, "top": 321, "textAlign": "center", "fill": "#FFFFFF" },
-    { "type": "textbox", "styles": "£consequences", "text": "$consequences$", "fontSize": 20, "fontFamily": "Boogaloo", "width": 426, "left": 22, "top": 369, "textAlign": "left", "fill": "#000000" },
-    {	"type": "image", "left": 17, "width": 438,	"top": 76, "height": 189,	"src": "$image", "fill": "#D678A2" }
-    ]
+		}, {
+			"type": "textbox",
+			"text": "$name$",
+			"fontSize": 38,
+			"fontFamily": "Aclonica",
+			"width": 470,
+			"top": 10,
+			"textAlign": "center",
+			"fill": "#FFFFFF"
+		}, {
+      "type": "textbox",
+			"text": "$description$",
+			"fontSize": 18,
+			"fontFamily": "Aclonica",
+			"width": 470,
+			"top": 610,
+			"textAlign": "center",
+			"fill": "#FFFFFF"
+		}, {
+			"type": "textbox",
+			"text": "$trigger$",
+			"fontSize": 18,
+			"fontFamily": "Boogaloo",
+			"width": 352,
+			"left": 15,
+			"top": 281,
+			"textAlign": "left",
+			"fill": "#FFFFFF"
+		}, {
+			"type": "textbox",
+			"text": "$stats.text$",
+			"fontSize": 24,
+			"fontFamily": "Aclonica",
+			"width": 79,
+			"left": 382,
+			"top": 321,
+			"textAlign": "center",
+			"fill": "#FFFFFF"
+		}, {
+			"type": "textbox",
+			"styles": "£consequences",
+			"text": "$consequences$",
+			"fontSize": 20,
+			"fontFamily": "Boogaloo",
+			"width": 426,
+			"left": 22,
+			"top": 369,
+			"textAlign": "left",
+			"fill": "#000000"
+		}, {
+			"type": "image",
+			"left": 17,
+			"width": 438,
+			"top": 76,
+			"height": 189,
+			"src": "$image",
+			"fill": "#D678A2"
+		}]
+	}, {
+		"key": "basicmove_fr",
+		"name": "Actions de Base",
+		"description": "Actions de Base pour Dungeon World",
+		"basedOn": "default",
+		"fields": [{
+			"name": "name",
+			"label": "Nom",
+			"default": "Action de Base"
+		}, {
+			"name": "trigger",
+			"label": "Déclencheur",
+			"default": "Quand vous faites quelque chose, lancez ..."
+		}, {
+			"name": "stats",
+			"label": "Caractéristique",
+			"sharedOptions": "stats_fr",
+			"default": "strength"
+		}, {
+			"name": "consequences",
+			"label": "Conséquences",
+			"default": "<p><strong>Sur 10+</strong> c'est vraiment bien.</p><p><strong>Sur 7-9</strong>, quelque chose cloche ...</p>"
+		}, {
+      "name": "description",
+      "defaut": "Action de Base"
+    }],
+		"canvasFields": []
 	}]
 }
