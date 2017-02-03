@@ -82,11 +82,24 @@
 			"label": "Name",
 			"default": "Basic Move"
 		}, {
+			"name": "grp_trigger",
+			"label": "Trigger",
+			"type": "group",
+			"expanded": true
+		}, {
+			"name": "display_trigger",
+			"label": "Display Trigger ?",
+			"group": "grp_trigger",
+			"default": true,
+			"type": "checkbox"
+		}, {
 			"name": "trigger",
 			"label": "Trigger",
+			"group": "grp_trigger",
 			"default": "When you do something, roll ..."
 		}, {
 			"name": "stats",
+			"group": "grp_trigger",
 			"label": "Stat",
 			"type": "options",
 			"sharedOptions": "stats",
@@ -97,9 +110,21 @@
 			"label": "Consequences",
 			"default": "<p><strong>On 10+</strong> it's very good.</p><p><strong>On 7-9</strong>, it's not so good ...</p>"
 		}, {
+			"name": "grp_image",
+			"label": "Image",
+			"type": "group",
+			"expanded": true
+		}, {
+			"name": "display_image",
+			"label": "Display Image ?",
+			"group": "grp_image",
+			"default": true,
+			"type": "checkbox"
+		}, {
 			"name": "image",
 			"type": "image",
 			"label": "Image",
+			"group": "grp_image",
 			"ratio": 2.3174
     }, {
 			"name": "description",
@@ -159,9 +184,9 @@
 				"originX": "left",
 				"originY": "top",
 				"left": 16,
-				"top": 362,
+				"top": "{{value = card[display_trigger] ? 362 : 272; value -= card[display_image] ? 0 : 189;}}",
 				"width": 438,
-				"height": 260,
+				"height": "{{value = card[display_trigger] ? 260 : 350; value += card[display_image] ? 0 : 189;}}",
 				"fill": {
 					"type": "linear",
 					"coords": {
@@ -186,10 +211,11 @@
 			}, {
 				"id": "trigger_frame",
 				"type": "rect",
+				"visible": "?display_trigger",
 				"originX": "left",
 				"originY": "top",
 				"left": 1,
-				"top": 272,
+				"top": "{{value = card[display_image] ? 272 : 83;}}",
 				"width": 468,
 				"height": 77,
 				"fill": {
@@ -217,9 +243,10 @@
 				"id": "dices",
 				"type": "path",
 				"originX": "left",
+				"visible": "?display_trigger",
 				"originY": "top",
 				"left": 398,
-				"top": 278,
+				"top": "{{value = card[display_image] ? 278 : 89;}}",
 				"width": 56.66,
 				"height": 35.62,
 				"fill": "#ffffff",
@@ -450,6 +477,7 @@
 			"textAlign": "center",
 			"fill": "#FFFFFF"
 		}, {
+			"id": "text_description",
       "type": "textbox",
 			"text": "$description$",
 			"fontSize": 18,
@@ -459,23 +487,27 @@
 			"textAlign": "center",
 			"fill": "#FFFFFF"
 		}, {
+			"id": "text_trigger",
 			"type": "textbox",
+			"visible": "?display_trigger",
 			"text": "$trigger$",
 			"fontSize": 18,
 			"fontFamily": "Boogaloo",
 			"width": 352,
 			"left": 15,
-			"top": 281,
+			"top": "{{value = card[display_image] ? 281 : 92;}}",
 			"textAlign": "left",
 			"fill": "#FFFFFF"
 		}, {
+			"id": "text_stat",
 			"type": "textbox",
+			"visible": "?display_trigger",
 			"text": "$stats.text$",
 			"fontSize": 24,
 			"fontFamily": "Aclonica",
 			"width": 79,
 			"left": 382,
-			"top": 321,
+			"top": "{{value = card[display_image] ? 321 : 132;}}",
 			"textAlign": "center",
 			"fill": "#FFFFFF"
 		}, {
@@ -486,12 +518,13 @@
 			"fontFamily": "Boogaloo",
 			"width": 426,
 			"left": 22,
-			"top": 369,
+			"top": "{{value = card[display_trigger] ? 369 : 279; value -= card[display_image] ? 0 : 189;}}",
 			"textAlign": "left",
 			"fill": "#000000"
 		}, {
 			"type": "image",
 			"left": 17,
+			"visible": "?display_image",
 			"width": 438,
 			"top": 76,
 			"height": 189,
@@ -500,8 +533,8 @@
 		}]
 	}, {
 		"key": "basicmove_fr",
-		"name": "Actions de Base",
-		"description": "Actions de Base pour Dungeon World",
+		"name": "Actions",
+		"description": "Actions pour Dungeon World",
 		"basedOn": "default",
 		"fields": [{
 			"name": "name",
@@ -522,13 +555,22 @@
 			"default": "<p><strong>Sur 10+</strong> c'est vraiment bien.</p><p><strong>Sur 7-9</strong>, quelque chose cloche ...</p>"
 		}, {
       "name": "description",
-      "defaut": "Action de Base"
-    }],
+      "default": "Action de Base"
+    }, {
+			"name": "grp_trigger",
+			"label": "Déclencheur"
+		}, {
+			"name": "display_trigger",
+			"label": "Afficher le Déclencheur ?"
+		}, {
+			"name": "display_image",
+			"label": "Afficher une image ?"
+		}],
 		"canvasFields": []
 	}, {
-		"key": "basicmove_bw",
-		"name": "Basic Moves (Black & White)",
-		"description": "Dungeon World Basic Moves in printer-friendly Black & White",
+		"key": "moves_bw",
+		"name": "Moves (Black & White)",
+		"description": "Dungeon World Moves in printer-friendly Black & White",
 		"basedOn": "default",
 		"fields": [],
 		"canvasFields": [
@@ -539,7 +581,46 @@
 			{ "id": "frame", "fill": "", "stroke": "#000000" },
 			{ "id": "description_frame", "fill": "#B1B1B1", "stroke": "#000000", "strokeWidth": 2 },
 			{ "id": "dices", "fill": "#000000" },
-			{ "id": "text_name", "fille": "#000000" }
+			{ "id": "text_name", "fill": "#000000" },
+			{ "id": "text_description", "fill": "#000000" },
+			{ "id": "text_trigger", "fill": "#000000" },
+			{ "id": "text_stat", "fill": "#000000" }
 		]
+	}, {
+		"key": "moves_bw_fr",
+		"name": "Actions (Noir & Blanc)",
+		"description": "Actions pour Dungeon World, en Noir et Blanc (facile à imprimer)",
+		"basedOn": "moves_bw",
+		"fields": [{
+			"name": "name",
+			"label": "Nom",
+			"default": "Action de Base"
+		}, {
+			"name": "trigger",
+			"label": "Déclencheur",
+			"default": "Quand vous faites quelque chose, lancez ..."
+		}, {
+			"name": "stats",
+			"label": "Caractéristique",
+			"sharedOptions": "stats_fr",
+			"default": "strength"
+		}, {
+			"name": "consequences",
+			"label": "Conséquences",
+			"default": "<p><strong>Sur 10+</strong> c'est vraiment bien.</p><p><strong>Sur 7-9</strong>, quelque chose cloche ...</p>"
+		}, {
+      "name": "description",
+			"default": "Action de Base"
+    }, {
+			"name": "grp_trigger",
+			"label": "Déclencheur"
+		}, {
+			"name": "display_trigger",
+			"label": "Afficher le Déclencheur ?"
+		}, {
+			"name": "display_image",
+			"label": "Afficher une image ?"
+		}],
+		"canvasFields": []
 	}]
 }
