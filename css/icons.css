@@ -24,26 +24,11 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-delete:before {
-    content: "\f014";
+.icon-edition-mode:before {
+  content: "\f058";
 }
-.icon-home:before {
-    content: "\f015";
-}
-.icon-download:before {
-    content: "\f019";
-}
-.icon-save:before {
-    content: "\f0c7";
-}
-.icon-undo:before {
-    content: "\f0e2";
-}
-.icon-add:before {
-    content: "\f0fe";
-}
-.icon-image:before {
-    content: "\f1c5";
+.icon-file-pdf:before {
+  content: "\e900";
 }
 .icon-card:before {
     content: "\e923";
@@ -60,12 +45,6 @@
 .icon-about:before {
     content: "\ea0c";
 }
-.icon-clear-list:before {
-    content: "\f01c";
-}
-.icon-edition-mode:before {
-    content: "\f058";
-}
 .icon-apply-template:before {
   content: "\ea52";
 }
@@ -75,3 +54,34 @@
 .icon-circle-down:before {
   content: "\ea43";
 }
+.icon-copy:before {
+  content: "\e92c";
+}
+.icon-check:before {
+  content: "\f00c";
+}
+.icon-delete:before {
+  content: "\f014";
+}
+.icon-home:before {
+  content: "\f015";
+}
+.icon-download:before {
+  content: "\f019";
+}
+.icon-clear-list:before {
+  content: "\f01c";
+}
+.icon-save:before {
+  content: "\f0c7";
+}
+.icon-undo:before {
+  content: "\f0e2";
+}
+.icon-add:before {
+  content: "\f0fe";
+}
+.icon-image:before {
+  content: "\f1c5";
+}
+

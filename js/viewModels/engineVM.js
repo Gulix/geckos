@@ -26,7 +26,7 @@ define(['knockout',
     self.generatedTemplate = ko.pureComputed(function() {
       var jsonCanvas = { };
       if (self.isCardSelected() && (self.cardTemplate() != null)) {
-        jsonCanvas = self.cardTemplate().generateTemplate(self.editableCard());        
+        jsonCanvas = self.cardTemplate().generateTemplate(self.editableCard());
       }
 
       return jsonCanvas;
@@ -82,6 +82,18 @@ define(['knockout',
       var newCard = self.createNewCard();
       self.listCards.push(newCard);
       self.editableCard(newCard);
+    }
+    self.copyNewCard = function() {
+      if (self.editableCard() != null) {
+        var jsonCurrentCard = self.editableCard().getSavedData();
+        self.editableCard(null);
+
+        var newCard = self.createNewCard();
+        newCard.loadFromJson(jsonCurrentCard);
+
+        self.listCards.push(newCard);
+        self.editableCard(newCard);
+      }
     }
     self.removeSelectedCard = function() {
 
