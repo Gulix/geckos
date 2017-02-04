@@ -124,7 +124,10 @@ define(['knockout', 'lodash', 'viewModels/field-factory', 'tinycolor', 'fabricjs
      self.processString = function(processedString) {
 
        // TODO : better match code with the possible variables names (Regex ?)
-       if (processedString.indexOf('?') == 0) {
+       if (processedString.indexOf('?!') == 0) {
+         var valueField = processedString.replace('?!', '');
+         return !self._getBoolValue(valueField);
+       } else if (processedString.indexOf('?') == 0) {
          var valueField = processedString.replace('?', '');
          return self._getBoolValue(valueField);
        } else if (processedString.indexOf('££') == 0) {
