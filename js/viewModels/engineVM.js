@@ -97,8 +97,6 @@ define(['knockout',
     }
     self.removeSelectedCard = function() {
 
-      self.editableCard(self.listCards()[0]);
-
       if (self.editableCard() != null) {
         self.listCards.remove(self.editableCard());
         if (self.listCards().length > 0) {
