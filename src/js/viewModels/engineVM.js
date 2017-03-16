@@ -1,10 +1,11 @@
 define(['knockout',
         'fabric',
+        'jszip',
         'viewModels/field-factory',
         'viewModels/cardTemplateVM',
         'viewModels/UItemplates',
         'FileSaver'
-      ], function(ko, fabric, FieldFactory, CardTemplateVM, UITemplates) {
+      ], function(ko, fabric, jszip, FieldFactory, CardTemplateVM, UITemplates) {
 
 /***************************************/
 /* Main entry point of the application */
@@ -114,13 +115,41 @@ define(['knockout',
     /* Export the content of the Canvas as a PNG */
     /* TODO : Getting a dedicated object / function to export a card (template + data) as a PNG */
     self.exportPng = function() {
-      if (self.editableCard() != null) {
+      /*if (self.editableCard() != null) {
         var canvas = document.getElementById('fabricjs-canvas');
         canvas.toBlob(function(blob) {
           saveAs(blob, self.editableCard().cardName() + ".png");
         });
+      }*/
+      var zip = new jszip();
+      self.cardsToPng(0, self.addToZip, zip);
+    }
+
+    self.cardsToPng = function(iCardIndex, blobAction, zipper) {
+      if ((iCardIndex >= 0) && (iCardIndex < self.listCards().length)) {
+        self.editableCard(self.listCards()[iCardIndex]);
+        setTimeout(function() {
+          var canvas = document.getElementById('fabricjs-canvas');
+          canvas.toBlob(function(blob) {
+            blobAction(blob, iCardIndex, zipper);
+          });
+        }, 500); // Need to find a better way to launch action when the canvas is ready
+      } else if (iCardIndex >= self.listCards().length) {
+        zipper.generateAsync({type:"blob"})
+          .then(function(content) {
+            saveAs(content, "example.zip");
+        });
       }
     }
+
+    self.addToZip = function(blob, iCardIndex, zipper) {
+      console.log("Ajout d'un fichier dans le zip : " + self.editableCard().cardName());
+      console.log("Taille du blob concerné : " + blob.size + " / Type : " + blob.type);
+      zipper.file(self.editableCard().cardName() + ".png", blob);
+      console.log("Elément ajouté au fichier zip ...");
+      self.cardsToPng(iCardIndex + 1, self.addToZip, zipper);
+    };
+
 
     /* Import / Export data for list of cards */
     self.exportList = function() {

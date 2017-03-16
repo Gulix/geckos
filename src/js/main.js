@@ -13,7 +13,8 @@ require.config({
         'lodash': 'vendor/lodash',
         'ajv': 'vendor/ajv.min',
         'cropper': 'vendor/cropper',
-        'webfont': 'vendor/webfont'
+        'webfont': 'vendor/webfont',
+        'jszip': 'vendor/jszip.min'
     },
     shim: {
         'jQuery': {
