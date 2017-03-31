@@ -112,18 +112,41 @@ define(['knockout',
       self.listCards.removeAll();
     }
 
+    /* ------------------------ */
+    /* --- Export functions --- */
+    /* ------------------------ */
+
     /* Export the content of the Canvas as a PNG */
     /* TODO : Getting a dedicated object / function to export a card (template + data) as a PNG */
+    self.exportAllCardsToPngZip = function() {
+      var zip = new jszip();
+      self.cardsToPng(0, self.addToZip, zip);
+    }
+
+    self.exportAllCardsToSvgZip = function() {
+      var zip = new jszip();
+      self.cardsToSvg(0, self.addToZip, zip);
+    }
+
     self.exportPng = function() {
-      /*if (self.editableCard() != null) {
+      if (self.editableCard() != null) {
         var canvas = document.getElementById('fabricjs-canvas');
         canvas.toBlob(function(blob) {
           saveAs(blob, self.editableCard().cardName() + ".png");
         });
-      }*/
-      var zip = new jszip();
-      self.cardsToPng(0, self.addToZip, zip);
+      }
     }
+
+    self.exportSvg = function() {
+      if (self.editableCard() != null) {
+        if (self.canvas != null) {
+          var svg = self.canvas.toSVG();
+          var blob = new Blob([svg], {type: "image/svg+xml"});
+          saveAs(blob, self.editableCard().cardName() + ".svg");
+        }
+      }
+    }
+
 
     self.cardsToPng = function(iCardIndex, blobAction, zipper) {
       if ((iCardIndex >= 0) && (iCardIndex < self.listCards().length)) {
@@ -142,14 +165,16 @@ define(['knockout',
       }
     }
 
-    self.addToZip = function(blob, iCardIndex, zipper) {
-      console.log("Ajout d'un fichier dans le zip : " + self.editableCard().cardName());
-      console.log("Taille du blob concerné : " + blob.size + " / Type : " + blob.type);
-      zipper.file(self.editableCard().cardName() + ".png", blob);
-      console.log("Elément ajouté au fichier zip ...");
+    self.addToZip = function(blob, iCardIndex, zipper, extension) {
+      // TODO - Check for 'same name' cards
+
+      zipper.file(self.editableCard().cardName() + "." + extension, blob);
       self.cardsToPng(iCardIndex + 1, self.addToZip, zipper);
     };
 
+    /* ------------------------------- */
+    /* --- End of Export functions --- */
+    /* ------------------------------- */
 
     /* Import / Export data for list of cards */
     self.exportList = function() {
