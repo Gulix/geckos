@@ -28,12 +28,11 @@ require(['knockout',
          'viewModels/engineVM',
          'tabs',
          'components/registration',
-         'templates/load-templates',
          'knockoutExtensions',
          /*'ko-ext/ckeditor',*/ 'ko-ext/ddslick', 'ko-ext/fabric', 'ko-ext/jscolor', 'ko-ext/simplecolorpicker',
          'ko-ext/slideBottomListItem',
          'domReady!'
-       ], function(ko, CardTemplateVM, EngineVM, tabs, components, Templates){
+       ], function(ko, CardTemplateVM, EngineVM, tabs, components){
 
 
   window.CKEDITOR_BASEPATH = './vendor/ckeditor/';
