@@ -113,6 +113,7 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles", "webfont
       }
 
       jsonCompleteStyle.sharedOptions = self._activeTemplateJson.sharedOptions;
+      jsonCompleteStyle.globals = self._activeTemplateJson.globals;
       jsonCompleteStyle.fields.sort(self.compareFieldOrder);
       jsonCompleteStyle.canvasFields.sort(self.compareFieldOrder);
 

@@ -357,7 +357,7 @@
                 "top": 0,
                 "width": 609,
                 "height": 392,
-                "fill": "rgba(182,182,182,1)",
+                "fill": "[[grey2]]",
                 "stroke": "",
                 "strokeWidth": 25.89,
                 "strokeDashArray": null,
@@ -416,7 +416,7 @@
                 "top": 58.47,
                 "width": 397.88,
                 "height": 63.91,
-                "fill": "rgba(182,182,182,1)",
+                "fill": "[[grey2]]",
                 "stroke": "",
                 "strokeWidth": 1,
                 "strokeDashArray": null,
@@ -481,7 +481,7 @@
                 "backgroundColor": "",
                 "fillRule": "evenodd",
                 "globalCompositeOperation": "source-over",
-                "transformMatrix": [1, 0, 0, 1, -56.125, -310.25],
+                "transformMatrix": "[[defaultTransformMatrix]]",
                 "skewX": 0,
                 "skewY": 0,
                 "pathOffset": {
@@ -736,7 +736,7 @@
                 "top": 447.29,
                 "width": 64.46,
                 "height": 204.91,
-                "fill": "rgba(182,182,182,1)",
+                "fill": "[[grey2]]",
                 "stroke": "rgba(142,142,142,1)",
                 "strokeWidth": 3.26,
                 "strokeDashArray": null,
@@ -755,7 +755,7 @@
                 "backgroundColor": "",
                 "fillRule": "evenodd",
                 "globalCompositeOperation": "source-over",
-                "transformMatrix": [1, 0, 0, 1, -56.125, -310.25],
+                "transformMatrix": "[[defaultTransformMatrix]]",
                 "skewX": 0,
                 "skewY": 0,
                 "rx": 50.033932,
@@ -1020,7 +1020,7 @@
                 "top": 245.69,
                 "width": 362.38,
                 "height": 89.06,
-                "fill": "rgba(182,182,182,1)",
+                "fill": "[[grey2]]",
                 "stroke": "",
                 "strokeWidth": 5.1,
                 "strokeDashArray": null,
@@ -1082,7 +1082,7 @@
                 "top": 245.38,
                 "width": 275.84,
                 "height": 89.69,
-                "fill": "rgba(182,182,182,1)",
+                "fill": "[[grey2]]",
                 "stroke": "",
                 "strokeWidth": 4.46,
                 "strokeDashArray": null,
@@ -1157,7 +1157,7 @@
                 "backgroundColor": "",
                 "fillRule": "evenodd",
                 "globalCompositeOperation": "source-over",
-                "transformMatrix": [1, 0, 0, 1, -56.125, -310.25],
+                "transformMatrix": "[[defaultTransformMatrix]]",
                 "skewX": 0,
                 "skewY": 0,
                 "pathOffset": {
@@ -1211,7 +1211,7 @@
                 "backgroundColor": "",
                 "fillRule": "evenodd",
                 "globalCompositeOperation": "source-over",
-                "transformMatrix": [1, 0, 0, 1, -56.125, -310.25],
+                "transformMatrix": "[[defaultTransformMatrix]]",
                 "skewX": 0,
                 "skewY": 0,
                 "pathOffset": {
@@ -1262,7 +1262,7 @@
                 "backgroundColor": "",
                 "fillRule": "evenodd",
                 "globalCompositeOperation": "source-over",
-                "transformMatrix": [1, 0, 0, 1, -56.125, -310.25],
+                "transformMatrix": "[[defaultTransformMatrix]]",
                 "skewX": 0,
                 "skewY": 0,
                 "pathOffset": {
@@ -1305,7 +1305,7 @@
                 "backgroundColor": "",
                 "fillRule": "evenodd",
                 "globalCompositeOperation": "source-over",
-                "transformMatrix": [1, 0, 0, 1, -56.125, -310.25],
+                "transformMatrix": "[[defaultTransformMatrix]]",
                 "skewX": 0,
                 "skewY": 0,
                 "pathOffset": {
@@ -1348,7 +1348,7 @@
                 "backgroundColor": "",
                 "fillRule": "evenodd",
                 "globalCompositeOperation": "source-over",
-                "transformMatrix": [1, 0, 0, 1, -56.125, -310.25],
+                "transformMatrix": "[[defaultTransformMatrix]]",
                 "skewX": 0,
                 "skewY": 0,
                 "pathOffset": {
@@ -1433,7 +1433,7 @@
                 "backgroundColor": "",
                 "fillRule": "nonzero",
                 "globalCompositeOperation": "source-over",
-                "transformMatrix": [1, 0, 0, 1, -56.125, -310.25],
+                "transformMatrix": "[[defaultTransformMatrix]]",
                 "skewX": 0,
                 "skewY": 0,
                 "pathOffset": {
@@ -1493,7 +1493,7 @@
                 "backgroundColor": "",
                 "fillRule": "nonzero",
                 "globalCompositeOperation": "source-over",
-                "transformMatrix": [1, 0, 0, 1, -56.125, -310.25],
+                "transformMatrix": "[[defaultTransformMatrix]]",
                 "skewX": 0,
                 "skewY": 0,
                 "pathOffset": {
@@ -1553,7 +1553,7 @@
                 "backgroundColor": "",
                 "fillRule": "nonzero",
                 "globalCompositeOperation": "source-over",
-                "transformMatrix": [1, 0, 0, 1, -56.125, -310.25],
+                "transformMatrix": "[[defaultTransformMatrix]]",
                 "skewX": 0,
                 "skewY": 0,
                 "pathOffset": {
@@ -1636,7 +1636,7 @@
                 "backgroundColor": "",
                 "fillRule": "nonzero",
                 "globalCompositeOperation": "source-over",
-                "transformMatrix": [1, 0, 0, 1, -56.125, -310.25],
+                "transformMatrix": "[[defaultTransformMatrix]]",
                 "skewX": 0,
                 "skewY": 0,
                 "pathOffset": {
@@ -1709,7 +1709,7 @@
                 "backgroundColor": "",
                 "fillRule": "nonzero",
                 "globalCompositeOperation": "source-over",
-                "transformMatrix": [1, 0, 0, 1, -56.125, -310.25],
+                "transformMatrix": "[[defaultTransformMatrix]]",
                 "skewX": 0,
                 "skewY": 0,
                 "pathOffset": {
@@ -1798,7 +1798,7 @@
                 "backgroundColor": "",
                 "fillRule": "nonzero",
                 "globalCompositeOperation": "source-over",
-                "transformMatrix": [1, 0, 0, 1, -56.125, -310.25],
+                "transformMatrix": "[[defaultTransformMatrix]]",
                 "skewX": 0,
                 "skewY": 0,
                 "pathOffset": {
@@ -1855,7 +1855,7 @@
                 "backgroundColor": "",
                 "fillRule": "evenodd",
                 "globalCompositeOperation": "source-over",
-                "transformMatrix": [1, 0, 0, 1, -56.125, -310.25],
+                "transformMatrix": "[[defaultTransformMatrix]]",
                 "skewX": 0,
                 "skewY": 0,
                 "pathOffset": {
@@ -1898,7 +1898,7 @@
                 "backgroundColor": "",
                 "fillRule": "evenodd",
                 "globalCompositeOperation": "source-over",
-                "transformMatrix": [1, 0, 0, 1, -56.125, -310.25],
+                "transformMatrix": "[[defaultTransformMatrix]]",
                 "skewX": 0,
                 "skewY": 0,
                 "pathOffset": {
@@ -1941,7 +1941,7 @@
                 "backgroundColor": "",
                 "fillRule": "evenodd",
                 "globalCompositeOperation": "source-over",
-                "transformMatrix": [1, 0, 0, 1, -56.125, -310.25],
+                "transformMatrix": "[[defaultTransformMatrix]]",
                 "skewX": 0,
                 "skewY": 0,
                 "pathOffset": {
@@ -2026,7 +2026,7 @@
                 "backgroundColor": "",
                 "fillRule": "nonzero",
                 "globalCompositeOperation": "source-over",
-                "transformMatrix": [1, 0, 0, 1, -56.125, -310.25],
+                "transformMatrix": "[[defaultTransformMatrix]]",
                 "skewX": 0,
                 "skewY": 0,
                 "pathOffset": {
@@ -2060,6 +2060,7 @@
                     ["z"]
                 ]
             }, {
+                "id": "weapon3range",
                 "type": "path",
                 "originX": "left",
                 "originY": "top",
@@ -2086,7 +2087,7 @@
                 "backgroundColor": "",
                 "fillRule": "evenodd",
                 "globalCompositeOperation": "source-over",
-                "transformMatrix": [1, 0, 0, 1, -56.125, -310.25],
+                "transformMatrix": "[[defaultTransformMatrix]]",
                 "skewX": 0,
                 "skewY": 0,
                 "pathOffset": {
@@ -2129,7 +2130,7 @@
                 "backgroundColor": "",
                 "fillRule": "evenodd",
                 "globalCompositeOperation": "source-over",
-                "transformMatrix": [1, 0, 0, 1, -56.125, -310.25],
+                "transformMatrix": "[[defaultTransformMatrix]]",
                 "skewX": 0,
                 "skewY": 0,
                 "pathOffset": {
@@ -2172,7 +2173,7 @@
                 "backgroundColor": "",
                 "fillRule": "evenodd",
                 "globalCompositeOperation": "source-over",
-                "transformMatrix": [1, 0, 0, 1, -56.125, -310.25],
+                "transformMatrix": "[[defaultTransformMatrix]]",
                 "skewX": 0,
                 "skewY": 0,
                 "pathOffset": {
@@ -2255,7 +2256,7 @@
                 "backgroundColor": "",
                 "fillRule": "nonzero",
                 "globalCompositeOperation": "source-over",
-                "transformMatrix": [1, 0, 0, 1, -56.125, -310.25],
+                "transformMatrix": "[[defaultTransformMatrix]]",
                 "skewX": 0,
                 "skewY": 0,
                 "pathOffset": {
@@ -2532,7 +2533,7 @@
             "fontFamily": "Impact",
             "fill": "rgba(255,255,255,1)",
             "textAlign": "center",
-            "visible": "{{ value = !card[withoutweapon3];}}"
+            "visible": "?!withoutweapon3"
         }, {
             "type": "textbox",
             "width": 38,
@@ -2542,7 +2543,7 @@
             "text": "$weapon3range$",
             "fontFamily": "Impact",
             "textAlign": "center",
-            "visible": "{{ value = !card[withoutweapon3];}}"
+            "visible": "?!withoutweapon3"
         }, {
             "type": "textbox",
             "width": 31,
@@ -2552,12 +2553,16 @@
             "text": "$weapon3damages$",
             "fontFamily": "Impact",
             "textAlign": "center",
-            "visible": "{{ value = !card[withoutweapon3];}}"
+            "visible": "?!withoutweapon3"
         }],
         "canvasBackground": "#E6E6E6",
         "canvasWidth": 609,
         "canvasHeight": 392
     }],
+    "globals": {
+      "defaultTransformMatrix": [1, 0, 0, 1, -56.125, -310.25],
+      "grey2": "rgba(182,182,182,1)"
+    },
     "description": {
         "description": "Templates pour le jeu 'Au nom de l'Empereur'",
         "title": "Au Nom de l'Empereur",
