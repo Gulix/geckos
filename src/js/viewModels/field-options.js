@@ -42,6 +42,16 @@ define(['knockout'], function(ko) {
       return self.selectedOption().text;
     }
 
+    /* Value to get the content */
+    self.getCodeValue = function() {
+      var selectedValue = self.selectedOption();
+      if ((selectedValue != null) && (selectedValue.content != undefined)) {
+        return selectedValue.content;
+      } else {
+        return self.getJsonValue();
+      }
+    }
+
     /* Value to be exported to be saved */
     self.getJsonValue = function() {
       return self.selectedOption().option;
