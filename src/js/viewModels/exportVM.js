@@ -1,6 +1,7 @@
 define(['jszip',
+        'knockout',
         'FileSaver'
-      ], function(jszip) {
+      ], function(jszip, ko) {
 
 /***********************************************************************/
 /* ViewModel for Exporting the Cards (unique or list, svg or png, ...) */
@@ -13,16 +14,23 @@ define(['jszip',
     /*************************/
     self.mainEngineVM = engineVM;
 
+    // Displaying the Modal Export Frame
+    self.isModalDisplayed = ko.observable(false);
+    self.indexCurrentExportedFile = ko.observable(-1);
+    self.totalExportedFiles = ko.observable(-1);
+
+    self.listFileNames = [];
+
     /********************************/
     /* End of Variables declaration */
     /********************************/
+    self.progress = ko.pureComputed(function() {
+      return self.indexCurrentExportedFile() + " / " + self.totalExportedFiles();
+    });
 
     /*************************/
     /* Functions declaration */
     /*************************/
-
-    /* Export the content of the Canvas as a PNG */
-    /* TODO : Getting a dedicated object / function to export a card (template + data) as a PNG */
 
     // Get the currend card as a PNG file to save on the client computer
     self.exportAsPNG = function() {
@@ -34,13 +42,20 @@ define(['jszip',
     }
     // Get all the cards as a ZIP file of PNG files
     self.exportAllCardsToPngZip = function() {
-      var zip = new jszip();
-      self.exportSingleCardToZip(0, self.exportCurrentCardAsPNG, zip);
+      self.exportAllToZip(self.exportCurrentCardAsSVG);
     }
     // Get all the cards as a ZIP file of SVG files
     self.exportAllCardsToSvgZip = function() {
+      self.exportAllToZip(self.exportCurrentCardAsSVG);
+    }
+
+    self.exportAllToZip = function(fnExportType) {
       var zip = new jszip();
-      self.exportSingleCardToZip(0, self.exportCurrentCardAsSVG, zip);
+      self.isModalDisplayed(true);
+      self.indexCurrentExportedFile(0);
+      self.totalExportedFiles(self.mainEngineVM.listCards().length);
+      self.listFileNames = [];
+      self.exportSingleCardToZip(0, fnExportType, zip);
     }
 
     // Current selected card is exported in PNG
@@ -49,7 +64,9 @@ define(['jszip',
       if (self.mainEngineVM.editableCard() != null) {
         var canvas = document.getElementById('fabricjs-canvas');
         canvas.toBlob(function(blob) {
-          actionOnBlob(blob, self.mainEngineVM.editableCard().cardName() + ".png");
+          var cardName = self.getUniqueFileName(self.mainEngineVM.editableCard().cardName());
+
+          actionOnBlob(blob, cardName + ".png");
         });
       }
     }
@@ -61,7 +78,9 @@ define(['jszip',
         if (self.mainEngineVM.canvas != null) {
           var svg = self.mainEngineVM.canvas.toSVG();
           var blob = new Blob([svg], {type: "image/svg+xml"});
-          actionOnBlob(blob, self.mainEngineVM.editableCard().cardName() + ".svg");
+          var cardName = self.getUniqueFileName(self.mainEngineVM.editableCard().cardName());
+
+          actionOnBlob(blob, cardName + ".svg");
         }
       }
     }
@@ -74,6 +93,8 @@ define(['jszip',
 
     self.exportSingleCardToZip = function(iCardIndex, exportBlob, zipper) {
       if ((iCardIndex >= 0) && (iCardIndex < self.mainEngineVM.listCards().length)) {
+
+        self.indexCurrentExportedFile(iCardIndex);
         self.mainEngineVM.editableCard(self.mainEngineVM.listCards()[iCardIndex]);
 
         // Timeout is needed in order to ensure the canvas is fully loaded
@@ -84,6 +105,7 @@ define(['jszip',
         zipper.generateAsync({type:"blob"})
           .then(function(content) {
             saveAs(content, "allMyCards.zip");
+            self.isModalDisplayed(false);
         });
       }
     }
@@ -94,6 +116,22 @@ define(['jszip',
       zipper.file(fullCardName, blob);
       self.exportSingleCardToZip(iCardIndex + 1, actionOnBlob, zipper);
     };
+
+    self.getUniqueFileName = function(cardName) {
+      var currentName = cardName;
+      var index = 0;
+      while(_.some(self.listFileNames, function(f) {
+          return f.toUpperCase() == currentName.toUpperCase();
+        })
+      )
+      {
+        index++;
+        currentName = cardName + "(" + index + ")";
+      }
+
+      self.listFileNames.push(currentName);
+      return currentName;
+    }
 
     /*******************************/
     /*End of Functions declaration */
