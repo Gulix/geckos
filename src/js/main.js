@@ -30,7 +30,7 @@ require(['knockout',
          'components/registration',
          'knockoutExtensions',
          /*'ko-ext/ckeditor',*/ 'ko-ext/ddslick', 'ko-ext/fabric', 'ko-ext/jscolor', 'ko-ext/simplecolorpicker',
-         'ko-ext/slideBottomListItem',
+         'ko-ext/slideRight', 'ko-ext/progressBar',
          'domReady!'
        ], function(ko, CardTemplateVM, EngineVM, tabs, components){
 

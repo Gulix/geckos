@@ -251,8 +251,16 @@
 
                   <div style="display:none;" class="modal-box" data-bind="visible: exportVM.isModalDisplayed">
                     <div class="modal-box-content">
-                      <h3>Export in progress</h3>
-                      <div data-bind="text: exportVM.progress"></div>
+                      <h3>Export all cards to a Zip file</h3>
+                      <div>All the cards in the current collection will be exported into a zip file.</div>
+                      <div data-bind="text: exportVM.formatDescription"></div>
+                      <div data-bind="visible: exportVM.exportInactive">It will take approximatively <span data-bind="text: exportVM.estimatedTime"></span> to complete.</div>
+                      <h3 data-bind="visible: exportVM.exportActive">Export in Progress ...</h3>
+                      <div data-bind="visible: exportVM.exportActive, progressBar: { value : exportVM.progressPercentage }"></div>
+                      <div class="modal-buttons">
+                        <div class="modal-button" data-bind="visible: exportVM.exportInactive, click: exportVM.launchZipCreation"><div class="icon icon-apply-template"></div>Create the ZIP</div>
+                        <div class="modal-button" data-bind="visible: exportVM.exportInactive, click: exportVM.cancelZipCreation"><div class="icon icon-apply-template"></div>Cancel</div>
+                      </div>
                     </div>
                   </div>
 
@@ -267,14 +275,18 @@
                        data-bind="click: copyNewCard"><span>Copy</span></a></li>
               	<li><a href="#" class="icon-delete" title="Delete the selected card"
                        data-bind="click: removeSelectedCard"><span>Remove</span></a></li>
-              	<li><a href="#" class="icon-image" title="Export the card to a PNG image"
-                       data-bind="click: exportAsPNG"><span>to PNG</span></a></li>
-                <li><a href="#" class="icon-image" title="Export all the card to a ZIP of PNG images"
-                       data-bind="click: exportAllCardsToPngZip"><span>to Zip (PNG)</span></a></li>
-                <li><a href="#" class="icon-image" title="Export the card to a SVG image"
-                       data-bind="click: exportAsSVG"><span>to SVG</span></a></li>
-                <li><a href="#" class="icon-image" title="Export all the card to a ZIP of SVG images"
-                       data-bind="click: exportAllCardsToSvgZip"><span>to Zip (SVG)</span></a></li>
+              	<li><!-- data-bind="event: { mouseover: menu.displayCardExport, mouseout: menu.hideCardExport }" -->
+                  <a href="#" class="icon-image" title="Export the card to a PNG image"
+                     data-bind="click: exportAsPNG"><span>to PNG</span></a>
+                  <div class="sub-menu-list" data-bind="slideRightMenu: menu.isCardExportDisplayed">
+                    <div class="sub-menu"><a href="#" class="icon-image" title="Export all the card to a ZIP of PNG images"
+                           data-bind="click: exportAllCardsToPngZip"><span>to Zip (PNG)</span></a></div>
+                    <div class="sub-menu"><a href="#" class="icon-image" title="Export the card to a SVG image"
+                           data-bind="click: exportAsSVG"><span>to SVG</span></a></div>
+                    <div class="sub-menu"><a href="#" class="icon-image" title="Export all the card to a ZIP of SVG images"
+                           data-bind="click: exportAllCardsToSvgZip"><span>to Zip (SVG)</span></a></div>
+                  </div>
+                </li>
               </ul>
             </div>
           </div>

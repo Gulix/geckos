@@ -14,10 +14,16 @@ define(['jszip',
     /*************************/
     self.mainEngineVM = engineVM;
 
+    self.fnExportType = function() { };
+    self.formatDescription = ko.observable('');
+
     // Displaying the Modal Export Frame
     self.isModalDisplayed = ko.observable(false);
     self.indexCurrentExportedFile = ko.observable(-1);
     self.totalExportedFiles = ko.observable(-1);
+
+    // Export currently in progress
+    self.isExportInProgress = ko.observable(false);
 
     self.listFileNames = [];
 
@@ -26,6 +32,19 @@ define(['jszip',
     /********************************/
     self.progress = ko.pureComputed(function() {
       return self.indexCurrentExportedFile() + " / " + self.totalExportedFiles();
+    });
+    self.progressPercentage = ko.pureComputed(function() {
+      var val100 = 100 * self.indexCurrentExportedFile() / self.totalExportedFiles();
+      if (!Number.isInteger(val100)) {
+        return val100.toFixed(2)
+      }
+      return val100;
+    });
+
+    self.exportActive = ko.computed(function() { return self.isExportInProgress(); })
+    self.exportInactive = ko.computed(function() { return !self.isExportInProgress(); })
+    self.estimatedTime = ko.computed(function() {
+      return (self.mainEngineVM.listCards().length * 0.5) + "s";
     });
 
     /*************************/
@@ -42,20 +61,31 @@ define(['jszip',
     }
     // Get all the cards as a ZIP file of PNG files
     self.exportAllCardsToPngZip = function() {
+      self.formatDescription("The cards will be generated as PNG files.");
       self.exportAllToZip(self.exportCurrentCardAsSVG);
     }
     // Get all the cards as a ZIP file of SVG files
     self.exportAllCardsToSvgZip = function() {
+      self.formatDescription("The cards will be generated as SVG files.");
       self.exportAllToZip(self.exportCurrentCardAsSVG);
     }
 
     self.exportAllToZip = function(fnExportType) {
-      var zip = new jszip();
       self.isModalDisplayed(true);
       self.indexCurrentExportedFile(0);
       self.totalExportedFiles(self.mainEngineVM.listCards().length);
       self.listFileNames = [];
-      self.exportSingleCardToZip(0, fnExportType, zip);
+      self.fnExportType = fnExportType;
+      self.isExportInProgress(false);
+    }
+
+    self.launchZipCreation = function() {
+      self.isExportInProgress(true);
+      var zip = new jszip();
+      self.exportSingleCardToZip(0, self.fnExportType, zip);
+    }
+    self.cancelZipCreation = function() {
+      self.isModalDisplayed(false);
     }
 
     // Current selected card is exported in PNG

@@ -1,0 +1,85 @@
+// main: ./styles.less
+
+/*****************/
+/* Vertical Menu */
+/*****************/
+
+@menuItemWidth: 5em;
+
+.vertical-menu {
+	float: left;
+  display: block;
+	//overflow: hidden;
+	top: 40;
+	left: 0;
+	height: 100%;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	background: @backgroundMainColor;
+
+  li {
+    position: relative;
+
+    a {
+    	display: block;
+    	text-indent: -500em;
+    	height: @menuItemWidth;
+    	width: @menuItemWidth;
+    	line-height: @menuItemWidth;
+    	text-align: center;
+    	color: @mainColor1;
+      background: @backgroundMainColor;
+    	position: relative;
+    	border: 1px solid @mainColor1-light;
+    	-webkit-transition: background 0.1s ease-in-out;
+    	-moz-transition: background 0.1s ease-in-out;
+    	transition: background 0.1s ease-in-out;
+
+      &:active {
+      	background: @mainColor2;
+      	color: @mainColor2-light;
+      }
+
+      &:hover {
+      	background: @mainColor1;
+      	color: @verticalMenuHighlight;
+      }
+
+      &:before {
+      	font-family: 'svgicons';
+      	speak: none;
+      	font-style: normal;
+      	font-weight: normal;
+      	text-indent: 0em;
+      	position: absolute;
+      	top: 0;
+      	left: 0;
+      	width: 100%;
+      	height: 100%;
+      	font-size: 1.4em;
+      	-webkit-font-smoothing: antialiased;
+      }
+    }
+
+    .sub-menu-list {
+      display: flex;
+      position: absolute;
+      left: @menuItemWidth;
+      top: 0;
+
+      .sub-menu {
+        flex: 1;
+        margin-left: 0.5em;
+      }
+    }
+  }
+}
+
+/* Example for media query (depends on total height of menu) */
+@media screen and (max-height: 34.9375em) {
+
+	.vertical-menu {
+		font-size: 70%;
+	}
+}

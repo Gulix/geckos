@@ -4,8 +4,9 @@ define(['knockout',
         'viewModels/cardTemplateVM',
         'viewModels/UItemplates',
         'viewModels/exportVM',
+        'viewModels/menuManager',
         'FileSaver'
-      ], function(ko, fabric, FieldFactory, CardTemplateVM, UITemplates, Export) {
+      ], function(ko, fabric, FieldFactory, CardTemplateVM, UITemplates, Export, MenuManager) {
 
 /***************************************/
 /* Main entry point of the application */
@@ -20,6 +21,7 @@ define(['knockout',
     self.listCards = ko.observableArray([]);
     self.editableCard = ko.observable(null);
     self.exportVM = Export.loadExportVM(self);
+    self.menu = MenuManager.newMenuManager();
 
     self.isCardSelected = ko.pureComputed(function() {
       return self.editableCard() != null;
