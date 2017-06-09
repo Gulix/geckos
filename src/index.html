@@ -275,10 +275,10 @@
                        data-bind="click: copyNewCard"><span>Copy</span></a></li>
               	<li><a href="#" class="icon-delete" title="Delete the selected card"
                        data-bind="click: removeSelectedCard"><span>Remove</span></a></li>
-              	<li data-bind="event: { mouseover: menu.displayCardExport, mouseout: menu.hideCardExport }">
+              	<li>
                   <a href="#" class="icon-file-export" title="Export the card(s)"
                      data-bind="click: menu.toggleCardExport"><span>export Card(s)</span></a>
-                  <div class="sub-menu-list" data-bind="visible: menu.isCardExportDisplayed">
+                  <div class="sub-menu-list" data-bind="slideRightMenu: menu.isCardExportDisplayed">
                     <div class="sub-menu"><a href="#" class="icon-image" title="Export the card to a PNG image"
                            data-bind="click: exportAsPNG"><span>to PNG</span></a></div>
                     <div class="sub-menu"><a href="#" class="icon-file-svg" title="Export the card to a SVG image"
