@@ -24,6 +24,12 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-file-export:before {
+  content: "\e901";
+}
+.icon-file-svg:before {
+  content: "\e902";
+}
 .icon-edition-mode:before {
   content: "\f058";
 }
@@ -54,8 +60,23 @@
 .icon-circle-down:before {
   content: "\ea43";
 }
+.icon-image2:before {
+  content: "\e90d";
+}
+.icon-images:before {
+  content: "\e90e";
+}
+.icon-file-zip:before {
+  content: "\e92b";
+}
 .icon-copy:before {
   content: "\e92c";
+}
+.icon-folder-open:before {
+  content: "\e930";
+}
+.icon-svg:before {
+  content: "\eae9";
 }
 .icon-check:before {
   content: "\f00c";
