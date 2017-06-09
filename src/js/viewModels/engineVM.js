@@ -128,7 +128,7 @@ define(['knockout',
       self.exportVM.exportAsSVG();
     }
     // Get all the cards as a ZIP file of PNG files
-    self.exportAllCardsToPngZip = function() {
+    self.exportAllCardsToZip = function() {
       self.exportVM.exportAllCardsToPngZip();
     }
     // Get all the cards as a ZIP file of SVG files

@@ -275,16 +275,16 @@
                        data-bind="click: copyNewCard"><span>Copy</span></a></li>
               	<li><a href="#" class="icon-delete" title="Delete the selected card"
                        data-bind="click: removeSelectedCard"><span>Remove</span></a></li>
-              	<li><!-- data-bind="event: { mouseover: menu.displayCardExport, mouseout: menu.hideCardExport }" -->
-                  <a href="#" class="icon-image" title="Export the card to a PNG image"
-                     data-bind="click: exportAsPNG"><span>to PNG</span></a>
-                  <div class="sub-menu-list" data-bind="slideRightMenu: menu.isCardExportDisplayed">
-                    <div class="sub-menu"><a href="#" class="icon-image" title="Export all the card to a ZIP of PNG images"
-                           data-bind="click: exportAllCardsToPngZip"><span>to Zip (PNG)</span></a></div>
-                    <div class="sub-menu"><a href="#" class="icon-image" title="Export the card to a SVG image"
+              	<li data-bind="event: { mouseover: menu.displayCardExport, mouseout: menu.hideCardExport }">
+                  <a href="#" class="icon-file-export" title="Export the card(s)"
+                     data-bind="click: menu.toggleCardExport"><span>export Card(s)</span></a>
+                  <div class="sub-menu-list" data-bind="visible: menu.isCardExportDisplayed">
+                    <div class="sub-menu"><a href="#" class="icon-image" title="Export the card to a PNG image"
+                           data-bind="click: exportAsPNG"><span>to PNG</span></a></div>
+                    <div class="sub-menu"><a href="#" class="icon-file-svg" title="Export the card to a SVG image"
                            data-bind="click: exportAsSVG"><span>to SVG</span></a></div>
-                    <div class="sub-menu"><a href="#" class="icon-image" title="Export all the card to a ZIP of SVG images"
-                           data-bind="click: exportAllCardsToSvgZip"><span>to Zip (SVG)</span></a></div>
+                    <div class="sub-menu"><a href="#" class="icon-file-zip" title="Export all the card to a ZIP file"
+                           data-bind="click: exportAllCardsToZip"><span>to Zip</span></a></div>
                   </div>
                 </li>
               </ul>

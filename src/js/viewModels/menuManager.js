@@ -18,6 +18,7 @@ define(["knockout"], function(ko) {
     /*************************/
     self.displayCardExport = function() { self.isCardExportDisplayed(true); }
     self.hideCardExport = function() { self.isCardExportDisplayed(false); }
+    self.toggleCardExport = function() { self.isCardExportDisplayed(!self.isCardExportDisplayed()); }
 
     /********************************/
     /* End of Functions declaration */
