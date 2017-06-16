@@ -253,12 +253,19 @@
                     <div class="modal-box-content">
                       <h3>Export all cards to a Zip file</h3>
                       <div>All the cards in the current collection will be exported into a zip file.</div>
-                      <div data-bind="text: exportVM.formatDescription"></div>
                       <div data-bind="visible: exportVM.exportInactive">It will take approximatively <span data-bind="text: exportVM.estimatedTime"></span> to complete.</div>
+                      <div class="format-buttons" data-bind="foreach: exportVM.formatsList">
+                        <div class="format-button"><a href="#" data-bind="click: function() { $parent.exportVM.selectFormat($data) }, css: attrCss, attr: { title: description }">
+                          <span>Nada</span></a>
+                        </div>
+                      </div>
+                      <div class="format-description" data-bind="text: exportVM.formatDescription"></div>
                       <h3 data-bind="visible: exportVM.exportActive">Export in Progress ...</h3>
                       <div data-bind="visible: exportVM.exportActive, progressBar: { value : exportVM.progressPercentage }"></div>
+
+
                       <div class="modal-buttons">
-                        <div class="modal-button" data-bind="visible: exportVM.exportInactive, click: exportVM.launchZipCreation"><div class="icon icon-apply-template"></div>Create the ZIP</div>
+                        <div class="modal-button" data-bind="visible: exportVM.isLaunchZipExportVisible, click: exportVM.launchZipCreation"><div class="icon icon-apply-template"></div>Create the ZIP</div>
                         <div class="modal-button" data-bind="visible: exportVM.exportInactive, click: exportVM.cancelZipCreation"><div class="icon icon-apply-template"></div>Cancel</div>
                       </div>
                     </div>
@@ -280,11 +287,11 @@
                      data-bind="click: menu.toggleCardExport"><span>export Card(s)</span></a>
                   <div class="sub-menu-list" data-bind="slideRightMenu: menu.isCardExportDisplayed">
                     <div class="sub-menu"><a href="#" class="icon-image" title="Export the card to a PNG image"
-                           data-bind="click: exportAsPNG"><span>to PNG</span></a></div>
+                           data-bind="click: exportVM.exportAsPNG"><span>to PNG</span></a></div>
                     <div class="sub-menu"><a href="#" class="icon-file-svg" title="Export the card to a SVG image"
-                           data-bind="click: exportAsSVG"><span>to SVG</span></a></div>
+                           data-bind="click: exportVM.exportAsSVG"><span>to SVG</span></a></div>
                     <div class="sub-menu"><a href="#" class="icon-file-zip" title="Export all the card to a ZIP file"
-                           data-bind="click: exportAllCardsToZip"><span>to Zip</span></a></div>
+                           data-bind="click: exportVM.exportAllToZip"><span>to Zip</span></a></div>
                   </div>
                 </li>
               </ul>

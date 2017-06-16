@@ -1,7 +1,8 @@
 define(['jszip',
         'knockout',
+        'viewModels/zipExportFormat',
         'FileSaver'
-      ], function(jszip, ko) {
+      ], function(jszip, ko, ZipFormat) {
 
 /***********************************************************************/
 /* ViewModel for Exporting the Cards (unique or list, svg or png, ...) */
@@ -14,13 +15,12 @@ define(['jszip',
     /*************************/
     self.mainEngineVM = engineVM;
 
-    self.fnExportType = function() { };
-    self.formatDescription = ko.observable('');
-
     // Displaying the Modal Export Frame
     self.isModalDisplayed = ko.observable(false);
     self.indexCurrentExportedFile = ko.observable(-1);
     self.totalExportedFiles = ko.observable(-1);
+
+    self.formatsList = ko.observableArray([]);
 
     // Export currently in progress
     self.isExportInProgress = ko.observable(false);
@@ -41,16 +41,33 @@ define(['jszip',
       return val100;
     });
 
-    self.exportActive = ko.computed(function() { return self.isExportInProgress(); })
-    self.exportInactive = ko.computed(function() { return !self.isExportInProgress(); })
+    self.exportActive = ko.computed(function() { return self.isExportInProgress(); });
+    self.exportInactive = ko.computed(function() { return !self.isExportInProgress(); });
     self.estimatedTime = ko.computed(function() {
       return (self.mainEngineVM.listCards().length * 0.5) + "s";
+    });
+    self.currentFormat = ko.computed(function() {
+      var format = _.find(self.formatsList(), function(f) {
+        return f.isSelected();
+      });
+      return format;
+    })
+    self.formatDescription = ko.computed(function() {
+      var format = self.currentFormat();
+      if (format != null) {
+        return format.description;
+      } else {
+        return "Select a format ...";
+      }
+    });
+
+    self.isLaunchZipExportVisible = ko.computed(function() {
+      return self.exportInactive() && (self.currentFormat() != null);
     });
 
     /*************************/
     /* Functions declaration */
     /*************************/
-
     // Get the currend card as a PNG file to save on the client computer
     self.exportAsPNG = function() {
       self.exportCurrentCardAsPNG(self.saveBlobOnComputer);
@@ -59,30 +76,37 @@ define(['jszip',
     self.exportAsSVG = function() {
       self.exportCurrentCardAsSVG(self.saveBlobOnComputer);
     }
-    // Get all the cards as a ZIP file of PNG files
-    self.exportAllCardsToPngZip = function() {
-      self.formatDescription("The cards will be generated as PNG files.");
-      self.exportAllToZip(self.exportCurrentCardAsSVG);
+
+    self.getFormats = function() {
+      var formats = [];
+      formats.push(ZipFormat.getFormat("The cards will be generated as PNG files.", "icon-image", self.exportCurrentCardAsPNG));
+      formats.push(ZipFormat.getFormat("The cards will be generated as SVG files.", "icon-file-svg", self.exportCurrentCardAsSVG));
+      return formats;
     }
-    // Get all the cards as a ZIP file of SVG files
-    self.exportAllCardsToSvgZip = function() {
-      self.formatDescription("The cards will be generated as SVG files.");
-      self.exportAllToZip(self.exportCurrentCardAsSVG);
+    self.selectFormat = function(format) {
+      _.forEach(self.formatsList(), function(f) {
+        f.isSelected(format.key == f.key);
+      });
     }
 
-    self.exportAllToZip = function(fnExportType) {
+    // Opens the Modal Box for Zip Generation
+    self.exportAllToZip = function() {
       self.isModalDisplayed(true);
       self.indexCurrentExportedFile(0);
       self.totalExportedFiles(self.mainEngineVM.listCards().length);
       self.listFileNames = [];
-      self.fnExportType = fnExportType;
+      self.formatsList(self.getFormats());
       self.isExportInProgress(false);
     }
 
     self.launchZipCreation = function() {
-      self.isExportInProgress(true);
-      var zip = new jszip();
-      self.exportSingleCardToZip(0, self.fnExportType, zip);
+      var currentFormat = self.currentFormat();
+      if (currentFormat != null) {
+        self.isExportInProgress(true);
+        var zip = new jszip();
+        self.exportSingleCardToZip(0, currentFormat.func, zip);
+      }
+
     }
     self.cancelZipCreation = function() {
       self.isModalDisplayed(false);

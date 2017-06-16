@@ -113,32 +113,7 @@ define(['knockout',
     self.clearList = function() {
       self.editableCard(null);
       self.listCards.removeAll();
-    }
-
-    /* ------------------------ */
-    /* --- Export functions --- */
-    /* ------------------------ */
-
-    // Get the currend card as a PNG file to save on the client computer
-    self.exportAsPNG = function() {
-      self.exportVM.exportAsPNG();
-    }
-    // Get the currend card as a SVG file to save on the client computer
-    self.exportAsSVG = function() {
-      self.exportVM.exportAsSVG();
-    }
-    // Get all the cards as a ZIP file of PNG files
-    self.exportAllCardsToZip = function() {
-      self.exportVM.exportAllCardsToPngZip();
-    }
-    // Get all the cards as a ZIP file of SVG files
-    self.exportAllCardsToSvgZip = function() {
-      self.exportVM.exportAllCardsToSvgZip();
-    }
-
-    /* ------------------------------- */
-    /* --- End of Export functions --- */
-    /* ------------------------------- */
+    }    
 
     /* Import / Export data for list of cards */
     self.exportList = function() {

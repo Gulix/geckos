@@ -1,0 +1,62 @@
+// main: ./styles.less
+
+/*****************/
+/* Vertical Menu */
+/*****************/
+
+@formatItemWidth: 5em;
+
+.format-buttons {
+  position: relative;
+  text-align: center;
+
+  .format-button {
+    display: inline-block;
+    margin-left: 0.5em;
+
+    a {
+    	display: block;
+    	text-indent: -500em;
+    	height: @formatItemWidth;
+    	width: @formatItemWidth;
+    	line-height: @formatItemWidth;
+    	text-align: center;
+    	color: @mainColor1;
+      background: @backgroundMainColor;
+    	position: relative;
+    	border: 1px solid @mainColor1-light;
+    	-webkit-transition: background 0.1s ease-in-out;
+    	-moz-transition: background 0.1s ease-in-out;
+    	transition: background 0.1s ease-in-out;
+
+      &:hover {
+      	background: @mainColor1;
+      	color: @verticalMenuHighlight;
+      }
+
+      &:before {
+      	font-family: 'svgicons';
+      	speak: none;
+      	font-style: normal;
+      	font-weight: normal;
+      	text-indent: 0em;
+      	position: absolute;
+      	top: 0;
+      	left: 0;
+      	width: 100%;
+      	height: 100%;
+      	font-size: 1.4em;
+      	-webkit-font-smoothing: antialiased;
+      }
+
+      &.selected {
+      	background: darken(@mainColor1, 10%);
+      	color: @verticalMenuHighlight;        
+      }
+    }
+  }
+}
+
+.format-description {
+  text-align: center;
+}
