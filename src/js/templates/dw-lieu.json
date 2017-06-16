@@ -11,44 +11,16 @@
 		"canvasWidth": 446.45,
 		"canvasHeight": 623.625,
 		"fields": [{
-			"name": "display_background",
-			"label": "Afficher le fond ?",
-			"default": false,
-			"type": "checkbox"
-		},{
-			"name": "name",
-			"label": "Nom",
-			"default": "Le Gué des Fées"
-		},{
-			"name": "marqueurs",
-			"label": "Marqueurs",
-			"default": "Magique"
-		}, {
-			"name": "impressions",
-			"type": "multiline",
-			"lines": 8,
-			"label": "Impressions",
-			"default": "❍ Une rivière poissonneuse et chantante.\n❍ Des pierres plates adoucies par l’usage.\nQ : À quoi peut-on deviner l’héritage des fées autour du gué ?"
-		}, {
-			"name": "details",
-			"label": "Détails",
-			"type": "richtext",
-			"default": "<p>Les f&eacute;es occupaient l&rsquo;endroit avant que la civilisation ne les en chasse. Le gu&eacute; est un raccourcis, mais les &eacute;trangers le fuient comme la peste pr&eacute;textant que ses pierres sont glissantes et instables.</p><p>Quand vous <strong>franchissez le gu&eacute; sans chanter ou danser pour les f&eacute;es</strong>, lancez +DEX. Sur 10+, vous conservez votre &eacute;quilibre malgr&eacute; que la magie des f&eacute;es retourne des pierres sous vos pas. Sur 7&ndash;9, choisissez 1.</p><p>❍ Vous vous foulez la cheville (vous &ecirc;tes Secou&eacute;).</p><p>❍ Vous perdez un &Eacute;quipment dans le ruisseau (au choix du Meneur).</p>"
-		},{
-			"name":"details_fontsize", "label":"Taille de police", "default":16, "type": "options",
-			"options": [
-				{ "option":10, "text":"10" },
-				{ "option":12, "text":"12" },
-				{ "option":14, "text":"14" },
-				{ "option":16, "text":"16" },
-				{ "option":18, "text":"18" },
-				{ "option":20, "text":"20" }
-			]
-		}, {
 			"name": "grpAspect",
 			"label": "Aspect",
 			"type": "group",
 			"expanded": false
+		}, {
+			"name": "display_background",
+			"label": "Afficher le fond ?",
+			"default": false,
+			"type": "checkbox",
+			"group": "grpAspect"
 		}, {
 			"name": "color1",
 			"label": "Couleur de base",
@@ -61,42 +33,104 @@
 			"default": "#560f19",
 			"type": "color",
 			"group": "grpAspect"
+		},{
+			"name": "name",
+			"label": "Nom",
+			"default": "Le Gué des Fées"
+		},{
+			"name": "marqueurs",
+			"label": "Marqueurs",
+			"default": "Magique"
+		}, {
+			"name": "grpImpressions",
+			"label": "Impressions",
+			"type": "group",
+			"expanded": true
+		}, {
+			"name": "impressions",
+			"type": "multiline",
+			"lines": 8,
+			"label": "Impressions",
+			"group": "grpImpressions",
+			"default": "❍ Une rivière poissonneuse et chantante.\n❍ Des pierres plates adoucies par l’usage.\nQ : À quoi peut-on deviner l’héritage des fées autour du gué ?"
+		},{
+			"name":"impressions_fontsize", "label":"Taille de police", "default":16, "type": "options", "group": "grpImpressions",
+			"options": [
+				{ "option":10, "text":"10" },
+				{ "option":12, "text":"12" },
+				{ "option":14, "text":"14" },
+				{ "option":16, "text":"16" },
+				{ "option":18, "text":"18" },
+				{ "option":20, "text":"20" }
+			]
+		}, {
+			"name": "grpDetails",
+			"label": "Détails",
+			"type": "group",
+			"expanded": true
+		}, {
+			"name": "details",
+			"label": "Détails",
+			"type": "richtext",
+			"group": "grpDetails",
+			"default": "<p>Les f&eacute;es occupaient l&rsquo;endroit avant que la civilisation ne les en chasse. Le gu&eacute; est un raccourcis, mais les &eacute;trangers le fuient comme la peste pr&eacute;textant que ses pierres sont glissantes et instables.</p><p>Quand vous <strong>franchissez le gu&eacute; sans chanter ou danser pour les f&eacute;es</strong>, lancez +DEX. Sur 10+, vous conservez votre &eacute;quilibre malgr&eacute; que la magie des f&eacute;es retourne des pierres sous vos pas. Sur 7&ndash;9, choisissez 1.</p><p>❍ Vous vous foulez la cheville (vous &ecirc;tes Secou&eacute;).</p><p>❍ Vous perdez un &Eacute;quipment dans le ruisseau (au choix du Meneur).</p>"
+		},{
+			"name":"details_fontsize", "label":"Taille de police", "default":16, "type": "options","group": "grpDetails",
+			"options": [
+				{ "option":10, "text":"10" },
+				{ "option":12, "text":"12" },
+				{ "option":14, "text":"14" },
+				{ "option":16, "text":"16" },
+				{ "option":18, "text":"18" },
+				{ "option":20, "text":"20" }
+			]
+		}, {
+			"name": "grpIcones",
+			"label": "Icônes",
+			"type": "group",
+			"expanded": true
 		}, {
 			"name": "icontype",
 			"label": "Icône principale",
 			"default": "card-location",
 			"type": "options",
-			"sharedOptions": "icons"
+			"sharedOptions": "icons",
+			"group": "grpIcones"
 		}, {
 			"name": "icon1",
 			"label": "Icône 1",
 			"default": "logo-danger-discovery",
 			"type": "options",
-			"sharedOptions": "icons"
+			"sharedOptions": "icons",
+			"group": "grpIcones"
 		}, {
 			"name": "icon2",
 			"label": "Icône 2",
 			"default": "danger-civilized",
 			"type": "options",
-			"sharedOptions": "icons"
+			"sharedOptions": "icons",
+			"group": "grpIcones"
 		}, {
 			"name": "icon3",
 			"label": "Icône 3",
 			"default": "climate-temperate",
 			"type": "options",
-			"sharedOptions": "icons"
+			"sharedOptions": "icons",
+			"group": "grpIcones"
 		}, {
 			"name": "icon4",
 			"label": "Icône 4",
 			"default": "alignment-chaotic",
 			"type": "options",
-			"sharedOptions": "icons"
+			"sharedOptions": "icons",
+			"group": "grpIcones"
 		}, {
 			"name": "icon5",
 			"label": "Icône 5",
 			"default": "organization-seigneurie",
 			"type": "options",
-			"sharedOptions": "icons"
+			"sharedOptions": "icons",
+			"group": "grpIcones"
 		}],
 		"canvasFields": [{
 			"type": "image",
@@ -123,9 +157,9 @@
 					"fill": {
 						"type": "linear",
 						"coords": {
-							"x1": 269.81836,
+							"x1": 325.510,
 							"y1": 333.80341,
-							"x2": 402,
+							"x2": 402.378,
 							"y2": 332.55273
 						},
 						"colorStops": [{
@@ -169,6 +203,16 @@
 					"id": "cadres-tentacules",
 					"fill": "$color2.hexa$",
 					"path": "./js/templates/dw-svg/ETS-Type1-Couleur2.svg"
+				}, {
+					"type": "path",
+					"id": "libelles-outline",
+					"fill": "$color1.hexa$",
+					"path": "./js/templates/dw-svg/ETS-Type1-Libelles-Outline.svg"
+				}, {
+					"type": "path",
+					"id": "libelles",
+					"fill": "#FFFFFF",
+					"path": "./js/templates/dw-svg/ETS-Type1-Libelles.svg"
 				}
 			]
 		},{
@@ -218,22 +262,22 @@
 			"top": 14,
 			"width": 308,
 			"height": 27,
-			"fill": "{{value = tinycolor.mostReadable(card[color1].toHexString(), ['#EEE', '#888', '#111']).toHexString();}}",
+			"fill": "{{value = tinycolor.mostReadable(card[color1].toHexString(), ['#FFF', '#888', '#000']).toHexString();}}",
 			"stroke": "$color1.hexa$",
 			"strokeWidth": 0,
 			"strokeLineCap": "round",
 			"strokeLineJoin": "round",
 			"text": "$name$",
 			"fontSize": 26,
-			"fontWeight": "normal",
-			"fontFamily": "Merriweather",
+			"fontWeight": "bold",
+			"fontFamily": "Lora",
 			"textAlign": "center",
 			"lineHeight": 1.16
 		}, {
 			"type": "textbox",
 			"id": "tbMarqueurs",
 			"left": 22,
-			"top": 70,
+			"top": 73,
 			"width": 370,
 			"height": 29,
 			"fill": "rgb(0,0,0)",
@@ -246,7 +290,7 @@
 			"id": "tbImpressions",
 			"type": "textbox",
 			"left": 22,
-			"top": 127,
+			"top": 128,
 			"width": 370,
 			"height": 170,
 			"fill": "rgb(0,0,0)",
@@ -369,6 +413,28 @@
 					"top": 0,
 					"fill": "$color2.hexa$",
 					"path": "./js/templates/dw-svg/icon-eagle-stroke.svg"
+				}
+			]
+		}, {
+			"type": "path-group",
+			"left": 400,
+			"top": 304.521,
+			"scaleX": 1,
+			"scaleY": 1,
+			"paths": [
+				{
+					"type": "path",
+					"left": 0,
+					"top": 0,
+					"fill": "[[icon-color]]",
+					"path": "./js/templates/dw-svg/icon-book.svg"
+				},
+				{
+					"type": "path",
+					"left": 0,
+					"top": 0,
+					"fill": "$color2.hexa$",
+					"path": "./js/templates/dw-svg/icon-book-stroke.svg"
 				}
 			]
 		}]
