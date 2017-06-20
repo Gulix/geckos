@@ -44,11 +44,15 @@ define(['knockout'], function(ko) {
 
     /* Value to get the content */
     self.getCodeValue = function() {
+      return self.getJsonValue();
+    }
+
+    self.getObjectValue = function() {
       var selectedValue = self.selectedOption();
       if ((selectedValue != null) && (selectedValue.content != undefined)) {
         return selectedValue.content;
       } else {
-        return self.getJsonValue();
+        return { }
       }
     }
 

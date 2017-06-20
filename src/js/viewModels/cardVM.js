@@ -136,7 +136,7 @@ define(['knockout', 'lodash', 'viewModels/field-factory', 'tinycolor', 'fabricjs
          return styles.generateStylesFromFormattedText(formattedText);
        } else if (processedString.indexOf('£') == 0) {
          var valueField = processedString.replace('£', '');
-         return self._getStyles(valueField);
+         return self._getObjectValue(valueField);
        } else if (processedString.indexOf('&') == 0) {
          var valueField = processedString.replace('&', '');
          return self._getNumericValue(valueField);
@@ -252,11 +252,11 @@ define(['knockout', 'lodash', 'viewModels/field-factory', 'tinycolor', 'fabricjs
       return false;
     }
 
-    /* Returns the Styles array for FabricJS TextBox element */
-    self._getStyles = function(fieldName) {
+    /* Returns the Object Value - Styles for Textbox, Content from options (for the moment) */
+    self._getObjectValue = function(fieldName) {
       var field = self._getFieldFromName(fieldName);
-      if ((field != null) && (field.styles != undefined)) {
-        return field.styles();
+      if ((field != null) && (field.getObjectValue != undefined)) {
+        return field.getObjectValue();
       } else {
         return { };
       }

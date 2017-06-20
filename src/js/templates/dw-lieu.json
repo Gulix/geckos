@@ -320,7 +320,7 @@
 			"scaleX": 0.73,
 			"scaleY": 0.73,
 			"visible": true,
-			"paths": "$icontype"
+			"paths": "£icontype"
 		}, {
 			"type": "path-group",
 			"id": "icon1",
@@ -330,7 +330,7 @@
 			"scaleX": 0.73,
 			"scaleY": 0.73,
 			"visible": true,
-			"paths": "$icon1"
+			"paths": "£icon1"
 		}, {
 			"type": "path-group",
 			"id": "icon2",
@@ -340,7 +340,7 @@
 			"scaleX": 0.73,
 			"scaleY": 0.73,
 			"visible": true,
-			"paths": "$icon2"
+			"paths": "£icon2"
 		}, {
 			"type": "path-group",
 			"id": "icon3",
@@ -350,7 +350,7 @@
 			"scaleX": 0.73,
 			"scaleY": 0.73,
 			"visible": true,
-			"paths": "$icon3"
+			"paths": "£icon3"
 		}, {
 			"type": "path-group",
 			"id": "icon4",
@@ -360,7 +360,7 @@
 			"scaleX": 0.73,
 			"scaleY": 0.73,
 			"visible": true,
-			"paths": "$icon4"
+			"paths": "£icon4"
 		}, {
 			"type": "path-group",
 			"id": "icon5",
@@ -370,7 +370,7 @@
 			"scaleX": 0.73,
 			"scaleY": 0.73,
 			"visible": true,
-			"paths": "$icon5"
+			"paths": "£icon5"
 		},{
 			"type": "path-group",
 			"left": 369.921,
