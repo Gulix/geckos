@@ -5,6 +5,8 @@
 /*****************/
 
 @menuItemWidth: 5em;
+@menuOpenerWidth: 0.5em;
+@menuOpenerHeight: 3.5em;
 
 .vertical-menu {
 	float: left;
@@ -73,6 +75,42 @@
         margin-left: 0.5em;
       }
     }
+
+		.sub-menu-opener {
+			width: @menuItemWidth - @menuOpenerWidth;
+			position: relative;
+
+			&:after {
+				content:"";
+				position: absolute;
+				left: 100%;
+				top: (@menuItemWidth - @menuOpenerHeight) / 2;
+				width: 0;
+				height: 0;
+				border-top: (@menuOpenerHeight / 2) solid transparent;
+				border-left: @menuOpenerWidth solid @mainColor1;
+				border-bottom: (@menuOpenerHeight / 2) solid transparent;
+			}
+		}
+
+		.sub-menu-closer {
+			width: @menuItemWidth - @menuOpenerWidth;
+			position: relative;
+			margin-left: @menuOpenerWidth;
+
+			&:after {
+				content:"";
+				position: absolute;
+				left: -@menuOpenerWidth;
+				top: (@menuItemWidth - @menuOpenerHeight) / 2;
+				width: 0;
+				height: 0;
+				border-top: (@menuOpenerHeight / 2) solid transparent;
+				border-right: @menuOpenerWidth solid @mainColor1;
+				border-bottom: (@menuOpenerHeight / 2) solid transparent;
+			}
+		}
+
   }
 }
 
