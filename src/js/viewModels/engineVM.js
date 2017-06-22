@@ -5,8 +5,9 @@ define(['knockout',
         'viewModels/UItemplates',
         'viewModels/exportVM',
         'viewModels/menuManager',
+        'viewModels/datastorage/datastorage',
         'FileSaver'
-      ], function(ko, fabric, FieldFactory, CardTemplateVM, UITemplates, Export, MenuManager) {
+      ], function(ko, fabric, FieldFactory, CardTemplateVM, UITemplates, Export, MenuManager, DataStorage) {
 
 /***************************************/
 /* Main entry point of the application */
@@ -113,14 +114,19 @@ define(['knockout',
     self.clearList = function() {
       self.editableCard(null);
       self.listCards.removeAll();
-    }    
+    }
 
     /* Import / Export data for list of cards */
+    self.getListOfCardsAsJson = function() {
+      var jsonData = [];
+      _.forEach(self.listCards(), function(card) {
+        jsonData.push(card.getSavedData());
+      })
+      return jsonData;
+    }
+
     self.exportList = function() {
-      var jsonData = [ ];
-      for(var iCard = 0; iCard < self.listCards().length; iCard++) {
-        jsonData.push(self.listCards()[iCard].getSavedData());
-      }
+      var jsonData = self.getListOfCardsAsJson();
       var blob = new Blob([JSON.stringify(jsonData)], {type: "text/plain;charset=utf-8"});
       saveAs(blob, "listCards.json");
     }
@@ -139,6 +145,24 @@ define(['knockout',
       if (cards.length > 0) {
         self.editableCard(cards[0]);
       }
+    }
+
+    /* Save / Load from localStorage */
+    self.saveFromLocalStorage = function() {
+      var jsonData = self.getListOfCardsAsJson();
+      DataStorage.saveCurrentList(jsonData);
+      alert("Save is done in localStorage");
+    }
+    self.loadFromLocalStorage = function() {
+      var cardsList = DataStorage.getList(1);
+      var cards = [ ];
+      if ((cardsList == null) || (cardsList.cardsData == null) || (cardsList.cardsData.constructor !== Array)) {
+        alert("Nothing retrieved from the localStorage");
+      } else {
+        cards = cardsList.cardsData;
+      }
+
+      self.importList(cards);
     }
 
     /*******************************/

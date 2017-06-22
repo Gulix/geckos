@@ -200,9 +200,9 @@
                 <li><a href="#" class="icon-clear-list" title="Clear the list"
                        data-bind="click: clearList"><span>Clear</span></a></li>
               	<li><a href="#" class="icon-download" title="Load list from file"
-                       data-bind="click: loadList"><span>Load list</span></a></li>
+                       data-bind="click: loadFromLocalStorage"><span>Load list</span></a></li>
                 <li><a href="#" class="icon-save" title="Save list to file"
-                       data-bind="click: exportList"><span>Save list</span></a></li>
+                       data-bind="click: saveFromLocalStorage"><span>Save list</span></a></li>
               </ul>
               <form style="display:none" id="file-load-list-form">
                 <input type="file" id="file-load-list" name="file" class="form-control" style="display:none"
@@ -283,8 +283,8 @@
               	<li><a href="#" class="icon-delete" title="Delete the selected card"
                        data-bind="click: removeSelectedCard"><span>Remove</span></a></li>
               	<li>
-                  <a href="#" class="icon-file-export" title="Export the card(s)"
-                     data-bind="click: menu.toggleCardExport"><span>export Card(s)</span></a>
+                  <a href="#" class="icon-file-export sub-menu-opener" title="Export the card(s)"
+                     data-bind="click: menu.toggleCardExport, css: { 'sub-menu-opener': menu.isCardExportHidden, 'sub-menu-closer': menu.isCardExportDisplayed}"><span>export Card(s)</span></a>
                   <div class="sub-menu-list" data-bind="slideRightMenu: menu.isCardExportDisplayed">
                     <div class="sub-menu"><a href="#" class="icon-image" title="Export the card to a PNG image"
                            data-bind="click: exportVM.exportAsPNG"><span>to PNG</span></a></div>
