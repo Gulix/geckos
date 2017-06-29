@@ -8,6 +8,7 @@ define(["knockout"], function(ko) {
     /* Variables declaration */
     /*************************/
     self.isCardExportDisplayed = ko.observable(false);
+    self.isLoadSaveDisplayed = ko.observable(false);
 
     /********************************/
     /* End of Variables declaration */
@@ -20,6 +21,11 @@ define(["knockout"], function(ko) {
     self.hideCardExport = function() { self.isCardExportDisplayed(false); }
     self.toggleCardExport = function() { self.isCardExportDisplayed(!self.isCardExportDisplayed()); }
     self.isCardExportHidden = ko.computed(function() { return !self.isCardExportDisplayed(); });
+
+    self.displayLoadSave = function() { self.isLoadSaveDisplayed(true); }
+    self.hideLoadSave = function() { self.isLoadSaveDisplayed(false); }
+    self.toggleLoadSave = function() { self.isLoadSaveDisplayed(!self.isLoadSaveDisplayed()); }
+    self.isLoadSaveHidden = ko.computed(function() { return !self.isLoadSaveDisplayed(); });
 
     /********************************/
     /* End of Functions declaration */
