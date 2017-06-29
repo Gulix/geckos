@@ -1,4 +1,4 @@
-define(["knockout", "viewModels/datastorage/datastorage"  ], function(ko, DataStorage) {
+define(["knockout", "moment", "viewModels/datastorage/datastorage"  ], function(ko, moment, DataStorage) {
 
 /*****************************************/
 /* ViewModel for the Load/Save Modal Box */
@@ -15,6 +15,8 @@ define(["knockout", "viewModels/datastorage/datastorage"  ], function(ko, DataSt
     self.listOfDecks = ko.observableArray([]);
     self.newDeckName = ko.observable('');
     self.selectedDeck = ko.observable(null);
+
+    self.autoSaveDeckId = null;
 
     /********************************/
     /* End of Variables declaration */
@@ -33,7 +35,9 @@ define(["knockout", "viewModels/datastorage/datastorage"  ], function(ko, DataSt
     /*************************/
     self.initModal = function() {
       var tplKey = self.engineVM.getActiveTemplateKey();
-      self.listOfDecks(DataStorage.getDecksForTemplate(tplKey));
+      var decks = DataStorage.getDecksForTemplate(tplKey);
+      decks = _.sortBy(decks, function(d) { return (d.lastUpdateTime != null) ? -d.lastUpdateTime : -d.uniqueId; });
+      self.listOfDecks(decks);
       self.newDeckName('');
       self.selectedDeck(null);
     }
@@ -52,7 +56,49 @@ define(["knockout", "viewModels/datastorage/datastorage"  ], function(ko, DataSt
           alert("Nothing retrieved from the localStorage");
         } else {
           self.engineVM.importList(self.selectedDeck().cardsData);
+          self.autoSaveDeckId = self.selectedDeck().uniqueId;
         }
+      }
+    }
+
+    self.removeSelectedDeck = function() {
+      if (self.selectedDeck() != null) {
+        DataStorage.removeDeck(self.selectedDeck().uniqueId);
+
+        self.initModal();
+      }
+    }
+
+    self.updateSelectedDeckWithCurrent = function() {
+      if (self.selectedDeck() != null) {
+
+        self.updateDeckWithCurrent(self.selectedDeck().uniqueId);
+
+        self.initModal();
+      }
+    }
+
+    self.updateDeckWithCurrent = function(deckId) {
+      var deck = _.find(self.listOfDecks(), function(d) { return d.uniqueId == deckId; });
+      if (deck != null) {
+        var cardsData = self.engineVM.getListOfCardsAsJson();
+        deck.cardsData = cardsData;
+        deck.lastUpdateTime = moment().valueOf();
+        DataStorage.updateDeck(deck);
+      }
+    }
+
+    self.autoSave = function() {
+      if (self.autoSaveDeckId != null) {
+        self.updateDeckWithCurrent(self.autoSaveDeckId);
+      }
+    }
+
+    self.autoLoad = function() {
+      self.initModal(); // Maybe restraining to only useful objects ?
+      if (self.listOfDecks().length > 0) {
+        self.autoSaveDeckId = self.listOfDecks()[0].uniqueId;
+        self.engineVM.importList(self.listOfDecks()[0].cardsData);
       }
     }
 

@@ -194,11 +194,13 @@
                   <div class="modal-box-content">
                     <div class="modal-close" data-bind="click: hideModal">X</div>
                     <h3>Load / Save your cards</h3>
-                    <select data-bind="options: listOfDecks, optionsText: 'description', value: selectedDeck"
+                    <select data-bind="options: listOfDecks, optionsText: 'completeLabel', value: selectedDeck"
                             class="cards-list" size="5">
                     </select>
                     <input type="text" data-bind="value: newDeckName"></input>
                     <div class="modal-buttons">
+                      <div class="modal-button" data-bind="click: updateSelectedDeckWithCurrent"><div class="icon icon-apply-template"></div>Update</div>
+                      <div class="modal-button" data-bind="click: removeSelectedDeck"><div class="icon icon-apply-template"></div>Delete</div>
                       <div class="modal-button" data-bind="click: loadSelectedDeck"><div class="icon icon-apply-template"></div>Load</div>
                       <div class="modal-button" data-bind="click: saveCurrentDeckAsNew"><div class="icon icon-apply-template"></div>New</div>
                       <div class="modal-button" data-bind="click: hideModal"><div class="icon icon-apply-template"></div>Cancel</div>
@@ -222,6 +224,10 @@
                        data-bind="click: clearList"><span>Clear</span></a></li>
               	<li><a href="#" class="icon-save" title="Load / Save your cards"
                        data-bind="click: loadsaveVM.showModal"><span>Load / Save</span></a></li>
+                <li><a href="#" class="icon-save" title="Auto save your current deck"
+                       data-bind="click: loadsaveVM.autoSave"><span>Auto Save</span></a></li>
+                <li><a href="#" class="icon-save" title="Load the last saved deck"
+                       data-bind="click: loadsaveVM.autoLoad"><span>Auto Load</span></a></li>
               </ul>
               <form style="display:none" id="file-load-list-form">
                 <input type="file" id="file-load-list" name="file" class="form-control" style="display:none"
