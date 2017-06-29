@@ -40,7 +40,7 @@
 		}, {
             "name": "inspirationkey",
             "label": "Titre de l'inspiration",
-            "default": "", 
+            "default": "",
             "group": "grpInspirations"
         }, {
 			"name": "displayInspiration",
@@ -49,10 +49,10 @@
 			"default": false,
             "group": "grpInspirations"
 		}, {
-             "name": "grpInspirations", 
-             "label":"Inspirations", 
-             "type": "group", 
-             "expanded": false 
+             "name": "grpInspirations",
+             "label":"Inspirations",
+             "type": "group",
+             "expanded": false
         }, {
 			"name": "inspiration1",
 			"label": "Inspiration 1",
@@ -283,7 +283,7 @@
             "stroke": "",
             "text": "Après l'Accident",
             "fontSize": 28,
-            "fontFamily": "'Bubblegum Sans'",				
+            "fontFamily": "'Bubblegum Sans'",
             "textAlign": "center"
         }, {
 			"id": "bottom-text",
@@ -356,7 +356,7 @@
 			"fontFamily": "Lobster"
 		}, {
             "id": "cardtype-line1",
-            "type": "rect",            
+            "type": "rect",
             "left": 340,
             "top": 130,
             "width": 1,
@@ -386,12 +386,12 @@
 				"offsetX": 0,
 				"offsetY": 0
 			},
-            "strokeWidth": 1.07,            
-            "strokeMiterLimit": 4,            
+            "strokeWidth": 1.07,
+            "strokeMiterLimit": 4,
             "opacity": 1
         }, {
             "id": "cardtype-line2",
-            "type": "rect",            
+            "type": "rect",
             "left": 340,
             "top": 170,
             "width": 1,
@@ -421,12 +421,12 @@
 				"offsetX": 0,
 				"offsetY": 0
 			},
-            "strokeWidth": 1.07,            
-            "strokeMiterLimit": 4,            
-            "opacity": 1           
+            "strokeWidth": 1.07,
+            "strokeMiterLimit": 4,
+            "opacity": 1
         }, {
             "id": "cardtype-line3",
-            "type": "rect",            
+            "type": "rect",
             "left": 340,
             "top": 210,
             "width": 1,
@@ -456,12 +456,12 @@
 				"offsetX": 0,
 				"offsetY": 0
 			},
-            "strokeWidth": 1.07,            
-            "strokeMiterLimit": 4,            
-            "opacity": 1           
+            "strokeWidth": 1.07,
+            "strokeMiterLimit": 4,
+            "opacity": 1
         }, {
             "id": "cardtype-line4",
-            "type": "rect",            
+            "type": "rect",
             "left": 340,
             "top": 250,
             "width": 1,
@@ -491,20 +491,20 @@
 				"offsetX": 0,
 				"offsetY": 0
 			},
-            "strokeWidth": 1.07,            
-            "strokeMiterLimit": 4,            
-            "opacity": 1           
+            "strokeWidth": 1.07,
+            "strokeMiterLimit": 4,
+            "opacity": 1
         }, {
             "id": "circle-start",
             "type": "circle",
             "left": 335.50,
-            "top": 120,            
+            "top": 120,
             "fill": "rgba(255,255,255,1)",
             "stroke": "{{if (card[cardtype] == 'start') { value = 'rgba(0,0,0,1)'; } else { value = 'rgba(0,0,0,0.3)'; }}}",
             "strokeWidth": 0.50,
             "strokeMiterLimit": 4,
             "visible": "{{value = card[cardtype] != 'inspiration';}}",
-            "radius": 5            
+            "radius": 5
         }, {
             "id": "circle-start-icon",
             "type": "path",
@@ -531,14 +531,14 @@
             "id": "circle-act1",
             "type": "circle",
             "left": 335.50,
-            "top": 160,            
+            "top": 160,
             "fill": "rgba(255,255,255,1)",
             "stroke": "{{if (card[cardtype] == 'act1') { value = 'rgba(0,0,0,1)'; } else { value = 'rgba(0,0,0,0.3)'; }}}",
             "strokeWidth": 0.50,
-            "strokeMiterLimit": 4,            
+            "strokeMiterLimit": 4,
             "opacity": 1,
             "visible": "{{value = card[cardtype] != 'inspiration';}}",
-            "radius": 5            
+            "radius": 5
         }, {
             "id": "act1-text",
             "type": "textbox",
@@ -549,20 +549,20 @@
             "text": "1",
             "fontSize": 10,
             "visible": "{{value = card[cardtype] != 'inspiration';}}",
-            "fontFamily": "'Bubblegum Sans'",				
+            "fontFamily": "'Bubblegum Sans'",
             "textAlign": "center"
         }, {
             "id": "circle-act2",
             "type": "circle",
             "left": 335.50,
-            "top": 200,            
+            "top": 200,
             "fill": "rgba(255,255,255,1)",
             "stroke": "{{if (card[cardtype] == 'act2') { value = 'rgba(0,0,0,1)'; } else { value = 'rgba(0,0,0,0.3)'; }}}",
             "strokeWidth": 0.50,
-            "strokeMiterLimit": 4,            
+            "strokeMiterLimit": 4,
             "opacity": 1,
             "visible": "{{value = card[cardtype] != 'inspiration';}}",
-            "radius": 5            
+            "radius": 5
         }, {
             "id": "act2-text",
             "type": "textbox",
@@ -572,21 +572,21 @@
             "fill": "{{if (card[cardtype] == 'act2') { value = 'rgba(0,0,0,1)'; } else { value = 'rgba(0,0,0,0.3)'; }}}",
             "text": "2",
             "fontSize": 10,
-            "fontFamily": "'Bubblegum Sans'",	
-            "visible": "{{value = card[cardtype] != 'inspiration';}}",			
+            "fontFamily": "'Bubblegum Sans'",
+            "visible": "{{value = card[cardtype] != 'inspiration';}}",
             "textAlign": "center"
         }, {
             "id": "circle-act3",
             "type": "circle",
             "left": 335.50,
-            "top": 240,            
+            "top": 240,
             "fill": "rgba(255,255,255,1)",
             "stroke": "{{if (card[cardtype] == 'act3') { value = 'rgba(0,0,0,1)'; } else { value = 'rgba(0,0,0,0.3)'; }}}",
             "strokeWidth": 0.50,
-            "strokeMiterLimit": 4,            
+            "strokeMiterLimit": 4,
             "opacity": 1,
             "visible": "{{value = card[cardtype] != 'inspiration';}}",
-            "radius": 5            
+            "radius": 5
         }, {
             "id": "act3-text",
             "type": "textbox",
@@ -596,21 +596,21 @@
             "fill": "{{if (card[cardtype] == 'act3') { value = 'rgba(0,0,0,1)'; } else { value = 'rgba(0,0,0,0.3)'; }}}",
             "text": "3",
             "fontSize": 10,
-            "fontFamily": "'Bubblegum Sans'",	
-            "visible": "{{value = card[cardtype] != 'inspiration';}}",			
+            "fontFamily": "'Bubblegum Sans'",
+            "visible": "{{value = card[cardtype] != 'inspiration';}}",
             "textAlign": "center"
         }, {
             "id": "circle-ending",
             "type": "circle",
             "left": 335.50,
-            "top": 280,            
+            "top": 280,
             "fill": "rgba(255,255,255,1)",
             "stroke": "{{if (card[cardtype] == 'end') { value = 'rgba(0,0,0,1)'; } else { value = 'rgba(0,0,0,0.3)'; }}}",
             "strokeWidth": 0.50,
-            "strokeMiterLimit": 4,            
+            "strokeMiterLimit": 4,
             "opacity": 1,
             "visible": "{{value = card[cardtype] != 'inspiration';}}",
-            "radius": 5            
+            "radius": 5
         }, {
             "id": "circle-ending-icon",
             "type": "path",
@@ -619,7 +619,7 @@
             "width": 10.37,
             "height": 10.53,
             "visible": "{{value = card[cardtype] != 'inspiration';}}",
-            "fill": "{{if (card[cardtype] == 'end') { value = 'rgba(0,0,0,1)'; } else { value = 'rgba(0,0,0,0.3)'; }}}",            
+            "fill": "{{if (card[cardtype] == 'end') { value = 'rgba(0,0,0,1)'; } else { value = 'rgba(0,0,0,0.3)'; }}}",
             "pathOffset": {
                 "x": 223.35059,
                 "y": 150.10253999999998
@@ -794,7 +794,7 @@
             "strokeLineJoin": "round",
             "visible": "?kidfriendly",
             "strokeMiterLimit": 4,
-            "fillRule": "evenodd",				
+            "fillRule": "evenodd",
             "rx": 4.2154183,
             "ry": 4.2154183,
             "fill": "rgba(255,255,255,0)"
@@ -809,7 +809,7 @@
             "scaleY": 1.30,
             "visible": "?kidfriendly",
             "fill": "rgba(0,0,0,0.3)",
-            "strokeWidth": 0.03,				
+            "strokeWidth": 0.03,
             "pathOffset": {
                 "x": 222.23489985695693,
                 "y": -12.149956463540917
@@ -913,8 +913,8 @@
             { "id": "act1-text", "ignored": true },
             { "id": "act2-text", "ignored": true },
             { "id": "act3-text", "ignored": true }
-            
-        ], 
+
+        ],
         "fields": [ ]
     }],
 	"webfonts": {
@@ -925,6 +925,7 @@
 	"description": {
 		"description": "Carte pour le jeu narratif",
 		"title": "Après l'accident",
+		"key": "accident",
 		"credits": "by Nicolas Ronvel",
 		"url": "https://github.com/Gulix/geckos/"
 	}

@@ -48,6 +48,7 @@
 	"description": {
 		"description": "Basic Template for a card of various effect (for any type of game)",
     "title":"Basic - Effects",
+		"key": "basiceffects",
     "credits": "by Nicolas Ronvel",
     "url": "https://github.com/Gulix/geckos/"
 	}
