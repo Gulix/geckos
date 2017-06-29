@@ -1,70 +1,50 @@
-define([ "viewModels/datastorage/cardsList" ], function(CardsList) {
+define([ "viewModels/datastorage/cardsDeck" ], function(CardsDeck) {
 
 /*************************************************/
 /* Managing the DataStorage functions for Geckos */
 /*************************************************/
-  function datastorage() {
-    var self = this;
-
-    /*************************/
-    /* Variables declaration */
-    /*************************/
-
-
-    /*************************/
-    /* Functions declaration */
-    /*************************/
-    self.isDataStorageActive = function() {
-      return typeof(Storage) !== "undefined";
-    }
-
-    self.getStoredData = function() {
-      if (self.isDataStorageActive()) {
-        var data = localStorage.getItem("geckos_cards");
-        return data;
-      } else {
-        return null;
-      }
-    }
-
-    self.getListOfLists = function() {
-      var data = self.getStoredData();
-      if (data != null) {
-        var jsonData = JSON.parse(data);
-        return jsonData;
-      }
-
-      return [];
-    }
-
-    self.storeNewList = function(cardsData, templateKey, description) {
-      var cardsList = CardsList.createCardsList(cardsData, templateKey, description);
-      var storedData = self.getStoredData();
-      if ((storedData == null) || (storedData.constructor !== Array))  {
-        storedData = [ ];
-      }
-      storedData.push(cardsList);
-      var strData = JSON.stringify(storedData);
-      localStorage.setItem("geckos_cards", strData);
-
-    }
-
-
-
-    /*******************************/
-    /*End of Functions declaration */
-    /*******************************/
+  function isDataStorageActive() {
+    return typeof(Storage) !== "undefined";
   }
+
+  function getStoredCardsAsString() {
+    if (isDataStorageActive()) {
+      var data = localStorage.getItem("geckos_cards");
+      return data;
+    } else {
+      return null;
+    }
+  }
+
+  function getListOfDecks() {
+    var data = getStoredCardsAsString();
+    if (data != null) {
+      var jsonData = JSON.parse(data);
+      return jsonData;
+    }
+
+    return [];
+  }
+
+  function storeNewDeck(cardsData, templateKey, description) {
+    var newDeck = CardsDeck.createCardsDeck(cardsData, templateKey, description);
+    var storedDecks = getListOfDecks();
+    if ((storedDecks == null) || (storedDecks.constructor !== Array))  {
+      storedDecks = [ ];
+    }
+    storedDecks.push(newDeck);
+    var strData = JSON.stringify(storedDecks);
+    localStorage.setItem("geckos_cards", strData);
+  }
+
   return {
-    getList: function(listId) {
-      var ds = new datastorage();
-      var lists = ds.getListOfLists();
-      var searchedList = _.find(lists, function(l) { return l.uniqueId == listId; });
-      return searchedList;
+    getDecksForTemplate: function(templateKey) {
+      var decks = getListOfDecks();
+      decks = _.filter(decks, function(d) { return d.templateKey == templateKey; });
+      return decks;
     },
-    saveCurrentList: function(data) {
-      var ds = new datastorage();
-      ds.storeNewList(data, "balec", "balec");
+    saveDeckAsNew: function(cards, templateKey, description) {
+      storeNewDeck(cards, templateKey, description);
     }
   }
 });

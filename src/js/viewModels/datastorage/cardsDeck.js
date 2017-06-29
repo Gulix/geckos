@@ -1,9 +1,9 @@
 define([ ], function() {
 
-/*************************************************/
-/* Managing the DataStorage functions for Geckos */
-/*************************************************/
-  function cardsList(data) {
+/*****************************************************************/
+/* Represents a List of Card, stored in LocalStorage by the User */
+/*****************************************************************/
+  function cardsDeck(data) {
     var self = this;
 
     /*************************/
@@ -25,8 +25,8 @@ define([ ], function() {
     /*******************************/
   }
   return {
-    getCardsList: function(data) { return new cardsList(data); }, 
-    createCardsList: function(cardsData, templateKey, description) {
+    getCardsDeck: function(data) { return new cardsDeck(data); },
+    createCardsDeck: function(cardsData, templateKey, description) {
       var id = 1;
       var data = {
         description: description,
@@ -34,7 +34,7 @@ define([ ], function() {
         templateKey: templateKey,
         uniqueId: id
       }
-      return new cardsList(data);
+      return new cardsDeck(data);
     }
   }
 });

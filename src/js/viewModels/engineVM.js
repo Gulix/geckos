@@ -5,9 +5,9 @@ define(['knockout',
         'viewModels/UItemplates',
         'viewModels/exportVM',
         'viewModels/menuManager',
-        'viewModels/datastorage/datastorage',
+        'viewModels/datastorage/loadsaveVM',
         'FileSaver'
-      ], function(ko, fabric, FieldFactory, CardTemplateVM, UITemplates, Export, MenuManager, DataStorage) {
+      ], function(ko, fabric, FieldFactory, CardTemplateVM, UITemplates, Export, MenuManager, LoadSaveVM) {
 
 /***************************************/
 /* Main entry point of the application */
@@ -22,6 +22,7 @@ define(['knockout',
     self.listCards = ko.observableArray([]);
     self.editableCard = ko.observable(null);
     self.exportVM = Export.loadExportVM(self);
+    self.loadsaveVM = LoadSaveVM.getVM(self);
     self.menu = MenuManager.newMenuManager();
 
     self.isCardSelected = ko.pureComputed(function() {
@@ -45,6 +46,14 @@ define(['knockout',
     }
 
     self.UItemplates = ko.observable(null);
+
+    self.getActiveTemplateKey = ko.computed(function() {
+      if ((self.cardTemplate() == null)
+         || (self.cardTemplate().description() == null)) {
+         return "";
+      }
+      return self.cardTemplate().description().key;
+    });
     /********************************/
     /* End of Variables declaration */
     /********************************/
@@ -148,7 +157,7 @@ define(['knockout',
     }
 
     /* Save / Load from localStorage */
-    self.saveFromLocalStorage = function() {
+    /*self.saveFromLocalStorage = function() {
       var jsonData = self.getListOfCardsAsJson();
       DataStorage.saveCurrentList(jsonData);
       alert("Save is done in localStorage");
@@ -163,7 +172,7 @@ define(['knockout',
       }
 
       self.importList(cards);
-    }
+    }*/
 
     /*******************************/
     /*End of Functions declaration */
