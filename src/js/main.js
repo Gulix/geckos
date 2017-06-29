@@ -14,7 +14,8 @@ require.config({
         'ajv': 'vendor/ajv.min',
         'cropper': 'vendor/cropper',
         'webfont': 'vendor/webfont',
-        'jszip': 'vendor/jszip.min'
+        'jszip': 'vendor/jszip.min',
+        'moment': 'vendor/moment.min'
     },
     shim: {
         'jQuery': {
