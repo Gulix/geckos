@@ -697,6 +697,7 @@
 	"description": {
 		"description": "Dungeon World - Cartes de Lieux",
 		"title": "DW - Lieux",
+		"key": "dw-acritarche",
 		"credits": "by Acritarche & Nicolas Ronvel",
 		"url": "https://github.com/Gulix/geckos/"
 	}

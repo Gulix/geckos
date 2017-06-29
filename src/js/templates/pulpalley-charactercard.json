@@ -5454,6 +5454,7 @@
   "description":{
     "description":"Basic template for Pulp Alley",
     "title":"Pulp Alley",
+    "key": "pulpalley-character",
     "credits":"by Nicolas Ronvel",
     "url":"https://github.com/Gulix/geckos/"
   }
