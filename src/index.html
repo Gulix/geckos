@@ -55,10 +55,8 @@
 			<div class="content">
 				<section id="section-home">
           <div class="main-menu clearfix">
-            <ul>
-                <li><a rel="documentation" href="https://www.gulix.fr/geckos/wiki/">Documentation</a></li>
-                <li><a href="https://github.com/Gulix/geckos">Github Page</a></li>
-            </ul>
+            <a class="btn primary mainColor1 iconized icon-question-circle" rel="documentation" href="https://www.gulix.fr/geckos/wiki/">Documentation</a>
+            <a class="btn primary mainColor1 iconized icon-github" href="https://github.com/Gulix/geckos/">Github Page</a>
           </div>
           <h1>Welcome to Geckos</h1>
           <p>Geckos is a web-application which goal is to create <em>Image cards</em>, through the use of predetermined <em>Templates</em>.</p>
@@ -107,7 +105,8 @@
                     <h3>Template description</h3>
                     <template-style-description id="selected-template-description" params="templateVM: selectedTemplate"></template-style-description>
                     <div class="modal-buttons">
-                      <div class="modal-button" data-bind="click: setTemplate"><div class="icon icon-apply-template"></div>Use this Template</div>
+                      <a class="btn primary mainColor2 iconized icon-apply-template" data-bind="click: setTemplate">Use this Template</a>
+                      <a class="btn secondary iconized icon-dismiss" data-bind="click: cancelSelectedTemplate">Cancel</a>
                     </div>
                   </div>
                 </div>
@@ -197,13 +196,15 @@
                     <select data-bind="options: listOfDecks, optionsText: 'completeLabel', value: selectedDeck"
                             class="cards-list" size="5">
                     </select>
-                    <input type="text" data-bind="value: newDeckName"></input>
+                    <div>
+                      <input type="text" data-bind="value: newDeckName"></input>
+                      <a class="btn primary blue iconized icon-add" data-bind="click: saveCurrentDeckAsNew">New</a>
+                    </div>
                     <div class="modal-buttons">
-                      <div class="modal-button" data-bind="click: updateSelectedDeckWithCurrent"><div class="icon icon-apply-template"></div>Update</div>
-                      <div class="modal-button" data-bind="click: removeSelectedDeck"><div class="icon icon-apply-template"></div>Delete</div>
-                      <div class="modal-button" data-bind="click: loadSelectedDeck"><div class="icon icon-apply-template"></div>Load</div>
-                      <div class="modal-button" data-bind="click: saveCurrentDeckAsNew"><div class="icon icon-apply-template"></div>New</div>
-                      <div class="modal-button" data-bind="click: hideModal"><div class="icon icon-apply-template"></div>Cancel</div>
+                      <a class="btn primary green iconized icon-save" data-bind="click: updateSelectedDeckWithCurrent">Update</a>
+                      <a class="btn primary red iconized icon-delete" data-bind="click: removeSelectedDeck">Delete</a>
+                      <a class="btn primary blue iconized icon-download" data-bind="click: loadSelectedDeck">Load</a>
+                      <a class="btn secondary iconized icon-dismiss" data-bind="click: hideModal">Cancel</a>
                     </div>
                   </div>
                 </div>
@@ -222,12 +223,17 @@
                        data-bind="click: removeSelectedCard"><span>Remove</span></a></li>
                 <li><a href="#" class="icon-clear-list" title="Clear the list"
                        data-bind="click: clearList"><span>Clear</span></a></li>
-              	<li><a href="#" class="icon-save" title="Load / Save your cards"
-                       data-bind="click: loadsaveVM.showModal"><span>Load / Save</span></a></li>
-                <li><a href="#" class="icon-save" title="Auto save your current deck"
-                       data-bind="click: loadsaveVM.autoSave"><span>Auto Save</span></a></li>
-                <li><a href="#" class="icon-save" title="Load the last saved deck"
-                       data-bind="click: loadsaveVM.autoLoad"><span>Auto Load</span></a></li>
+                <li><a href="#" class="icon-save sub-menu-opener" title="Save / Load cards"
+                     data-bind="click: menu.toggleLoadSave, css: { 'sub-menu-opener': menu.isLoadSaveHidden, 'sub-menu-closer': menu.isLoadSaveDisplayed}"><span>save / load</span></a>
+                    <div class="sub-menu-list" data-bind="slideRightMenu: menu.isLoadSaveDisplayed">
+                      <div class="sub-menu"><a href="#" class="icon-folder-open" title="Open 'Load/Save' window"
+                             data-bind="click: loadsaveVM.showModal"><span>Open</span></a></div>
+                      <div class="sub-menu"><a href="#" class="icon-auto-save" title="Save the current deck in Local Storage"
+                             data-bind="click: loadsaveVM.autoSave"><span>auto Save</span></a></div>
+                      <div class="sub-menu"><a href="#" class="icon-auto-load" title="Load your last modified deck from Local Storage"
+                             data-bind="click: loadsaveVM.autoLoad"><span>auto Load</span></a></div>
+                    </div>
+                </li>
               </ul>
               <form style="display:none" id="file-load-list-form">
                 <input type="file" id="file-load-list" name="file" class="form-control" style="display:none"
