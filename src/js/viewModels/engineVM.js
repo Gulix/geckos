@@ -6,8 +6,9 @@ define(['knockout',
         'viewModels/exportVM',
         'viewModels/menuManager',
         'viewModels/datastorage/loadsaveVM',
+        'viewModels/messagebar',
         'FileSaver'
-      ], function(ko, fabric, FieldFactory, CardTemplateVM, UITemplates, Export, MenuManager, LoadSaveVM) {
+      ], function(ko, fabric, FieldFactory, CardTemplateVM, UITemplates, Export, MenuManager, LoadSaveVM, MessageBar) {
 
 /***************************************/
 /* Main entry point of the application */
@@ -24,10 +25,14 @@ define(['knockout',
     self.exportVM = Export.loadExportVM(self);
     self.loadsaveVM = LoadSaveVM.getVM(self);
     self.menu = MenuManager.newMenuManager();
+    self.generalMessageBar = MessageBar.getMessageBar();
 
     self.isCardSelected = ko.pureComputed(function() {
       return self.editableCard() != null;
     });
+    self.isTemplateLoaded = ko.pureComputed(function() {
+      return self.cardTemplate() != null;
+    })
 
     self.generatedTemplate = ko.pureComputed(function() {
       var jsonCanvas = { };
@@ -62,7 +67,7 @@ define(['knockout',
     /* Functions declaration */
     /*************************/
     self.changeTemplate = function(newTemplate) {
-      self.clearList();
+      self.removeAllCardsFromDeck();
       newTemplate.updateCanvasSize = self.updateCanvasSize;
       newTemplate.updateCards = self.updateCardsFields;
       self.cardTemplate(newTemplate);
@@ -120,7 +125,17 @@ define(['knockout',
         }
       }
     }
+
     self.clearList = function() {
+      if (self.listCards().length <= 0) {
+        self.generalMessageBar.showWarning("There is no cards to remove.");
+      } else {
+        self.removeAllCardsFromDeck();
+        self.generalMessageBar.showInfo("All cards have been removed from the list.");
+      }
+    }
+
+    self.removeAllCardsFromDeck = function() {
       self.editableCard(null);
       self.listCards.removeAll();
     }

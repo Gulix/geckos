@@ -24,10 +24,10 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-auto-load:before {
+.icon-quick-load:before {
   content: "\e90a";
 }
-.icon-auto-save:before {
+.icon-quick-save:before {
   content: "\e90b";
 }
 .icon-file-export:before {

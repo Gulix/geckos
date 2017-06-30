@@ -47,12 +47,17 @@
 				<ul>
 					<li><a href="#section-home" class="icon-home"><span>Home</span></a></li>
 					<li><a href="#section-template" class="icon-template"><span>Template</span></a></li>
-					<li><a href="#section-list" class="icon-list"><span>List</span></a></li>
-					<li class="special-tab"><a href="#section-card" class="icon-card"><span>Card</span></a></li>
+					<li style="display: none;" data-bind="visible: isTemplateLoaded"><a href="#section-list" class="icon-list"><span>List</span></a></li>
+					<li style="display: none;" data-bind="visible: isTemplateLoaded" class="special-tab"><a href="#section-card" class="icon-card"><span>Card</span></a></li>
 					<li><a href="#section-about" class="icon-about"><span>About</span></a></li>
 				</ul>
 			</nav>
 			<div class="content">
+        <!-- ko with: generalMessageBar -->
+        <div style="display: none;" class="message-bar" data-bind="html: message, slideIn: isVisible, css: { error: isError, warning: isWarning, info: isInfo, success: isSuccess}"></div>
+        <!-- /ko -->
+
+
 				<section id="section-home">
           <div class="main-menu clearfix">
             <a class="btn primary mainColor1 iconized icon-question-circle" rel="documentation" href="https://www.gulix.fr/geckos/wiki/">Documentation</a>
@@ -101,7 +106,7 @@
 
                 <div style="display:none;" class="modal-box" data-bind="visible: hasSelectedTemplate">
                   <div class="modal-box-content">
-                    <div class="modal-close" data-bind="click: cancelSelectedTemplate">X</div>
+                    <div class="modal-close icon icon-dismiss" data-bind="click: cancelSelectedTemplate"></div>
                     <h3>Template description</h3>
                     <template-style-description id="selected-template-description" params="templateVM: selectedTemplate"></template-style-description>
                     <div class="modal-buttons">
@@ -120,7 +125,7 @@
                     <h3>Template Code</h3>
                     <textarea rows="12" data-bind="value: _editableJson"></textarea>
                     <div class="modal-buttons">
-                      <div class="modal-button" data-bind="click: validateTemplate"><div class="icon icon-compile-template"></div>Compile your code</div>
+                      <a class="btn primary mainColor2 iconized icon-compile-template" data-bind="click: validateTemplate">Compile your code</a>
                     </div>
                   </div>
                   <!-- ko if: withCompilingErrors -->
@@ -132,11 +137,11 @@
                   <!-- ko if: compiledTemplate() != null -->
                   <div style="display:none;" class="modal-box" data-bind="visible: isCompiledTemplateVisible">
                     <div class="modal-box-content">
-                      <div class="modal-close" data-bind="click: cancelTemplateCompiledPreview">X</div>
+                      <div class="modal-close icon icon-dismiss" data-bind="click: cancelTemplateCompiledPreview"></div>
                       <h3>Template validated !</h3>
                       <template-style-description id="selected-template-description" params="templateVM: compiledTemplate"></template-style-description>
                       <div class="modal-buttons">
-                        <div class="modal-button" data-bind="click: setTemplate"><div class="icon icon-apply-template"></div>Use this Template</div>
+                        <a class="btn primary mainColor2 iconized icon-apply-template" data-bind="click: setTemplate">Use this Template</a>
                       </div>
                     </div>
                   </div>
@@ -175,7 +180,7 @@
         <!-- ********************
              List of cards (editing, loading, ...)
            -->
-        <section id="section-list">
+        <section id="section-list" data-bind="visible: isTemplateLoaded">
           <div class="section-twocols">
             <div class="section-colwrap">
               <div class="col-content">
@@ -191,20 +196,24 @@
                 <!-- ko with: loadsaveVM -->
                 <div style="display:none;" class="modal-box" data-bind="visible: isModalVisible">
                   <div class="modal-box-content">
-                    <div class="modal-close" data-bind="click: hideModal">X</div>
-                    <h3>Load / Save your cards</h3>
+                    <div class="modal-close icon icon-dismiss" data-bind="click: hideModal"></div>
+                    <h3><span class="icon icon-save"></span> Load / Save your cards</h3>
+                    <!-- ko with: messageBar -->
+                    <div style="display: none;" class="message-bar" data-bind="html: message, slideIn: isVisible, css: { error: isError, warning: isWarning, info: isInfo, success: isSuccess}"></div>
+                    <!-- /ko -->
                     <select data-bind="options: listOfDecks, optionsText: 'completeLabel', value: selectedDeck"
                             class="cards-list" size="5">
                     </select>
-                    <div>
-                      <input type="text" data-bind="value: newDeckName"></input>
+                    <label>Create a deck named</label>
+                    <div class="modal-buttons">
+                      <input type="text" class="input-text" data-bind="value: newDeckName"></input>                      
                       <a class="btn primary blue iconized icon-add" data-bind="click: saveCurrentDeckAsNew">New</a>
                     </div>
                     <div class="modal-buttons">
                       <a class="btn primary green iconized icon-save" data-bind="click: updateSelectedDeckWithCurrent">Update</a>
                       <a class="btn primary red iconized icon-delete" data-bind="click: removeSelectedDeck">Delete</a>
                       <a class="btn primary blue iconized icon-download" data-bind="click: loadSelectedDeck">Load</a>
-                      <a class="btn secondary iconized icon-dismiss" data-bind="click: hideModal">Cancel</a>
+                      <a class="btn secondary iconized icon-dismiss" data-bind="click: hideModal">Close</a>
                     </div>
                   </div>
                 </div>
@@ -215,23 +224,17 @@
             </div>
             <div class="col-menu">
               <ul class="vertical-menu icon">
-              	<li><a href="#" class="icon-add" title="Add a new card"
-                       data-bind="click: addNewCard"><span>Add</span></a></li>
-                <li><a href="#" class="icon-copy" title="Copy card into new card"
-                       data-bind="click: copyNewCard"><span>Copy</span></a></li>
-                <li><a href="#" class="icon-delete" title="Delete the selected card"
-                       data-bind="click: removeSelectedCard"><span>Remove</span></a></li>
-                <li><a href="#" class="icon-clear-list" title="Clear the list"
+              	<li><a href="#" class="icon-clear-list" title="Clear the list"
                        data-bind="click: clearList"><span>Clear</span></a></li>
                 <li><a href="#" class="icon-save sub-menu-opener" title="Save / Load cards"
                      data-bind="click: menu.toggleLoadSave, css: { 'sub-menu-opener': menu.isLoadSaveHidden, 'sub-menu-closer': menu.isLoadSaveDisplayed}"><span>save / load</span></a>
                     <div class="sub-menu-list" data-bind="slideRightMenu: menu.isLoadSaveDisplayed">
                       <div class="sub-menu"><a href="#" class="icon-folder-open" title="Open 'Load/Save' window"
                              data-bind="click: loadsaveVM.showModal"><span>Open</span></a></div>
-                      <div class="sub-menu"><a href="#" class="icon-auto-save" title="Save the current deck in Local Storage"
-                             data-bind="click: loadsaveVM.autoSave"><span>auto Save</span></a></div>
-                      <div class="sub-menu"><a href="#" class="icon-auto-load" title="Load your last modified deck from Local Storage"
-                             data-bind="click: loadsaveVM.autoLoad"><span>auto Load</span></a></div>
+                      <div class="sub-menu"><a href="#" class="icon-quick-save" title="Save the current deck in Local Storage"
+                             data-bind="click: loadsaveVM.quickSave"><span>quick Save</span></a></div>
+                      <div class="sub-menu"><a href="#" class="icon-quick-load" title="Load your last modified deck from Local Storage"
+                             data-bind="click: loadsaveVM.quickLoad"><span>quick Load</span></a></div>
                     </div>
                 </li>
               </ul>
@@ -246,7 +249,7 @@
         <!-- ************************************
          "Card" view, that displays a light list of cards, and the edition fields and canvas view of a card
          *************************************** -->
-        <section id="section-card" class="section">
+        <section id="section-card" class="section" data-bind="visible: isTemplateLoaded">
           <div class="section-twocols">
             <div class="section-colwrap">
               <div class="col-content">
@@ -296,8 +299,8 @@
 
 
                       <div class="modal-buttons">
-                        <div class="modal-button" data-bind="visible: exportVM.isLaunchZipExportVisible, click: exportVM.launchZipCreation"><div class="icon icon-apply-template"></div>Create the ZIP</div>
-                        <div class="modal-button" data-bind="visible: exportVM.exportInactive, click: exportVM.cancelZipCreation"><div class="icon icon-apply-template"></div>Cancel</div>
+                        <a class="btn primary mainColor2 iconized icon-file-zip" data-bind="visible: exportVM.isLaunchZipExportVisible, click: exportVM.launchZipCreation">Create the ZIP</a>
+                        <a class="btn secondary iconized icon-dismiss" data-bind="visible: exportVM.exportInactive, click: exportVM.cancelZipCreation">Cancel</a>
                       </div>
                     </div>
                   </div>
