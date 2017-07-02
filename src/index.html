@@ -206,7 +206,7 @@
                     </select>
                     <label>Create a deck named</label>
                     <div class="modal-buttons">
-                      <input type="text" class="input-text" data-bind="value: newDeckName"></input>                      
+                      <input type="text" class="input-text" data-bind="value: newDeckName"></input>
                       <a class="btn primary blue iconized icon-add" data-bind="click: saveCurrentDeckAsNew">New</a>
                     </div>
                     <div class="modal-buttons">
@@ -305,6 +305,21 @@
                     </div>
                   </div>
 
+                  <div style="display:none;" class="modal-box" data-bind="visible: pdfGenerator.isModalDisplayed">
+                    <!-- ko with: pdfGenerator -->
+                    <div class="modal-box-content">
+                      <h3>Generate a PDF with all the cards</h3>
+                      <div data-bind="visible: exportInactive">It will take approximatively <span data-bind="text: estimatedTime"></span> to complete.</div>
+                      <h3 data-bind="visible: exportActive">Export in Progress ...</h3>
+                      <div data-bind="visible: exportActive, progressBar: { value : progressPercentage }"></div>
+                      <div class="modal-buttons">
+                        <a class="btn primary mainColor2 iconized icon-file-zip" data-bind="visible: exportInactive, click: launchPdfGeneration">Generate the PDF</a>
+                        <a class="btn secondary iconized icon-dismiss" data-bind="visible: exportInactive, click: cancel">Cancel</a>
+                      </div>
+                    </div>
+                    <!-- /ko -->
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -321,11 +336,13 @@
                      data-bind="click: menu.toggleCardExport, css: { 'sub-menu-opener': menu.isCardExportHidden, 'sub-menu-closer': menu.isCardExportDisplayed}"><span>export Card(s)</span></a>
                   <div class="sub-menu-list" data-bind="slideRightMenu: menu.isCardExportDisplayed">
                     <div class="sub-menu"><a href="#" class="icon-image" title="Export the card to a PNG image"
-                           data-bind="click: exportVM.exportAsPNG"><span>to PNG</span></a></div>
+                         data-bind="click: exportVM.exportAsPNG"><span>to PNG</span></a></div>
                     <div class="sub-menu"><a href="#" class="icon-file-svg" title="Export the card to a SVG image"
-                           data-bind="click: exportVM.exportAsSVG"><span>to SVG</span></a></div>
-                    <div class="sub-menu"><a href="#" class="icon-file-zip" title="Export all the card to a ZIP file"
-                           data-bind="click: exportVM.exportAllToZip"><span>to Zip</span></a></div>
+                         data-bind="click: exportVM.exportAsSVG"><span>to SVG</span></a></div>
+                    <div class="sub-menu"><a href="#" class="icon-file-zip" title="Export all the cards to a ZIP file"
+                         data-bind="click: exportVM.exportAllToZip"><span>to Zip</span></a></div>
+                    <div class="sub-menu"><a href="#" class="icon-file-zip" title="Export all the cards to a PDF file"
+                         data-bind="click: pdfGenerator.showPdfModal"><span>to PDF</span></a></div>
                   </div>
                 </li>
               </ul>

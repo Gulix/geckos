@@ -15,11 +15,22 @@ require.config({
         'cropper': 'vendor/cropper',
         'webfont': 'vendor/webfont',
         'jszip': 'vendor/jszip.min',
-        'moment': 'vendor/moment.min'
+        'moment': 'vendor/moment.min',
+        'pdfmake': 'vendor/vfs_fonts',
+        'pdfMakeLib': 'vendor/pdfmake.min'
     },
     shim: {
         'jQuery': {
             exports: '$'
+        },
+        pdfMakeLib :
+        {
+            exports: 'pdfMake'
+        },
+        pdfmake :
+        {
+            deps: ['pdfMakeLib'],
+            exports: 'pdfMake'
         }
     }
 });

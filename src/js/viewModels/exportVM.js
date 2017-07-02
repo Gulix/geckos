@@ -30,9 +30,6 @@ define(['jszip',
     /********************************/
     /* End of Variables declaration */
     /********************************/
-    self.progress = ko.pureComputed(function() {
-      return self.indexCurrentExportedFile() + " / " + self.totalExportedFiles();
-    });
     self.progressPercentage = ko.pureComputed(function() {
       var val100 = 100 * self.indexCurrentExportedFile() / self.totalExportedFiles();
       if (!Number.isInteger(val100)) {

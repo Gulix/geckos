@@ -7,8 +7,9 @@ define(['knockout',
         'viewModels/menuManager',
         'viewModels/datastorage/loadsaveVM',
         'viewModels/messagebar',
+        'viewModels/pdfGenerator',
         'FileSaver'
-      ], function(ko, fabric, FieldFactory, CardTemplateVM, UITemplates, Export, MenuManager, LoadSaveVM, MessageBar) {
+      ], function(ko, fabric, FieldFactory, CardTemplateVM, UITemplates, Export, MenuManager, LoadSaveVM, MessageBar, PdfGenerator) {
 
 /***************************************/
 /* Main entry point of the application */
@@ -26,6 +27,7 @@ define(['knockout',
     self.loadsaveVM = LoadSaveVM.getVM(self);
     self.menu = MenuManager.newMenuManager();
     self.generalMessageBar = MessageBar.getMessageBar();
+    self.pdfGenerator = PdfGenerator.getPdfGenerator(self);
 
     self.isCardSelected = ko.pureComputed(function() {
       return self.editableCard() != null;
@@ -171,39 +173,12 @@ define(['knockout',
       }
     }
 
-    /* Save / Load from localStorage */
-    /*self.saveFromLocalStorage = function() {
-      var jsonData = self.getListOfCardsAsJson();
-      DataStorage.saveCurrentList(jsonData);
-      alert("Save is done in localStorage");
-    }
-    self.loadFromLocalStorage = function() {
-      var cardsList = DataStorage.getList(1);
-      var cards = [ ];
-      if ((cardsList == null) || (cardsList.cardsData == null) || (cardsList.cardsData.constructor !== Array)) {
-        alert("Nothing retrieved from the localStorage");
-      } else {
-        cards = cardsList.cardsData;
-      }
-
-      self.importList(cards);
-    }*/
-
     /*******************************/
     /*End of Functions declaration */
     /*******************************/
 
     /* Initialization of the FabricJS canvas object */
     self.canvas = new fabric.StaticCanvas('fabricjs-canvas');
-
-    /* Initialization of the Card Template */
-    //var cardTemplateVM = CardTemplateVM.newCardTemplateVM(jsonTemplate, self.updateCanvasSize, self.updateCardsFields);
-    //self.cardTemplate(cardTemplateVM);
-    //self.updateCanvasSize();
-
-    /* Initializing the list with one item */
-    //self.listCards().push(self.createNewCard());
-    //self.editableCard(self.listCards()[0]);
 
     /* Initializing the UI parts */
     self.UItemplates(UITemplates.getUItemplates(self));
