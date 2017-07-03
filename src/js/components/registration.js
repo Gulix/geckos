@@ -73,6 +73,19 @@ define(['knockout'], function(ko) {
         viewModel: { require: 'components/template-style-description/template-style-description' },
         template: { require: 'text!components/template-style-description/template-style-description.html' }
       });
+
+      /**********/
+      /* Modals */
+      /**********/
+      ko.components.register('modal-load-save', {
+        viewModel: { require: 'components/modal-load-save/modal-load-save' },
+        template: { require: 'text!components/modal-load-save/modal-load-save.html' }
+      });
+
+      /************/
+      /* Sections */
+      /************/
+      ko.components.register('section-about', { template: { require: 'text!components/section-about/section-about.html' } });
     }
   };
 });

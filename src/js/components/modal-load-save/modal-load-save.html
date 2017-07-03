@@ -1,0 +1,25 @@
+<!-- ko with: viewModel -->
+<div style="display:none;" class="modal-box" data-bind="visible: isModalVisible">
+  <div class="modal-box-content">
+    <div class="modal-close icon icon-dismiss" data-bind="click: hideModal"></div>
+    <h3><span class="icon icon-save"></span> Load / Save your cards</h3>
+    <!-- ko with: messageBar -->
+    <div style="display: none;" class="message-bar" data-bind="html: message, slideIn: isVisible, css: { error: isError, warning: isWarning, info: isInfo, success: isSuccess}"></div>
+    <!-- /ko -->
+    <select data-bind="options: listOfDecks, optionsText: 'completeLabel', value: selectedDeck"
+            class="cards-list" size="5">
+    </select>
+    <label>Create a deck named</label>
+    <div class="modal-buttons">
+      <input type="text" class="input-text" data-bind="value: newDeckName"></input>
+      <a class="btn primary blue iconized icon-add" data-bind="click: saveCurrentDeckAsNew">New</a>
+    </div>
+    <div class="modal-buttons">
+      <a class="btn primary green iconized icon-save" data-bind="click: updateSelectedDeckWithCurrent">Update</a>
+      <a class="btn primary red iconized icon-delete" data-bind="click: removeSelectedDeck">Delete</a>
+      <a class="btn primary blue iconized icon-download" data-bind="click: loadSelectedDeck">Load</a>
+      <a class="btn secondary iconized icon-dismiss" data-bind="click: hideModal">Close</a>
+    </div>
+  </div>
+</div>
+<!-- /ko -->

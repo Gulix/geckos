@@ -82,7 +82,7 @@
 
                 <!-- ko if: engineVM.cardTemplate() != null -->
                 <div id="active-template-description-header" class="template-description-header">Active template - Currently in use in Geckos</div>
-                <template-style-description params="templateVM: engineVM.cardTemplate"></template-style-description>
+                <template-style-description params="templateVM: engineVM.cardTemplate, isActive: true, mainVM: engineVM"></template-style-description>
                 <!-- /ko -->
 
                 <!-- ko if: isListModeActive -->
@@ -159,12 +159,10 @@
                        data-bind="click: goListMode, visible: isGoListModeVisible"><span>Go to 'List mode'</span></a></li>
                 <li><a href="#" class="icon-compile-template" title="Validate the edited template"
                        data-bind="click: validateTemplateCode, visible: isEditionModeActive"><span>Validate the edited template</span></a></li>
-                <li><a href="#" class="icon-apply-template" title="Use the selected template"
-                       data-bind="click: setTemplate, visible: isListModeActive"><span>Use the selected template</span></a></li>
                 <li><a href="#" class="icon-download" title="Load template from file"
                        data-bind="click: loadTemplate, visible: isEditionModeActive"><span>Load from file</span></a></li>
               	<li><a href="#" class="icon-save" title="Save template to file"
-                       data-bind="click: saveTemplateAsJson"><span>Save to file</span></a></li>
+                       data-bind="click: saveTemplateAsJson, visible: isEditionModeActive"><span>Save to file</span></a></li>
                 <li><a href="#" class="icon-undo" title="Cancel modifications on template"
                        data-bind="click: resetTemplateCode, visible: isEditionModeActive"><span>Cancel modifications</span></a></li>
               </ul>
@@ -191,35 +189,6 @@
                   </select>
                   <!-- /ko -->
                 </div>
-
-                <!-- ko if: loadsaveVM != null -->
-                <!-- ko with: loadsaveVM -->
-                <div style="display:none;" class="modal-box" data-bind="visible: isModalVisible">
-                  <div class="modal-box-content">
-                    <div class="modal-close icon icon-dismiss" data-bind="click: hideModal"></div>
-                    <h3><span class="icon icon-save"></span> Load / Save your cards</h3>
-                    <!-- ko with: messageBar -->
-                    <div style="display: none;" class="message-bar" data-bind="html: message, slideIn: isVisible, css: { error: isError, warning: isWarning, info: isInfo, success: isSuccess}"></div>
-                    <!-- /ko -->
-                    <select data-bind="options: listOfDecks, optionsText: 'completeLabel', value: selectedDeck"
-                            class="cards-list" size="5">
-                    </select>
-                    <label>Create a deck named</label>
-                    <div class="modal-buttons">
-                      <input type="text" class="input-text" data-bind="value: newDeckName"></input>
-                      <a class="btn primary blue iconized icon-add" data-bind="click: saveCurrentDeckAsNew">New</a>
-                    </div>
-                    <div class="modal-buttons">
-                      <a class="btn primary green iconized icon-save" data-bind="click: updateSelectedDeckWithCurrent">Update</a>
-                      <a class="btn primary red iconized icon-delete" data-bind="click: removeSelectedDeck">Delete</a>
-                      <a class="btn primary blue iconized icon-download" data-bind="click: loadSelectedDeck">Load</a>
-                      <a class="btn secondary iconized icon-dismiss" data-bind="click: hideModal">Close</a>
-                    </div>
-                  </div>
-                </div>
-                <!-- /ko -->
-                <!-- /ko -->
-
               </div>
             </div>
             <div class="col-menu">
@@ -351,60 +320,19 @@
         </section>
 
         <section id="section-about">
-          <div class="container">
-            <h1>About Geckos</h1>
-            <div>
-              <p>Geckos is a web-application, created to make cards based on templates.</p>
-              <p>This page is a demo-page for Geckos. A list of templates are pre-installed, feel free to use them, or create your own.</p>
-              <p>Templates can be found on <a href="https://github.com/Gulix/geckos/tree/master/templates">this page</a> of the repository, and there is a <a href="http://www.gulix.fr/geckos/wiki">Documentation Wiki</a> to help you create your own.</p>
-              <p>Geckos is open-source, and can be found on <a href="http://www.github.com/gulix/geckos">Github</a>.</p>
-              <p>Geckos is still <a href="http://www.github.com/gulix/geckos/issues">under development</a>, and this demo page is a Beta version of the software.</p>
-              <p>Geckos relies on multiple open-source softwares &amp; libraries :</p>
-              <ul>
-                <li>Geckos main engine
-                  <ul>
-                    <li><a href="https://jquery.com/">JQuery</a></li>
-                    <li><a href="http://knockoutjs.com/">KnockoutJS</a></li>
-                    <li><a href="http://fabricjs.com/">FabricJS</a></li>
-                    <li><a href="http://requirejs.org/">RequireJS</a></li>
-                  </ul>
-                </li>
-                <li>Geckos UI
-                  <ul>
-                    <li><a href="http://getskeleton.com">Skeleton</a></li>
-                    <li><a href="https://github.com/codrops/FullWidthTabs">codrops - Responsive Full Width Tabs</a></li>
-                    <li><a href="https://github.com/codrops/Blueprint-VerticalIconMenu">codrops - Vertical Icon Menu</a></li>
-                    <li><a href="https://icomoon.io">IcoMoon Vector Font generator</a></li>
-                  </ul>
-                </li>
-                <li>Widgets
-                  <ul>
-                    <li><a href="http://ckeditor.com/">CKEditor</a></li>
-                    <li><a href="http://jscolor.com/">JSColor</a></li>
-                    <li><a href="https://github.com/tkrotoff/jquery-simplecolorpicker">JQuery.simplecolorpicker.js</a></li>
-                    <li><a href="http://designwithpc.com/Plugins/ddSlick">ddSlick</a></li>
-                  </ul>
-                </li>
-                <li>Helpers &amp; others libraries
-                  <ul>
-                    <li><a href="https://github.com/eligrey/FileSaver.js/">FileSaver.js</a></li>
-                    <li><a href="http://bgrins.github.io/TinyColor/">TinyColor</a></li>
-                    <li><a href="https://github.com/epoberezkin/ajv">AJV</a></li>
-                    <li><a href="https://github.com/fengyuanchen/cropper">Cropper</a></li>
-                    <li><a href="https://github.com/typekit/webfontloader">Typekit Web Font Loader</a></li>
-                  </ul>
-                </li>
-              </ul>
-              <p>Any problem ? Any need ? Any question ? Any bug ? Write an <a href="http://www.github.com/gulix/geckos/issues/new">Issue</a> !<p>
-            </div>
-          </div>
+          <section-about></section-about>
         </section>
       </div>
     </div>
     <div class="clear"></div>
-    <div class="page-footer">Beta version 2 (WIP 0.2.2) - Last updated 2017-02-06 (master branch)</div>
+    <div class="page-footer">Beta version 3 (WIP 0.3.0) - Last updated 2017-07-03 (master branch)</div>
   </div>
 
+  <!-- ko if: loadsaveVM != null -->
+  <!-- ko with: loadsaveVM -->
+  <modal-load-save params="loadSaveVM: $data"></modal-load-save>
+  <!-- /ko -->
+  <!-- /ko -->
 
 
     <!-- ViewModels -->

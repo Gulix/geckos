@@ -1,34 +1,45 @@
-<!-- ko with: currentTemplate -->
-<div class="template-description box-elements flex-container">
-  <!-- ko if: (description() != null) && (description().logo != null) -->
-  <div class="flex-1 template-logo">
-    <img data-bind="attr: { src: description().logo }"></img>
+<div class="template-description box-elements">
+  <!-- ko with: currentTemplate -->
+  <div class="flex-container">
+    <!-- ko if: (description() != null) && (description().logo != null) -->
+    <div class="flex-1 template-logo">
+      <img data-bind="attr: { src: description().logo }"></img>
+    </div>
+    <!-- /ko -->
+
+    <div class="flex-6">
+      <!-- ko if: description() != null -->
+      <div>
+        <span class="template-title" data-bind="text: description().title"></span>
+        <span class="template-credits" data-bind="text: description().credits"></span>
+      </div>
+      <div data-bind="text: description().description"></div>
+      <!-- ko if: description().url != null -->
+      <div><a data-bind="attr: { 'href': description().url }">Source</a></div>
+      <!-- /ko -->
+      <!-- /ko -->
+
+      <!-- ko if: isMultiStyles() -->
+      <label>Default style used on all cards</label>
+      <div>
+        <select data-bind="options: jsonStylesList, optionsText: 'name', value: selectedStyle, enable: isStyleSelectionActive"></select>
+        <span class="word-link" data-bind="visible: !isStyleSelectionActive(), click: activateStyleSelection">Change</span>
+        <span class="word-link" data-bind="visible: isStyleSelectionActive, click: confirmStyleSelection">Confirm</span>
+        <span data-bind="visible: isStyleSelectionActive"> - </span>
+        <span class="word-link word-link-cancel" data-bind="visible: isStyleSelectionActive, click: cancelStyleSelection">Cancel</span>
+      </div>
+      <div data-bind="text: selectedStyle().description"></div>
+      <!-- /ko -->
+    </div>
   </div>
   <!-- /ko -->
 
-  <div class="flex-6">
-    <!-- ko if: description() != null -->
-    <div>
-      <span class="template-title" data-bind="text: description().title"></span>
-      <span class="template-credits" data-bind="text: description().credits"></span>
-    </div>
-    <div data-bind="text: description().description"></div>
-    <!-- ko if: description().url != null -->
-    <div><a data-bind="attr: { 'href': description().url }">Source</a></div>
-    <!-- /ko -->
-    <!-- /ko -->
-
-    <!-- ko if: isMultiStyles() -->
-    <label>Default style used on all cards</label>
-    <div>
-      <select data-bind="options: jsonStylesList, optionsText: 'name', value: selectedStyle, enable: isStyleSelectionActive"></select>
-      <span class="word-link" data-bind="visible: !isStyleSelectionActive(), click: activateStyleSelection">Change</span>
-      <span class="word-link" data-bind="visible: isStyleSelectionActive, click: confirmStyleSelection">Confirm</span>
-      <span data-bind="visible: isStyleSelectionActive"> - </span>
-      <span class="word-link word-link-cancel" data-bind="visible: isStyleSelectionActive, click: cancelStyleSelection">Cancel</span>
-    </div>
-    <div data-bind="text: selectedStyle().description"></div>
-    <!-- /ko -->
+  <!-- ko if: isActive -->
+  <div class="modal-buttons">
+    <a class="btn primary blue iconized icon-folder-open" data-bind="click: showLoadSaveModal"
+       title="Open the modal to load / save decks of cards">Load / Save</a>
+    <a class="btn primary mainColor2 iconized icon-quick-load" data-bind="click: quickLoad"
+       title="Quick load the last deck from this template">Quick load</a>
   </div>
+  <!-- /ko -->
 </div>
-<!-- /ko -->

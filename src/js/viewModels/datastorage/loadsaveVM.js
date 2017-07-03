@@ -58,7 +58,7 @@ define(["knockout", "moment", "viewModels/datastorage/datastorage", "viewModels/
         self.initModal();
 
         var strMessage = "<strong>" + name +"</strong> has been created and saved correctly.<br />";
-        self.messageBar.showSuccess(strMessage);        
+        self.messageBar.showSuccess(strMessage);
       }
     }
 
