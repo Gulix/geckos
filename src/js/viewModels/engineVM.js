@@ -7,7 +7,7 @@ define(['knockout',
         'viewModels/menuManager',
         'viewModels/datastorage/loadsaveVM',
         'viewModels/messagebar',
-        'viewModels/pdfGenerator',
+        'viewModels/pdf/pdfGenerator',
         'FileSaver'
       ], function(ko, fabric, FieldFactory, CardTemplateVM, UITemplates, Export, MenuManager, LoadSaveVM, MessageBar, PdfGenerator) {
 

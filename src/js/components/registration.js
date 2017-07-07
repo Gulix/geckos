@@ -81,6 +81,10 @@ define(['knockout'], function(ko) {
         viewModel: { require: 'components/modal-load-save/modal-load-save' },
         template: { require: 'text!components/modal-load-save/modal-load-save.html' }
       });
+      ko.components.register('modal-pdf-export', {
+        viewModel: { require: 'components/modal-pdf-export/modal-pdf-export' },
+        template: { require: 'text!components/modal-pdf-export/modal-pdf-export.html' }
+      });
 
       /************/
       /* Sections */
