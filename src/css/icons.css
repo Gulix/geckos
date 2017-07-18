@@ -24,6 +24,9 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-file-import:before {
+  content: "\e90c";
+}
 .icon-quick-load:before {
   content: "\e90a";
 }
