@@ -24,6 +24,18 @@ define(['knockout', 'config', 'lodash',
      *** Functions ***
      *****************/
 
+    self.loadDefaultTemplate = function(key) {
+      var tpl = _.find(self.objTemplates(), function(t) {
+        if ((t != null) && (t.description() != null) && (t.description().key != null)) {
+          return t.description().key == key;
+        }
+      });
+      if (tpl != null) {
+        self.selectedTemplate(tpl);
+        self.setTemplate();
+      }
+    }
+
     self.selectTemplate = function() {
       self.selectedTemplate(this);
     }

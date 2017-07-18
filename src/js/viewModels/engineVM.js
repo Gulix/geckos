@@ -8,8 +8,9 @@ define(['knockout',
         'viewModels/datastorage/loadsaveVM',
         'viewModels/messagebar',
         'viewModels/pdf/pdfGenerator',
+        'utils',
         'FileSaver'
-      ], function(ko, fabric, FieldFactory, CardTemplateVM, UITemplates, Export, MenuManager, LoadSaveVM, MessageBar, PdfGenerator) {
+      ], function(ko, fabric, FieldFactory, CardTemplateVM, UITemplates, Export, MenuManager, LoadSaveVM, MessageBar, PdfGenerator, Utils) {
 
 /***************************************/
 /* Main entry point of the application */
@@ -184,6 +185,12 @@ define(['knockout',
 
     /* Initializing the UI parts */
     self.UItemplates(UITemplates.getUItemplates(self));
+
+    /* Auto-load of a template from URL */
+    var defaultTemplateKey = Utils.getFromUrl('default_template');
+    if (defaultTemplateKey !== undefined) {
+      self.UItemplates().uiList().loadDefaultTemplate(defaultTemplateKey);
+    }
 
   }
   return {
