@@ -110,7 +110,14 @@ define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
         self.sharedConfiguration.globals = jsonCode.globals;
 
         if (jsonCode.canvasFields != null) {
-          self.canvasFields(jsonCode.canvasFields);
+          var sortedFields = _.sortBy(jsonCode.canvasFields, [function(f) {
+            if (f.zindex !== undefined) {
+              return f.zindex;
+            } else {
+              return 1;
+            }
+          }]);
+          self.canvasFields(sortedFields);
         } else {
           self.canvasFields([ ]);
         }

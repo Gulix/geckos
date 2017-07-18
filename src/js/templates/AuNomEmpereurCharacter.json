@@ -174,49 +174,56 @@
             "width": 159,
             "top": 34,
             "height": 159,
-            "src": "$portray"
+            "src": "$portray",
+            "zindex": 1
         }, {
             "type": "image",
             "left": 30,
             "width": 63,
             "top": 31,
             "height": 63,
-            "src": "$faction_logo"
+            "src": "$faction_logo",
+            "zindex": 1
         }, {
             "type": "image",
             "left": 143,
             "width": 66,
             "top": 139,
             "height": 66,
-            "src": "$power_logo"
+            "src": "$power_logo",
+            "zindex": 1
         }, {
             "type": "image",
             "left": 223,
             "width": 66,
             "top": 139,
             "height": 66,
-            "src": "$power_logo2"
+            "src": "$power_logo2",
+            "zindex": 1
         }, {
             "type": "image",
             "left": 299,
             "width": 66,
             "top": 139,
             "height": 66,
-            "src": "$power_logo3"
+            "src": "$power_logo3",
+            "zindex": 1
         }, {
             "type": "image",
             "left": 181,
             "width": 72,
             "top": 254,
             "height": 72,
-            "src": "$weapon1picture"
+            "src": "$weapon1picture",
+            "zindex": 1
         }, {
             "type": "image",
             "left": 303,
             "width": 72,
             "top": 254,
             "height": 72,
-            "src": "$weapon2picture"
+            "src": "$weapon2picture",
+            "zindex": 1
         }, {
             "type": "image",
             "left": 421,
@@ -224,7 +231,8 @@
             "top": 254,
             "height": 72,
             "src": "$weapon3picture",
-            "visible": "?!withoutweapon3"
+            "visible": "?!withoutweapon3",
+            "zindex": 1
         }, {
             "type": "path-group",
             "originX": "left",
@@ -233,6 +241,7 @@
             "top": 0,
             "width": 609,
             "height": 392,
+            "zindex": 2,
             "fill": "",
             "stroke": null,
             "strokeWidth": 1,
@@ -2410,7 +2419,8 @@
             "top": 67,
             "fontSize": 44,
             "text": "$name$",
-            "fontFamily": "Impact"
+            "fontFamily": "Impact",
+            "zindex": 3
         }, {
             "type": "textbox",
             "width": 36,
@@ -2419,7 +2429,8 @@
             "fontSize": 30,
             "text": "$movement$",
             "fontFamily": "Impact",
-            "textAlign": "center"
+            "textAlign": "center",
+            "zindex": 3
         }, {
             "type": "textbox",
             "width": 36,
@@ -2428,7 +2439,8 @@
             "fontSize": 30,
             "text": "$combat$",
             "fontFamily": "Impact",
-            "textAlign": "center"
+            "textAlign": "center",
+            "zindex": 3
         }, {
             "type": "textbox",
             "width": 36,
@@ -2437,7 +2449,8 @@
             "fontSize": 30,
             "text": "$shoot$",
             "fontFamily": "Impact",
-            "textAlign": "center"
+            "textAlign": "center",
+            "zindex": 3
         }, {
             "type": "textbox",
             "width": 35,
@@ -2447,7 +2460,8 @@
             "text": "$cran$",
             "fontFamily": "Impact",
             "fill": "rgba(255,255,255,1)",
-            "textAlign": "center"
+            "textAlign": "center",
+            "zindex": 3
         }, {
             "type": "textbox",
             "width": 30,
@@ -2457,7 +2471,8 @@
             "text": "$defense$",
             "fontFamily": "Impact",
             "fill": "rgba(255,255,255,1)",
-            "textAlign": "center"
+            "textAlign": "center",
+            "zindex": 3
         }, {
             "type": "textbox",
             "width": 54,
@@ -2466,7 +2481,8 @@
             "fontSize": 40,
             "text": "$points$",
             "fontFamily": "Impact",
-            "textAlign": "center"
+            "textAlign": "center",
+            "zindex": 3
         }, {
             "type": "textbox",
             "width": 17,
@@ -2476,7 +2492,8 @@
             "text": "$weapon1cran$",
             "fontFamily": "Impact",
             "fill": "rgba(255,255,255,1)",
-            "textAlign": "center"
+            "textAlign": "center",
+            "zindex": 3
         }, {
             "type": "textbox",
             "width": 38,
@@ -2485,7 +2502,8 @@
             "fontSize": 26,
             "text": "$weapon1range$",
             "fontFamily": "Impact",
-            "textAlign": "center"
+            "textAlign": "center",
+            "zindex": 3
         }, {
             "type": "textbox",
             "width": 31,
@@ -2494,7 +2512,8 @@
             "fontSize": 26,
             "text": "$weapon1damages$",
             "fontFamily": "Impact",
-            "textAlign": "center"
+            "textAlign": "center",
+            "zindex": 3
         }, {
             "type": "textbox",
             "width": 17,
@@ -2504,7 +2523,8 @@
             "text": "$weapon2cran$",
             "fontFamily": "Impact",
             "fill": "rgba(255,255,255,1)",
-            "textAlign": "center"
+            "textAlign": "center",
+            "zindex": 3
         }, {
             "type": "textbox",
             "width": 38,
@@ -2513,7 +2533,8 @@
             "fontSize": 26,
             "text": "$weapon2range$",
             "fontFamily": "Impact",
-            "textAlign": "center"
+            "textAlign": "center",
+            "zindex": 3
         }, {
             "type": "textbox",
             "width": 31,
@@ -2522,7 +2543,8 @@
             "fontSize": 26,
             "text": "$weapon2damages$",
             "fontFamily": "Impact",
-            "textAlign": "center"
+            "textAlign": "center",
+            "zindex": 3
         }, {
             "type": "textbox",
             "width": 17,
@@ -2533,7 +2555,8 @@
             "fontFamily": "Impact",
             "fill": "rgba(255,255,255,1)",
             "textAlign": "center",
-            "visible": "?!withoutweapon3"
+            "visible": "?!withoutweapon3",
+            "zindex": 3
         }, {
             "type": "textbox",
             "width": 38,
@@ -2543,7 +2566,8 @@
             "text": "$weapon3range$",
             "fontFamily": "Impact",
             "textAlign": "center",
-            "visible": "?!withoutweapon3"
+            "visible": "?!withoutweapon3",
+            "zindex": 3
         }, {
             "type": "textbox",
             "width": 31,
@@ -2553,7 +2577,8 @@
             "text": "$weapon3damages$",
             "fontFamily": "Impact",
             "textAlign": "center",
-            "visible": "?!withoutweapon3"
+            "visible": "?!withoutweapon3",
+            "zindex": 3
         }],
         "canvasBackground": "#E6E6E6",
         "canvasWidth": 609,
