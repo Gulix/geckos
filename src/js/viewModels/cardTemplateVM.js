@@ -114,20 +114,10 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles", "webfont
 
       jsonCompleteStyle.sharedOptions = self._activeTemplateJson.sharedOptions;
       jsonCompleteStyle.globals = self._activeTemplateJson.globals;
-      jsonCompleteStyle.fields.sort(self.compareFieldOrder);
-      jsonCompleteStyle.canvasFields.sort(self.compareFieldOrder);
+      jsonCompleteStyle.fields = _.sortBy(jsonCompleteStyle.fields, [function(f) { return (f.order !== undefined) ? f.order : 1; }]);
+      jsonCompleteStyle.canvasFields = _.sortBy(jsonCompleteStyle.canvasFields, [function(f) { return (f.zindex !== undefined) ? f.zindex : 1; }]);
 
       return jsonCompleteStyle;
-    }
-    self.compareFieldOrder = function(fieldA, fieldB) {
-      var orderA = (fieldA.order != undefined) ? fieldA.order : 1;
-      var orderB = (fieldB.order != undefined) ? fieldB.order : 1;
-
-      if (orderA < orderB)
-         return -1;
-      if (orderA > orderB)
-         return 1;
-      return 0;
     }
 
     self._getStyleFromKey = function(key) {
@@ -174,11 +164,6 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles", "webfont
 
       return jsonStyle;
     }
-
-    //self.setTemplate = function(jsonCode) {
-    //  self._activeTemplateJson = jsonCode;
-    //  self.initTemplateFromJson();
-    //}
 
     self.canvasWidth = function() {
       var style = self._styleForCard();
