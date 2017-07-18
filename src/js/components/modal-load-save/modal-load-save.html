@@ -6,6 +6,7 @@
     <!-- ko with: messageBar -->
     <div style="display: none;" class="message-bar" data-bind="html: message, slideIn: isVisible, css: { error: isError, warning: isWarning, info: isInfo, success: isSuccess}"></div>
     <!-- /ko -->
+    <div class="message-bar info">The decks are stored in the local storage of your browser. You can only access them with this browser on this computer.</div>    
     <select data-bind="options: listOfDecks, optionsText: 'completeLabel', value: selectedDeck"
             class="cards-list" size="5">
     </select>
