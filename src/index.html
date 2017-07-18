@@ -199,11 +199,13 @@
                      data-bind="click: menu.toggleLoadSave, css: { 'sub-menu-opener': menu.isLoadSaveHidden, 'sub-menu-closer': menu.isLoadSaveDisplayed}"><span>save / load</span></a>
                     <div class="sub-menu-list" data-bind="slideRightMenu: menu.isLoadSaveDisplayed">
                       <div class="sub-menu"><a href="#" class="icon-folder-open" title="Open 'Load/Save' window"
-                             data-bind="click: loadsaveVM.showModal"><span>Open</span></a></div>
-                      <div class="sub-menu"><a href="#" class="icon-quick-save" title="Save the current deck in Local Storage"
-                             data-bind="click: loadsaveVM.quickSave"><span>quick Save</span></a></div>
+                           data-bind="click: loadsaveVM.showModal"><span>Open</span></a></div>
                       <div class="sub-menu"><a href="#" class="icon-quick-load" title="Load your last modified deck from Local Storage"
-                             data-bind="click: loadsaveVM.quickLoad"><span>quick Load</span></a></div>
+                           data-bind="click: loadsaveVM.quickLoad"><span>quick Load</span></a></div>
+                      <div class="sub-menu"><a href="#" class="icon-file-export" title="Save the current deck to JSON file"
+                           data-bind="click: exportListToFile"><span>Save to File</span></a></div>
+                      <div class="sub-menu"><a href="#" class="icon-file-import" title="Load deck from JSON file"
+                           data-bind="click: loadListFromFile"><span>Load from File</span></a></div>
                     </div>
                 </li>
               </ul>
@@ -285,6 +287,8 @@
                        data-bind="click: copyNewCard"><span>Copy</span></a></li>
               	<li><a href="#" class="icon-delete" title="Delete the selected card"
                        data-bind="click: removeSelectedCard"><span>Remove</span></a></li>
+                <li><a href="#" class="icon-save" title="Save the current deck in Local Storage"
+                       data-bind="click: loadsaveVM.quickSave"><span>quick Save</span></a></li>
               	<li>
                   <a href="#" class="icon-file-export sub-menu-opener" title="Export the card(s)"
                      data-bind="click: menu.toggleCardExport, css: { 'sub-menu-opener': menu.isCardExportHidden, 'sub-menu-closer': menu.isCardExportDisplayed}"><span>export Card(s)</span></a>
@@ -299,6 +303,7 @@
                          data-bind="click: pdfGenerator.showPdfModal"><span>to PDF</span></a></div>
                   </div>
                 </li>
+
               </ul>
             </div>
           </div>

@@ -151,12 +151,14 @@ define(['knockout',
       return jsonData;
     }
 
-    self.exportList = function() {
+    self.exportListToFile = function() {
+      self.menu.hideLoadSave();
       var jsonData = self.getListOfCardsAsJson();
       var blob = new Blob([JSON.stringify(jsonData)], {type: "text/plain;charset=utf-8"});
       saveAs(blob, "listCards.json");
     }
-    self.loadList = function() {
+    self.loadListFromFile = function() {
+      self.menu.hideLoadSave();
       $("#file-load-list").click();
     }
     self.importList = function(jsonData) {
