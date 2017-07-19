@@ -20,14 +20,43 @@ define(['knockout'], function(ko) {
       // Getting the SharedOptions (if they exist and are defined)
       if ((sharedOptions != undefined) && (sharedOptions.length > 0) && (jsonField.sharedOptions != undefined))
       {
-        for (iShared = 0; iShared < sharedOptions.length; iShared++) {
-          if (sharedOptions[iShared].key == jsonField.sharedOptions) {
-            self.options = sharedOptions[iShared].options;
-            self.selectedOption = ko.observable(self.options[0]);
+        var sharedOptionsKey = null;
+        // SharedOptions can be expressed by a single string or the object { key: key }
+        if (jsonField.sharedOptions.key !== undefined) {
+          sharedOptionsKey = jsonField.sharedOptions.key;
+
+        } else { // String object
+          sharedOptionsKey = jsonField.sharedOptions;
+        }
+
+        var foundSharedOption = _.find(sharedOptions, function(o) {
+          return o.key == sharedOptionsKey;
+        });
+
+        var optionsList = [];
+
+        if (foundSharedOption != null) {
+
+          optionsList = foundSharedOption.options;
+
+          // Filter on the displayed options if the sharedOptions provides a list : { key: key, options: [ "" ] }
+          if ((jsonField.sharedOptions.options !== undefined) && Array.isArray(jsonField.sharedOptions.options)
+              && (jsonField.sharedOptions.options.length > 0)) {
+            optionsList = _.filter(optionsList, function(o) {
+              return _.some(jsonField.sharedOptions.options, function(k) {
+                return k == o.option;
+              });
+            });
           }
+        }
+
+        self.options = optionsList;
+        if (optionsList.length > 0) {
+          self.selectedOption = ko.observable(self.options[0]);
         }
       }
     }
+
     self.setOptionFromText = function(textOption) {
       for (var iOption = 0; iOption < self.options.length; iOption++) {
         if (self.options[iOption].option == textOption) {
