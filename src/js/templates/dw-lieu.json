@@ -122,7 +122,7 @@
 			"label": "Icône 4",
 			"default": "alignment-chaotic",
 			"type": "options",
-			"sharedOptions": "icons",
+			"sharedOptions": { "key": "icons", "options": [ "alignment-good", "alignment-chaotic", "alignment-neutral", "alignment-lawful", "alignment-evil" ] },
 			"group": "grpIcones"
 		}, {
 			"name": "icon5",
@@ -473,13 +473,6 @@
 				"content": [{
 					"type": "path",
 					"path": "./js/templates/dw-svg/Alignement-Loyal.svg"
-				}]
-			}, {
-				"option": "alignment-chaotic",
-				"text": "Alignement - Chaotique",
-				"content": [{
-					"type": "path",
-					"path": "./js/templates/dw-svg/Alignement-Chaotique.svg"
 				}]
 			}, {
 				"option": "alignment-evil",
