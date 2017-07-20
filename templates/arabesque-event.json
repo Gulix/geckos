@@ -164,6 +164,7 @@
 	"description": {
 		"description": "Template for playing with colors !",
     "title":"Arabesque",
+		"key": "arabesque",
     "credits": "by Nicolas Ronvel",
     "url": "https://github.com/Gulix/geckos/"
 	}
