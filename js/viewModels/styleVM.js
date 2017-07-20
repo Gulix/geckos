@@ -41,8 +41,9 @@ define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
       return generated;
     }
 
-    self.processObject = function(cardVM, jsonObject) {
+    self.processObject = function(cardVM, jsonObj) {
 
+      var jsonObject = jsonObj;
       // No card associated : the jsonObject is returned as-is
       if (cardVM == null) {
         return jsonObject;
@@ -52,6 +53,21 @@ define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
       if (jsonObject === null) {
         return null;
       }
+
+      // A string "[[globalsName]]" needs to be replaced by the global value before processing
+      if (typeof(jsonObject) == "string") {
+        var regexGlobal = /^\[\[(.*)\]\]$/g;
+        var matchCode = regexGlobal.exec(jsonObject);
+        if (matchCode != null) {
+          var globalName = matchCode[1];
+          if ((self.sharedConfiguration != null) && (self.sharedConfiguration.globals != null)
+              && (self.sharedConfiguration.globals[globalName] != null))
+          {
+            jsonObject = self.sharedConfiguration.globals[globalName];
+          }
+        }
+      }
+
       // The object is an Array : the Array is rebuilt by processing each element of the Array
       // and then rebuilding the Array
       if (Array.isArray(jsonObject)) {
@@ -91,9 +107,17 @@ define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
         self.fields(jsonCode.fields);
 
         self.sharedConfiguration.sharedOptions = jsonCode.sharedOptions;
+        self.sharedConfiguration.globals = jsonCode.globals;
 
         if (jsonCode.canvasFields != null) {
-          self.canvasFields(jsonCode.canvasFields);
+          var sortedFields = _.sortBy(jsonCode.canvasFields, [function(f) {
+            if (f.zindex !== undefined) {
+              return f.zindex;
+            } else {
+              return 1;
+            }
+          }]);
+          self.canvasFields(sortedFields);
         } else {
           self.canvasFields([ ]);
         }

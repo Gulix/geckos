@@ -1,0 +1,697 @@
+{
+	"globals": {
+		"icon-color": "#ffffff",
+		"icon-color-old": "#fff5c4"
+	},
+	"styles": [{
+		"key": "default",
+		"name": "DW Lieu",
+		"description": "Carte de lieu pour Dungeon World",
+		"canvasBackground": "rgba(255,255,255,255)",
+		"canvasWidth": 446.45,
+		"canvasHeight": 623.625,
+		"fields": [{
+			"name": "grpAspect",
+			"label": "Aspect",
+			"type": "group",
+			"expanded": false
+		}, {
+			"name": "display_background",
+			"label": "Afficher le fond ?",
+			"default": false,
+			"type": "checkbox",
+			"group": "grpAspect"
+		}, {
+			"name": "color1",
+			"label": "Couleur de base",
+			"type": "color",
+			"default": "#be0a26",
+			"group": "grpAspect"
+		}, {
+			"name": "color2",
+			"label": "Couleur secondaire",
+			"default": "#560f19",
+			"type": "color",
+			"group": "grpAspect"
+		},{
+			"name": "name",
+			"label": "Nom",
+			"default": "Le Gué des Fées"
+		},{
+			"name": "marqueurs",
+			"label": "Marqueurs",
+			"default": "Magique"
+		}, {
+			"name": "grpImpressions",
+			"label": "Impressions",
+			"type": "group",
+			"expanded": true
+		}, {
+			"name": "impressions",
+			"type": "multiline",
+			"lines": 8,
+			"label": "Impressions",
+			"group": "grpImpressions",
+			"default": "❍ Une rivière poissonneuse et chantante.\n❍ Des pierres plates adoucies par l’usage.\nQ : À quoi peut-on deviner l’héritage des fées autour du gué ?"
+		},{
+			"name":"impressions_fontsize", "label":"Taille de police", "default":16, "type": "options", "group": "grpImpressions",
+			"options": [
+				{ "option":10, "text":"10" },
+				{ "option":12, "text":"12" },
+				{ "option":14, "text":"14" },
+				{ "option":16, "text":"16" },
+				{ "option":18, "text":"18" },
+				{ "option":20, "text":"20" }
+			]
+		}, {
+			"name": "grpDetails",
+			"label": "Détails",
+			"type": "group",
+			"expanded": true
+		}, {
+			"name": "details",
+			"label": "Détails",
+			"type": "richtext",
+			"group": "grpDetails",
+			"default": "<p>Les f&eacute;es occupaient l&rsquo;endroit avant que la civilisation ne les en chasse. Le gu&eacute; est un raccourcis, mais les &eacute;trangers le fuient comme la peste pr&eacute;textant que ses pierres sont glissantes et instables.</p><p>Quand vous <strong>franchissez le gu&eacute; sans chanter ou danser pour les f&eacute;es</strong>, lancez +DEX. Sur 10+, vous conservez votre &eacute;quilibre malgr&eacute; que la magie des f&eacute;es retourne des pierres sous vos pas. Sur 7&ndash;9, choisissez 1.</p><p>❍ Vous vous foulez la cheville (vous &ecirc;tes Secou&eacute;).</p><p>❍ Vous perdez un &Eacute;quipment dans le ruisseau (au choix du Meneur).</p>"
+		},{
+			"name":"details_fontsize", "label":"Taille de police", "default":16, "type": "options","group": "grpDetails",
+			"options": [
+				{ "option":10, "text":"10" },
+				{ "option":12, "text":"12" },
+				{ "option":14, "text":"14" },
+				{ "option":16, "text":"16" },
+				{ "option":18, "text":"18" },
+				{ "option":20, "text":"20" }
+			]
+		}, {
+			"name": "grpIcones",
+			"label": "Icônes",
+			"type": "group",
+			"expanded": true
+		}, {
+			"name": "icontype",
+			"label": "Icône principale",
+			"default": "card-location",
+			"type": "options",
+			"sharedOptions": "icons",
+			"group": "grpIcones"
+		}, {
+			"name": "icon1",
+			"label": "Icône 1",
+			"default": "logo-danger-discovery",
+			"type": "options",
+			"sharedOptions": "icons",
+			"group": "grpIcones"
+		}, {
+			"name": "icon2",
+			"label": "Icône 2",
+			"default": "danger-civilized",
+			"type": "options",
+			"sharedOptions": "icons",
+			"group": "grpIcones"
+		}, {
+			"name": "icon3",
+			"label": "Icône 3",
+			"default": "climate-temperate",
+			"type": "options",
+			"sharedOptions": "icons",
+			"group": "grpIcones"
+		}, {
+			"name": "icon4",
+			"label": "Icône 4",
+			"default": "alignment-chaotic",
+			"type": "options",
+			"sharedOptions": { "key": "icons", "options": [ "alignment-good", "alignment-chaotic", "alignment-neutral", "alignment-lawful", "alignment-evil" ] },
+			"group": "grpIcones"
+		}, {
+			"name": "icon5",
+			"label": "Icône 5",
+			"default": "organization-seigneurie",
+			"type": "options",
+			"sharedOptions": "icons",
+			"group": "grpIcones"
+		}],
+		"canvasFields": [{
+			"type": "image",
+			"left": 0,
+			"top": 0,
+			"width": 451,
+			"visible": "?display_background",
+			"height": 628,
+			"src": "./js/templates/dw-svg/background.png"
+		}, {
+			"type": "path-group",
+			"id": "general-skeleton-type1",
+			"left": 0,
+			"top": 0,
+			"paths": [
+				{
+					"type": "path",
+					"id": "cadres",
+					"fill": "$color1.hexa$",
+					"path": "./js/templates/dw-svg/ETS-Type1-Couleur1.svg"
+				}, {
+					"type": "path",
+					"id": "cadres",
+					"fill": {
+						"type": "linear",
+						"coords": {
+							"x1": 325.510,
+							"y1": 333.80341,
+							"x2": 402.378,
+							"y2": 332.55273
+						},
+						"colorStops": [{
+							"offset": 1,
+							"color": "$color2.hexa$",
+							"opacity": 1
+						}, {
+							"offset": 0.32315284,
+							"color": "$color1.hexa$",
+							"opacity": 1
+						}],
+						"offsetX": -323.59766,
+						"offsetY": -48.037109
+					},
+					"path": "./js/templates/dw-svg/ETS-Type1-GradientHaut.svg"
+				}, {
+					"type": "path",
+					"fill": {
+						"type": "linear",
+						"coords": {
+							"x1": 269.81836,
+							"y1": 333.80341,
+							"x2": 438.64343,
+							"y2": 332.55273
+						},
+						"colorStops": [{
+							"offset": 1,
+							"color": "$color2.hexa$",
+							"opacity": 1
+						}, {
+							"offset": 0.32315284,
+							"color": "$color1.hexa$",
+							"opacity": 1
+						}],
+						"offsetX": -323.59766,
+						"offsetY": -48.037109
+					},
+					"path": "./js/templates/dw-svg/ETS-Type1-GradientBas.svg"
+				}, {
+					"type": "path",
+					"id": "cadres-tentacules",
+					"fill": "$color2.hexa$",
+					"path": "./js/templates/dw-svg/ETS-Type1-Couleur2.svg"
+				}, {
+					"type": "path",
+					"id": "libelles-outline",
+					"fill": "$color1.hexa$",
+					"path": "./js/templates/dw-svg/ETS-Type1-Libelles-Outline.svg"
+				}, {
+					"type": "path",
+					"id": "libelles",
+					"fill": "#FFFFFF",
+					"path": "./js/templates/dw-svg/ETS-Type1-Libelles.svg"
+				}
+			]
+		},{
+			"type": "path-group",
+			"id": "general-skeleton-titre",
+			"left": 0,
+			"top": 0,
+			"paths": [
+				{
+					"type": "path",
+					"id": "cadre-titre",
+					"fill": "$color1.hexa$",
+					"path": "./js/templates/dw-svg/ETS-Titre-Couleur1.svg"
+				}, {
+					"type": "path",
+					"fill": {
+						"type": "linear",
+						"coords": {
+							"x1": 333,
+							"y1": 333.80341,
+							"x2": 402,
+							"y2": 332.55273
+						},
+						"colorStops": [{
+							"offset": 1,
+							"color": "$color2.hexa$",
+							"opacity": 1
+						}, {
+							"offset": 0.2832,
+							"color": "$color1.hexa$",
+							"opacity": 1
+						}],
+						"offsetX": -323.59766,
+						"offsetY": -48.037109
+					},
+					"path": "./js/templates/dw-svg/ETS-Titre-Gradient.svg"
+				}, {
+					"type": "path",
+					"id": "titre-tentacules",
+					"fill": "$color2.hexa$",
+					"path": "./js/templates/dw-svg/ETS-Titre-Couleur2.svg"
+				}
+			]
+		},{
+			"type": "textbox",
+			"left": 61,
+			"top": 14,
+			"width": 308,
+			"height": 27,
+			"fill": "{{value = tinycolor.mostReadable(card[color1].toHexString(), ['#FFF', '#888', '#000']).toHexString();}}",
+			"stroke": "$color1.hexa$",
+			"strokeWidth": 0,
+			"strokeLineCap": "round",
+			"strokeLineJoin": "round",
+			"text": "$name$",
+			"fontSize": 26,
+			"fontWeight": "bold",
+			"fontFamily": "Lora",
+			"textAlign": "center",
+			"lineHeight": 1.16
+		}, {
+			"type": "textbox",
+			"id": "tbMarqueurs",
+			"left": 22,
+			"top": 73,
+			"width": 370,
+			"height": 29,
+			"fill": "rgb(0,0,0)",
+			"text": "$marqueurs$",
+			"fontSize": 16,
+			"fontFamily": "Lora",
+			"fontStyle": "italic",
+			"lineHeight": 1.16
+		}, {
+			"id": "tbImpressions",
+			"type": "textbox",
+			"left": 22,
+			"top": 128,
+			"width": 370,
+			"height": 170,
+			"fill": "rgb(0,0,0)",
+			"text": "$impressions$",
+			"fontSize": 16,
+			"fontFamily": "Lora",
+			"lineHeight": 1.16
+		}, {
+			"id": "tbDetails",
+			"type": "textbox",
+			"left": 22,
+			"top": 323,
+			"width": 400,
+			"height": 282,
+			"fill": "rgb(0,0,0)",
+			"text": "$details$",
+			"styles": "£details",
+			"fontSize": "$details_fontsize",
+			"fontFamily": "Lora",
+			"lineHeight": 1.16
+		}, {
+			"type": "path-group",
+			"id": "icontype",
+			"left": 9,
+			"top": 7,
+			"fill": "$color1.hexa$",
+			"scaleX": 0.73,
+			"scaleY": 0.73,
+			"visible": true,
+			"paths": "£icontype"
+		}, {
+			"type": "path-group",
+			"id": "icon1",
+			"left": 400,
+			"top": 7,
+			"fill": "$color2.hexa$",
+			"scaleX": 0.73,
+			"scaleY": 0.73,
+			"visible": true,
+			"paths": "£icon1"
+		}, {
+			"type": "path-group",
+			"id": "icon2",
+			"left": 400,
+			"top": 65,
+			"fill": "$color1.hexa$",
+			"scaleX": 0.73,
+			"scaleY": 0.73,
+			"visible": true,
+			"paths": "£icon2"
+		}, {
+			"type": "path-group",
+			"id": "icon3",
+			"left": 400,
+			"top": 123,
+			"fill": "$color1.hexa$",
+			"scaleX": 0.73,
+			"scaleY": 0.73,
+			"visible": true,
+			"paths": "£icon3"
+		}, {
+			"type": "path-group",
+			"id": "icon4",
+			"left": 400,
+			"top": 181,
+			"fill": "$color1.hexa$",
+			"scaleX": 0.73,
+			"scaleY": 0.73,
+			"visible": true,
+			"paths": "£icon4"
+		}, {
+			"type": "path-group",
+			"id": "icon5",
+			"left": 400,
+			"top": 239,
+			"fill": "$color1.hexa$",
+			"scaleX": 0.73,
+			"scaleY": 0.73,
+			"visible": true,
+			"paths": "£icon5"
+		},{
+			"type": "path-group",
+			"left": 369.921,
+			"top": 106.88,
+			"scaleX": 1,
+			"scaleY": 1,
+			"paths": [
+				{
+					"type": "path",
+					"left": 0,
+					"top": 0,
+					"fill": "[[icon-color]]",
+					"path": "./js/templates/dw-svg/icon-eye.svg"
+				},
+				{
+					"type": "path",
+					"left": 0,
+					"top": 0,
+					"fill": "$color2.hexa$",
+					"path": "./js/templates/dw-svg/icon-eye-stroke.svg"
+				}
+			]
+		}, {
+			"type": "path-group",
+			"left": 368.811,
+			"top": 49.421,
+			"scaleX": 1,
+			"scaleY": 1,
+			"paths": [
+				{
+					"type": "path",
+					"left": 0,
+					"top": 0,
+					"fill": "[[icon-color]]",
+					"path": "./js/templates/dw-svg/icon-eagle.svg"
+				},
+				{
+					"type": "path",
+					"left": 0,
+					"top": 0,
+					"fill": "$color2.hexa$",
+					"path": "./js/templates/dw-svg/icon-eagle-stroke.svg"
+				}
+			]
+		}, {
+			"type": "path-group",
+			"left": 400,
+			"top": 304.521,
+			"scaleX": 1,
+			"scaleY": 1,
+			"paths": [
+				{
+					"type": "path",
+					"left": 0,
+					"top": 0,
+					"fill": "[[icon-color]]",
+					"path": "./js/templates/dw-svg/icon-book.svg"
+				},
+				{
+					"type": "path",
+					"left": 0,
+					"top": 0,
+					"fill": "$color2.hexa$",
+					"path": "./js/templates/dw-svg/icon-book-stroke.svg"
+				}
+			]
+		}]
+	}],
+	"webfonts": {
+		"google": {
+			"families": ["Merriweather", "Lora"]
+		}
+	},
+	"sharedOptions": [{
+		"key": "icons",
+		"options": [{
+				"option": "none",
+				"text": "Aucun",
+				"content": [{
+					"type": "path",
+					"path": []
+				}]
+			}, {
+				"option": "alignment-good",
+				"text": "Alignement - Bon",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Alignement-Bon.svg"
+				}]
+			}, {
+				"option": "alignment-chaotic",
+				"text": "Alignement - Chaotique",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Alignement-Chaotique.svg"
+				}]
+			}, {
+				"option": "alignment-lawful",
+				"text": "Alignement - Loyal",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Alignement-Loyal.svg"
+				}]
+			}, {
+				"option": "alignment-evil",
+				"text": "Alignement - Mauvais",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Alignement-Mauvais.svg"
+				}]
+			}, {
+				"option": "alignment-neutral",
+				"text": "Alignement - Neutre",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Alignement-Neutre.svg"
+				}]
+			}, {
+				"option": "card-area",
+				"text": "Carte - Zone",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Carte_Zone.svg"
+				}]
+			}, {
+				"option": "card-creature",
+				"text": "Carte - Créature",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Carte_Creature.svg"
+				}]
+			}, {
+				"option": "card-danger",
+				"text": "Carte - Danger",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Carte_Danger.svg"
+				}]
+			}, {
+				"option": "card-discovery",
+				"text": "Carte - Découverte",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Carte_Decouverte.svg"
+				}]
+			}, {
+				"option": "card-npc",
+				"text": "Carte - PNJ",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Carte_PNJ.svg"
+				}]
+			}, {
+				"option": "card-region",
+				"text": "Carte - Région",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Carte_Region.svg"
+				}]
+			}, {
+				"option": "card-location",
+				"text": "Carte - Site",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Carte_Site.svg"
+				}]
+			}, {
+				"option": "card-treasure",
+				"text": "Carte - Trésor",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Carte_Tresor.svg"
+				}]
+			}, {
+				"option": "climate-all",
+				"text": "Climat - Tous",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Climat-All.svg"
+				}]
+			}, {
+				"option": "climate-polar",
+				"text": "Climat - Polaire",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Climat-Polaire.svg"
+				}]
+			}, {
+				"option": "climate-temperate",
+				"text": "Climat - Tempéré",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Climat-Tempere.svg"
+				}]
+			}, {
+				"option": "climate-tropical",
+				"text": "Climat - Tropical",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Climat-Tropical.svg"
+				}]
+			}, {
+				"option": "danger-civilized",
+				"text": "Danger - Civilisé",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Danger-Civilise.svg"
+				}]
+			}, {
+				"option": "danger-perilous",
+				"text": "Danger - Périlleux",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Danger-Perilleux.svg"
+				}]
+			}, {
+				"option": "danger-unsure",
+				"text": "Danger - Peu sûr",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Danger-Peu_Sur.svg"
+				}]
+			}, {
+				"option": "danger-sure",
+				"text": "Danger - Sûr",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Danger-Sur.svg"
+				}]
+			}, {
+				"option": "location-city",
+				"text": "Localité - Cité",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Localite-Cite.svg"
+				}]
+			}, {
+				"option": "location-fortress",
+				"text": "Localité - Forteresse",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Localite-Forteresse.svg"
+				}]
+			}, {
+				"option": "location-village",
+				"text": "Localité - Village",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Localite-Village.svg"
+				}]
+			}, {
+				"option": "location-town",
+				"text": "Localité - Ville",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Localite-Ville.svg"
+				}]
+			}, {
+				"option": "logo-danger",
+				"text": "Logo - Danger",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Logo_Danger.svg"
+				}]
+			}, {
+				"option": "logo-danger-discovery",
+				"text": "Logo - Danger / Découverte",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Logo_Danger_Decouverte.svg"
+				}]
+			}, {
+				"option": "logo-discovery",
+				"text": "Logo - Découverte",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Logo_Decouverte.svg"
+				}]
+			}, {
+				"option": "organization-realm",
+				"text": "Organisation - Royaume",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Organisation-Royaume.svg"
+				}]
+			}, {
+				"option": "organization-lordship",
+				"text": "Organisation - Seigneurerie",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Organisation-Seigneurerie.svg"
+				}]
+			}, {
+				"option": "organization-wildlands",
+				"text": "Organisation - Terres Sauvages",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Organisation-Terres_sauvages.svg"
+				}]
+			}, {
+				"option": "organization-freecity",
+				"text": "Organisation - Ville franche",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Organisation-Ville_franche.svg"
+				}]
+			}, {
+				"option": "organization-lordship",
+				"text": "Organisation - Seigneurerie",
+				"content": [{
+					"type": "path",
+					"path": "./js/templates/dw-svg/Organisation-Seigneurerie.svg"
+				}]
+			}
+		]
+	}],
+	"description": {
+		"description": "Dungeon World - Cartes de Lieux",
+		"title": "DW - Lieux",
+		"key": "dw-acritarche",
+		"credits": "by Acritarche & Nicolas Ronvel",
+		"url": "https://github.com/Gulix/geckos/"
+	}
+}

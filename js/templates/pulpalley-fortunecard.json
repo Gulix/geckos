@@ -1829,6 +1829,7 @@
   "description":{
     "description":"Fortune cards template for Pulp Alley",
     "title":"Pulp Alley Fortune Cards",
+    "key": "pulpalley-fortune",
     "credits":"by Nicolas Ronvel",
     "url":"https://github.com/Gulix/geckos/"
   }

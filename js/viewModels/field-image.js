@@ -57,6 +57,9 @@ define(['knockout', 'cropper'], function(ko, cropper) {
 
       self.closeCrop();
     }
+    self.clearImage = function() {
+      self.dataUrl('');
+    }
 
     /****************************/
     /* --- Loading the File --- */

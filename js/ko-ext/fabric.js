@@ -23,7 +23,7 @@ define(['knockout', 'jQuery'], function(ko) {
             }
             // canvas.loadFromJSON modofies the JSON passed in parameters
             // By using Stringify, it's not modified
-            canvas.loadFromJSON(JSON.stringify(jsonValue), canvas.renderAll.bind(canvas));
+            canvas.loadFromDatalessJSON(JSON.stringify(jsonValue), canvas.renderAll.bind(canvas));
           }
       }
   };

@@ -1,0 +1,52 @@
+<!-- ko with: viewModel -->
+<div style="display:none;" class="modal-box" data-bind="visible: isModalDisplayed">
+  <div class="modal-box-content">
+    <div class="modal-close icon icon-dismiss" data-bind="click: cancel"></div>
+    <h3><span class="icon icon-file-pdf"></span> Export cards to PDF</h3>
+
+    <!-- ko with: messageBar -->
+    <div style="display: none;" class="message-bar" data-bind="html: message, slideIn: isVisible, css: { error: isError, warning: isWarning, info: isInfo, success: isSuccess}"></div>
+    <!-- /ko -->
+
+    <!-- ko with: config -->
+    <div class="flex-container">
+      <h4 class="flex-1">Export Configuration</h4>
+      <div class="modal-buttons flex-1">
+        <a class="btn" data-bind="click: setInInches, css: { secondary: configInMM, primary: configInInches, mainColor1: configInInches }">in Inches</a>
+        <a class="btn" data-bind="click: setInMM, css: { secondary: configInInches, primary: configInMM, mainColor1: configInMM }">in Millimeters</a>
+      </div>
+    </div>
+    <div class="flex-container flex-1">
+      <a class="btn" data-bind="click: setLandscape, css: { secondary: configIsPortrait, primary: configIsLandscape, mainColor1: configIsLandscape }">Landscape</a>
+      <a class="btn" data-bind="click: setPortrait, css: { secondary: configIsLandscape, primary: configIsPortrait, mainColor1: configIsPortrait }">Portrait</a>
+    </div>
+    <div class="flex-container">
+      <div class="editable-field input-numeric pdf-card-value">
+       <label>Card Width</label>
+       <input data-bind="value: displayedWidth"></input>
+      </div>
+      <div class="editable-field input-numeric pdf-card-value">
+       <label>Card Height</label>
+       <input data-bind="value: displayedHeight"></input>
+      </div>
+    </div>
+    <div class="flex-container">
+      <div class="editable-field input-numeric pdf-card-value">
+       <label>Margin between cards</label>
+       <input data-bind="value: displayedMargin"></input>
+      </div>
+    </div>
+
+    <!-- /ko -->
+
+    <div data-bind="visible: exportInactive">It will take approximatively <span data-bind="text: estimatedTime"></span> to complete.</div>
+    <h3 data-bind="visible: exportActive">Export in Progress ...</h3>
+    <div data-bind="visible: exportActive, progressBar: { value : progressPercentage }"></div>
+
+    <div class="modal-buttons">
+      <a class="btn primary mainColor1 iconized icon-file-pdf" data-bind="visible: exportInactive, click: launchPdfGeneration">Generate PDF</a>
+      <a class="btn secondary iconized icon-dismiss" data-bind="visible: exportInactive, click: cancel">Close</a>
+    </div>
+  </div>
+</div>
+<!-- /ko -->

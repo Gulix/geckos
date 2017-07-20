@@ -23,8 +23,6 @@
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link rel="icon" type="image/png" href="images/favicon.png">
 
-    <link rel="stylesheet" type="text/css" href="css/codropsFullWidthTabs.css" />
-
     <link rel="stylesheet" type="text/css" href="css/styles.css"></link>
     <link rel="stylesheet" type="text/css" href="css/icons.css"></link>
 
@@ -49,18 +47,21 @@
 				<ul>
 					<li><a href="#section-home" class="icon-home"><span>Home</span></a></li>
 					<li><a href="#section-template" class="icon-template"><span>Template</span></a></li>
-					<li><a href="#section-list" class="icon-list"><span>List</span></a></li>
-					<li class="special-tab"><a href="#section-card" class="icon-card"><span>Card</span></a></li>
+					<li style="display: none;" data-bind="visible: isTemplateLoaded"><a href="#section-list" class="icon-list"><span>List</span></a></li>
+					<li style="display: none;" data-bind="visible: isTemplateLoaded" class="special-tab"><a href="#section-card" class="icon-card"><span>Card</span></a></li>
 					<li><a href="#section-about" class="icon-about"><span>About</span></a></li>
 				</ul>
 			</nav>
 			<div class="content">
+        <!-- ko with: generalMessageBar -->
+        <div style="display: none;" class="message-bar" data-bind="html: message, slideIn: isVisible, css: { error: isError, warning: isWarning, info: isInfo, success: isSuccess}"></div>
+        <!-- /ko -->
+
+
 				<section id="section-home">
           <div class="main-menu clearfix">
-            <ul>
-                <li><a rel="documentation" href="https://www.gulix.fr/geckos/wiki/">Documentation</a></li>
-                <li><a href="https://github.com/Gulix/geckos">Github Page</a></li>
-            </ul>
+            <a class="btn primary mainColor1 iconized icon-question-circle" rel="documentation" href="https://www.gulix.fr/geckos/wiki/">Documentation</a>
+            <a class="btn primary mainColor1 iconized icon-github" href="https://github.com/Gulix/geckos/">Github Page</a>
           </div>
           <h1>Welcome to Geckos</h1>
           <p>Geckos is a web-application which goal is to create <em>Image cards</em>, through the use of predetermined <em>Templates</em>.</p>
@@ -81,7 +82,7 @@
 
                 <!-- ko if: engineVM.cardTemplate() != null -->
                 <div id="active-template-description-header" class="template-description-header">Active template - Currently in use in Geckos</div>
-                <template-style-description params="templateVM: engineVM.cardTemplate"></template-style-description>
+                <template-style-description params="templateVM: engineVM.cardTemplate, isActive: true, mainVM: engineVM"></template-style-description>
                 <!-- /ko -->
 
                 <!-- ko if: isListModeActive -->
@@ -105,11 +106,12 @@
 
                 <div style="display:none;" class="modal-box" data-bind="visible: hasSelectedTemplate">
                   <div class="modal-box-content">
-                    <div class="modal-close" data-bind="click: cancelSelectedTemplate">X</div>
+                    <div class="modal-close icon icon-dismiss" data-bind="click: cancelSelectedTemplate"></div>
                     <h3>Template description</h3>
                     <template-style-description id="selected-template-description" params="templateVM: selectedTemplate"></template-style-description>
                     <div class="modal-buttons">
-                      <div class="modal-button" data-bind="click: setTemplate"><div class="icon icon-apply-template"></div>Use this Template</div>
+                      <a class="btn primary mainColor2 iconized icon-apply-template" data-bind="click: setTemplate">Use this Template</a>
+                      <a class="btn secondary iconized icon-dismiss" data-bind="click: cancelSelectedTemplate">Cancel</a>
                     </div>
                   </div>
                 </div>
@@ -123,7 +125,7 @@
                     <h3>Template Code</h3>
                     <textarea rows="12" data-bind="value: _editableJson"></textarea>
                     <div class="modal-buttons">
-                      <div class="modal-button" data-bind="click: validateTemplate"><div class="icon icon-compile-template"></div>Compile your code</div>
+                      <a class="btn primary mainColor2 iconized icon-compile-template" data-bind="click: validateTemplate">Compile your code</a>
                     </div>
                   </div>
                   <!-- ko if: withCompilingErrors -->
@@ -135,11 +137,11 @@
                   <!-- ko if: compiledTemplate() != null -->
                   <div style="display:none;" class="modal-box" data-bind="visible: isCompiledTemplateVisible">
                     <div class="modal-box-content">
-                      <div class="modal-close" data-bind="click: cancelTemplateCompiledPreview">X</div>
+                      <div class="modal-close icon icon-dismiss" data-bind="click: cancelTemplateCompiledPreview"></div>
                       <h3>Template validated !</h3>
                       <template-style-description id="selected-template-description" params="templateVM: compiledTemplate"></template-style-description>
                       <div class="modal-buttons">
-                        <div class="modal-button" data-bind="click: setTemplate"><div class="icon icon-apply-template"></div>Use this Template</div>
+                        <a class="btn primary mainColor2 iconized icon-apply-template" data-bind="click: setTemplate">Use this Template</a>
                       </div>
                     </div>
                   </div>
@@ -157,12 +159,10 @@
                        data-bind="click: goListMode, visible: isGoListModeVisible"><span>Go to 'List mode'</span></a></li>
                 <li><a href="#" class="icon-compile-template" title="Validate the edited template"
                        data-bind="click: validateTemplateCode, visible: isEditionModeActive"><span>Validate the edited template</span></a></li>
-                <li><a href="#" class="icon-apply-template" title="Use the selected template"
-                       data-bind="click: setTemplate, visible: isListModeActive"><span>Use the selected template</span></a></li>
                 <li><a href="#" class="icon-download" title="Load template from file"
                        data-bind="click: loadTemplate, visible: isEditionModeActive"><span>Load from file</span></a></li>
               	<li><a href="#" class="icon-save" title="Save template to file"
-                       data-bind="click: saveTemplateAsJson"><span>Save to file</span></a></li>
+                       data-bind="click: saveTemplateAsJson, visible: isEditionModeActive"><span>Save to file</span></a></li>
                 <li><a href="#" class="icon-undo" title="Cancel modifications on template"
                        data-bind="click: resetTemplateCode, visible: isEditionModeActive"><span>Cancel modifications</span></a></li>
               </ul>
@@ -178,7 +178,7 @@
         <!-- ********************
              List of cards (editing, loading, ...)
            -->
-        <section id="section-list">
+        <section id="section-list" data-bind="visible: isTemplateLoaded">
           <div class="section-twocols">
             <div class="section-colwrap">
               <div class="col-content">
@@ -193,18 +193,21 @@
             </div>
             <div class="col-menu">
               <ul class="vertical-menu icon">
-              	<li><a href="#" class="icon-add" title="Add a new card"
-                       data-bind="click: addNewCard"><span>Add</span></a></li>
-                <li><a href="#" class="icon-copy" title="Copy card into new card"
-                       data-bind="click: copyNewCard"><span>Copy</span></a></li>
-                <li><a href="#" class="icon-delete" title="Delete the selected card"
-                       data-bind="click: removeSelectedCard"><span>Remove</span></a></li>
-                <li><a href="#" class="icon-clear-list" title="Clear the list"
+              	<li><a href="#" class="icon-clear-list" title="Clear the list"
                        data-bind="click: clearList"><span>Clear</span></a></li>
-              	<li><a href="#" class="icon-download" title="Load list from file"
-                       data-bind="click: loadList"><span>Load list</span></a></li>
-                <li><a href="#" class="icon-save" title="Save list to file"
-                       data-bind="click: exportList"><span>Save list</span></a></li>
+                <li><a href="#" class="icon-save sub-menu-opener" title="Save / Load cards"
+                     data-bind="click: menu.toggleLoadSave, css: { 'sub-menu-opener': menu.isLoadSaveHidden, 'sub-menu-closer': menu.isLoadSaveDisplayed}"><span>save / load</span></a>
+                    <div class="sub-menu-list" data-bind="slideRightMenu: menu.isLoadSaveDisplayed">
+                      <div class="sub-menu"><a href="#" class="icon-folder-open" title="Open 'Load/Save' window"
+                           data-bind="click: loadsaveVM.showModal"><span>Open</span></a></div>
+                      <div class="sub-menu"><a href="#" class="icon-quick-load" title="Load your last modified deck from Local Storage"
+                           data-bind="click: loadsaveVM.quickLoad"><span>quick Load</span></a></div>
+                      <div class="sub-menu"><a href="#" class="icon-file-export" title="Save the current deck to JSON file"
+                           data-bind="click: exportListToFile"><span>Save to File</span></a></div>
+                      <div class="sub-menu"><a href="#" class="icon-file-import" title="Load deck from JSON file"
+                           data-bind="click: loadListFromFile"><span>Load from File</span></a></div>
+                    </div>
+                </li>
               </ul>
               <form style="display:none" id="file-load-list-form">
                 <input type="file" id="file-load-list" name="file" class="form-control" style="display:none"
@@ -217,7 +220,7 @@
         <!-- ************************************
          "Card" view, that displays a light list of cards, and the edition fields and canvas view of a card
          *************************************** -->
-        <section id="section-card" class="section">
+        <section id="section-card" class="section" data-bind="visible: isTemplateLoaded">
           <div class="section-twocols">
             <div class="section-colwrap">
               <div class="col-content">
@@ -251,6 +254,28 @@
                     </div>
                   </div>
 
+                  <div style="display:none;" class="modal-box" data-bind="visible: exportVM.isModalDisplayed">
+                    <div class="modal-box-content">
+                      <h3>Export all cards to a Zip file</h3>
+                      <div>All the cards in the current collection will be exported into a zip file.</div>
+                      <div data-bind="visible: exportVM.exportInactive">It will take approximatively <span data-bind="text: exportVM.estimatedTime"></span> to complete.</div>
+                      <div class="format-buttons" data-bind="foreach: exportVM.formatsList">
+                        <div class="format-button"><a href="#" data-bind="click: function() { $parent.exportVM.selectFormat($data) }, css: attrCss, attr: { title: description }">
+                          <span>Nada</span></a>
+                        </div>
+                      </div>
+                      <div class="format-description" data-bind="text: exportVM.formatDescription"></div>
+                      <h3 data-bind="visible: exportVM.exportActive">Export in Progress ...</h3>
+                      <div data-bind="visible: exportVM.exportActive, progressBar: { value : exportVM.progressPercentage }"></div>
+
+
+                      <div class="modal-buttons">
+                        <a class="btn primary mainColor2 iconized icon-file-zip" data-bind="visible: exportVM.isLaunchZipExportVisible, click: exportVM.launchZipCreation">Create the ZIP</a>
+                        <a class="btn secondary iconized icon-dismiss" data-bind="visible: exportVM.exportInactive, click: exportVM.cancelZipCreation">Cancel</a>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -262,69 +287,48 @@
                        data-bind="click: copyNewCard"><span>Copy</span></a></li>
               	<li><a href="#" class="icon-delete" title="Delete the selected card"
                        data-bind="click: removeSelectedCard"><span>Remove</span></a></li>
-              	<li><a href="#" class="icon-image" title="Export the card to a PNG image"
-                       data-bind="click: exportPng"><span>to PNG</span></a></li>
+                <li><a href="#" class="icon-save" title="Save the current deck in Local Storage"
+                       data-bind="click: loadsaveVM.quickSave"><span>quick Save</span></a></li>
+              	<li>
+                  <a href="#" class="icon-file-export sub-menu-opener" title="Export the card(s)"
+                     data-bind="click: menu.toggleCardExport, css: { 'sub-menu-opener': menu.isCardExportHidden, 'sub-menu-closer': menu.isCardExportDisplayed}"><span>export Card(s)</span></a>
+                  <div class="sub-menu-list" data-bind="slideRightMenu: menu.isCardExportDisplayed">
+                    <div class="sub-menu"><a href="#" class="icon-image" title="Export the card to a PNG image"
+                         data-bind="click: exportVM.exportAsPNG"><span>to PNG</span></a></div>
+                    <div class="sub-menu"><a href="#" class="icon-file-svg" title="Export the card to a SVG image"
+                         data-bind="click: exportVM.exportAsSVG"><span>to SVG</span></a></div>
+                    <div class="sub-menu"><a href="#" class="icon-file-zip" title="Export all the cards to a ZIP file"
+                         data-bind="click: exportVM.exportAllToZip"><span>to Zip</span></a></div>
+                    <div class="sub-menu"><a href="#" class="icon-file-pdf" title="Export all the cards to a PDF file"
+                         data-bind="click: pdfGenerator.showPdfModal"><span>to PDF</span></a></div>
+                  </div>
+                </li>
+
               </ul>
             </div>
           </div>
         </section>
 
         <section id="section-about">
-          <div class="container">
-            <h1>About Geckos</h1>
-            <div>
-              <p>Geckos is a web-application, created to make cards based on templates.</p>
-              <p>This page is a demo-page for Geckos. A list of templates are pre-installed, feel free to use them, or create your own.</p>
-              <p>Templates can be found on <a href="https://github.com/Gulix/geckos/tree/master/templates">this page</a> of the repository, and there is a <a href="http://www.gulix.fr/geckos/wiki">Documentation Wiki</a> to help you create your own.</p>
-              <p>Geckos is open-source, and can be found on <a href="http://www.github.com/gulix/geckos">Github</a>.</p>
-              <p>Geckos is still <a href="http://www.github.com/gulix/geckos/issues">under development</a>, and this demo page is a Beta version of the software.</p>
-              <p>Geckos relies on multiple open-source softwares &amp; libraries :</p>
-              <ul>
-                <li>Geckos main engine
-                  <ul>
-                    <li><a href="https://jquery.com/">JQuery</a></li>
-                    <li><a href="http://knockoutjs.com/">KnockoutJS</a></li>
-                    <li><a href="http://fabricjs.com/">FabricJS</a></li>
-                    <li><a href="http://requirejs.org/">RequireJS</a></li>
-                  </ul>
-                </li>
-                <li>Geckos UI
-                  <ul>
-                    <li><a href="http://getskeleton.com">Skeleton</a></li>
-                    <li><a href="https://github.com/codrops/FullWidthTabs">codrops - Responsive Full Width Tabs</a></li>
-                    <li><a href="https://github.com/codrops/Blueprint-VerticalIconMenu">codrops - Vertical Icon Menu</a></li>
-                    <li><a href="https://icomoon.io">IcoMoon Vector Font generator</a></li>
-                  </ul>
-                </li>
-                <li>Widgets
-                  <ul>
-                    <li><a href="http://ckeditor.com/">CKEditor</a></li>
-                    <li><a href="http://jscolor.com/">JSColor</a></li>
-                    <li><a href="https://github.com/tkrotoff/jquery-simplecolorpicker">JQuery.simplecolorpicker.js</a></li>
-                    <li><a href="http://designwithpc.com/Plugins/ddSlick">ddSlick</a></li>
-                  </ul>
-                </li>
-                <li>Helpers &amp; others libraries
-                  <ul>
-                    <li><a href="https://github.com/eligrey/FileSaver.js/">FileSaver.js</a></li>
-                    <li><a href="http://bgrins.github.io/TinyColor/">TinyColor</a></li>
-                    <li><a href="https://github.com/epoberezkin/ajv">AJV</a></li>
-                    <li><a href="https://github.com/fengyuanchen/cropper">Cropper</a></li>
-                    <li><a href="https://github.com/typekit/webfontloader">Typekit Web Font Loader</a></li>
-                  </ul>
-                </li>
-              </ul>
-              <p>Any problem ? Any need ? Any question ? Any bug ? Write an <a href="http://www.github.com/gulix/geckos/issues/new">Issue</a> !<p>
-            </div>
-          </div>
+          <section-about></section-about>
         </section>
       </div>
     </div>
     <div class="clear"></div>
-    <div class="page-footer">Beta version 2 (WIP 0.2.2) - Last updated 2017-02-06 (master branch)</div>
+    <div class="page-footer">Beta version 3 (WIP 0.3.0) - Last updated 2017-07-20 (master branch)</div>
   </div>
 
+  <!-- ko if: loadsaveVM != null -->
+  <!-- ko with: loadsaveVM -->
+  <modal-load-save params="loadSaveVM: $data"></modal-load-save>
+  <!-- /ko -->
+  <!-- /ko -->
 
+  <!-- ko if: pdfGenerator != null -->
+  <!-- ko with: pdfGenerator -->
+  <modal-pdf-export params="pdfGenerator: $data"></modal-pdf-export>
+  <!-- /ko -->
+  <!-- /ko -->
 
     <!-- ViewModels -->
     <script src="js/vendor/require.min.js" data-main="js/main.js"></script>
