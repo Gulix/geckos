@@ -98,12 +98,26 @@ require(['knockout',
 
 /* Scrolling let's the Canvas on top (see also Issue #87) */
 $(window).scroll(function(){
+  // Difference between normal height and revised height of the canvas
   var existingDiff = $('#card-canvas-header').outerHeight();
-  console.log(existingDiff);
+  // Position of the scroll on the Viewport
   var scrollTop = $(window).scrollTop();
+  var viewportHeight = $(window).height();
+  // Top position of the Canvas
   var boxTop = $('#card-canvas-box').offset().top;
+  var canvasHeight = $('#card-canvas-view').outerHeight();
+  console.log("existingDiff : " + existingDiff);
+  console.log("scrollTop : " + scrollTop);
+  console.log("boxTop : " + boxTop);
+  console.log("canvasHeight : " + canvasHeight);
+  console.log("viewportHeight : " + viewportHeight);
+
+  // If the ScrollPosition is beneath the top of the canvas, the canvas is lowered
   if (scrollTop > (boxTop + existingDiff)) {
     var diff = scrollTop - boxTop - existingDiff;
+    if ((viewportHeight < canvasHeight) && (diff > (canvasHeight - viewportHeight))) {
+      diff -= (canvasHeight - viewportHeight) + existingDiff;
+    }
     $('#card-canvas-view').css({'margin-top': diff + 'px'});
   } else {
     $('#card-canvas-view').css({'margin-top': '0px'});
