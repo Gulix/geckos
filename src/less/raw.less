@@ -1,0 +1,474 @@
+// main: ./styles.less
+
+// Here lies all the code previously in style.css, waiting to be dispatched in less files
+
+body {
+  background-color: @backgroundMainColor;
+}
+
+.fullwidth-container {
+  width: 100%;
+  max-width: initial;
+  padding: 0 0;
+}
+
+/******************/
+/* --- Header --- */
+/******************/
+.header {
+
+}
+
+.header-logo {
+  float: left;
+  width: 15%;
+}
+
+.header-text {
+
+}
+
+.page-title {
+  color: @mainColor1;
+  font-weight: bold;
+  font-size: 3em;
+}
+.page-subtitle {
+  color: @mainColor1-light;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 1.4em;
+  margin-left: 25px;
+  margin-bottom: 25px;
+}
+
+
+/* Top Main Menu */
+.main-menu {
+  display:table;
+  float:right;
+  margin: 1em 0 0.5em 0;
+  font-size: 14px;
+  font-weight: bold;
+}
+.main-menu ul li { display: inline; }
+.main-menu ul li a {
+	display: inline-block;
+  padding: 0.4em 1.5em;
+  text-decoration: none;
+	-moz-border-radius: 0.5em;
+  -webkit-border-radius: 0.5em;
+  border-radius: 0.5em;
+}
+.main-menu ul li a, .main-menu ul li a:visited
+{
+  color: @backgroundMainColor;
+  background-color: @mainColor1;
+}
+.main-menu ul li a.active, .main-menu ul li a:hover
+{
+   background-color: @mainColor1-light;
+ }
+/********************************************/
+/* Section display with left vertical menus */
+/********************************************/
+
+.section {
+  position: relative;
+  float: left;
+  width: 100%;
+}
+
+.section-twocols {
+  float: left;
+  width: 200%;
+  position: relative;
+  left: 100px;
+}
+
+.section-colwrap {
+  float: right;
+  width: 50%;
+  position: relative;
+  right: 100px;
+  padding-bottom: 1em;
+}
+
+.col-content {
+  margin: 0 15px 0 115px;
+  position: relative;
+  right: 100%;
+}
+
+.col-menu {
+  float: left;
+  width: 70px;
+  position: relative;
+  right: 85px;
+}
+
+/*************************/
+/* Blocks of information */
+/*************************/
+.box-elements {
+	background-color: fade(@mainColor2-light, 20%);
+  padding: 1em;
+  margin: 10px;
+  border: solid 1px @mainColor2;
+}
+
+.clear {
+
+}
+
+/* Managing the template */
+.template-text textarea {
+  width: 100%;
+  height: 100%;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow-x: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/*****************************/
+/* Description of a Template */
+/*****************************/
+
+.template-description-header {
+  margin-bottom: 0px;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-weight: bold;
+  color: @mainColor2;
+}
+
+.template-description {
+  margin-top: 0px;
+}
+
+.template-title {
+  font-size: 3.6rem;
+  line-height: 1.25;
+  letter-spacing: -.1rem;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+.template-credits {
+  font-size: 3.0rem;
+  line-height: 1.25;
+  letter-spacing: -.1rem;
+  color: @mainColor2;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  margin-left: 10px;
+  font-weight: 300;
+}
+
+.template-logo {
+  margin-right: 15px;
+}
+
+.template-logo img {
+  max-width: 100%;
+}
+
+/*********************/
+/* List of Templates */
+/*********************/
+.templates-list {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.template-listitem {
+  display: inline-flex;
+  width: 300px;
+  height: 200px;
+  background-color: @mainColor1-light;
+  border-color: @mainColor1;
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 5px;
+  margin-left: 10px;
+  padding: 5px;
+  position: relative;
+  cursor: pointer;
+}
+
+.template-listitem.active {
+  background-color: @mainColor2;
+  border-color: @mainColor2-light;
+  cursor: default;
+}
+
+.template-listitem-title {
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+.template-listitem-description {
+  font-size: 0.8em;
+}
+
+.template-listitem-logo {
+  margin-right: 15px;
+  height: 100%;
+}
+
+.template-listitem-logo img {
+  width: 100%;
+}
+
+
+
+/**********************/
+/* Errors on Template */
+/**********************/
+.compiling-errors-header {
+  margin-bottom: 0px;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-weight: bold;
+  color: @redAlert;
+}
+
+.compiling-errors {
+  margin-top: 0px;
+}
+
+
+/**************/
+/* Word Links */
+/**************/
+
+.word-link {
+  font-weight: bold;
+  cursor: pointer;
+  color: @mainColor1-light;
+}
+.word-link:hover {
+  color: @mainColor1;
+  text-decoration: underline;
+}
+.word-link-cancel {
+  color: @mainColor2-light;
+}
+.word-link-cancel:hover {
+  color: @mainColor2;
+}
+
+/**********************************/
+/* List of cards in the Card view */
+/**********************************/
+
+select.cards-list {
+  width: 100%;
+  height: 10em;
+}
+
+/***********************/
+/* --- Canvas View --- */
+/***********************/
+.canvas-view {
+  overflow: auto;
+}
+.canvas-view canvas {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+#card-canvas-box {
+  overflow-x: auto;
+}
+
+/***********************/
+/* --- Page Footer --- */
+/***********************/
+
+.page-footer {
+  color: @mainColor2;
+  text-align: center;
+  font-style: italic;
+}
+
+a {
+  color: @mainColor1; }
+a:hover {
+  color: @mainColor2; }
+
+/***************************/
+/* --- Editable Fields --- */
+/***************************/
+.editable-field {
+  margin-bottom: 4px;
+}
+
+.editable-field label {
+  margin-bottom: 0px;
+  font-size: 0.8em;
+}
+
+.editable-field select {
+  width: 100%;
+  height: 32px;
+  font-size: 16px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.image-field-buttons {
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+}
+
+.image-field-buttons .button {
+  border: solid 1px @mainColor1;
+  padding: 0px 8px;
+  text-align: center;
+  font-weight: 400;
+  color: @mainColor1;
+  background-color: @mainColor2-lighter;
+  cursor: pointer;
+  margin-right: 10px;
+  flex: 1;
+  width: 100%;
+}
+.image-field-buttons .button:hover {
+  border: solid 2px @mainColor1;
+  font-weight: 800;
+  background-color: @mainColor2-light;
+}
+.image-field-buttons .button.disabled {
+  border: solid 1px @disabledBorderColor;
+  font-weight: 400;
+  background-color: @disabledBackgroundColor;
+  cursor: default;
+}
+
+/***************************/
+/* --- Group of Fields --- */
+/***************************/
+.editable-fields-group {
+  width: 100%;
+  position: relative;
+  border: solid 2px @mainColor1;
+  margin-bottom: 4px;
+  background-color: fade(@mainColor1, 30%); // rgba(7, 136, 155, 0.3);
+}
+
+.editable-fields-group .editable-fields {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.group-expand-button {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  cursor: pointer;
+}
+
+.group-expand-button:hover {
+  color: @mainColor1-light;
+}
+
+.group-header {
+  background-color: @mainColor1;
+  padding: 0px 8px;
+  font-weight: 800;
+  color: @backgroundMainColor;
+}
+
+.group-label {
+
+}
+/******************************/
+/* --- Cropper for Images --- */
+/******************************/
+.crop-modal-box {
+  position: fixed;
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  height: 100%;
+  background-color: @modalBackground; // rgba(0,0,0, 0.8);
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.crop-modal-wrapper {
+  display: flex;
+  flex-flow: column;
+  width: 80%;
+  height: 80%;
+  margin: 5% 10%;
+  background-color: @mainColor2-lighter;
+  padding: 1em;
+  border: solid 1px @mainColor2;
+}
+
+.crop-modal-header {
+  flex: 2;
+  position: relative;
+}
+.crop-modal-close {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  font-weight: 1000;
+  cursor: pointer;
+  font-size: 32px;
+}
+
+.crop-modal-footer {
+  flex: 7;
+  position: relative;
+}
+.crop-modal-right {
+  display: none;
+  flex: 1;
+}
+.crop-modal-main {
+  flex: 16;
+  display: flex;
+  flex-flow: row;
+  max-height: 80%;
+}
+.crop-modal-container {
+  flex: 4;
+}
+
+.crop-modal-container img {
+  height: auto;
+  width: auto;
+  max-width:100%;
+  max-height: 100%;
+}
+.crop-modal-footer .button {
+  background-color: @mainColor1;
+  padding: 0px 8px;
+  font-weight: 800;
+  color: @backgroundMainColor;
+  cursor: pointer;
+  padding: 0px 8px;
+  text-align: center;
+  font-weight: 400;
+  position: absolute;
+  right: 0px;
+}
+.crop-modal-footer .button:hover {
+  font-weight: 800;
+  background-color: darken(@mainColor1, 10%);
+}

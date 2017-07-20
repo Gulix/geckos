@@ -1,0 +1,45 @@
+// main: ./styles.less
+
+.modal-box {
+  position: fixed;
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  height: 100%;
+  background-color: @modalBackground;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.modal-box-content {
+  width: 80%;
+  max-height: 80%;
+  margin: 5% 10%;
+  background-color: @mainColor2-lighter;
+  padding: 1em;
+  border: solid 1px @mainColor2;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-weight: 1000;
+  cursor: pointer;
+  font-size: 32px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+
+  .input-text {
+    flex: 1;
+    margin-top: 3px;
+  }
+}

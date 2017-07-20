@@ -14,11 +14,23 @@ require.config({
         'ajv': 'vendor/ajv.min',
         'cropper': 'vendor/cropper',
         'webfont': 'vendor/webfont',
-        'jszip': 'vendor/jszip.min'
+        'jszip': 'vendor/jszip.min',
+        'moment': 'vendor/moment.min',
+        'pdfmake': 'vendor/vfs_fonts',
+        'pdfMakeLib': 'vendor/pdfmake.min'
     },
     shim: {
         'jQuery': {
             exports: '$'
+        },
+        pdfMakeLib :
+        {
+            exports: 'pdfMake'
+        },
+        pdfmake :
+        {
+            deps: ['pdfMakeLib'],
+            exports: 'pdfMake'
         }
     }
 });
@@ -30,7 +42,7 @@ require(['knockout',
          'components/registration',
          'knockoutExtensions',
          /*'ko-ext/ckeditor',*/ 'ko-ext/ddslick', 'ko-ext/fabric', 'ko-ext/jscolor', 'ko-ext/simplecolorpicker',
-         'ko-ext/slideBottomListItem',
+         'ko-ext/slideRight', 'ko-ext/progressBar', 'ko-ext/slideIn',
          'domReady!'
        ], function(ko, CardTemplateVM, EngineVM, tabs, components){
 
@@ -86,12 +98,26 @@ require(['knockout',
 
 /* Scrolling let's the Canvas on top (see also Issue #87) */
 $(window).scroll(function(){
+  // Difference between normal height and revised height of the canvas
   var existingDiff = $('#card-canvas-header').outerHeight();
-  console.log(existingDiff);
+  // Position of the scroll on the Viewport
   var scrollTop = $(window).scrollTop();
+  var viewportHeight = $(window).height();
+  // Top position of the Canvas
   var boxTop = $('#card-canvas-box').offset().top;
+  var canvasHeight = $('#card-canvas-view').outerHeight();
+  console.log("existingDiff : " + existingDiff);
+  console.log("scrollTop : " + scrollTop);
+  console.log("boxTop : " + boxTop);
+  console.log("canvasHeight : " + canvasHeight);
+  console.log("viewportHeight : " + viewportHeight);
+
+  // If the ScrollPosition is beneath the top of the canvas, the canvas is lowered
   if (scrollTop > (boxTop + existingDiff)) {
     var diff = scrollTop - boxTop - existingDiff;
+    if ((viewportHeight < canvasHeight) && (diff > (canvasHeight - viewportHeight))) {
+      diff -= (canvasHeight - viewportHeight) + existingDiff;
+    }
     $('#card-canvas-view').css({'margin-top': diff + 'px'});
   } else {
     $('#card-canvas-view').css({'margin-top': '0px'});

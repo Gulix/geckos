@@ -3,6 +3,7 @@
   <div class="image-field-buttons">
     <div class="button" data-bind="click: field.loadImage">Load image</div>
     <div class="button" data-bind="click: field.editImage, css: { disabled: field.isDisabled }">Edit image</div>
+    <div class="button" data-bind="click: field.clearImage, css: { disabled: field.isDisabled }">Clear image</div>
   </div>
   <input style="display: none" type="file" data-bind="attr: { id: field.uniqueInputId }, event: { change: field.uploadImage($element.files[0])}"></input>
   <div style="display:none;" class="crop-modal-box" data-bind="visible: field.isCropShown">

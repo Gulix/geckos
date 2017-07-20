@@ -86,11 +86,12 @@
             {
                 "description":{ "type":"string" },
                 "title":{ "type":"string" },
+                "key": { "type": "string" },
                 "credits":{ "type":"string" },
                 "url":{ "type":"string", "format": "uri" },
                 "logo": { "logo": "string", "format": "uri" }
             },
-            "required": [ "description", "title" ]
+            "required": [ "description", "title", "key" ]
         },
         "sharedOptions":
         {

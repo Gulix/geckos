@@ -55,7 +55,7 @@ define(['knockout'], function(ko) {
 
     /* Advanced String variables, with specific "valueType" */
     self.getAdvancedValue = function(valueType) {
-      return '';
+      return self.numericValue().toString();
     }
   }
 

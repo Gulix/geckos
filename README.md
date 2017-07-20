@@ -45,10 +45,17 @@ It's free, open-source, and you can get it, modify it, enhance it. Feel free to 
 * **Helpers & others libraries**
   * [FileSaver.js](https://github.com/eligrey/FileSaver.js/)
   * [TinyColor](http://bgrins.github.io/TinyColor/)
+  * [AJV](https://github.com/epoberezkin/ajv)
+  * [Cropper](https://github.com/fengyuanchen/cropper)
+  * [Typekit Web Font Loader](https://github.com/typekit/webfontloader)
+  * [Lodash](https://lodash.com/)
+  * [JsZip](https://stuk.github.io/jszip/)
+  * [Moment.js](https://momentjs.com/)
+  * [PdfMake](https://github.com/bpampuch/pdfmake)
 
 ## The How
 
-Since the first Alpha release, **Geckos** have its [own page](http://gulix.github.io/geckos). You can also download the source code and launch the index.html page to test it locally.
+Since the first Alpha release, **Geckos** have its [own page](http://gulix.github.io/geckos). You can also download the source code and launch the index.html page to test it locally (works with Firefox, with other browsers, you need to put up a web server).
 
 The [wiki](http://www.gulix.fr/geckos/wiki/) will provide guides on [how to create a template](http://www.gulix.fr/geckos/wiki/doku.php?id=en:tutorial:tutorial01), to use it to make cards, and how in general **Geckos** is working. Something is missing ? Feel free to use the [Issues](https://github.com/Gulix/geckos/issues) to ask for an explanation.
 

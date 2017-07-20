@@ -1,11 +1,16 @@
 define(['knockout',
         'fabric',
-        'jszip',
         'viewModels/field-factory',
         'viewModels/cardTemplateVM',
         'viewModels/UItemplates',
+        'viewModels/exportVM',
+        'viewModels/menuManager',
+        'viewModels/datastorage/loadsaveVM',
+        'viewModels/messagebar',
+        'viewModels/pdf/pdfGenerator',
+        'utils',
         'FileSaver'
-      ], function(ko, fabric, jszip, FieldFactory, CardTemplateVM, UITemplates) {
+      ], function(ko, fabric, FieldFactory, CardTemplateVM, UITemplates, Export, MenuManager, LoadSaveVM, MessageBar, PdfGenerator, Utils) {
 
 /***************************************/
 /* Main entry point of the application */
@@ -19,10 +24,18 @@ define(['knockout',
     self.cardTemplate = ko.observable(null);
     self.listCards = ko.observableArray([]);
     self.editableCard = ko.observable(null);
+    self.exportVM = Export.loadExportVM(self);
+    self.loadsaveVM = LoadSaveVM.getVM(self);
+    self.menu = MenuManager.newMenuManager();
+    self.generalMessageBar = MessageBar.getMessageBar();
+    self.pdfGenerator = PdfGenerator.getPdfGenerator(self);
 
     self.isCardSelected = ko.pureComputed(function() {
       return self.editableCard() != null;
     });
+    self.isTemplateLoaded = ko.pureComputed(function() {
+      return self.cardTemplate() != null;
+    })
 
     self.generatedTemplate = ko.pureComputed(function() {
       var jsonCanvas = { };
@@ -41,6 +54,14 @@ define(['knockout',
     }
 
     self.UItemplates = ko.observable(null);
+
+    self.getActiveTemplateKey = ko.computed(function() {
+      if ((self.cardTemplate() == null)
+         || (self.cardTemplate().description() == null)) {
+         return "";
+      }
+      return self.cardTemplate().description().key;
+    });
     /********************************/
     /* End of Variables declaration */
     /********************************/
@@ -49,7 +70,7 @@ define(['knockout',
     /* Functions declaration */
     /*************************/
     self.changeTemplate = function(newTemplate) {
-      self.clearList();
+      self.removeAllCardsFromDeck();
       newTemplate.updateCanvasSize = self.updateCanvasSize;
       newTemplate.updateCards = self.updateCardsFields;
       self.cardTemplate(newTemplate);
@@ -107,103 +128,38 @@ define(['knockout',
         }
       }
     }
+
     self.clearList = function() {
+      if (self.listCards().length <= 0) {
+        self.generalMessageBar.showWarning("There is no cards to remove.");
+      } else {
+        self.removeAllCardsFromDeck();
+        self.generalMessageBar.showInfo("All cards have been removed from the list.");
+      }
+    }
+
+    self.removeAllCardsFromDeck = function() {
       self.editableCard(null);
       self.listCards.removeAll();
     }
 
-    /* ------------------------ */
-    /* --- Export functions --- */
-    /* ------------------------ */
-
-    /* Export the content of the Canvas as a PNG */
-    /* TODO : Getting a dedicated object / function to export a card (template + data) as a PNG */
-
-    // Get the currend card as a PNG file to save on the client computer
-    self.exportAsPNG = function() {
-      self.exportCurrentCardAsPNG(self.saveBlobOnComputer);
-    }
-    // Get the currend card as a SVG file to save on the client computer
-    self.exportAsSVG = function() {
-      self.exportCurrentCardAsSVG(self.saveBlobOnComputer);
-    }
-    // Get all the cards as a ZIP file of PNG files
-    self.exportAllCardsToPngZip = function() {
-      var zip = new jszip();
-      self.exportSingleCardToZip(0, self.exportCurrentCardAsPNG, zip);
-    }
-    // Get all the cards as a ZIP file of SVG files
-    self.exportAllCardsToSvgZip = function() {
-      var zip = new jszip();
-      self.exportSingleCardToZip(0, self.exportCurrentCardAsSVG, zip);
-    }
-
-    // Current selected card is exported in PNG
-    // Following action with the generated blob depends on parameter
-    self.exportCurrentCardAsPNG = function(actionOnBlob) {
-      if (self.editableCard() != null) {
-        var canvas = document.getElementById('fabricjs-canvas');
-        canvas.toBlob(function(blob) {
-          actionOnBlob(blob, self.editableCard().cardName() + ".png");
-        });
-      }
-    }
-
-    // Current selected card is exported in PNG
-    // Following action with the generated blob depends on parameter
-    self.exportCurrentCardAsSVG = function(actionOnBlob) {
-      if (self.editableCard() != null) {
-        if (self.canvas != null) {
-          var svg = self.canvas.toSVG();
-          var blob = new Blob([svg], {type: "image/svg+xml"});
-          actionOnBlob(blob, self.editableCard().cardName() + ".svg");
-        }
-      }
-    }
-
-    // Save a blob (SVG or PNG) as a file on the computer
-    self.saveBlobOnComputer = function(blob, fullCardName) {
-      saveAs(blob, fullCardName);
-    }
-
-
-    self.exportSingleCardToZip = function(iCardIndex, exportBlob, zipper) {
-      if ((iCardIndex >= 0) && (iCardIndex < self.listCards().length)) {
-        self.editableCard(self.listCards()[iCardIndex]);
-
-        // Timeout is needed in order to ensure the canvas is fully loaded
-        setTimeout(function() {
-          exportBlob(function(blob, fullCardName) { self.addBlobFileToZip(blob, iCardIndex, zipper, fullCardName, exportBlob); });
-        }, 500); // TODO - Need to find a better way to launch action when the canvas is ready
-      } else if (iCardIndex >= self.listCards().length) {
-        zipper.generateAsync({type:"blob"})
-          .then(function(content) {
-            saveAs(content, "allMyCards.zip");
-        });
-      }
-    }
-
-    self.addBlobFileToZip = function(blob, iCardIndex, zipper, fullCardName, actionOnBlob) {
-      // TODO - Check for 'same name' cards
-
-      zipper.file(fullCardName, blob);
-      self.exportSingleCardToZip(iCardIndex + 1, actionOnBlob, zipper);
-    };
-
-    /* ------------------------------- */
-    /* --- End of Export functions --- */
-    /* ------------------------------- */
-
     /* Import / Export data for list of cards */
-    self.exportList = function() {
-      var jsonData = [ ];
-      for(var iCard = 0; iCard < self.listCards().length; iCard++) {
-        jsonData.push(self.listCards()[iCard].getSavedData());
-      }
+    self.getListOfCardsAsJson = function() {
+      var jsonData = [];
+      _.forEach(self.listCards(), function(card) {
+        jsonData.push(card.getSavedData());
+      })
+      return jsonData;
+    }
+
+    self.exportListToFile = function() {
+      self.menu.hideLoadSave();
+      var jsonData = self.getListOfCardsAsJson();
       var blob = new Blob([JSON.stringify(jsonData)], {type: "text/plain;charset=utf-8"});
       saveAs(blob, "listCards.json");
     }
-    self.loadList = function() {
+    self.loadListFromFile = function() {
+      self.menu.hideLoadSave();
       $("#file-load-list").click();
     }
     self.importList = function(jsonData) {
@@ -227,17 +183,14 @@ define(['knockout',
     /* Initialization of the FabricJS canvas object */
     self.canvas = new fabric.StaticCanvas('fabricjs-canvas');
 
-    /* Initialization of the Card Template */
-    //var cardTemplateVM = CardTemplateVM.newCardTemplateVM(jsonTemplate, self.updateCanvasSize, self.updateCardsFields);
-    //self.cardTemplate(cardTemplateVM);
-    //self.updateCanvasSize();
-
-    /* Initializing the list with one item */
-    //self.listCards().push(self.createNewCard());
-    //self.editableCard(self.listCards()[0]);
-
     /* Initializing the UI parts */
     self.UItemplates(UITemplates.getUItemplates(self));
+
+    /* Auto-load of a template from URL */
+    var defaultTemplateKey = Utils.getFromUrl('default_template');
+    if (defaultTemplateKey !== undefined) {
+      self.UItemplates().uiList().loadDefaultTemplate(defaultTemplateKey);
+    }
 
   }
   return {

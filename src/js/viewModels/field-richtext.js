@@ -15,7 +15,7 @@ define(['knockout', 'fabricjs-textStyles'], function(ko, styles) {
     self.textDisplayed = ko.observable(function() {
       return styles.generateTextFromHtml(self.textValue());
     });
-    self.styles = function() {
+    self.getObjectValue = function() {
       return styles.generateStylesFromHtml(self.textValue());
     };
 

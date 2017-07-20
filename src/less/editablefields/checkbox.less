@@ -1,0 +1,47 @@
+// main: ../styles.less
+.editable-field.editable-checkbox {
+
+    color: @editableTextColor;
+    margin-top: 4px;
+
+    [type="checkbox"]:checked,
+    [type="checkbox"]:not(:checked) {
+      position: absolute;
+      left: -9999px;
+    }
+
+    [type="checkbox"]:not(:checked) + label,
+    [type="checkbox"]:checked + label {
+      position: relative;
+      cursor: pointer;
+      display: inline-block;
+      margin-right: 1em;
+      line-height: 20px;
+    }
+    [type="checkbox"]:not(:checked) + label:before,
+    [type="checkbox"]:checked + label:before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: .5em;
+      background: @backgroundMainColor;
+      border: solid 1px @mainColor1;
+      vertical-align: middle;
+      color: transparent;
+      font-size: 1em;
+      -webkit-transition: .6s;
+      transition: .6s;
+      text-align: center;
+    }
+
+    [type="checkbox"]:checked + label:before {
+      color: @backgroundMainColor;
+      background: @mainColor1;
+    }
+
+
+    [type="checkbox"]:checked + label:before {
+      content: '\2714';
+    }
+}

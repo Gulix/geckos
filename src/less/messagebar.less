@@ -1,0 +1,31 @@
+// main: ./styles.less
+
+.message-bar {
+  margin-top: 0px;
+  border-bottom: 1px solid black;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 10px;
+  padding-bottom: 15px;
+
+  &.info {
+    color: @infoColor;
+    background-color: @infoBackgroundColor;
+    border-bottom-color: @infoColor;
+  }
+  &.success {
+    color: @successColor;
+    background-color: @successBackgroundColor;
+    border-bottom-color: @successColor;
+  }
+  &.warning {
+    color: @warningColor;
+    background-color: @warningBackgroundColor;
+    border-bottom-color: @warningColor;
+  }
+  &.error {
+    color: @errorColor;
+    background-color: @errorBackgroundColor;
+    border-bottom-color: @errorColor;
+  }
+}

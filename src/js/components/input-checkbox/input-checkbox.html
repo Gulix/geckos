@@ -1,6 +1,4 @@
-<div class="editable-field">
-  <label>
-    <input type='checkbox' data-bind='checked: field.checkedValue'></input>
-    <span data-bind="text: field.label"></span>
-  </label>
+<div class="editable-field editable-checkbox">
+  <input type="checkbox" data-bind="attr: { id: 'chk-' + field.name }, checked: field.checkedValue" />
+  <label data-bind="attr: { for: 'chk-' + field.name }, text: field.label"></label>
 </div>

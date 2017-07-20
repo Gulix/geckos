@@ -172,6 +172,7 @@
 	"description": {
 		"description": "Character card for Warhammer Quest - Silver Tower (by Games Workshop)",
     "title":"Warhammer Quest - Silver Tower character",
+    "key": "ws-silvertower-character",
     "credits": "by Nicolas Ronvel",
     "url": "https://github.com/Gulix/geckos/"
 	}

@@ -82,6 +82,7 @@
 		"description": "Template for Blood Bowl's Starplayers, with the V3 design",
     "title":"Blood Bowl Classic Starplayer",
     "credits": "by Nicolas Ronvel",
+    "key": "bb-starplayers-v3",
     "url": "https://github.com/Gulix/geckos/"
 	}
 }

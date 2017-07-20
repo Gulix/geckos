@@ -5,7 +5,7 @@
       "src":"https://fonts.gstatic.com/s/rokkitt/v10/Uu8b3yBtxQPmPTMr0WQ_CA.woff2"
     }
   ],
-	"sharedOptions": [
+  "sharedOptions":[
     {
       "key":"characterType",
       "options":[
@@ -90,13 +90,13 @@
       ]
     }
   ],
-	"styles": [
-		{
-			"key": "classic",
-			"name": "Classic template",
-			"description": "The classic template for Pulp Alley.",
-			"isDefault": false,
-			"fields": [
+  "styles":[
+    {
+      "key":"classic",
+      "name":"Classic template",
+      "description":"The classic template for Pulp Alley.",
+      "isDefault":false,
+      "fields":[
         {
           "name":"name",
           "label":"Name",
@@ -158,8 +158,8 @@
           "default":"d10",
           "sharedOptions":"healthDice"
         }
-		  ],
-			"canvasFields": [
+      ],
+      "canvasFields":[
         {
           "id":"fullBox",
           "type":"rect",
@@ -431,18 +431,18 @@
           "fontSize":16,
           "text":"{{if (card[health] == 'd12') { value = 'Out'; }}}"
         }
-		  ],
-			"canvasBackground": "#CAAB7F",
-			"canvasWidth": 340,
-			"canvasHeight": 495
-		},
-		{
-			"key": "classic_fr",
-			"basedOn": "classic",
-			"name": "Template classique",
-			"description": "Le template classique pour Pulp Alley, en français.",
+      ],
+      "canvasBackground":"#CAAB7F",
+      "canvasWidth":340,
+      "canvasHeight":495
+    },
+    {
+      "key":"classic_fr",
+      "basedOn":"classic",
+      "name":"Template classique",
+      "description":"Le template classique pour Pulp Alley, en français.",
       "isDefault":false,
-			"fields": [
+      "fields":[
         {
           "name":"name",
           "label":"Nom",
@@ -490,8 +490,8 @@
           "name":"health",
           "label":"Santé"
         }
-		  ],
-			"canvasFields": [
+      ],
+      "canvasFields":[
         {
           "id":"brawlLabel",
           "text":"Bagarre"
@@ -5318,44 +5318,44 @@
           "path":[ [ "m", 382.5, 1016.8622 ], [ "l", 29.5, 0 ], [ "l", 11.5, 11 ], [ "l", 0, 9 ], [ "l", -11, 11 ], [ "l", -30, 0 ], [ "l", -11, -11 ], [ "l", 0, -9 ], [ "z" ] ],
           "pathOffset":{ "x":397.5, "y":1032.3622 }
         },
-        { "id":"brawlLabel", "order": 4, "type":"textbox", "text":"brawl", "fontWeight": "normal", "fontSize":24, "fontFamily":"Rokkitt", "width":100, "top":65, "left":247, "textAlign":"center" },
-        { "id":"shootLabel", "order": 4, "type":"textbox", "text":"shoot", "fontWeight": "normal", "fontSize":24, "fontFamily":"Rokkitt", "width":100, "top":151, "left":247, "textAlign":"center" },
-        { "id":"dodgeLabel", "order": 4, "type":"textbox", "text":"dodge", "fontWeight": "normal", "fontSize":24, "fontFamily":"Rokkitt", "width":100, "top":237, "left":247, "textAlign":"center" },
-        { "id":"mightLabel", "order": 4, "type":"textbox", "text":"might", "fontWeight": "normal", "fontSize":24, "fontFamily":"Rokkitt", "width":100, "top":65, "left":347, "textAlign":"center" },
-        { "id":"finesseLabel", "order": 4, "type":"textbox", "text":"finesse", "fontWeight": "normal", "fontSize":24, "fontFamily":"Rokkitt", "width":100, "top":151, "left":347, "textAlign":"center" },
-        { "id":"cunningLabel", "order": 4, "type":"textbox", "text":"cunning", "fontWeight": "normal", "fontSize":24, "fontFamily":"Rokkitt", "width":100, "top":237, "left":347, "textAlign":"center" },
-        { "id":"brawlValue", "order": 4, "type": "textbox", "fontFamily":"Rokkitt", "fontSize":32, "fontWeight":"bold", "left":254, "top":100, "width": 72, "textAlign": "center" },
-        { "id":"shootValue", "order": 4, "type": "textbox", "fontFamily":"Rokkitt", "fontSize":32, "fontWeight":"bold", "left":254, "top":186, "width": 72, "textAlign": "center" },
-        { "id":"dodgeValue", "order": 4, "type": "textbox", "fontFamily":"Rokkitt", "fontSize":32, "fontWeight":"bold", "left":254, "top":272, "width": 72, "textAlign": "center" },
-        { "id":"mightValue", "order": 4, "type": "textbox", "fontFamily":"Rokkitt", "fontSize":32, "fontWeight":"bold", "left":354, "top":100, "width": 72, "textAlign": "center" },
-        { "id":"finesseValue", "order": 4, "type": "textbox", "fontFamily":"Rokkitt", "fontSize":32, "fontWeight":"bold", "left":354, "top":186, "width": 72, "textAlign": "center" },
-        { "id":"cunningValue", "order": 4, "type": "textbox", "fontFamily":"Rokkitt", "fontSize":32, "fontWeight":"bold", "left":354, "top":272, "width": 72, "textAlign": "center" },
-        { "id":"descriptionValue", "order": 4, "width":380, "left":30, "top":374, "fontSize":20, "text":"$description$", "styles":"£description", "fontFamily": "Rokkitt" },
+        { "id":"brawlLabel", "zindex": 4, "type":"textbox", "text":"brawl", "fontWeight": "normal", "fontSize":24, "fontFamily":"Rokkitt", "width":100, "top":65, "left":247, "textAlign":"center" },
+        { "id":"shootLabel", "zindex": 4, "type":"textbox", "text":"shoot", "fontWeight": "normal", "fontSize":24, "fontFamily":"Rokkitt", "width":100, "top":151, "left":247, "textAlign":"center" },
+        { "id":"dodgeLabel", "zindex": 4, "type":"textbox", "text":"dodge", "fontWeight": "normal", "fontSize":24, "fontFamily":"Rokkitt", "width":100, "top":237, "left":247, "textAlign":"center" },
+        { "id":"mightLabel", "zindex": 4, "type":"textbox", "text":"might", "fontWeight": "normal", "fontSize":24, "fontFamily":"Rokkitt", "width":100, "top":65, "left":347, "textAlign":"center" },
+        { "id":"finesseLabel", "zindex": 4, "type":"textbox", "text":"finesse", "fontWeight": "normal", "fontSize":24, "fontFamily":"Rokkitt", "width":100, "top":151, "left":347, "textAlign":"center" },
+        { "id":"cunningLabel", "zindex": 4, "type":"textbox", "text":"cunning", "fontWeight": "normal", "fontSize":24, "fontFamily":"Rokkitt", "width":100, "top":237, "left":347, "textAlign":"center" },
+        { "id":"brawlValue", "zindex": 4, "type": "textbox", "fontFamily":"Rokkitt", "fontSize":32, "fontWeight":"bold", "left":254, "top":100, "width": 72, "textAlign": "center" },
+        { "id":"shootValue", "zindex": 4, "type": "textbox", "fontFamily":"Rokkitt", "fontSize":32, "fontWeight":"bold", "left":254, "top":186, "width": 72, "textAlign": "center" },
+        { "id":"dodgeValue", "zindex": 4, "type": "textbox", "fontFamily":"Rokkitt", "fontSize":32, "fontWeight":"bold", "left":254, "top":272, "width": 72, "textAlign": "center" },
+        { "id":"mightValue", "zindex": 4, "type": "textbox", "fontFamily":"Rokkitt", "fontSize":32, "fontWeight":"bold", "left":354, "top":100, "width": 72, "textAlign": "center" },
+        { "id":"finesseValue", "zindex": 4, "type": "textbox", "fontFamily":"Rokkitt", "fontSize":32, "fontWeight":"bold", "left":354, "top":186, "width": 72, "textAlign": "center" },
+        { "id":"cunningValue", "zindex": 4, "type": "textbox", "fontFamily":"Rokkitt", "fontSize":32, "fontWeight":"bold", "left":354, "top":272, "width": 72, "textAlign": "center" },
+        { "id":"descriptionValue", "zindex": 4, "width":380, "left":30, "top":374, "fontSize":20, "text":"$description$", "styles":"£description", "fontFamily": "Rokkitt" },
         {
           "id":"healthLabel", "width":100, "textAlign":"right", "top":564, "fontWeight":"normal", "fontSize":32, "fontFamily": "Rokkitt", "text":"health",
           "left": "{{if (card[health] == 'd12') value = 13; else if (card[health] == 'd10') value = 75; else if (card[health] == 'd8') value = 138; else value = 201;}}"
         },
         {
-          "id":"healthValue1", "width":50, "left":121, "textAlign":"center", "top":566, "order": 4,
+          "id":"healthValue1", "width":50, "left":121, "textAlign":"center", "top":566, "zindex": 4,
           "fontWeight":"bold", "fontFamily": "Rokkitt", "fontSize":22, "text":"d12",
           "visible": "{{value = (card[health] == 'd12');}}"
         },
         {
-          "id":"healthValue2", "width":50, "left":184, "textAlign":"center", "top":570, "order": 4,
+          "id":"healthValue2", "width":50, "left":184, "textAlign":"center", "top":570, "zindex": 4,
           "fontWeight":"bold", "fontFamily": "Rokkitt", "fontSize":22, "text":"d10",
           "visible": "{{value = (card[health] == 'd10') || (card[health] == 'd12');}}"
         },
         {
-          "id":"healthValue3", "width":50, "left":247, "textAlign":"center", "top":570, "order": 4,
+          "id":"healthValue3", "width":50, "left":247, "textAlign":"center", "top":570, "zindex": 4,
           "fontWeight":"bold", "fontFamily": "Rokkitt", "fontSize":22, "text":"d8",
           "visible": "{{value = (card[health] == 'd8') || (card[health] == 'd10') || (card[health] == 'd12');}}"
         },
         {
-          "id":"healthValue4", "width":50, "left":310, "textAlign":"center", "top":570, "order": 4,
+          "id":"healthValue4", "width":50, "left":310, "textAlign":"center", "top":570, "zindex": 4,
           "fontWeight":"bold", "fontFamily": "Rokkitt", "fontSize":22, "text":"{{value = (card[health] == 'd6*') ? 'd6*' : 'd6'}}"
         },
         {
-          "id":"healthValue5", "width":50, "left":373, "textAlign":"center", "top":570, "order": 4,
+          "id":"healthValue5", "width":50, "left":373, "textAlign":"center", "top":570, "zindex": 4,
           "fontWeight":"bold", "fontFamily": "Rokkitt", "fontSize":22, "text":"KO"
         }
       ],
@@ -5448,13 +5448,14 @@
           "id":"healthLabel",
           "text":"santé"
         }
-		  ]
-		}
-	],
-	"description": {
-		"description": "Basic template for Pulp Alley",
+      ]
+    }
+  ],
+  "description":{
+    "description":"Basic template for Pulp Alley",
     "title":"Pulp Alley",
-    "credits": "by Nicolas Ronvel",
-    "url": "https://github.com/Gulix/geckos/"
-	}
+    "key": "pulpalley-character",
+    "credits":"by Nicolas Ronvel",
+    "url":"https://github.com/Gulix/geckos/"
+  }
 }

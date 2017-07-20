@@ -8244,7 +8244,7 @@ fabric.util.object.extend(fabric.Object.prototype, {
                 var pathUrl = object.path;
                 path = elements[0];
                 delete object.path;
-                fabric.util.object.extend(path, object);
+                path.setOptions(object);
                 path.setSourcePath(pathUrl);
                 callback && callback(path);
             });

@@ -1,0 +1,27 @@
+// main: ./styles.less
+
+.progressBar {
+  position: relative;
+  width: 95%;
+  height: 50px;
+  margin: 20px auto;
+  border: 3px solid @mainColor1;
+  border-radius: 5px;
+  overflow: hidden;
+
+  div {
+   position: relative;
+   height: 100%;
+   background-color: @mainColor1-light;
+ }
+
+ .progressText {
+   position: absolute;
+   margin: 0 auto;
+   top: 12px;
+   left: 0;
+   right: 0;
+   background-color: transparent;
+   text-align: center;
+ }
+}
