@@ -106,11 +106,13 @@ $(window).scroll(function(){
   // Top position of the Canvas
   var boxTop = $('#card-canvas-box').offset().top;
   var canvasHeight = $('#card-canvas-view').outerHeight();
+  /*
   console.log("existingDiff : " + existingDiff);
   console.log("scrollTop : " + scrollTop);
   console.log("boxTop : " + boxTop);
   console.log("canvasHeight : " + canvasHeight);
   console.log("viewportHeight : " + viewportHeight);
+  */
 
   // If the ScrollPosition is beneath the top of the canvas, the canvas is lowered
   if (scrollTop > (boxTop + existingDiff)) {
