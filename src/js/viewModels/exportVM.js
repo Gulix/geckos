@@ -65,12 +65,18 @@ define(['jszip',
     /*************************/
     /* Functions declaration */
     /*************************/
+    self.closeSlidingMenu = function() {
+      self.mainEngineVM.menu.hideCardExport();
+    }
+
     // Get the currend card as a PNG file to save on the client computer
     self.exportAsPNG = function() {
+      self.closeSlidingMenu()
       self.exportCurrentCardAsPNG(self.saveBlobOnComputer);
     }
     // Get the currend card as a SVG file to save on the client computer
     self.exportAsSVG = function() {
+      self.closeSlidingMenu()
       self.exportCurrentCardAsSVG(self.saveBlobOnComputer);
     }
 
@@ -88,6 +94,8 @@ define(['jszip',
 
     // Opens the Modal Box for Zip Generation
     self.exportAllToZip = function() {
+      self.closeSlidingMenu()
+
       self.isModalDisplayed(true);
       self.indexCurrentExportedFile(0);
       self.totalExportedFiles(self.mainEngineVM.listCards().length);
