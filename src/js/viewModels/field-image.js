@@ -8,6 +8,8 @@ define(['knockout', 'cropper'], function(ko, cropper) {
     self.ratio = 1;
     if (jsonField.ratio != undefined) {
       self.ratio = jsonField.ratio;
+    } else if ((jsonField.height != undefined) && (jsonField.width != undefined)) {
+      self.ratio = jsonField.width / jsonField.height;
     }
     self.isNameField = false;
     if (jsonField.isNameField != undefined) {
