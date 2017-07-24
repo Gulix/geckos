@@ -507,6 +507,7 @@
 		"title": "Frostgrave - Monster Cards",
 		"key": "fg-monsters",
 		"credits": "Nicolas Ronvel, Natasha Sinegina for the Snowflake (http://www.supercoloring.com/silhouettes/snowflake) CC-By-SA",
-		"url": "https://github.com/Gulix/geckos/"
+		"url": "https://github.com/Gulix/geckos/",
+		"logo": "./js/templates/frostgrave/logo-monster.png"
 	}
 }
