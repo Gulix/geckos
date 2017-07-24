@@ -157,6 +157,7 @@
 				"strokeWidth": 0.30
 			}, {
 				"type": "textbox",
+				"id": "lblMove",
 				"zindex": 3,
 				"width": 61,
 				"height": 30,
@@ -169,6 +170,7 @@
 				"textAlign": "center"
 			}, {
 				"type": "textbox",
+				"id": "lblFight",
 				"zindex": 3,
 				"width": 61,
 				"height": 30,
@@ -181,6 +183,7 @@
 				"textAlign": "center"
 			}, {
 				"type": "textbox",
+				"id": "lblShoot",
 				"zindex": 3,
 				"width": 61,
 				"height": 30,
@@ -193,6 +196,7 @@
 				"textAlign": "center"
 			}, {
 				"type": "textbox",
+				"id": "lblArmour",
 				"zindex": 3,
 				"width": 76,
 				"height": 30,
@@ -205,6 +209,7 @@
 				"textAlign": "center"
 			}, {
 				"type": "textbox",
+				"id": "lblWillpower",
 				"zindex": 3,
 				"width": 76,
 				"height": 30,
@@ -217,6 +222,7 @@
 				"textAlign": "center"
 			}, {
 				"type": "textbox",
+				"id": "lblHealth",
 				"zindex": 3,
 				"width": 61,
 				"height": 30,
@@ -352,6 +358,144 @@
 				"path": "./js/templates/frostgrave/palmtree-frame.svg"
 			}
 		]
+	}, {
+		"key": "flocon",
+		"name": "Flocon",
+		"basedOn": "snowflake",
+		"description": "Carte de Monstres pour Frostgrave, thème Flocon",
+		"fields":
+		[
+			{
+				"name": "name",
+				"label": "Nom",
+				"default": "Nom du Monstre"
+			}, {
+				"name": "grp_attributes",
+				"label": "Attributs"
+			}, {
+				"name": "move",
+				"label": "Mouvement"
+			}, {
+				"name": "fight",
+				"label": "Combat"
+			}, {
+				"name": "shoot",
+				"label": "Tir"
+			}, {
+				"name": "armour",
+				"label": "Armure"
+			}, {
+				"name": "willpower",
+				"label": "Volonté"
+			}, {
+				"name": "health",
+				"label": "Santé"
+			}, {
+				"name": "picture",
+				"label": "Image"
+			}, {
+				"name": "description",
+				"label": "Description",
+				"default": "<p><em>Courte description</em></p><p><strong>Type de monstre</strong></p><p>Quelques règles spéciales</p>"
+			}, {
+				"name": "grp_display",
+				"label": "Affichage"
+			}, {
+				"name": "mainColor",
+				"label": "Couleur du cadre"
+			}
+		],
+		"canvasFields":
+		[
+			{
+				"id": "lblMove",
+				"text": "Mouv."
+			}, {
+				"id": "lblFight",
+				"text": "Combat"
+			}, {
+				"id": "lblShoot",
+				"text": "Tir"
+			}, {
+				"id": "lblArmour",
+				"text": "Armure"
+			}, {
+				"id": "lblWillpower",
+				"text": "Volonté"
+			}, {
+				"id": "lblHealth",
+				"text": "Santé"
+			}
+		]
+	}, {
+		"key": "palmier",
+		"name": "Palmier",
+		"basedOn": "palmtree",
+		"description": "Carte de Monstres pour Frostgrave, thème Palmier",
+		"fields":
+		[
+			{
+				"name": "name",
+				"label": "Nom",
+				"default": "Nom du Monstre"
+			}, {
+				"name": "grp_attributes",
+				"label": "Attributs"
+			}, {
+				"name": "move",
+				"label": "Mouvement"
+			}, {
+				"name": "fight",
+				"label": "Combat"
+			}, {
+				"name": "shoot",
+				"label": "Tir"
+			}, {
+				"name": "armour",
+				"label": "Armure"
+			}, {
+				"name": "willpower",
+				"label": "Volonté"
+			}, {
+				"name": "health",
+				"label": "Santé"
+			}, {
+				"name": "picture",
+				"label": "Image"
+			}, {
+				"name": "description",
+				"label": "Description",
+				"default": "<p><em>Courte description</em></p><p><strong>Type de monstre</strong></p><p>Quelques règles spéciales</p>"
+			}, {
+				"name": "grp_display",
+				"label": "Affichage"
+			}, {
+				"name": "mainColor",
+				"label": "Couleur du cadre"
+			}
+		],
+		"canvasFields":
+		[
+			{
+				"id": "lblMove",
+				"text": "Mouv."
+			}, {
+				"id": "lblFight",
+				"text": "Combat"
+			}, {
+				"id": "lblShoot",
+				"text": "Tir"
+			}, {
+				"id": "lblArmour",
+				"text": "Armure"
+			}, {
+				"id": "lblWillpower",
+				"text": "Volonté"
+			}, {
+				"id": "lblHealth",
+				"text": "Santé"
+			}
+		]
 	}],
 	"webfonts": {
 		"google": {
@@ -362,7 +506,7 @@
 		"description": "Monster Cards for the Frostgrave game",
 		"title": "Frostgrave - Monster Cards",
 		"key": "fg-monsters",
-		"credits": "Nicolas Ronvel",
+		"credits": "Nicolas Ronvel, Natasha Sinegina for the Snowflake (http://www.supercoloring.com/silhouettes/snowflake) CC-By-SA",
 		"url": "https://github.com/Gulix/geckos/"
 	}
 }
