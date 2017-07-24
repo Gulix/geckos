@@ -1,0 +1,513 @@
+{
+	"globals": {
+		"icon-color": "#ffffff",
+		"icon-color-old": "#fff5c4"
+	},
+	"styles": [{
+		"key": "snowflake",
+		"name": "Snowflake",
+		"isDefault": true,
+		"description": "Snowflake themed card for Frostgrave Monsters",
+		"canvasBackground": "rgba(255,255,255,255)",
+		"canvasWidth": 510,
+		"canvasHeight": 382.741,
+		"fields":
+		[
+			{
+				"name": "name",
+				"label": "Name",
+				"default": "Monster Name"
+			}, {
+				"name": "grp_attributes",
+				"label": "Attributes",
+				"type": "group",
+				"expanded": true
+			}, {
+				"name": "move",
+				"label": "Move",
+				"default": "6",
+				"group": "grp_attributes"
+			}, {
+				"name": "fight",
+				"label": "Fight",
+				"default": "+2",
+				"group": "grp_attributes"
+			}, {
+				"name": "shoot",
+				"label": "Shoot",
+				"default": "+0",
+				"group": "grp_attributes"
+			}, {
+				"name": "armour",
+				"label": "Armour",
+				"default": "10",
+				"group": "grp_attributes"
+			}, {
+				"name": "willpower",
+				"label": "Willpower",
+				"default": "+1",
+				"group": "grp_attributes"
+			}, {
+				"name": "health",
+				"label": "Health",
+				"default": "6",
+				"group": "grp_attributes"
+			}, {
+				"name": "picture",
+				"label": "Picture",
+				"type": "image",
+				"ratio": 0.6192
+			}, {
+				"name": "description",
+				"label": "Description",
+				"default": "<p><em>Some description</em></p><p><strong>Type of monster</strong></p><p>Some kind of special rule</p>",
+				"type": "richtext"
+			}, {
+				"name": "grp_display",
+				"label": "Display",
+				"type": "group",
+				"expanded": false
+			}, {
+				"name": "mainColor",
+				"label": "Frame Color",
+				"default": "#aad4ff",
+				"type": "color",
+				"group": "grp_display"
+			}
+		],
+		"canvasFields":
+		[
+			{
+				"type": "path",
+				"id": "frame",
+				"fill": "#$mainColor$",
+				"stroke": "#000000",
+				"strokeWidth": 0.58,
+				"path": "./js/templates/frostgrave/snowflake-frame.svg",
+				"zindex": 1
+			}, {
+				"type": "rect",
+				"zindex": 2,
+				"width": 401,
+				"height": 70,
+				"left": 54.5,
+				"top": 80,
+				"fill": "#$mainColor$",
+				"stroke": "#000000",
+				"strokeWidth": 0.58
+			}, {
+				"type": "rect",
+				"zindex": 3,
+				"width": 61,
+				"height": 30,
+				"left": 59.5,
+				"top": 115,
+				"fill": "#FFFFFF",
+				"stroke": "#000000",
+				"strokeWidth": 0.30
+			}, {
+				"type": "rect",
+				"zindex": 3,
+				"width": 61,
+				"height": 30,
+				"left": 125.5,
+				"top": 115,
+				"fill": "#FFFFFF",
+				"stroke": "#000000",
+				"strokeWidth": 0.30
+			}, {
+				"type": "rect",
+				"zindex": 3,
+				"width": 61,
+				"height": 30,
+				"left": 191.5,
+				"top": 115,
+				"fill": "#FFFFFF",
+				"stroke": "#000000",
+				"strokeWidth": 0.30
+			}, {
+				"type": "rect",
+				"zindex": 3,
+				"width": 61,
+				"height": 30,
+				"left": 257.5,
+				"top": 115,
+				"fill": "#FFFFFF",
+				"stroke": "#000000",
+				"strokeWidth": 0.30
+			}, {
+				"type": "rect",
+				"zindex": 3,
+				"width": 61,
+				"height": 30,
+				"left": 323.5,
+				"top": 115,
+				"fill": "#FFFFFF",
+				"stroke": "#000000",
+				"strokeWidth": 0.30
+			}, {
+				"type": "rect",
+				"zindex": 3,
+				"width": 61,
+				"height": 30,
+				"left": 389.5,
+				"top": 115,
+				"fill": "#FFFFFF",
+				"stroke": "#000000",
+				"strokeWidth": 0.30
+			}, {
+				"type": "textbox",
+				"id": "lblMove",
+				"zindex": 3,
+				"width": 61,
+				"height": 30,
+				"left": 59.5,
+				"top": 85,
+				"fill": "#000000",
+				"text": "Move",
+				"fontSize": 20,
+				"fontFamily": "Bellefair",
+				"textAlign": "center"
+			}, {
+				"type": "textbox",
+				"id": "lblFight",
+				"zindex": 3,
+				"width": 61,
+				"height": 30,
+				"left": 125.5,
+				"top": 85,
+				"fill": "#000000",
+				"text": "Fight",
+				"fontSize": 20,
+				"fontFamily": "Bellefair",
+				"textAlign": "center"
+			}, {
+				"type": "textbox",
+				"id": "lblShoot",
+				"zindex": 3,
+				"width": 61,
+				"height": 30,
+				"left": 191.5,
+				"top": 85,
+				"fill": "#000000",
+				"text": "Shoot",
+				"fontSize": 20,
+				"fontFamily": "Bellefair",
+				"textAlign": "center"
+			}, {
+				"type": "textbox",
+				"id": "lblArmour",
+				"zindex": 3,
+				"width": 76,
+				"height": 30,
+				"left": 250,
+				"top": 87,
+				"fill": "#000000",
+				"text": "Armour",
+				"fontSize": 18,
+				"fontFamily": "Bellefair",
+				"textAlign": "center"
+			}, {
+				"type": "textbox",
+				"id": "lblWillpower",
+				"zindex": 3,
+				"width": 76,
+				"height": 30,
+				"left": 316,
+				"top": 87,
+				"fill": "#000000",
+				"text": "Willpower",
+				"fontSize": 18,
+				"fontFamily": "Bellefair",
+				"textAlign": "center"
+			}, {
+				"type": "textbox",
+				"id": "lblHealth",
+				"zindex": 3,
+				"width": 61,
+				"height": 30,
+				"left": 389.5,
+				"top": 87,
+				"fill": "#000000",
+				"text": "Health",
+				"fontSize": 18,
+				"fontFamily": "Bellefair",
+				"textAlign": "center"
+			}, {
+				"type": "textbox",
+				"zindex": 4,
+				"width": 61,
+				"height": 30,
+				"left": 59.5,
+				"top": 117,
+				"fill": "#000000",
+				"text": "$move$",
+				"fontSize": 24,
+				"fontFamily": "Montserrat",
+				"textAlign": "center"
+			}, {
+				"type": "textbox",
+				"zindex": 4,
+				"width": 61,
+				"height": 30,
+				"left": 125.5,
+				"top": 117,
+				"fill": "#000000",
+				"text": "$fight$",
+				"fontSize": 24,
+				"fontFamily": "Montserrat",
+				"textAlign": "center"
+			}, {
+				"type": "textbox",
+				"zindex": 4,
+				"width": 61,
+				"height": 30,
+				"left": 191.5,
+				"top": 117,
+				"fill": "#000000",
+				"text": "$shoot$",
+				"fontSize": 24,
+				"fontFamily": "Montserrat",
+				"textAlign": "center"
+			}, {
+				"type": "textbox",
+				"zindex": 4,
+				"width": 76,
+				"height": 30,
+				"left": 250,
+				"top": 117,
+				"fill": "#000000",
+				"text": "$armour$",
+				"fontSize": 24,
+				"fontFamily": "Montserrat",
+				"textAlign": "center"
+			}, {
+				"type": "textbox",
+				"zindex": 4,
+				"width": 76,
+				"height": 30,
+				"left": 316,
+				"top": 117,
+				"fill": "#000000",
+				"text": "$willpower$",
+				"fontSize": 24,
+				"fontFamily": "Montserrat",
+				"textAlign": "center"
+			}, {
+				"type": "textbox",
+				"zindex": 4,
+				"width": 61,
+				"height": 30,
+				"left": 389.5,
+				"top": 117,
+				"fill": "#000000",
+				"text": "$health$",
+				"fontSize": 24,
+				"fontFamily": "Montserrat",
+				"textAlign": "center"
+			}, {
+				"type": "textbox",
+				"zindex": 4,
+				"width": 413,
+				"height": 47,
+				"left": 17,
+				"top": 20,
+				"fill": "#000000",
+				"text": "$name$",
+				"fontSize": 42,
+				"fontFamily": "Bellefair",
+				"textAlign": "right"
+			}, {
+				"type": "textbox",
+				"zindex": 4,
+				"width": 345,
+				"height": 215,
+				"left": 150,
+				"top": 155,
+				"fill": "#000000",
+				"fontSize": 16,
+				"fontFamily": "Montserrat",
+				"textAlign": "left",
+				"text": "$description$",
+				"styles": "£description"
+			}, {
+				"type": "image",
+				"left": 10,
+				"width": 135,
+				"top": 155,
+				"height": 218,
+				"src": "$picture"
+			}
+		]
+	}, {
+		"key": "palmtree",
+		"name": "Palmtree",
+		"basedOn": "snowflake",
+		"description": "Palmtree themed card for Frostgrave Monsters",
+		"fields":
+		[
+			{
+				"name": "mainColor",
+				"default": "#2cd41a"
+			}
+		],
+		"canvasFields":
+		[
+			{
+				"id": "frame",
+				"path": "./js/templates/frostgrave/palmtree-frame.svg"
+			}
+		]
+	}, {
+		"key": "flocon",
+		"name": "Flocon",
+		"basedOn": "snowflake",
+		"description": "Carte de Monstres pour Frostgrave, thème Flocon",
+		"fields":
+		[
+			{
+				"name": "name",
+				"label": "Nom",
+				"default": "Nom du Monstre"
+			}, {
+				"name": "grp_attributes",
+				"label": "Attributs"
+			}, {
+				"name": "move",
+				"label": "Mouvement"
+			}, {
+				"name": "fight",
+				"label": "Combat"
+			}, {
+				"name": "shoot",
+				"label": "Tir"
+			}, {
+				"name": "armour",
+				"label": "Armure"
+			}, {
+				"name": "willpower",
+				"label": "Volonté"
+			}, {
+				"name": "health",
+				"label": "Santé"
+			}, {
+				"name": "picture",
+				"label": "Image"
+			}, {
+				"name": "description",
+				"label": "Description",
+				"default": "<p><em>Courte description</em></p><p><strong>Type de monstre</strong></p><p>Quelques règles spéciales</p>"
+			}, {
+				"name": "grp_display",
+				"label": "Affichage"
+			}, {
+				"name": "mainColor",
+				"label": "Couleur du cadre"
+			}
+		],
+		"canvasFields":
+		[
+			{
+				"id": "lblMove",
+				"text": "Mouv."
+			}, {
+				"id": "lblFight",
+				"text": "Combat"
+			}, {
+				"id": "lblShoot",
+				"text": "Tir"
+			}, {
+				"id": "lblArmour",
+				"text": "Armure"
+			}, {
+				"id": "lblWillpower",
+				"text": "Volonté"
+			}, {
+				"id": "lblHealth",
+				"text": "Santé"
+			}
+		]
+	}, {
+		"key": "palmier",
+		"name": "Palmier",
+		"basedOn": "palmtree",
+		"description": "Carte de Monstres pour Frostgrave, thème Palmier",
+		"fields":
+		[
+			{
+				"name": "name",
+				"label": "Nom",
+				"default": "Nom du Monstre"
+			}, {
+				"name": "grp_attributes",
+				"label": "Attributs"
+			}, {
+				"name": "move",
+				"label": "Mouvement"
+			}, {
+				"name": "fight",
+				"label": "Combat"
+			}, {
+				"name": "shoot",
+				"label": "Tir"
+			}, {
+				"name": "armour",
+				"label": "Armure"
+			}, {
+				"name": "willpower",
+				"label": "Volonté"
+			}, {
+				"name": "health",
+				"label": "Santé"
+			}, {
+				"name": "picture",
+				"label": "Image"
+			}, {
+				"name": "description",
+				"label": "Description",
+				"default": "<p><em>Courte description</em></p><p><strong>Type de monstre</strong></p><p>Quelques règles spéciales</p>"
+			}, {
+				"name": "grp_display",
+				"label": "Affichage"
+			}, {
+				"name": "mainColor",
+				"label": "Couleur du cadre"
+			}
+		],
+		"canvasFields":
+		[
+			{
+				"id": "lblMove",
+				"text": "Mouv."
+			}, {
+				"id": "lblFight",
+				"text": "Combat"
+			}, {
+				"id": "lblShoot",
+				"text": "Tir"
+			}, {
+				"id": "lblArmour",
+				"text": "Armure"
+			}, {
+				"id": "lblWillpower",
+				"text": "Volonté"
+			}, {
+				"id": "lblHealth",
+				"text": "Santé"
+			}
+		]
+	}],
+	"webfonts": {
+		"google": {
+			"families": ["Bellefair", "Montserrat:400,400i,700,700i"]
+		}
+	},
+	"description": {
+		"description": "Monster Cards for the Frostgrave game",
+		"title": "Frostgrave - Monster Cards",
+		"key": "fg-monsters",
+		"credits": "Nicolas Ronvel, Natasha Sinegina for the Snowflake (http://www.supercoloring.com/silhouettes/snowflake) CC-By-SA",
+		"url": "https://github.com/Gulix/geckos/",
+		"logo": "./js/templates/frostgrave/logo-monster.png"
+	}
+}

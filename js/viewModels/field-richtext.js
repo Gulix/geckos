@@ -10,13 +10,26 @@ define(['knockout', 'fabricjs-textStyles'], function(ko, styles) {
       self.isNameField = jsonField.isNameField;
     }
 
-    self.textValue = ko.observable(jsonField.default);
+    self._textValue = ko.observable(jsonField.default);
+    self.textValue = ko.computed({
+      read: function () {
+        if ((self._textValue() == null) || (self._textValue().length < 1)) {
+          return "<p></p>";
+        }
+        else {
+          return self._textValue();
+        }
+      },
+      write: function (value) {
+        self._textValue(value);
+      }
+    })
 
     self.textDisplayed = ko.observable(function() {
-      return styles.generateTextFromHtml(self.textValue());
+      return styles.generateTextFromHtml(self._textValue());
     });
     self.getObjectValue = function() {
-      return styles.generateStylesFromHtml(self.textValue());
+      return styles.generateStylesFromHtml(self._textValue());
     };
 
     /* Value to be used in the templates */
@@ -26,12 +39,12 @@ define(['knockout', 'fabricjs-textStyles'], function(ko, styles) {
 
     /* Value to be exported to be saved */
     self.getJsonValue = function() {
-      return self.textValue();
+      return self._textValue();
     }
 
     /* Setting value from Json stored data */
     self.setValue = function(value) {
-      self.textValue(value);
+      self._textValue(value);
     }
 
     self.getComponentName = function() {
