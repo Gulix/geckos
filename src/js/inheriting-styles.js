@@ -1,67 +1,95 @@
 define(['utils'], function(Utils) {
 
-  // Create a Style object, based on another style
-  function getStyleFromBase(parentStyle, childStyle) {
+  /* ---------------------------------------------------------- */
+  /* -- Create a Style object, based on another style        -- */
+  /* -- Child Style is the current style used                -- */
+  /* -- Parent Style is the style that the child is based on -- */
+  /* ---------------------------------------------------------- */
+  function getStyleFromBase(childStyle, parentStyle) {
     var builtStyle = { };
 
     // Basic properties
-    builtStyle.name = (parentStyle.name == undefined) ? childStyle.name : parentStyle.name;
-    builtStyle.description = (parentStyle.description == undefined) ? childStyle.description : parentStyle.description;
-    builtStyle.canvasBackground = (parentStyle.canvasBackground == undefined) ? childStyle.canvasBackground : parentStyle.canvasBackground;
-    builtStyle.canvasWidth = (parentStyle.canvasWidth == undefined) ? childStyle.canvasWidth : parentStyle.canvasWidth;
-    builtStyle.canvasHeight = (parentStyle.canvasHeight == undefined) ? childStyle.canvasHeight : parentStyle.canvasHeight;
+    builtStyle.name = (childStyle.name == undefined) ? parentStyle.name : childStyle.name;
+    builtStyle.description = (childStyle.description == undefined) ? parentStyle.description : childStyle.description;
+    builtStyle.canvasBackground = (childStyle.canvasBackground == undefined) ? parentStyle.canvasBackground : childStyle.canvasBackground;
+    builtStyle.canvasWidth = (childStyle.canvasWidth == undefined) ? parentStyle.canvasWidth : childStyle.canvasWidth;
+    builtStyle.canvasHeight = (childStyle.canvasHeight == undefined) ? parentStyle.canvasHeight : childStyle.canvasHeight;
 
     // Fields, identified by 'name'
-    builtStyle.fields = [ ]; // TODO : need to think about an 'order of fields' with this inheritance
-    // Adding all the fields existing in the childStyle (modified by the parentStyle, if needed)
-    for(var iChildField = 0; iChildField < childStyle.fields.length; iChildField++) {
-      var childField = Utils.clone(childStyle.fields[iChildField]);
-      var parentField = getFieldByName(parentStyle.fields, childField.name);
-      if (parentField == null) {
-        // Field not modified by parentStyle
-        addElementTo(childField, builtStyle.fields);
-      } else {
-        addElementTo(Object.assign(childField, parentField), builtStyle.fields);
-      }
-    }
-    // Adding the fields existing only in the parentStyle
-    for (var iParentField = 0; iParentField < parentStyle.fields.length; iParentField++) {
-      var parentField = Utils.clone(parentStyle.fields[iParentField]);
+    builtStyle.fields = [ ];
+    // Adding all the fields existing in the parentStyle (modified by the childStyle, if needed)
+    _.forEach(parentStyle.fields, function(_parentField) {
+      var parentField = Utils.clone(_parentField);
       var childField = getFieldByName(childStyle.fields, parentField.name);
       if (childField == null) {
+        // Field not modified by childStyle
         addElementTo(parentField, builtStyle.fields);
+      } else {
+        addElementTo(Object.assign(parentField, childField), builtStyle.fields);
       }
-    }
+    });
+    // Adding the fields existing only in the childStyle
+    _.forEach(childStyle.fields, function(_childField) {
+      var childField = Utils.clone(_childField);
+      var parentField = getFieldByName(parentStyle.fields, childField.name);
+      if (parentField == null) {
+        addElementTo(childField, builtStyle.fields);
+      }
+    });
 
     // Canvas fields, identified by 'id' (if no id, fields always added)
-    builtStyle.canvasFields = [ ]; // TODO : need to think about an 'order of fields / z-index' with this inheritance
-    // Adding all the canvasFields existing in the childStyle (modified by the parentStyle, if needed)
-    for(var iChildField = 0; iChildField < childStyle.canvasFields.length; iChildField++) {
-      var childField = Utils.clone(childStyle.canvasFields[iChildField]);
+    builtStyle.canvasFields = [ ];
+
+    // Creating the CanvasFields by populating from the childStyle
+    // The fields with an ID look in the child fields to get child-value
+    populateCanvasFields(parentStyle.canvasFields, builtStyle.canvasFields, childStyle.canvasFields);
+
+    // Adding the fields from the Child with no ID or an ID not existing in the Parent
+    _.forEach(childStyle.canvasFields, function(childField) {
       var parentField = null;
       if (childField.id != undefined) {
         parentField = getCanvasFieldById(parentStyle.canvasFields, childField.id);
       }
       if (parentField == null) {
-        // Field not modified by parentStyle
         addElementTo(childField, builtStyle.canvasFields);
-      } else {
-        addElementTo(Object.assign(childField, parentField), builtStyle.canvasFields);
       }
-    }
-    // Adding the canvasFields existing only in the parentStyle
-    for (var iParentField = 0; iParentField < parentStyle.canvasFields.length; iParentField++) {
-      var parentField = Utils.clone(parentStyle.canvasFields[iParentField]);
-      var childField = null;
-      if (parentField.id != undefined) {
-        childField = getCanvasFieldById(childStyle.canvasFields, parentField.id);
-      }
-      if (childField == null) {
-        addElementTo(parentField, builtStyle.canvasFields);
-      }
-    }
+    });
 
     return builtStyle;
+  }
+
+  /* ---------------------------------------------------------------------------------------------- */
+  /* -- Recursive loop to populate the canvas fields                                             -- */
+  /* -- Some fields have children fields (path-group) that need to be dealt with                 -- */
+  /* -- A child style can have a level-1 field with an id linking to level-2 (or deeper) element -- */
+  /* ---------------------------------------------------------------------------------------------- */
+  function populateCanvasFields(fieldsFromParent, childRootArray, childCanvasFields) {
+    var canvasFieldsFromChildStyle = Utils.clone(childCanvasFields);
+    _.forEach(fieldsFromParent, function(_fieldFromParent) {
+      var fieldFromParent = Utils.clone(_fieldFromParent);
+      var fieldForChild = { };
+
+      // If the current 'fieldFromParent' has properties with Array value,
+      // each element of the Array is transformed (if needed)
+      _.forOwn(fieldFromParent, function(value, key) {
+        if (Array.isArray(value)) {
+          fieldForChild[key] = [ ];
+          populateCanvasFields(value, fieldForChild[key], canvasFieldsFromChildStyle);
+        } else {
+          fieldForChild[key] = value;
+        }
+      });
+
+      // If the current 'fieldFromParent' has an ID, we need to know if there is an occurence in the child fields
+      if ((fieldFromParent.id != undefined) && (fieldFromParent.id != null)) {
+        var childOccurence = getCanvasFieldById(canvasFieldsFromChildStyle, fieldFromParent.id);
+        if (childOccurence != null) {
+          fieldForChild = Object.assign(fieldForChild, childOccurence);
+        }
+      }
+
+      addElementTo(fieldForChild, childRootArray);
+    });
   }
 
   function getFieldByName(fields, name) {
@@ -74,14 +102,20 @@ define(['utils'], function(Utils) {
   }
 
   function getCanvasFieldById(canvasFields, id) {
-    var field = null;
-    for (var iField = 0; iField < canvasFields.length; iField++) {
-      if ((canvasFields[iField].id != null) && (canvasFields[iField].id == id)) {
-        field = canvasFields[iField];
+    var searchedField = null;
+    _.forEach(canvasFields, function(field) {
+      if ((field.id != null) && (field.id == id)) {
+        searchedField = Utils.clone(field);
+      } else {
+        _.forOwn(field, function(value, key) {
+          if (Array.isArray(value)) {
+            searchedField = getCanvasFieldById(value, id);
+          }
+        });
       }
-    }
+    });
 
-    return field;
+    return searchedField;
   }
 
   // Simply push the element to an array, unless it is 'ignored'
@@ -93,6 +127,6 @@ define(['utils'], function(Utils) {
   }
 
   return {
-    getStyleFromBase: function(parentStyle, childStyle) { return getStyleFromBase(parentStyle, childStyle); }
+    getStyleFromBase: function(childStyle, parentStyle) { return getStyleFromBase(childStyle, parentStyle); }
   }
 });
