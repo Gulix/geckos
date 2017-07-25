@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Fond"
+   x="0px"
+   y="0px"
+   width="446.25"
+   height="623.625"
+   viewBox="0 0 446.25 623.625"
+   enable-background="new 0 0 178.58 249.45"
+   xml:space="preserve"
+   sodipodi:docname="ETS-Type2-GradientHaut.svg"
+   inkscape:version="0.92.0 r15299"><metadata
+   id="metadata321"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title /></cc:Work></rdf:RDF></metadata><defs
+   id="defs319">
+	
+	
+	
+
+		
+		
+		
+		
+			
+
+		
+			
+
+		
+
+		
+
+	
+			<defs
+   id="defs193">
+				<path
+   inkscape:connector-curvature="0"
+   d="m 157.584,57.134 -0.875,-1 c -0.094,-0.108 -0.23,-0.17 -0.374,-0.171 -0.001,0 -0.001,0 -0.002,0 -0.143,0 -0.278,0.061 -0.374,0.168 -0.019,0.021 -1.885,2.082 -4.876,2.082 -0.838,0 -1.458,0.037 -1.813,0.104 L 15.106,58.325 C 14.666,58.25 14.044,58.213 13.208,58.213 10.234,58.213 8.35,56.151 8.331,56.13 8.236,56.024 8.1,55.963 7.958,55.963 7.852,55.975 7.676,56.025 7.581,56.133 l -0.875,1 c -0.171,0.196 -0.16,0.495 0.021,0.681 0.305,0.314 1.855,2.21 1.855,3.648 0,0.062 0.015,0.122 0.041,0.178 l -0.25,65.385 c 0,2.757 2.243,5.001 5,5.001 h 137.5 c 2.757,0 5,-2.244 5,-5.001 l -0.042,-66.304 c 0.412,-1.446 1.717,-2.893 1.728,-2.904 0.189,-0.185 0.199,-0.484 0.025,-0.683 z m -6.459,73.684 h -138 c -1.93,0 -3.5,-1.57 -3.5,-3.5 V 66.943 c 0,-1.93 1.57,-3.5 3.5,-3.5 h 138 c 1.93,0 3.5,1.57 3.5,3.5 v 60.375 c 0,1.93 -1.57,3.5 -3.5,3.5 z"
+   id="SVGID_7_" />
+			</defs>
+			<clipPath
+   id="SVGID_8_">
+				<use
+   height="100%"
+   width="100%"
+   y="0"
+   x="0"
+   style="overflow:visible"
+   id="use195"
+   overflow="visible"
+   xlink:href="#SVGID_7_" />
+			</clipPath>
+			
+		
+				
+					<linearGradient
+   id="SVGID_9_"
+   gradientUnits="userSpaceOnUse"
+   x1="19.250999"
+   y1="93.761703"
+   x2="50.000999"
+   y2="93.761703"
+   gradientTransform="matrix(-2.6009004,0,0,2.6009004,454.9688,-14.568279)">
+					<stop
+   offset="0.2832"
+   style="stop-color:#560F19"
+   id="stop198" />
+					<stop
+   offset="1"
+   style="stop-color:#BE0A26"
+   id="stop200" />
+				</linearGradient>
+				
+				
+			</defs><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1280"
+   inkscape:window-height="961"
+   id="namedview317"
+   showgrid="false"
+   fit-margin-top="0"
+   fit-margin-left="0"
+   fit-margin-right="0"
+   fit-margin-bottom="0"
+   inkscape:zoom="0.94608139"
+   inkscape:cx="149.67454"
+   inkscape:cy="260.97532"
+   inkscape:window-x="1272"
+   inkscape:window-y="-8"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Fond" />
+
+<path
+   style="fill:#be0a26;stroke-width:2.60090041"
+   d="M 398.06836 130.98633 C 397.69643 130.98633 397.34539 131.14554 397.0957 131.42383 C 397.0463 131.47843 392.19336 136.83789 384.41406 136.83789 C 382.23451 136.83789 380.62254 136.93509 379.69922 137.10938 L 324.92188 137.11328 L 324.92188 150.44141 L 384.52344 150.44141 C 389.54318 150.44141 393.62695 154.52323 393.62695 159.54297 L 393.62695 316.57227 C 393.62695 321.59201 389.54318 325.67578 384.52344 325.67578 L 324.92188 325.67578 L 324.92188 328.81836 L 383.86719 328.81836 C 391.03788 328.81836 396.87305 322.98124 396.87305 315.81055 L 396.76367 143.36133 C 397.83524 139.60043 401.2292 135.8372 401.25781 135.80859 C 401.74938 135.32742 401.77485 134.54883 401.32227 134.03125 L 399.04688 131.42969 C 398.80239 131.1488 398.44875 130.98893 398.07422 130.98633 L 398.06836 130.98633 z "
+   id="path190" />
+</svg>

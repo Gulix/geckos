@@ -36,7 +36,7 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles", "webfont
 
     self.generateTemplate = function(cardVM) {
       var generated = { "objects" : [] };
-      var styleForCard = self._styleForCard(cardVM);
+      var styleForCard = self._styleForCard(cardVM);      
       if (styleForCard != null) {
         generated = styleForCard.generateTemplate(cardVM);
       }
