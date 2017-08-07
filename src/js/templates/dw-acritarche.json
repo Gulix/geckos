@@ -674,7 +674,7 @@
 				"text": "Danger - Peu sûr",
 				"content": [{
 					"type": "path",
-					"path": "./js/templates/dw-svg/Danger-Peu_Sur.svg"
+					"path": "./js/templates/dw-svg/Danger-Peu_sur.svg"
 				}]
 			}, {
 				"option": "danger-sure",
