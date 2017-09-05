@@ -42,6 +42,18 @@
 			"name": "name",
 			"label": "Nom",
 			"default": "Le Gué des Fées"
+		}, {
+			"name": "icontype",
+			"label": "Icône principale",
+			"default": "card-location",
+			"type": "options",
+			"sharedOptions": { "key": "icons", "options": [ "card-area", "card-creature", "card-danger", "card-discovery", "card-npc", "card-region", "card-location", "card-treasure" ] }
+		}, {
+			"name": "icon1",
+			"label": "Danger / Découverte",
+			"default": "logo-danger-discovery",
+			"type": "options",
+			"sharedOptions": { "key": "icons", "options": [ "logo-danger-discovery", "logo-discovery", "logo-danger" ] }
 		},{
 			"name": "marqueurs",
 			"label": "Marqueurs",
@@ -95,20 +107,6 @@
 			"type": "group",
 			"expanded": true
 		}, {
-			"name": "icontype",
-			"label": "Icône principale",
-			"default": "card-location",
-			"type": "options",
-			"sharedOptions": "icons",
-			"group": "grpIcones"
-		}, {
-			"name": "icon1",
-			"label": "Icône 1",
-			"default": "logo-danger-discovery",
-			"type": "options",
-			"sharedOptions": "icons",
-			"group": "grpIcones"
-		}, {
 			"name": "icon2",
 			"label": "Icône 2",
 			"default": "danger-civilized",
@@ -154,7 +152,7 @@
 				{
 					"type": "path",
 					"id": "cadres",
-					"fill": "{{ value = card[blackwhite] ? '#FFFFFF' : card[color1].toHexString(); }}",
+					"fill": "{{ value = card[blackwhite] ? '#BBB' : card[color1].toHexString(); }}",
 					"stroke": "{{ value = card[blackwhite] ? '#000000' : null; }}",
 					"strokeWidth": 0.5,
 					"path": "./js/templates/dw-svg/ETS-Type1-Couleur1.svg"
@@ -275,7 +273,7 @@
 		},{
 			"type": "textbox",
 			"left": 61,
-			"top": 14,
+			"top": 11,
 			"width": 308,
 			"height": 27,
 			"fill": "{{value = card[blackwhite] ? '#000' : (tinycolor.mostReadable(card[color1].toHexString(), ['#FFF', '#888', '#000']).toHexString());}}",
@@ -307,7 +305,7 @@
 			"height": 170,
 			"fill": "rgb(0,0,0)",
 			"text": "$impressions$",
-			"fontSize": 16,
+			"fontSize": "$impressions_fontsize",
 			"fontFamily": "Lora",
 			"lineHeight": 1.16
 		}, {
