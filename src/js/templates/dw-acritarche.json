@@ -212,7 +212,8 @@
 				}, {
 					"type": "path",
 					"id": "cadres-tentacules",
-					"fill": "{{ value = card[blackwhite] ? '#222' : card[color2].toHexString(); }}",
+					"fill": "$color2.hexa$",
+					"visible": "?!blackwhite",
 					"path": "./js/templates/dw-svg/ETS-Type1-Couleur2.svg"
 				}, {
 					"type": "path",
@@ -266,7 +267,8 @@
 				}, {
 					"type": "path",
 					"id": "titre-tentacules",
-					"fill":  "{{ value = card[blackwhite] ? '#222' : card[color2].toHexString(); }}",
+					"fill": "$color2.hexa$",
+					"visible": "?!blackwhite",
 					"path": "./js/templates/dw-svg/ETS-Titre-Couleur2.svg"
 				}
 			]
