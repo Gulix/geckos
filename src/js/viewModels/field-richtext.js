@@ -10,6 +10,24 @@ define(['knockout', 'fabricjs-textStyles'], function(ko, styles) {
       self.isNameField = jsonField.isNameField;
     }
 
+    if ((jsonField.snippets != null) && (jsonField.snippets.length > 0)) {
+      self.snippets = [];
+
+      _.forEach(jsonField.snippets, function(s) {
+        var snip = { };
+        snip.name = s.name;
+        snip.html = s.value;
+        snip.title = s.tooltip;
+        if (s.icon != null) {
+          snip.icon = "../../../../templates/" + s.icon;
+        } else if (s.dataurl != null) {
+          snip.icon = s.dataurl;
+        }
+
+        self.snippets.push(snip);
+      });
+    }
+
     self._textValue = ko.observable(jsonField.default);
     self.textValue = ko.computed({
       read: function () {

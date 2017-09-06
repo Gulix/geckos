@@ -12,13 +12,23 @@ define(['knockout', 'jscolor', 'simplecolorpicker', 'ddslick', 'ckeditor', 'jQue
         $(element).attr('id','id_' + Math.floor(new Date().valueOf()));
         id = $(element).attr('id');
       }
+      console.log("Snippets ? " + ((viewModel != null) ? (viewModel.snippets != null ? "here are snippets !" : "no snippets") : "no viewModel"));
+      console.log(JSON.stringify(viewModel));
 
       var editorElement = CKEDITOR.document.getById(id);
       editorElement.setHtml(modelValue);
       editorElement.setAttribute( 'contenteditable', 'true' );
       // Configuration needed for the EnterMode (not having breakline plus new paragraphs)
 
-      var editor = CKEDITOR.replace(id);
+      var CKconfig = { };
+      // Adding the snippets to the Field
+      if ((viewModel != null) && (viewModel.field != null) && (viewModel.field.snippets != null))
+      {
+        CKconfig.htmlbuttons = viewModel.field.snippets;
+      }
+
+
+      var editor = CKEDITOR.replace(id, CKconfig);      
       editor.on( 'change', function( evt ) {
 
         var observable;

@@ -34,7 +34,10 @@ define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
         for (var iObject = 0; iObject < self.canvasFields().length; iObject++) {
           var field = self.canvasFields()[iObject];
           var generatedObject = self.processObject(cardVM, field);
-          generated.objects.push(generatedObject);
+          if (generatedObject != null) {
+            generated.objects.push(generatedObject);
+          }
+
         }
       }
 
@@ -74,10 +77,11 @@ define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
         var array = [];
         for(var iElement = 0; iElement < jsonObject.length; iElement++) {
           var itemValue = self.processObject(cardVM, jsonObject[iElement]);
-          array.push(itemValue);
+          if (itemValue != null) { array.push(itemValue); }
         }
         return array;
       }
+
       // The object is a Boolean : he's returned as-is
       if (typeof(jsonObject) == "boolean") {
         return jsonObject;
@@ -95,6 +99,10 @@ define(["knockout", "utils", "viewModels/cardVM"], function(ko, utils, CardVM) {
         var generatedObject = { };
         for(var key in jsonObject) {
           generatedObject[key] = self.processObject(cardVM, jsonObject[key]);
+        }
+
+        if ((generatedObject.visible != null) && !generatedObject.visible) {
+          return null;
         }
         return generatedObject;
       }

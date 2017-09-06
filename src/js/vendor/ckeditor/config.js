@@ -34,6 +34,15 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Only paragraphs, no Linebreaks creating <br />
 	config.shiftEnterMode = CKEDITOR.ENTER_P;
+	
+	config.extraPlugins='panel';
+	config.extraPlugins='floatpanel';
+	config.extraPlugins='button';
+	config.extraPlugins='menu';
+	config.extraPlugins='menubutton';
+	config.extraPlugins='htmlbuttons';
+	
+	config.htmlbuttons = [ ];
 
 	config.width = "auto";
   config.height = "auto";
