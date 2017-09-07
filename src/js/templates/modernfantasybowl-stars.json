@@ -1,0 +1,92 @@
+{
+  "styles":
+  [
+      {
+          "key": "default",
+          "name": "Default",
+          "fields": [
+            {
+        			"name": "grpAspect",
+        			"label": "Aspect",
+        			"type": "group",
+        			"expanded": false
+        		}, {
+        			"name": "display_background",
+        			"label": "Afficher le fond ?",
+        			"default": false,
+        			"type": "checkbox",
+        			"group": "grpAspect"
+        		}, {
+        			"name": "blackwhite",
+        			"label": "Noir & Blanc",
+        			"default": false,
+        			"type": "checkbox",
+        			"group": "grpAspect"
+        		}, {
+        			"name": "mainColor",
+        			"label": "Main Color",
+        			"type": "color",
+        			"default": "#be0a26",
+        			"group": "grpAspect"
+        		},
+            { "name": "name", "label": "Name", "default": "Moboto" },
+            { "name": "movement", "label": "Movement", "default": "5" },
+            { "name": "strength", "label": "Strength", "default": "6" },
+            { "name": "agility", "label": "Agility", "default": "2" },
+            { "name": "armour", "label": "Armour", "default": "8" },
+            { "type": "image", "name": "portray", "label": "Portray" },
+            { "name": "cost", "label": "Cost", "default": "290.000 GP" },
+            { "name": "skills", "label": "Skills", "default": "Loner, Frenzy, Block, Mighty Blow", "type": "multiline" },
+            { "name": "teams", "label": "Teams", "default": "Zulus", "type": "multiline" }
+          ],
+          "canvasFields": [
+            {
+        			"type": "path-group",
+        			"id": "general-frame",
+        			"left": 0,
+        			"top": 0,
+        			"paths": [
+        				{
+        					"type": "path",
+        					"id": "frame",
+        					"fill": "{{ value = card[blackwhite] ? '#FFF' : card[mainColor].toHexString(); }}",
+        					"stroke": "{{ value = card[blackwhite] ? '#000000' : null; }}",
+        					"strokeWidth": 0.5,
+        					"path": "./js/templates/fantasybowl/modern-stars.svg"
+        				}
+              ]
+            },
+            { "type": "textbox", "text": "$name", "left": 71, "top": 20, "width": 319, "textAlign": "center", "fill": "#FDF3E7", "fontFamily": "Graduate", "fontWeight": 800, "fontSize": 40 },
+            { "type": "textbox", "text": "Ma", "left": 44, "top": 348, "width": 93, "textAlign": "center", "fill": "#FDF3E7", "fontFamily": "Graduate", "fontSize": 40, "fontWeight": 800 },
+            { "type": "textbox", "text": "St", "left": 137, "top": 348, "width": 93, "textAlign": "center", "fill": "#FDF3E7", "fontFamily": "Graduate", "fontSize": 40, "fontWeight": 800 },
+            { "type": "textbox", "text": "Ag", "left": 230, "top": 348, "width": 93, "textAlign": "center", "fill": "#FDF3E7", "fontFamily": "Graduate", "fontSize": 40, "fontWeight": 800 },
+            { "type": "textbox", "text": "Av", "left": 323, "top": 348, "width": 93, "textAlign": "center", "fill": "#FDF3E7", "fontFamily": "Graduate", "fontSize": 40, "fontWeight": 800 },
+            { "type": "textbox", "text": "TEAMS", "left": 386, "top": 494, "width": 132, "textAlign": "center", "fill": "#FFD800", "fontFamily": "Arial", "fontWeight": 700, "fontSize": 22 },
+            { "type": "textbox", "text": "SKILLS", "left": 18, "top": 494, "width": 347, "textAlign": "center", "fill": "#FFD800", "fontFamily": "Arial", "fontWeight": 700, "fontSize": 22 },
+            { "type": "textbox", "text": "$movement", "left": 44, "top": 418, "width": 93, "textAlign": "center", "fill": "#CAC2B8", "fontFamily": "Graduate", "fontWeight": 800, "fontSize": 46 },
+            { "type": "textbox", "text": "$strength", "left": 137, "top": 418, "width": 93, "textAlign": "center", "fill": "#CAC2B8", "fontFamily": "Graduate", "fontWeight": 800, "fontSize": 46 },
+            { "type": "textbox", "text": "$agility", "left": 230, "top": 418, "width": 93, "textAlign": "center", "fill": "#CAC2B8", "fontFamily": "Graduate", "fontWeight": 800, "fontSize": 46 },
+            { "type": "textbox", "text": "$armour", "left": 323, "top": 418, "width": 93, "textAlign": "center", "fill": "#CAC2B8", "fontFamily": "Graduate", "fontWeight": 800, "fontSize": 46 },
+            { "type": "image", "left": 15, "top": 124, "width": 354, "height":352, "src": "$portray" },
+            { "type": "textbox", "text": "$cost", "left": 18, "top": 684, "width": 504, "textAlign": "center", "fill": "#FFD800", "fontFamily": "Arial", "fontWeight": 700, "fontSize": 40, "fontStyle": "italic" },
+            { "type": "textbox", "text": "$skills", "left": 20, "top": 524, "width": 342, "textAlign": "left", "fill": "#000000", "fontFamily": "Arial", "fontWeight": 500, "fontSize": 28 },
+            { "type": "textbox", "text": "$teams", "left": 388, "top": 524, "width": 128, "textAlign": "center", "fill": "#000000", "fontFamily": "Arial", "fontWeight": 600, "fontSize": 22 }
+          ],
+          "canvasBackground": "#FDF3E7",
+          "canvasWidth": 460,
+          "canvasHeight": 635
+      }
+  ],
+  "webfonts": {
+		"google": {
+			"families": ["Graduate", "Audiowide"]
+		}
+	},
+	"description": {
+		"description": "Fantasy Bowl Stars",
+    "title":"Fantasy Bowl Stars",
+    "credits": "by Nicolas Ronvel",
+    "key": "fantasybowl-modern-stars",
+    "url": "https://github.com/Gulix/geckos/"
+	}
+}
