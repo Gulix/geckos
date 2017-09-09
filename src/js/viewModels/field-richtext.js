@@ -1,4 +1,4 @@
-define(['knockout', 'fabricjs-textStyles'], function(ko, styles) {
+define(['knockout', 'fabricjs-textStyles', 'tinycolor'], function(ko, styles, tinycolor) {
 
   function fieldRichtext(jsonField) {
     var self = this;
@@ -10,6 +10,7 @@ define(['knockout', 'fabricjs-textStyles'], function(ko, styles) {
       self.isNameField = jsonField.isNameField;
     }
 
+    // Filling snippets
     if ((jsonField.snippets != null) && (jsonField.snippets.length > 0)) {
       self.snippets = [];
 
@@ -26,6 +27,20 @@ define(['knockout', 'fabricjs-textStyles'], function(ko, styles) {
 
         self.snippets.push(snip);
       });
+    }
+
+    // Filling colored text
+    if ((jsonField.colored != null) && jsonField.colored) {
+      self.colored = true;
+      if ((jsonField.colors != null) && (jsonField.colors.length > 0)) {
+        var colors = [];
+        _.forEach(jsonField.colors, function(c) {
+          var color = tinycolor(c);
+          colors.push(color.toHex());
+        });
+
+        self.colors = _.join(colors, ',');
+      }
     }
 
     self._textValue = ko.observable(jsonField.default);

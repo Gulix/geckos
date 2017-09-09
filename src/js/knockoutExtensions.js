@@ -21,14 +21,31 @@ define(['knockout', 'jscolor', 'simplecolorpicker', 'ddslick', 'ckeditor', 'jQue
       // Configuration needed for the EnterMode (not having breakline plus new paragraphs)
 
       var CKconfig = { };
-      // Adding the snippets to the Field
-      if ((viewModel != null) && (viewModel.field != null) && (viewModel.field.snippets != null))
+      CKconfig.extraPlugins='panel,floatpanel,button,menu,menubutton,dialog,dialogui,panelbutton';
+
+      if ((viewModel != null) && (viewModel.field != null))
       {
-        CKconfig.htmlbuttons = viewModel.field.snippets;
+        // Adding the snippets to the Field
+        if (viewModel.field.snippets != null) {
+          CKconfig.extraPlugins += ',htmlbuttons';
+          CKconfig.htmlbuttons = viewModel.field.snippets;
+        }
+        // Adding colors
+        if ((viewModel.field.colored != null) && viewModel.field.colored) {
+          if ((viewModel.field.colors != null) && (viewModel.field.colors.length > 0)) {
+            CKconfig.extraPlugins += ',colorbutton';
+            CKconfig.colorButton_colors = viewModel.field.colors;
+          } else {
+            // All colors accepted
+            CKconfig.extraPlugins += ',colorbutton,colordialog';
+          }
+        }
       }
 
 
-      var editor = CKEDITOR.replace(id, CKconfig);      
+
+
+      var editor = CKEDITOR.replace(id, CKconfig);
       editor.on( 'change', function( evt ) {
 
         var observable;
