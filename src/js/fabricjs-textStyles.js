@@ -10,7 +10,8 @@ define([ ], function() {
     var charLines = [ ];
     var currentStyle = {
       "isBold": false,
-      "isItalic": false
+      "isItalic": false,
+      "color": ""
     };
 
     for (var iLine = 0; iLine < parsedHtml.length; iLine++) {
@@ -34,7 +35,8 @@ define([ ], function() {
 
     var styleBefore = {
       "isBold": style.isBold,
-      "isItalic": style.isItalic
+      "isItalic": style.isItalic,
+      "color": style.color
      };
 
     // Text element - Each char is added to charsArray with the current style
@@ -43,7 +45,8 @@ define([ ], function() {
         var charToAdd = {
           "char": html.nodeValue[iChar],
           "bold": ((style != null) && (style.isBold != undefined)) ? style.isBold : false,
-          "italic": ((style != null) && (style.isItalic != undefined)) ? style.isItalic : false
+          "italic": ((style != null) && (style.isItalic != undefined)) ? style.isItalic : false,
+          "color": ((style != null) && (style.color != undefined)) ? style.color : ""
         };
         charsArray.push(charToAdd);
       }
@@ -53,6 +56,10 @@ define([ ], function() {
         style.isBold = true;
       } else if (html.nodeName == "EM") {
         style.isItalic = true;
+      } else if (html.nodeName == "SPAN") {
+        if (html.style['color'] != null) {
+          style.color = html.style['color'];
+        }
       }
 
       for(var iChild = 0; iChild < html.childNodes.length; iChild++) {
@@ -62,6 +69,7 @@ define([ ], function() {
       }
       style.isBold = styleBefore.isBold;
       style.isItalic = styleBefore.isItalic;
+      style.color = styleBefore.color;
     }
   }
 
@@ -83,13 +91,16 @@ define([ ], function() {
       var lineWithStyle = false;
       for (var iChar = 0; iChar < charTables[iLine].length; iChar++) {
         var charElement = charTables[iLine][iChar];
-        if (charElement["bold"] || charElement['italic']) {
+        if (charElement["bold"] || charElement['italic'] || charElement["color"]) {
           var charStyle = { };
           if (charElement["bold"]) {
             charStyle['fontWeight'] = 'bold';
           }
           if (charElement["italic"]) {
             charStyle['fontStyle'] = 'italic';
+          }
+          if (charElement["color"] != null) {
+            charStyle['fill'] = charElement["color"];
           }
           stylesLine['' + iChar] = charStyle;
           lineWithStyle = true;
