@@ -36,7 +36,7 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles", "webfont
 
     self.generateTemplate = function(cardVM) {
       var generated = { "objects" : [] };
-      var styleForCard = self._styleForCard(cardVM);      
+      var styleForCard = self._styleForCard(cardVM);
       if (styleForCard != null) {
         generated = styleForCard.generateTemplate(cardVM);
       }
@@ -168,7 +168,6 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles", "webfont
     self.canvasWidth = function() {
       var style = self._styleForCard();
       if (style != null) return style.canvasWidth;
-      console.log('canvas width accessed');
       return 0;
     }
     self.canvasHeight = function() {
@@ -181,8 +180,7 @@ define(["knockout", "utils", "viewModels/styleVM", "inheriting-styles", "webfont
       return self._styleForCard().createNewCard();
     }
 
-    self.updateFieldsOfCard = function(card) {
-      console.log('cardTemplateVM.updateFieldsOfCard');
+    self.updateFieldsOfCard = function(card) {      
       self._styleForCard(card).updateFieldsOfCard(card);
     }
 

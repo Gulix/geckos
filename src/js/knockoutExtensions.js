@@ -12,8 +12,6 @@ define(['knockout', 'jscolor', 'simplecolorpicker', 'ddslick', 'ckeditor', 'jQue
         $(element).attr('id','id_' + Math.floor(new Date().valueOf()));
         id = $(element).attr('id');
       }
-      console.log("Snippets ? " + ((viewModel != null) ? (viewModel.snippets != null ? "here are snippets !" : "no snippets") : "no viewModel"));
-      console.log(JSON.stringify(viewModel));
 
       var editorElement = CKEDITOR.document.getById(id);
       editorElement.setHtml(modelValue);

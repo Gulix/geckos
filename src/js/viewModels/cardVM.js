@@ -39,7 +39,6 @@ define(['knockout', 'lodash', 'viewModels/field-factory', 'tinycolor', 'fabricjs
      *** Public functions ***
      ************************/
      self.updateFields = function(fieldList, sharedConfiguration) {
-       console.log('cardVM.updateFields');
        var fields = [];
 
        if (fieldList != null)
