@@ -65,11 +65,13 @@
 			"expanded": true
 		}, {
 			"name": "impressions",
-			"type": "multiline",
-			"lines": 8,
+			"type": "richtext",
 			"label": "Impressions",
 			"group": "grpImpressions",
-			"default": "❍ Une rivière poissonneuse et chantante.\n❍ Des pierres plates adoucies par l’usage.\nQ : À quoi peut-on deviner l’héritage des fées autour du gué ?"
+			"snippets": [
+				{ "name": "btnPuce", "icon": "dw-svg/puce.png", "value": "❍", "tooltip": "Puce" }
+			],
+			"default": "<p>❍ Une rivière poissonneuse et chantante.</p><p>❍ Des pierres plates adoucies par l’usage.</p><p>Q : À quoi peut-on deviner l’héritage des fées autour du gué ?</p>"
 		},{
 			"name":"impressions_fontsize", "label":"Taille de police", "default":16, "type": "options", "group": "grpImpressions",
 			"options": [
@@ -92,8 +94,6 @@
 			"snippets": [
 				{ "name": "btnPuce", "icon": "dw-svg/puce.png", "value": "❍", "tooltip": "Puce" }
 			],
-			"colored": true,
-			"colors": [ "be0a26", "black" ],
 			"group": "grpDetails",
 			"default": "<p>Les f&eacute;es occupaient l&rsquo;endroit avant que la civilisation ne les en chasse. Le gu&eacute; est un raccourcis, mais les &eacute;trangers le fuient comme la peste pr&eacute;textant que ses pierres sont glissantes et instables.</p><p>Quand vous <strong>franchissez le gu&eacute; sans chanter ou danser pour les f&eacute;es</strong>, lancez +DEX. Sur 10+, vous conservez votre &eacute;quilibre malgr&eacute; que la magie des f&eacute;es retourne des pierres sous vos pas. Sur 7&ndash;9, choisissez 1.</p><p>❍ Vous vous foulez la cheville (vous &ecirc;tes Secou&eacute;).</p><p>❍ Vous perdez un &Eacute;quipment dans le ruisseau (au choix du Meneur).</p>"
 		},{
@@ -310,6 +310,7 @@
 			"height": 170,
 			"fill": "rgb(0,0,0)",
 			"text": "$impressions$",
+			"styles": "£impressions",
 			"fontSize": "$impressions_fontsize",
 			"fontFamily": "Lora",
 			"lineHeight": 1.16
