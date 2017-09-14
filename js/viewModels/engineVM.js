@@ -78,7 +78,6 @@ define(['knockout',
     }
 
     self.updateCanvasSize = function() {
-      console.log('engineVM.updateCanvasSize');
       if ((self.canvas != null) && (self.cardTemplate() != null)) {
         self.canvas.setWidth(self.cardTemplate().canvasWidth());
         self.canvas.setHeight(self.cardTemplate().canvasHeight());

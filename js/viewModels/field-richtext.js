@@ -1,4 +1,4 @@
-define(['knockout', 'fabricjs-textStyles'], function(ko, styles) {
+define(['knockout', 'fabricjs-textStyles', 'tinycolor'], function(ko, styles, tinycolor) {
 
   function fieldRichtext(jsonField) {
     var self = this;
@@ -8,6 +8,39 @@ define(['knockout', 'fabricjs-textStyles'], function(ko, styles) {
     self.isNameField = false;
     if (jsonField.isNameField != undefined) {
       self.isNameField = jsonField.isNameField;
+    }
+
+    // Filling snippets
+    if ((jsonField.snippets != null) && (jsonField.snippets.length > 0)) {
+      self.snippets = [];
+
+      _.forEach(jsonField.snippets, function(s) {
+        var snip = { };
+        snip.name = s.name;
+        snip.html = s.value;
+        snip.title = s.tooltip;
+        if (s.icon != null) {
+          snip.icon = "../../../../templates/" + s.icon;
+        } else if (s.dataurl != null) {
+          snip.icon = s.dataurl;
+        }
+
+        self.snippets.push(snip);
+      });
+    }
+
+    // Filling colored text
+    if ((jsonField.colored != null) && jsonField.colored) {
+      self.colored = true;
+      if ((jsonField.colors != null) && (jsonField.colors.length > 0)) {
+        var colors = [];
+        _.forEach(jsonField.colors, function(c) {
+          var color = tinycolor(c);
+          colors.push(color.toHex());
+        });
+
+        self.colors = _.join(colors, ',');
+      }
     }
 
     self._textValue = ko.observable(jsonField.default);
