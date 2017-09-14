@@ -40,47 +40,51 @@ CKEDITOR.plugins.add( 'colorbutton', {
 				]
 			} );
 
-			var  bgOptions = {},
-				normalizeBackground = editor.config.colorButton_normalizeBackground;
+			// 'colorButton_showBackground' can hide the background button
+			if ((editor.config.colorButton_showBackground === undefined) || editor.config.colorButton_showBackground) {
 
-			if ( normalizeBackground === undefined || normalizeBackground ) {
-				// If background contains only color, then we want to convert it into background-color so that it's
-				// correctly picked by colorbutton plugin.
-				bgOptions.contentTransformations = [
-					[
-						{
-							// Transform span that specify background with color only to background-color.
-							element: 'span',
-							left: function( element ) {
-								var tools = CKEDITOR.tools;
-								if ( element.name != 'span' || !element.styles || !element.styles.background ) {
-									return false;
+				var  bgOptions = {},
+					normalizeBackground = editor.config.colorButton_normalizeBackground;
+
+				if ( normalizeBackground === undefined || normalizeBackground ) {
+					// If background contains only color, then we want to convert it into background-color so that it's
+					// correctly picked by colorbutton plugin.
+					bgOptions.contentTransformations = [
+						[
+							{
+								// Transform span that specify background with color only to background-color.
+								element: 'span',
+								left: function( element ) {
+									var tools = CKEDITOR.tools;
+									if ( element.name != 'span' || !element.styles || !element.styles.background ) {
+										return false;
+									}
+
+									var background = tools.style.parse.background( element.styles.background );
+
+									// We return true only if background specifies **only** color property, and there's only one background directive.
+									return background.color && tools.objectKeys( background ).length === 1;
+								},
+								right: function( element ) {
+									var style = new CKEDITOR.style( editor.config.colorButton_backStyle, {
+											color: element.styles.background
+										} ),
+										definition = style.getDefinition();
+
+									// Align the output object with the template used in config.
+									element.name = definition.element;
+									element.styles = definition.styles;
+									element.attributes = definition.attributes || {};
+
+									return element;
 								}
-
-								var background = tools.style.parse.background( element.styles.background );
-
-								// We return true only if background specifies **only** color property, and there's only one background directive.
-								return background.color && tools.objectKeys( background ).length === 1;
-							},
-							right: function( element ) {
-								var style = new CKEDITOR.style( editor.config.colorButton_backStyle, {
-										color: element.styles.background
-									} ),
-									definition = style.getDefinition();
-
-								// Align the output object with the template used in config.
-								element.name = definition.element;
-								element.styles = definition.styles;
-								element.attributes = definition.attributes || {};
-
-								return element;
 							}
-						}
-					]
-				];
-			}
+						]
+					];
+				}
 
-			addButton( 'BGColor', 'back', lang.bgColorTitle, 20, bgOptions );
+				addButton( 'BGColor', 'back', lang.bgColorTitle, 20, bgOptions );
+			}
 		}
 
 		function addButton( name, type, title, order, options ) {

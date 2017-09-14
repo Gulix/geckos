@@ -30,6 +30,9 @@ define(['knockout', 'jscolor', 'simplecolorpicker', 'ddslick', 'ckeditor', 'jQue
         }
         // Adding colors
         if ((viewModel.field.colored != null) && viewModel.field.colored) {
+
+          CKconfig.colorButton_showBackground = false; 
+
           if ((viewModel.field.colors != null) && (viewModel.field.colors.length > 0)) {
             CKconfig.extraPlugins += ',colorbutton';
             CKconfig.colorButton_colors = viewModel.field.colors;
