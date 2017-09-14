@@ -1,4 +1,9 @@
 {
+  "globals": {
+    "textOnFrameColorValue": "{{value = tinycolor.isReadable(card[mainColor].toHexString(), card[backColor].toHexString()) ? card[backColor].toHexString() : tinycolor.mostReadable(card[mainColor].toHexString(), [ tinycolor(card[backColor]).darken(30).toHexString(), tinycolor(card[backColor]).lighten(30).toHexString() ]).toHexString();}}",
+    "darkTextOnBackgroundColorValue": "{{value = tinycolor.isReadable(card[backColor].toHexString(), card[mainColor].darken(15).toHexString()) ? card[mainColor].darken(15).toHexString() : tinycolor.mostReadable(card[backColor].toHexString(), [ tinycolor(card[mainColor]).darken(30).toHexString(), tinycolor(card[mainColor]).lighten(30).toHexString() ]).toHexString();}}",
+    "bwTextOnBackgroundColorValue": "{{value = tinycolor.mostReadable(card[backColor].toHexString(), [ '#000', '#FFF' ]).toHexString();}}"
+  },
   "styles":
   [
       {
@@ -6,45 +11,55 @@
           "name": "Default",
           "fields": [
             {
-        			"name": "grpAspect",
-        			"label": "Aspect",
+        			"name": "grpDisplay",
+        			"label": "Display",
         			"type": "group",
         			"expanded": false
         		}, {
-        			"name": "display_background",
-        			"label": "Afficher le fond ?",
-        			"default": false,
-        			"type": "checkbox",
-        			"group": "grpAspect"
-        		}, {
         			"name": "blackwhite",
-        			"label": "Noir & Blanc",
+        			"label": "Black & White",
         			"default": false,
         			"type": "checkbox",
-        			"group": "grpAspect"
+        			"group": "grpDisplay",
+              "ignored": true
         		}, {
         			"name": "mainColor",
         			"label": "Main Color",
         			"type": "color",
-        			"default": "#be0a26",
-        			"group": "grpAspect"
+        			"default": "#b72a0c",
+        			"group": "grpDisplay"
+        		}, {
+        			"name": "backColor",
+        			"label": "Background Color",
+        			"type": "color",
+        			"default": "#FDF3E7",
+        			"group": "grpDisplay"
+        		}, {
+        			"name": "imageFrame",
+        			"label": "Display frame for Image",
+        			"type": "checkbox",
+        			"default": false,
+        			"group": "grpDisplay"
         		},
-            { "name": "name", "label": "Name", "default": "Moboto" },
-            { "name": "movement", "label": "Movement", "default": "5" },
+            { "name": "name", "label": "Name", "default": "Thrud\nThe Barbarian", "type": "multiline", "lines": 2 },
+            { "name": "movement", "label": "Movement", "default": "6" },
             { "name": "strength", "label": "Strength", "default": "6" },
             { "name": "agility", "label": "Agility", "default": "2" },
-            { "name": "armour", "label": "Armour", "default": "8" },
-            { "type": "image", "name": "portray", "label": "Portray" },
-            { "name": "cost", "label": "Cost", "default": "290.000 GP" },
-            { "name": "skills", "label": "Skills", "default": "Loner, Frenzy, Block, Mighty Blow", "type": "multiline" },
+            { "name": "armour", "label": "Armour", "default": "9" },
+            { "type": "image", "name": "starPicture", "label": "Image", "width": 399, "height": 200  },
+            { "name": "cost", "label": "Cost", "default": "100.000 GP" },
+            { "name": "skills", "label": "Skills", "default": "Block, Break Tackle, Horns, \nMighty Blow, Multiple Block, Thick Skull, \nBone-Head, Easily Confused, Thrud's Fans", "type": "multiline" },
             { "name": "teams", "label": "Teams", "default": "Zulus", "type": "multiline" }
           ],
           "canvasFields": [
+            { "type": "rect", "left": 0, "top": 0, "width": 460, "height": 635, "fill": "$backColor.hexa$", "zindex": 1 },
+            { "id": "starPicture", "type": "image", "left": 31, "top": 121, "width": 399, "height":200, "src": "$starPicture", "zindex": 2 },
             {
         			"type": "path-group",
         			"id": "general-frame",
         			"left": 0,
         			"top": 0,
+              "zindex": 3,
         			"paths": [
         				{
         					"type": "path",
@@ -53,33 +68,127 @@
         					"stroke": "{{ value = card[blackwhite] ? '#000000' : null; }}",
         					"strokeWidth": 0.5,
         					"path": "./js/templates/fantasybowl/modern-stars.svg"
+        				},
+                {
+        					"type": "path",
+        					"id": "image-frame",
+        					"fill": "{{ value = card[blackwhite] ? '#FFF' : card[mainColor].toHexString(); }}",
+        					"stroke": "{{ value = card[blackwhite] ? '#000000' : null; }}",
+        					"strokeWidth": 0.5,
+        					"path": "./js/templates/fantasybowl/modern-stars-imageFrame.svg",
+                  "visible": "?imageFrame"
         				}
               ]
             },
-            { "type": "textbox", "text": "$name", "left": 71, "top": 20, "width": 319, "textAlign": "center", "fill": "#FDF3E7", "fontFamily": "Graduate", "fontWeight": 800, "fontSize": 40 },
-            { "type": "textbox", "text": "Ma", "left": 44, "top": 348, "width": 93, "textAlign": "center", "fill": "#FDF3E7", "fontFamily": "Graduate", "fontSize": 40, "fontWeight": 800 },
-            { "type": "textbox", "text": "St", "left": 137, "top": 348, "width": 93, "textAlign": "center", "fill": "#FDF3E7", "fontFamily": "Graduate", "fontSize": 40, "fontWeight": 800 },
-            { "type": "textbox", "text": "Ag", "left": 230, "top": 348, "width": 93, "textAlign": "center", "fill": "#FDF3E7", "fontFamily": "Graduate", "fontSize": 40, "fontWeight": 800 },
-            { "type": "textbox", "text": "Av", "left": 323, "top": 348, "width": 93, "textAlign": "center", "fill": "#FDF3E7", "fontFamily": "Graduate", "fontSize": 40, "fontWeight": 800 },
-            { "type": "textbox", "text": "TEAMS", "left": 386, "top": 494, "width": 132, "textAlign": "center", "fill": "#FFD800", "fontFamily": "Arial", "fontWeight": 700, "fontSize": 22 },
-            { "type": "textbox", "text": "SKILLS", "left": 18, "top": 494, "width": 347, "textAlign": "center", "fill": "#FFD800", "fontFamily": "Arial", "fontWeight": 700, "fontSize": 22 },
-            { "type": "textbox", "text": "$movement", "left": 44, "top": 418, "width": 93, "textAlign": "center", "fill": "#CAC2B8", "fontFamily": "Graduate", "fontWeight": 800, "fontSize": 46 },
-            { "type": "textbox", "text": "$strength", "left": 137, "top": 418, "width": 93, "textAlign": "center", "fill": "#CAC2B8", "fontFamily": "Graduate", "fontWeight": 800, "fontSize": 46 },
-            { "type": "textbox", "text": "$agility", "left": 230, "top": 418, "width": 93, "textAlign": "center", "fill": "#CAC2B8", "fontFamily": "Graduate", "fontWeight": 800, "fontSize": 46 },
-            { "type": "textbox", "text": "$armour", "left": 323, "top": 418, "width": 93, "textAlign": "center", "fill": "#CAC2B8", "fontFamily": "Graduate", "fontWeight": 800, "fontSize": 46 },
-            { "type": "image", "left": 15, "top": 124, "width": 354, "height":352, "src": "$portray" },
-            { "type": "textbox", "text": "$cost", "left": 18, "top": 684, "width": 504, "textAlign": "center", "fill": "#FFD800", "fontFamily": "Arial", "fontWeight": 700, "fontSize": 40, "fontStyle": "italic" },
-            { "type": "textbox", "text": "$skills", "left": 20, "top": 524, "width": 342, "textAlign": "left", "fill": "#000000", "fontFamily": "Arial", "fontWeight": 500, "fontSize": 28 },
-            { "type": "textbox", "text": "$teams", "left": 388, "top": 524, "width": 128, "textAlign": "center", "fill": "#000000", "fontFamily": "Arial", "fontWeight": 600, "fontSize": 22 }
+            { "type": "textbox", "zindex": 4, "text": "$name", "left": 71, "top": 20, "lineHeight": 0.8, "width": 319, "textAlign": "center", "fill": "[[textOnFrameColorValue]]", "fontFamily": "Graduate", "fontWeight": 800, "fontSize": "{{value = (card[name].indexOf('\\n') !== -1) ? 28 : 40;}}" },
+            { "type": "textbox", "id": "ma_label", "zindex": 4, "text": "Ma", "left": 44, "top": 332, "width": 93, "textAlign": "center", "fill": "[[textOnFrameColorValue]]", "fontFamily": "Graduate", "fontSize": 40, "fontWeight": 800 },
+            { "type": "textbox", "id": "st_label", "zindex": 4, "text": "St", "left": 137, "top": 332, "width": 93, "textAlign": "center", "fill": "[[textOnFrameColorValue]]", "fontFamily": "Graduate", "fontSize": 40, "fontWeight": 800 },
+            { "type": "textbox", "id": "ag_label", "zindex": 4, "text": "Ag", "left": 230, "top": 332, "width": 93, "textAlign": "center", "fill": "[[textOnFrameColorValue]]", "fontFamily": "Graduate", "fontSize": 40, "fontWeight": 800 },
+            { "type": "textbox", "id": "av_label", "zindex": 4, "text": "Av", "left": 323, "top": 332, "width": 93, "textAlign": "center", "fill": "[[textOnFrameColorValue]]", "fontFamily": "Graduate", "fontSize": 40, "fontWeight": 800 },
+            { "type": "textbox", "id": "teams_label", "zindex": 4, "text": "TEAMS", "left": 0, "top": 568, "width": 460, "textAlign": "center", "fill": "[[darkTextOnBackgroundColorValue]]", "fontFamily": "Graduate", "fontWeight": 800, "fontSize": 18 },
+            { "type": "textbox", "id": "skills_label", "zindex": 4, "text": "SKILLS", "left": 0, "top": 468, "width": 460, "textAlign": "center", "fill": "[[darkTextOnBackgroundColorValue]]", "fontFamily": "Graduate", "fontWeight": 800, "fontSize": 18 },
+            { "type": "textbox", "zindex": 4, "text": "$movement", "left": 44, "top": 390, "width": 93, "textAlign": "center", "fill": "[[textOnFrameColorValue]]", "fontFamily": "Graduate", "fontWeight": 800, "fontSize": 50 },
+            { "type": "textbox", "zindex": 4, "text": "$strength", "left": 137, "top": 390, "width": 93, "textAlign": "center", "fill": "[[textOnFrameColorValue]]", "fontFamily": "Graduate", "fontWeight": 800, "fontSize": 50 },
+            { "type": "textbox", "zindex": 4, "text": "$agility", "left": 230, "top": 390, "width": 93, "textAlign": "center", "fill": "[[textOnFrameColorValue]]", "fontFamily": "Graduate", "fontWeight": 800, "fontSize": 50 },
+            { "type": "textbox", "zindex": 4, "text": "$armour", "left": 323, "top": 390, "width": 93, "textAlign": "center", "fill": "[[textOnFrameColorValue]]", "fontFamily": "Graduate", "fontWeight": 800, "fontSize": 50 },
+            { "type": "textbox", "zindex": 4, "text": "$cost", "left": 24, "top": 90, "width": 412, "textAlign": "center", "fill": "$mainColor.hexa$", "fontFamily": "Graduate", "fontWeight": 800, "fontSize": 24 },
+            { "type": "textbox", "zindex": 4, "text": "$skills", "left": 24, "top": 490, "width": 412, "textAlign": "center", "fill": "[[bwTextOnBackgroundColorValue]]", "fontFamily": "Montserrat", "fontSize": 20 },
+            { "type": "textbox", "zindex": 4, "text": "$teams", "left": 24, "top": 590, "width": 412, "textAlign": "center", "fill": "[[bwTextOnBackgroundColorValue]]", "fontFamily": "Montserrat", "fontSize": 18 }
           ],
           "canvasBackground": "#FDF3E7",
           "canvasWidth": 460,
           "canvasHeight": 635
+      }, {
+          "key": "semipicture",
+          "name": "Default - Picture on half",
+          "basedOn": "default",
+          "fields": [
+            { "name": "imageFrame", "ignored": true },
+            { "name": "starPicture", "width": 445, "height": 452 }
+          ],
+          "canvasFields": [
+            { "id": "starPictureHalf", "type": "image","left": 7, "top": 8, "width": 445, "height":452, "src": "$starPicture", "zindex": 2 },
+            { "id": "starPicture", "ignored": true },
+            { "id": "image-frame", "ignored": true },
+            { "type": "textbox", "zindex": 3, "text": "$cost", "left": 24, "top": 90, "width": 412, "textAlign": "center", "fill": "$backColor.hexa$", "stroke": "$backColor.hexa$", "strokeWidth": 3,
+              "fontFamily": "Graduate", "fontWeight": 800, "fontSize": 24 },
+            {
+        			"type": "path-group",
+        			"id": "border-frame",
+        			"left": 0,
+        			"top": 0,
+              "zindex": 2,
+        			"paths": [
+        				{
+        					"type": "path",
+        					"id": "borderframe",
+        					"fill": "{{ value = card[blackwhite] ? '#FFF' : card[backColor].toHexString(); }}",
+        					"path": "./js/templates/fantasybowl/modern-stars-roundBorder.svg"
+        				}
+              ]
+            }
+          ]
+      }, {
+          "key": "default_fr",
+          "name": "Défaut",
+          "basedOn": "default",
+          "fields": [
+            { "name": "grpDisplay", "label": "Aspect" },
+            { "name": "blackwhite", "label": "Noir & Blanc", "ignored": true },
+            {	"name": "mainColor", "label": "Couleur principale" },
+            {	"name": "backColor", "label": "Couleur de fond" },
+            {	"name": "imageFrame","label": "Afficher le cadre pour l'image" },
+            { "name": "name", "label": "Nom", "default": "Thrud\nLe Barbare" },
+            { "name": "movement", "label": "Mouvement" },
+            { "name": "strength", "label": "Force" },
+            { "name": "agility", "label": "Agilité" },
+            { "name": "armour", "label": "Armure" },
+            { "name": "starPicture", "label": "Image" },
+            { "name": "cost", "label": "Coût", "default": "100.000 PO" },
+            { "name": "skills", "label": "Compétences", "default": "Blocage, Esquive en Force, Cornes\nChâtaigne, Blocage Multiple, Crâne Épais\nCerveau Lent, Fans de Thrud, Facilement confus" },
+            { "name": "teams", "label": "Équipes", "default": "Toutes" }
+          ],
+          "canvasFields": [
+            { "id": "ma_label", "text": "M" },
+            { "id": "st_label", "text": "F" },
+            { "id": "ag_label", "text": "Ag" },
+            { "id": "av_label", "text": "Ar" },
+            { "id": "teams_label", "text": "EQUIPES" },
+            { "id": "skills_label", "text": "COMPETENCES" }
+          ]
+      }, {
+          "key": "semipicture_fr",
+          "name": "Défaut - Image étendue",
+          "basedOn": "semipicture",
+          "fields": [
+            { "name": "grpDisplay", "label": "Aspect" },
+            { "name": "blackwhite", "label": "Noir & Blanc", "ignored": true },
+            {	"name": "mainColor", "label": "Couleur principale" },
+            {	"name": "backColor", "label": "Couleur de fond" },
+            {	"name": "imageFrame","label": "Afficher le cadre pour l'image" },
+            { "name": "name", "label": "Nom", "default": "Thrud\nLe Barbare" },
+            { "name": "movement", "label": "Mouvement" },
+            { "name": "strength", "label": "Force" },
+            { "name": "agility", "label": "Agilité" },
+            { "name": "armour", "label": "Armure" },
+            { "name": "starPicture", "label": "Image" },
+            { "name": "cost", "label": "Coût", "default": "100.000 PO" },
+            { "name": "skills", "label": "Compétences", "default": "Blocage, Esquive en Force, Cornes\nChâtaigne, Blocage Multiple, Crâne Épais\nCerveau Lent, Fans de Thrud, Facilement confus" },
+            { "name": "teams", "label": "Équipes", "default": "Toutes" }
+          ],
+          "canvasFields": [
+            { "id": "ma_label", "text": "M" },
+            { "id": "st_label", "text": "F" },
+            { "id": "ag_label", "text": "Ag" },
+            { "id": "av_label", "text": "Ar" },
+            { "id": "teams_label", "text": "EQUIPES" },
+            { "id": "skills_label", "text": "COMPETENCES" }
+          ]
       }
   ],
   "webfonts": {
 		"google": {
-			"families": ["Graduate", "Audiowide"]
+			"families": [ "Graduate", "Montserrat" ]
 		}
 	},
 	"description": {
@@ -87,6 +196,7 @@
     "title":"Fantasy Bowl Stars",
     "credits": "by Nicolas Ronvel",
     "key": "fantasybowl-modern-stars",
-    "url": "https://github.com/Gulix/geckos/"
+    "url": "https://github.com/Gulix/geckos/",
+    "logo": "./js/templates/fantasybowl/cover.png"
 	}
 }
