@@ -1,0 +1,112 @@
+{
+	"styles": [
+		{
+			"key": "default",
+      "name": "Default Style",
+      "description": "Basic Template for Poleis",
+			"canvasBackground": "#EEEEEE",
+			"canvasWidth": 660,
+			"canvasHeight": 933,
+			"fields": [
+		    {	"name": "nom", "type": "multiline", "label": "Nom", "default": "Nom de la carte" },
+				{ "name":"nom_fontsize", "label":"Taille de police", "default":62, "type": "options",
+				"options":
+					[
+						{ "option":70, "text":"Très Grand" },
+						{ "option":62, "text":"Grand" },
+						{ "option":54, "text":"Moyen" },
+						{ "option":50, "text":"Petit" },
+						{ "option":42, "text":"Très petit" }
+					]
+				},
+		    { "name": "description", "type": "multiline", "label": "Description", "default": "Description du sujet de la carte" },
+				{ "name":"description_fontsize", "label":"Taille de police", "default":26, "type": "options",
+				"options":
+					[
+						{ "option":34, "text":"Très Grand" },
+						{ "option":30, "text":"Grand" },
+						{ "option":26, "text":"Moyen" },
+						{ "option":22, "text":"Petit" },
+						{ "option":18, "text":"Très petit" }
+					]
+				},
+		    {	"name": "citation", "type": "multiline", "label": "Citation", "default": "" },
+				{ "name":"citation_fontsize", "label":"Taille citation", "default":22, "type": "options",
+				"options":
+					[
+						{ "option":30, "text":"Très Grand" },
+						{ "option":26, "text":"Grand" },
+						{ "option":22, "text":"Moyen" },
+						{ "option":18, "text":"Petit" },
+						{ "option":14, "text":"Très petit" }
+					]
+				},
+				{ "name": "image", "type": "image", "label": "Image", "width": 866, "height": 659 },
+		    {	"name": "effet", "label": "Effet", "default": "1 PV" },
+				{	"name": "effet2", "label": "Effet secondaire", "type": "multiline", "default": "" },
+		    { "name": "prerequis", "label": "Pré-requis", "default": "Arts : minimum 4" },
+				{ "name": "ferveur", "label": "Ferveur", "default": false, "type": "checkbox"}
+		  ],
+			"canvasFields": [
+		    {	"type": "image", "left": 0, "width": 660,	"top": 0, "height": 933,	"src": "./js/templates/poleis/carte-background.png", "visible": "?!ferveur" },
+				{	"type": "image", "left": 0, "width": 660,	"top": 0, "height": 933,	"src": "./js/templates/poleis/carte-background-god.png", "visible": "?ferveur" },
+		    { "type": "textbox", "text": "$nom$", "fontSize": "$nom_fontsize", "fontFamily": "Caesar Dressing", "width": 486, "left": 89, "top": "{{value = card[nom_fontsize] == 42 ? 64 : 72;}}", "textAlign": "center", "fill": "#7F0000" },
+		    { "type": "textbox", "text": "$description$", "fontSize": "$description_fontsize", "fontFamily": "Roboto", "fontStyle": "italic", "width": 486, "left": 89, "top": 166, "textAlign": "center" },
+		    { "type": "textbox", "text": "$effet$", "fontSize": 48, "fontFamily": "Caesar Dressing", "width": 339, "left": 163, "top": 675, "textAlign": "center", "fill": "#7F0000" },
+		    { "type": "textbox", "text": "$effet2$", "fontSize": 26, "fontFamily": "Roboto", "fontStyle": "italic", "width": 449, "left": 109, "top": 749, "textAlign": "center" },
+				{ "type": "textbox", "text": "$prerequis$", "fontSize": 28, "fontFamily": "Roboto", "fontWeight": 800, "width": 488, "left": 86, "top": 842, "textAlign": "center" },
+				{ "type": "textbox", "text": "$citation$", "fontSize": "$citation_fontsize", "fontFamily": "Roboto", "width": 450, "left": 105, "top": 259, "textAlign": "center" },
+				{	"type": "image", "left": 105, "top": 259, "width": 450,	"height": 342,	"src": "$image" }
+		  ]
+		}, {
+			"key": "desastre",
+      "name": "Désastre",
+      "description": "Désastre",
+			"canvasBackground": "#EEEEEE",
+			"canvasWidth": 660,
+			"canvasHeight": 933,
+			"fields": [
+				{	"name": "nom", "type": "multiline", "label": "Nom", "default": "Nom de la carte" },
+				{ "name":"nom_fontsize", "label":"Taille de police", "default":62, "type": "options",
+				"options":
+					[
+						{ "option":70, "text":"Très Grand" },
+						{ "option":62, "text":"Grand" },
+						{ "option":54, "text":"Moyen" },
+						{ "option":50, "text":"Petit" },
+						{ "option":42, "text":"Très petit" }
+					]
+				},
+		    { "name": "image", "type": "image", "label": "Image", "width": 464, "height": 221 },
+				{ "name": "desastre", "type": "richtext" },
+				{ "name":"desastre_fontsize", "label":"Taille police désastre", "default":22, "type": "options",
+				"options":
+					[
+						{ "option":30, "text":"Très Grand" },
+						{ "option":26, "text":"Grand" },
+						{ "option":22, "text":"Moyen" },
+						{ "option":18, "text":"Petit" },
+						{ "option":14, "text":"Très petit" }
+					]
+				}
+		  ],
+			"canvasFields": [
+		    {	"type": "image", "left": 0, "width": 660,	"top": 0, "height": 933,	"src": "./js/templates/poleis/carte-desastre.png" },
+		    { "type": "textbox", "text": "$nom$", "fontSize": "$nom_fontsize", "fontFamily": "Caesar Dressing", "width": 486, "left": 89, "top": "{{value = card[nom_fontsize] == 42 ? 64 : 72;}}", "textAlign": "center", "fill": "#7F0000" },
+				{ "type": "textbox", "text": "Désastre", "fontSize": 64, "fontFamily": "Caesar Dressing", "width": 336, "left": 167, "top": 425, "textAlign": "center", "fill": "#7F0000" },
+				{	"type": "image", "left": 97, "top": 174, "width": 464,	"height": 221,	"src": "$image" },
+				{ "type": "textbox", "text": "$desastre$", "styles": "£desastre", "fontSize": "$desastre_fontsize", "fontFamily": "Roboto", "width": 460, "left": 99, "top": 490 }
+		  ]
+		}
+	],
+  "webfonts":	{
+		"google": { "families": [ "Caesar Dressing", "Roboto" ] }
+	},
+	"description": {
+		"description": "Poleis",
+    "title":"Poleis",
+		"key": "poleis",
+    "credits": "by Nicolas Ronvel",
+    "url": "https://github.com/Gulix/geckos/"
+	}
+}
