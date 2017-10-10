@@ -27,6 +27,9 @@ define(['knockout', 'pdfmake', 'viewModels/messagebar', 'viewModels/pdf/pdfConfi
     // Construction of PDF
     self.listDataUrls = [];
 
+    // Step of configuration
+    self.currentStep = ko.observable(1);
+
     /********************************/
     /* End of Variables declaration */
     /********************************/
@@ -52,6 +55,7 @@ define(['knockout', 'pdfmake', 'viewModels/messagebar', 'viewModels/pdf/pdfConfi
       self.mainEngineVM.menu.hideCardExport();
       self.isModalDisplayed(true);
       self.indexCurrentExportedFile(0);
+      self.currentStep(1);
       self.totalExportedFiles(self.mainEngineVM.listCards().length);
       self.isExportInProgress(false);
       self.listDataUrls = [];
@@ -62,6 +66,16 @@ define(['knockout', 'pdfmake', 'viewModels/messagebar', 'viewModels/pdf/pdfConfi
     }
     self.cancel = function() {
       self.isModalDisplayed(false);
+    }
+
+    self.nextStep = function() {
+      if (self.currentStep() == 4) {
+        self.launchPdfGeneration();
+      } else if (self.currentStep() < 1) {
+        self.currentStep(1);
+      } else {
+        self.currentStep(self.currentStep() + 1);
+      }
     }
 
     self.launchPdfGeneration = function() {

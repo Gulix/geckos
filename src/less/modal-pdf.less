@@ -1,0 +1,141 @@
+// main: ./styles.less
+
+.modal-box-pdf {
+
+  .modal-box-content {
+    height: 400px;
+
+    .bottom-buttons {
+      bottom: 10px;
+      position: absolute;
+      right: 10px;
+    }
+  }
+}
+
+.btn-orientation {
+  clear: both;
+  overflow: auto;
+  position: relative;
+  height: auto;
+
+  &.primary .orientation-frame {
+    border-color: #FFF;
+    border-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+  }
+
+  &.secondary .orientation-frame {
+    border-color: #777;
+    border-shadow: 0 1px 0 rgba(255,255,255,0.8);
+  }
+
+  .legend {
+    text-align: center;
+  }
+
+  .orientation-frame {
+    border: solid 5px;
+    border-radius: 2px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .landscape {
+    width: 57.5px;
+    height: 75px;
+  }
+
+  .portrait {
+    height: 57.5px;
+    margin-bottom: 17.5px;
+    width: 75px;
+  }
+}
+
+.breadcrumb-pdf {
+  	/*centering*/
+  	display: inline-block;
+  	overflow: hidden;
+  	border-radius: 5px;
+    border: solid 1px rgba(0,0,0,0.4);
+
+    a {
+    	text-decoration: none;
+    	outline: none;
+    	display: block;
+    	float: left;
+    	line-height: 36px;
+    	color: #777;
+    	/*need more margin on the left of links to accomodate the numbers*/
+    	padding: 0 10px 0 60px;
+    	background: #F3F3F3;
+    	position: relative;
+      flex: 1;
+      cursor: default;
+
+      &:hover {
+        color: #777;
+      }
+
+      &:first-child {
+        padding-left: 46px;
+      	border-radius: 5px 0 0 5px; /*to match with the parent's radius*/
+      }
+
+      &:last-child {
+      	border-radius: 0 5px 5px 0; /*this was to prevent glitches on hover*/
+      	padding-right: 20px;
+
+        &:after {
+          /*we dont need an arrow after the last link*/
+          content: none;
+        }
+      }
+
+      &:after {
+      	content: '';
+      	position: absolute;
+      	top: 0;
+      	right: -18px; /*half of square's length*/
+      	/*same dimension as the line-height of .breadcrumb a */
+      	width: 36px;
+      	height: 36px;
+      	/*as you see the rotated square takes a larger height. which makes it tough to position it properly. So we are going to scale it down so that the diagonals become equal to the line-height of the link. We scale it to 70.7% because if square's:
+      	length = 1; diagonal = (1^2 + 1^2)^0.5 = 1.414 (pythagoras theorem)
+      	if diagonal required = 1; length = 1/1.414 = 0.707*/
+      	transform: scale(0.707) rotate(45deg);
+      	/*we need to prevent the arrows from getting buried under the next link*/
+      	z-index: 1;
+      	/*background same as links but the gradient will be rotated to compensate with the transform applied*/
+      	background: #F3F3F3;
+      	/*stylish arrow design using box shadow*/
+      	box-shadow:
+      		2px -2px 0 2px rgba(0, 0, 0, 0.4),
+      		3px -3px 0 2px rgba(255, 255, 255, 0.1);
+      	/*
+      		5px - for rounded arrows and
+      		50px - to prevent hover glitches on the border created using shadows*/
+      	border-radius: 0 5px 0 50px;
+      }
+
+      &.done {
+        background: @mainColor1-light;
+        color: #FFF;
+
+        &:after {
+          background: @mainColor1-light;
+        }
+      }
+
+      &.active {
+        background: @mainColor1;
+      	color: #FFF;
+
+        &:after {
+          background: @mainColor1;
+        }
+      }
+
+
+    }
+  }

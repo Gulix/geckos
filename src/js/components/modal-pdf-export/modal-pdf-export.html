@@ -1,5 +1,5 @@
 <!-- ko with: viewModel -->
-<div style="display:none;" class="modal-box" data-bind="visible: isModalDisplayed">
+<div style="display:none;" class="modal-box modal-box-pdf" data-bind="visible: isModalDisplayed">
   <div class="modal-box-content">
     <div class="modal-close icon icon-dismiss" data-bind="click: cancel"></div>
     <h3><span class="icon icon-file-pdf"></span> Export cards to PDF</h3>
@@ -8,18 +8,60 @@
     <div style="display: none;" class="message-bar" data-bind="html: message, slideIn: isVisible, css: { error: isError, warning: isWarning, info: isInfo, success: isSuccess}"></div>
     <!-- /ko -->
 
+    <!-- Progress bar in the configuration Steps -->
+    <div class="flex-container breadcrumb-pdf">
+      <a data-bind="css: { done: currentStep() > 1, active: currentStep() == 1}">Page configuration</a>
+      <a data-bind="css: { done: currentStep() > 2, active: currentStep() == 2}">Margins & Paddings</a>
+      <a data-bind="css: { done: currentStep() > 3, active: currentStep() == 3}">Card configuration</a>
+      <a data-bind="css: { done: currentStep() > 4, active: currentStep() == 4}">PDF Generation</a>
+    </div>
+
+    <!-- ko if: currentStep() == 1 -->
+    <!-- ko with: config -->
+    <h4>Page Configuration</h4>
+    <div class="flex-container">
+      <div class="flex-1"></div>
+      <div class="flex-3">
+        <div>Page Orientation</div>
+        <div class="flex-container">
+          <div class="btn btn-orientation"
+               data-bind="click: setLandscape, css: { secondary: configIsPortrait, primary: configIsLandscape, mainColor1: configIsLandscape }">
+               <div class="landscape orientation-frame"></div>
+               <div class="legend">Landscape</div>
+          </div>
+          <div class="btn btn-orientation"
+               data-bind="click: setPortrait, css: { secondary: configIsLandscape, primary: configIsPortrait, mainColor1: configIsPortrait }">
+               <div class="portrait orientation-frame"></div>
+               <div class="legend">Portrait</div>
+          </div>
+        </div>
+      </div>
+      <div class="flex-1"></div>
+      <div class="flex-3">
+        <div>Units to be used</div>
+        <div class="flex-container">
+          <a class="btn" data-bind="click: setInInches, css: { secondary: configInMM, primary: configInInches, mainColor1: configInInches }">in Inches</a>
+          <a class="btn" data-bind="click: setInMM, css: { secondary: configInInches, primary: configInMM, mainColor1: configInMM }">in Millimeters</a>
+        </div>
+      </div>
+      <div class="flex-1"></div>
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+
+    <!-- ko if: currentStep() == 2 -->
     <!-- ko with: config -->
     <div class="flex-container">
-      <h4 class="flex-1">Export Configuration</h4>
-      <div class="modal-buttons flex-1">
-        <a class="btn" data-bind="click: setInInches, css: { secondary: configInMM, primary: configInInches, mainColor1: configInInches }">in Inches</a>
-        <a class="btn" data-bind="click: setInMM, css: { secondary: configInInches, primary: configInMM, mainColor1: configInMM }">in Millimeters</a>
+      <div class="editable-field input-numeric pdf-card-value">
+       <label>Margin between cards</label>
+       <input data-bind="value: displayedMargin"></input>
       </div>
     </div>
-    <div class="flex-container flex-1">
-      <a class="btn" data-bind="click: setLandscape, css: { secondary: configIsPortrait, primary: configIsLandscape, mainColor1: configIsLandscape }">Landscape</a>
-      <a class="btn" data-bind="click: setPortrait, css: { secondary: configIsLandscape, primary: configIsPortrait, mainColor1: configIsPortrait }">Portrait</a>
-    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+
+    <!-- ko if: currentStep() == 3 -->
+    <!-- ko with: config -->
     <div class="flex-container">
       <div class="editable-field input-numeric pdf-card-value">
        <label>Card Width</label>
@@ -30,21 +72,17 @@
        <input data-bind="value: displayedHeight"></input>
       </div>
     </div>
-    <div class="flex-container">
-      <div class="editable-field input-numeric pdf-card-value">
-       <label>Margin between cards</label>
-       <input data-bind="value: displayedMargin"></input>
-      </div>
-    </div>
-
+    <!-- /ko -->
     <!-- /ko -->
 
+    <!-- ko if: currentStep() == 4 -->
     <div data-bind="visible: exportInactive">It will take approximatively <span data-bind="text: estimatedTime"></span> to complete.</div>
     <h3 data-bind="visible: exportActive">Export in Progress ...</h3>
     <div data-bind="visible: exportActive, progressBar: { value : progressPercentage }"></div>
+    <!-- /ko -->
 
-    <div class="modal-buttons">
-      <a class="btn primary mainColor1 iconized icon-file-pdf" data-bind="visible: exportInactive, click: launchPdfGeneration">Generate PDF</a>
+    <div class="modal-buttons bottom-buttons">
+      <a class="btn primary mainColor1 iconized icon-file-pdf" data-bind="visible: exportInactive, click: nextStep">Generate PDF</a>
       <a class="btn secondary iconized icon-dismiss" data-bind="visible: exportInactive, click: cancel">Close</a>
     </div>
   </div>
