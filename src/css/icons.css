@@ -99,7 +99,7 @@
 .icon-edition-mode:before {
   content: "\f058";
 }
-.icon-file-pdf:before {
+.icon-file-pdf:before, .iconFilePdf:before {
   content: "\e900";
 }
 .icon-card:before {
@@ -149,4 +149,10 @@
 }
 .icon-exit:before {
   content: "\ea14";
+}
+.icon-backward2:before {
+  content: "\ea1f";
+}
+.icon-forward3:before, .iconForward3:before {
+  content: "\ea20";
 }

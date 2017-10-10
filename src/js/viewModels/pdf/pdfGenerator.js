@@ -68,8 +68,11 @@ define(['knockout', 'pdfmake', 'viewModels/messagebar', 'viewModels/pdf/pdfConfi
       self.isModalDisplayed(false);
     }
 
+    /********************/
+    /* Steps Management */
+    /********************/
     self.nextStep = function() {
-      if (self.currentStep() == 4) {
+      if (self.isFinalStep()) {
         self.launchPdfGeneration();
       } else if (self.currentStep() < 1) {
         self.currentStep(1);
@@ -77,6 +80,19 @@ define(['knockout', 'pdfmake', 'viewModels/messagebar', 'viewModels/pdf/pdfConfi
         self.currentStep(self.currentStep() + 1);
       }
     }
+    self.nextButtonTitle = ko.pureComputed(function() {
+      return self.isFinalStep() ? "Generate PDF" : "Next";
+    });
+    self.isFinalStep = ko.pureComputed(function() {
+      return self.currentStep() == 4;
+    });
+    self.isNotFinalStep = ko.pureComputed(function() {
+      return !self.isFinalStep();
+    });
+
+    /***************************/
+    /* End of Steps Management */
+    /***************************/
 
     self.launchPdfGeneration = function() {
       self.isExportInProgress(true);
