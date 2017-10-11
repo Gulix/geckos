@@ -11,10 +11,14 @@ define(['knockout'], function(ko) {
     /*************************/
     self.displayedUnit = ko.observable('i');
     self.orientation = ko.observable('l');
-    self.cardWidthInPoints = ko.observable(200);
-    self.cardHeightInPoints = ko.observable(300);
-    self.marginInPoints = ko.observable(0);
-    self.scale = ko.observable(1.0);
+    //self.cardWidthInPoints = ko.observable(200);
+    //self.cardHeightInPoints = ko.observable(300);
+    self.pageMarginValue = ko.observable(40);
+    self.paddingValue = ko.observable(0);
+    self.originalCardWidth = ko.observable(200);
+    self.originalCardHeight = ko.observable(300);
+    self.cardWidthValue = ko.observable(self.originalCardWidth());
+    self.cardHeightValue = ko.observable(self.originalCardHeight());
 
     /********************************/
     /* End of Variables declaration */
@@ -37,8 +41,10 @@ define(['knockout'], function(ko) {
 
     // Width & Height
     self.setCardDimensions = function(width, height) {
-      self.cardWidthInPoints(width);
-      self.cardHeightInPoints(height);
+      self.originalCardWidth(width / 4);
+      self.originalCardHeight(height / 4);
+      self.cardWidthValue(self.originalCardWidth());
+      self.cardHeightValue(self.originalCardHeight());
     }
     self.convertFromDisplayedUnitToPoints = function(unitValue) {
       if (self.configInInches()) {
@@ -56,32 +62,77 @@ define(['knockout'], function(ko) {
       }
       return pointsValue;
     }
-    self.displayedWidth = ko.computed({
+
+    /*****************************************************/
+    /* Padding between cards with min, max & value */
+    /*****************************************************/
+    self.paddingValueString = ko.computed(function() {
+      var val = self.convertFromPointsToDisplayedUnit(self.paddingValue());
+      var unit = self.configInMM() ? " mm" : " inches";
+      return val + unit;
+    });
+    self.paddingMin = 0;
+    self.paddingMax = 72; // in points, one inch / 25mm
+
+    /**************************************/
+    /* Page Margins with min, max & value */
+    /**************************************/
+    self.pageMarginValueString = ko.computed(function() {
+      var val = self.convertFromPointsToDisplayedUnit(self.pageMarginValue());
+      var unit = self.configInMM() ? " mm" : " inches";
+      return val + unit;
+    });
+    self.pageMarginMin = 0;
+    self.pageMarginMax = 72; // in points, one inch / 25mm
+
+    /**************/
+    /* Card Width */
+    /**************/
+    self.cardWidthValueString = ko.computed(function() {
+      var val = self.convertFromPointsToDisplayedUnit(self.cardWidthValue());
+      var unit = self.configInMM() ? " mm" : " inches";
+      return val + unit;
+    });
+    self.cardWidthValueForSlider = ko.computed({
       read: function () {
-        return self.convertFromPointsToDisplayedUnit(self.cardWidthInPoints() * self.scale());
+        return self.cardWidthValue();
       },
       write: function (value) {
-        var newWidth = self.convertFromDisplayedUnitToPoints(value);
-        self.scale(newWidth / self.cardWidthInPoints());
+        var ratio = self.cardWidthValue() / self.cardHeightValue();
+        var newHeight = value / ratio;
+        self.cardWidthValue(value);
+        self.cardHeightValue(newHeight);
       }
     });
-    self.displayedHeight = ko.computed({
+    self.cardWidthMin = 10;
+    self.cardWidthMax = 720; // Could/Should be dependent of the orientation, margins, paddings, card ratio, ...
+    self.scaleX = ko.computed(function() {
+      return self.cardWidthValue() / self.originalCardWidth();
+    });
+
+    /***************/
+    /* Card Height */
+    /***************/
+    self.cardHeightValueString = ko.computed(function() {
+      var val = self.convertFromPointsToDisplayedUnit(self.cardHeightValue());
+      var unit = self.configInMM() ? " mm" : " inches";
+      return val + unit;
+    });
+    self.cardHeightValueForSlider = ko.computed({
       read: function () {
-        return self.convertFromPointsToDisplayedUnit(self.cardHeightInPoints() * self.scale());
+        return self.cardHeightValue();
       },
       write: function (value) {
-        var newHeight = self.convertFromDisplayedUnitToPoints(value);
-        self.scale(newHeight / self.cardHeightInPoints());
+        var ratio = self.cardWidthValue() / self.cardHeightValue();
+        var newWidth = value * ratio;
+        self.cardHeightValue(value);
+        self.cardWidthValue(newWidth);
       }
     });
-    self.displayedMargin = ko.computed({
-      read: function () {
-        return self.convertFromPointsToDisplayedUnit(self.marginInPoints());
-      },
-      write: function (value) {
-        var newMargin = self.convertFromDisplayedUnitToPoints(value);
-        self.marginInPoints(newMargin);
-      }
+    self.cardHeightMin = 10;
+    self.cardHeightMax = 720; // Could/Should be dependent of the orientation, margins, paddings, card ratio, ...
+    self.scaleY = ko.computed(function() {
+      return self.cardHeightValue() / self.originalCardHeight();
     });
 
     /*************************/

@@ -60,7 +60,6 @@ define(['knockout', 'pdfmake', 'viewModels/messagebar', 'viewModels/pdf/pdfConfi
       self.isExportInProgress(false);
       self.listDataUrls = [];
       if (self.mainEngineVM.cardTemplate() != null) {
-        self.config.scale(1.0);
         self.config.setCardDimensions(self.mainEngineVM.cardTemplate().canvasWidth(), self.mainEngineVM.cardTemplate().canvasHeight());
       }
     }
@@ -80,6 +79,16 @@ define(['knockout', 'pdfmake', 'viewModels/messagebar', 'viewModels/pdf/pdfConfi
         self.currentStep(self.currentStep() + 1);
       }
     }
+    self.previousStep = function() {
+      if (self.currentStep() <= 1) {
+        self.currentStep(1);
+      } else {
+        self.currentStep(self.currentStep() - 1);
+      }
+    }
+    self.previousIsVisible = ko.computed(function() {
+      return self.exportInactive() && (self.currentStep() != 1);
+    });
     self.nextButtonTitle = ko.pureComputed(function() {
       return self.isFinalStep() ? "Generate PDF" : "Next";
     });
@@ -120,26 +129,28 @@ define(['knockout', 'pdfmake', 'viewModels/messagebar', 'viewModels/pdf/pdfConfi
       var docDef = {  };
       docDef.pageOrientation = self.config.configIsLandscape() ? 'landscape' : 'portrait';
       docDef.pageSize = 'A4';
-      docDef.pageMargins = [ 40, 60, 40, 60 ];
-      var pageWidthContent = (self.config.configIsLandscape() ? 841.89 : 595.28) - 40*2;
-      var pageHeightContent = (self.config.configIsLandscape() ? 595.28 : 841.89) - 60*2;
-      var startX = 40;
-      var startY = 60;
+      var pageMarginWidth = self.config.pageMarginValue();
+      var pageMarginHeight = self.config.pageMarginValue();
+      docDef.pageMargins = [ pageMarginWidth, pageMarginHeight, pageMarginWidth, pageMarginHeight ];
+      var pageWidthContent = (self.config.configIsLandscape() ? 841.89 : 595.28) - pageMarginWidth*2;
+      var pageHeightContent = (self.config.configIsLandscape() ? 595.28 : 841.89) - pageMarginHeight*2;
+      var startX = pageMarginWidth;
+      var startY = pageMarginHeight;
       var currentX = 0;
       var currentY = 0;
       var maxHeightInRow = 0;
-      var margin = self.config.marginInPoints();
+      var paddingBetweenCards = self.config.paddingValue();
       docDef.content = [];
 
       _.forEach(self.listDataUrls, function(dataUrl) {
-        var elementWidth = dataUrl.width * self.config.scale();
-        var elementHeight = dataUrl.height * self.config.scale();
+        var elementWidth = dataUrl.width * self.config.scaleX();
+        var elementHeight = dataUrl.height * self.config.scaleY();
         var element = { image: dataUrl.dataUrl, width: elementWidth, height: elementHeight };
 
         // New Row !
         if ((currentX != 0) && ((currentX + elementWidth) > pageWidthContent)) {
           currentX = 0;
-          currentY += margin + maxHeightInRow;
+          currentY += paddingBetweenCards + maxHeightInRow;
           maxHeightInRow = 0;
         }
         // New Page !
@@ -151,7 +162,7 @@ define(['knockout', 'pdfmake', 'viewModels/messagebar', 'viewModels/pdf/pdfConfi
         element.absolutePosition =  { x: startX + currentX, y: startY + currentY };
         docDef.content.push(element);
 
-        currentX += margin + elementWidth;
+        currentX += paddingBetweenCards + elementWidth;
         maxHeightInRow = Math.max(maxHeightInRow, elementHeight);
       });
 

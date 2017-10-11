@@ -11,7 +11,7 @@
     <!-- Progress bar in the configuration Steps -->
     <div class="flex-container breadcrumb-pdf">
       <a data-bind="css: { done: currentStep() > 1, active: currentStep() == 1}">Page configuration</a>
-      <a data-bind="css: { done: currentStep() > 2, active: currentStep() == 2}">Margins & Paddings</a>
+      <a data-bind="css: { done: currentStep() > 2, active: currentStep() == 2}">Paddings & Margins</a>
       <a data-bind="css: { done: currentStep() > 3, active: currentStep() == 3}">Card configuration</a>
       <a data-bind="css: { done: currentStep() > 4, active: currentStep() == 4}">PDF Generation</a>
     </div>
@@ -51,26 +51,50 @@
 
     <!-- ko if: currentStep() == 2 -->
     <!-- ko with: config -->
+    <h4>Paddings & Margins</h4>
     <div class="flex-container">
-      <div class="editable-field input-numeric pdf-card-value">
-       <label>Margin between cards</label>
-       <input data-bind="value: displayedMargin"></input>
+      <div class="editable-field input-numeric pdf-card-value flex-1">
+       <div>Padding between cards</div>
+       <div class="flex-container">
+          <input type="range" step="1" data-bind="attr: { min: paddingMin, max: paddingMax }, value: paddingValue, valueUpdate: 'input'" class="slider flex-2">
+          <div class="flex-1">
+            <div class="info-slider" data-bind="text: paddingValueString"></div>
+          </div>
+       </div>
+       <div>Page margins</div>
+       <div class="flex-container">
+          <input type="range" step="1" data-bind="attr: { min: pageMarginMin, max: pageMarginMax }, value: pageMarginValue, valueUpdate: 'input'" class="slider flex-2">
+          <div class="flex-1">
+            <div class="info-slider" data-bind="text: pageMarginValueString"></div>
+          </div>
+       </div>
       </div>
+      <div class="flex-1"></div>
     </div>
     <!-- /ko -->
     <!-- /ko -->
 
     <!-- ko if: currentStep() == 3 -->
     <!-- ko with: config -->
+    <h4>Card Configuration</h4>
     <div class="flex-container">
-      <div class="editable-field input-numeric pdf-card-value">
-       <label>Card Width</label>
-       <input data-bind="value: displayedWidth"></input>
+      <div class="editable-field input-numeric pdf-card-value flex-1">
+       <div>Card width</div>
+       <div class="flex-container">
+          <input type="range" step="1" data-bind="attr: { min: cardWidthMin, max: cardWidthMax }, value: cardWidthValueForSlider, valueUpdate: 'input'" class="slider flex-2">
+          <div class="flex-1">
+            <div class="info-slider" data-bind="text: cardWidthValueString"></div>
+          </div>
+       </div>
+       <div>Card Height</div>
+       <div class="flex-container">
+          <input type="range" step="1" data-bind="attr: { min: cardHeightMin, max: cardHeightMax }, value: cardHeightValueForSlider, valueUpdate: 'input'" class="slider flex-2">
+          <div class="flex-1">
+            <div class="info-slider" data-bind="text: cardHeightValueString"></div>
+          </div>
+       </div>
       </div>
-      <div class="editable-field input-numeric pdf-card-value">
-       <label>Card Height</label>
-       <input data-bind="value: displayedHeight"></input>
-      </div>
+      <div class="flex-1"></div>
     </div>
     <!-- /ko -->
     <!-- /ko -->
@@ -81,7 +105,10 @@
     <div data-bind="visible: exportActive, progressBar: { value : progressPercentage }"></div>
     <!-- /ko -->
 
-    <div class="modal-buttons bottom-buttons">
+    <div class="modal-buttons bottom-buttons left-buttons">
+      <a class="btn secondary iconized icon-backward2" data-bind="visible: previousIsVisible, click: previousStep">Previous</a>
+    </div>
+    <div class="modal-buttons bottom-buttons right-buttons">
       <a class="btn primary mainColor1 iconized"
          data-bind="visible: exportInactive, click: nextStep, text: nextButtonTitle, css: { iconFilePdf: isFinalStep, iconForward3: isNotFinalStep }"></a>
       <a class="btn secondary iconized icon-dismiss" data-bind="visible: exportInactive, click: cancel">Close</a>
