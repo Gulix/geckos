@@ -41,10 +41,10 @@ define(['knockout'], function(ko) {
 
     // Width & Height
     self.setCardDimensions = function(width, height) {
-      self.originalCardWidth(width / 4);
-      self.originalCardHeight(height / 4);
-      self.cardWidthValue(self.originalCardWidth());
-      self.cardHeightValue(self.originalCardHeight());
+      self.originalCardWidth(width);
+      self.originalCardHeight(height);
+      self.cardWidthValue(self.originalCardWidth() / 3);
+      self.cardHeightValue(self.originalCardHeight() / 3);
     }
     self.convertFromDisplayedUnitToPoints = function(unitValue) {
       if (self.configInInches()) {
