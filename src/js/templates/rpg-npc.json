@@ -1,0 +1,110 @@
+{
+  "styles": [
+    {
+      "key": "default",
+      "name": "Default",
+      "fields": [
+        {
+          "name": "name",
+          "label": "Name",
+          "default": "PNJ"
+        },
+        {
+          "type": "number",
+          "name": "nameSize",
+          "label": "Name Size",
+          "default": 30
+        },
+        {
+          "type": "number",
+          "name": "textSize",
+          "label": "Text Size",
+          "default": "30"
+
+        },
+        {
+          "type": "image",
+          "name": "portray",
+          "label": "Portray"
+        },
+        {
+          "name": "description",
+          "label": "Description",
+          "default": "",
+          "type": "richtext"
+        }
+      ],
+      "canvasFields": [
+        {
+          "type": "image",
+          "left": 56,
+          "top": 560,
+          "width": 400,
+          "height": 400,
+          "src": "$portray"
+        },
+        {
+          "type": "image",
+          "left": 456,
+          "top": 510,
+          "width": 400,
+          "height": 400,
+          "angle": 180,
+          "src": "$portray"
+        },
+        {
+          "type": "textbox",
+          "text": "$name",
+          "left": 30,
+          "top": 1000,
+          "width": 452,
+          "textAlign": "center",
+          "fill": "#000",
+          "fontFamily": "Arial",
+          "fontWeight": 700,
+          "fontSize": "$nameSize"
+
+        },
+        {
+          "type": "textbox",
+          "text": "$name",
+          "angle": 180,
+          "centerTransform": true,
+          "left": 482,
+          "top": 100,
+          "width": 452,
+          "textAlign": "center",
+          "fill": "#000",
+          "fontFamily": "Arial",
+          "fontWeight": 700,
+          "fontSize": "$nameSize"
+
+        },
+        {
+          "type": "textbox",
+          "styles": "£description",
+          "text": "$description$",
+          "left": 30,
+          "top": 1150,
+          "width": 452,
+          "textAlign": "left",
+          "fill": "#000",
+          "fontFamily": "Arial",
+          "fontWeight": 300,
+          "fontSize": "$textSize"
+
+        }
+      ],
+      "canvasBackground": "#FFFFFF",
+      "canvasWidth": 512,
+      "canvasHeight": 2048
+    }
+  ],
+  "description": {
+    "description": "Template for RPG-NPC card",
+    "title": "RPG-NPC",
+    "credits": "by Raccoon",
+    "key": "rpg-npc-v1",
+    "url": "https://github.com/Gulix/geckos/"
+  }
+}
