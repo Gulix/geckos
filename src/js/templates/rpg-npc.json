@@ -36,6 +36,16 @@
       ],
       "canvasFields": [
         {
+          "type": "rect",
+          "width": 502,
+          "height": 2038,
+          "left": 5,
+          "top": 5,
+          "fill": "#FFFFFF",
+          "stroke": "#000000",
+          "strokeWidth": 1
+        },
+        {
           "type": "image",
           "left": 56,
           "top": 560,
