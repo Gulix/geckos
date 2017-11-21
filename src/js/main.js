@@ -99,27 +99,51 @@ require(['knockout',
 /* Scrolling let's the Canvas on top (see also Issue #87) */
 $(window).scroll(function(){
   // Difference between normal height and revised height of the canvas
-  var existingDiff = $('#card-canvas-header').outerHeight();
+  var canvasHeaderHeight = $('#card-canvas-header').outerHeight();
   // Position of the scroll on the Viewport
   var scrollTop = $(window).scrollTop();
   var viewportHeight = $(window).height();
   // Top position of the Canvas
   var boxTop = $('#card-canvas-box').offset().top;
   var canvasHeight = $('#card-canvas-view').outerHeight();
-  
+
+  /*
+  console.log("######### START SCROLLING ");
+  console.log("canvasHeaderHeight : " + canvasHeaderHeight);
+  console.log("scrollTop : " + scrollTop);
+  console.log("viewportHeight : " + viewportHeight);
+  console.log("boxTop : " + boxTop);
+  console.log("canvasHeight : " + canvasHeight);
+  */
+
+  if (canvasHeight > viewportHeight) return;
+
   // If the ScrollPosition is beneath the top of the canvas, the canvas is lowered
-  //if (scrollTop > (boxTop + existingDiff)) {
-  //  var diff = scrollTop - boxTop - existingDiff;
-  //  if ((viewportHeight < canvasHeight) && (diff > (canvasHeight - viewportHeight))) {
-  //    diff -= (canvasHeight - viewportHeight) + existingDiff;
-  //  }
-  //  $('#card-canvas-view').css({'margin-top': diff + 'px'});
-  //} else {
-  //  $('#card-canvas-view').css({'margin-top': '0px'});
-  //}
+  if (scrollTop > (boxTop + canvasHeaderHeight)) {
+    var diff = scrollTop - boxTop - canvasHeaderHeight;
+    /*
+    console.log("Scroll under the canvas ...");
+    console.log("diff : " + diff);
+    */
+    if (viewportHeight < canvasHeight)
+    {
+      //console.log("canvas bigger than viewport");
+      if (diff > (canvasHeight - viewportHeight))
+      {
+        //console.log("Displaying bottom of the canvas");
+        diff -= (canvasHeight - viewportHeight) + canvasHeaderHeight;
+      }
+    }
+    //console.log("diff modified : " + diff);
+    $('#card-canvas-view').css({'margin-top': diff + 'px'});
+  } else {
+    $('#card-canvas-view').css({'margin-top': '0px'});
+  }
+
+  //console.log("######### END SCROLLING ");
 
 
-  //$('#card-canvas-view').toggleClass('scrolling-position', $(window).scrollTop() > $('#card-canvas-box').offset().top);
+  $('#card-canvas-view').toggleClass('scrolling-position', $(window).scrollTop() > $('#card-canvas-box').offset().top);
 });
 
 
