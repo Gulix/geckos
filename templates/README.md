@@ -1,4 +1,4 @@
-# Templates for Geckos
+﻿# Templates for Geckos
 
 This directory is filled with templates for **Geckos**. Those templates are free, and you can use them by following the [CC-By-SA](https://creativecommons.org/licenses/by-sa/3.0/) license, and the [Beerware Agreement](http://www.github.com/gulix/geckos/License.md), unless otherwise specified within the template.
 
@@ -19,4 +19,5 @@ If you want to add some of your templates to this _official_ list, feel free to 
 | [Pulp Alley character](pulpalley-charactercard.json) | A card for the **Pulp Alley** game, to create profile cards for miniatures. | _[In progress](https://github.com/Gulix/geckos/issues/62)_ | Beta 0.3.0 and beyond |
 | [Pulp Alley Fortune Cards](pulpalley-fortunecard.json) | A card for the **Pulp Alley** game, to create Fortune & Rewards Cards. | _[In progress](https://github.com/Gulix/geckos/issues/62)_ | Beta 0.3.0 and beyond |
 | [Pulp City misc cards](pulpcity-misc.json) | Card for Pulp City for miscellaneous things : Plots, Agendas, ... Could be used for another game, with urban style. | **Completed** | Beta 0.3.0 and beyond |
+| [RPG-NPC](rpg-npc.json) | NPC-card for table-top role-playing games. Fold the card in 2 and hang it on the game master screen. | **Completed** | Beta 0.3.0 and beyond |
 | [WQ Silver Tower Hero card](wquest-silvertower-herocard.json) | A card for the heroes of **Warhammer Quest Silver Tower**, to create profile cards for miniatures. | _[In progress](https://github.com/Gulix/geckos/issues/60)_ | Beta 0.3.0 and beyond |

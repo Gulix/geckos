@@ -108,15 +108,15 @@ $(window).scroll(function(){
   var canvasHeight = $('#card-canvas-view').outerHeight();
   
   // If the ScrollPosition is beneath the top of the canvas, the canvas is lowered
-  if (scrollTop > (boxTop + existingDiff)) {
-    var diff = scrollTop - boxTop - existingDiff;
-    if ((viewportHeight < canvasHeight) && (diff > (canvasHeight - viewportHeight))) {
-      diff -= (canvasHeight - viewportHeight) + existingDiff;
-    }
-    $('#card-canvas-view').css({'margin-top': diff + 'px'});
-  } else {
-    $('#card-canvas-view').css({'margin-top': '0px'});
-  }
+  //if (scrollTop > (boxTop + existingDiff)) {
+  //  var diff = scrollTop - boxTop - existingDiff;
+  //  if ((viewportHeight < canvasHeight) && (diff > (canvasHeight - viewportHeight))) {
+  //    diff -= (canvasHeight - viewportHeight) + existingDiff;
+  //  }
+  //  $('#card-canvas-view').css({'margin-top': diff + 'px'});
+  //} else {
+  //  $('#card-canvas-view').css({'margin-top': '0px'});
+  //}
 
 
   //$('#card-canvas-view').toggleClass('scrolling-position', $(window).scrollTop() > $('#card-canvas-box').offset().top);
